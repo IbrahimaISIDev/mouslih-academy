@@ -59,7 +59,13 @@ relecture du code au fil des 9 prompts — pas une garantie d'absence totale d'�
   soit identique au logo. Le contraste a été préservé autrement : texte/icône en `green-ink`
   (~6,1:1) plutôt qu'en blanc sur tout remplissage `green-700`/`green-600`, et le vert n'est plus
   utilisé comme couleur de texte sur fond clair (liens, badges, bouton outline passent aussi à
-  `green-ink`). Voir `DESIGN-TOKENS.md` pour le détail token par token.
+  `green-ink`).
+  *Mise à jour du même jour (soirée) : le client a ensuite demandé que le fond du hero
+  (`bg-green-900`, quasi noir) se rapproche davantage du vert du logo. `green-900`/`green-800`
+  ont été éclaircis (`#09200C`→`#184E20`, `#113B17`→`#1D5D26`) ; comme `green-900` servait aussi
+  de couleur de texte à ce moment-là, il a fallu l'extraire dans un token dédié (`green-ink`,
+  resté à l'ancienne valeur très foncée) pour ne pas dégrader le contraste texte/bouton obtenu
+  ci-dessus.* Voir `DESIGN-TOKENS.md` pour le détail token par token.
 - **Ombres** : aucune ombre en dehors de `shadow-card-hover` (survol de card) et de l'anneau de
   focus ; les deux seules autres occurrences sont des `shadow-none` explicites.
 - **Or sans action de conversion** : les 6 usages de `variant="gold"` renvoient tous vers une

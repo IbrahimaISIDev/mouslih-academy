@@ -13,10 +13,18 @@
      quasi noir dédié au texte/icône, prend le relais partout où du texte/icône repose sur un
      remplissage green-700/green-600, et partout où le vert sert de couleur de texte sur fond
      clair (liens, badges, bouton outline) — green-700 lui-même y est trop clair. Ne jamais
-     utiliser green-ink comme fond. */
+     utiliser green-ink comme fond.
+
+     green-900/green-800 (fonds sombres : hero, sidebar, footer, bandeaux CTA) ont ensuite été
+     éclaircis de #09200C/#113B17 (quasi noirs) vers une teinte plus riche et plus proche du vert
+     du logo, à la demande explicite du client sur le rendu du hero — tout en restant assez
+     foncés pour que le texte on-dark* posé dessus garde 4,5:1+. C'est précisément pour absorber
+     cet ajustement sans dégrader le texte/bouton ci-dessus que green-ink existe en token séparé
+     de green-900 : les deux usages (fond sombre vs texte très foncé) tirent le contraste dans
+     des sens opposés. */
   --color-green-ink: #0b230e;
-  --color-green-900: #09200c;
-  --color-green-800: #113b17;
+  --color-green-900: #184e20;
+  --color-green-800: #1d5d26;
   --color-green-700: #38b349;
   --color-green-600: #45c557;
   --color-green-300: #6bd179;
@@ -133,6 +141,17 @@ body {
   }
   50% {
     opacity: 0.55;
+  }
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

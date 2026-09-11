@@ -20,11 +20,21 @@ couleur de **texte sur fond clair** (liens de paragraphe, libellés de badge, bo
 usages passent aussi à ```green-ink```. Les bordures et remplissages décoratifs (accents de card,
 graphiques) restent en ```green-700``` exact.
 
+```green-ink``` est un token dédié, distinct de ```green-900``` : le client a ensuite demandé
+(même jour) que le fond du hero — ```bg-green-900```, quasi noir à l'origine — se rapproche
+davantage du vert vif du logo. Ce fond ne peut pas devenir aussi clair que ```green-700``` sans
+perdre la lisibilité du texte blanc du hero, mais rien n'empêchait de l'enrichir. Le problème :
+```green-900``` servait *aussi* de couleur de texte (liens, badges) à ce moment-là, et ces deux
+usages tirent le contraste dans des sens opposés (le texte veut rester très foncé ; le fond de
+hero veut s'éclaircir). D'où la séparation en deux tokens — ```green-ink``` (texte, reste très
+foncé) et ```green-900```/```green-800``` (fonds, éclaircis) — plutôt qu'un compromis qui aurait
+dégradé l'un des deux usages.
+
 | Token | Hex | Usage |
 |---|---|---|
 | ```green-ink``` | ```#0B230E``` | **texte/icône uniquement** — sur fond green-700/600, ou vert de texte sur fond clair (liens, badges, bouton outline). Jamais un fond. |
-| ```green-900``` | ```#09200C``` | hero, sidebar admin, footer — fonds sombres |
-| ```green-800``` | ```#113B17``` | second niveau sombre, bandeaux CTA |
+| ```green-900``` | ```#184E20``` | hero, sidebar admin, footer — fonds sombres |
+| ```green-800``` | ```#1D5D26``` | second niveau sombre, bandeaux CTA |
 | ```green-700``` | ```#38B349``` | **vert exact du logo** — boutons, bordures, chips actifs (jamais comme couleur de texte) |
 | ```green-600``` | ```#45C557``` | survol des boutons primaires, barres de progression |
 | ```green-300``` | ```#6BD179``` | texte secondaire sur fond sombre |
@@ -150,8 +160,8 @@ Dans ```globals.css``` :
 
 @theme {
   --color-green-ink: #0B230E;
-  --color-green-900: #09200C;
-  --color-green-800: #113B17;
+  --color-green-900: #184E20;
+  --color-green-800: #1D5D26;
   --color-green-700: #38B349;
   --color-green-600: #45C557;
   --color-green-300: #6BD179;
