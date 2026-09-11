@@ -94,7 +94,9 @@ de téléphone.
 
 ## Formes, filets, ombres
 
-- **Rayon : 2 px partout** (```--radius-sm/md/lg```). Boutons, cards, champs, badges, images.
+- **Rayon : 8 px partout** (```--radius-sm/md/lg```, changé du 2 px d'origine le 2026-09-05 à
+  la demande explicite, pour un rendu plus doux). Boutons, cards, champs, badges, images.
+  ```--radius-xs``` (4 px) pour les petits éléments (bouton de fermeture, flèche de tooltip).
   Seules exceptions : avatars et boutons de lecture, en cercle parfait (```rounded-full```).
 - **Bordures : 1 px.** ```border``` sur les cards, ```border-strong``` sur les champs.
   Accent haut de card : ```border-top: 2px solid``` (```green-700``` ou ```gold-600```).
@@ -177,9 +179,10 @@ Dans ```globals.css``` :
   --font-arabic-serif: var(--font-amiri), serif;
   --font-arabic-sans: var(--font-plex-arabic), sans-serif;
 
-  --radius-sm: 2px;
-  --radius-md: 2px;
-  --radius-lg: 2px;
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 8px;
+  --radius-lg: 8px;
 
   --shadow-card-hover: 0 6px 22px rgba(12, 36, 29, 0.09);
 }

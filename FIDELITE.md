@@ -45,9 +45,13 @@ relecture du code au fil des 9 prompts — pas une garantie d'absence totale d'�
 
 ## Vérifications qui n'ont rien trouvé à corriger
 
-- **Rayon de bordure** : au moment de cette revue, `grep` ne trouvait aucun `rounded-md|lg|xl`
-  dans `src/` — uniquement `rounded-sm` (2 px) et `rounded-full` (avatars, pastilles, points
-  d'état — hors périmètre de la règle qui vise les cards/boutons/champs).
+- **Rayon de bordure** : au moment de cette revue (2026-09-05, avant-midi), `grep` ne trouvait
+  aucun `rounded-md|lg|xl` dans `src/` — uniquement `rounded-sm` (2 px) et `rounded-full`
+  (avatars, pastilles, points d'état — hors périmètre de la règle qui vise les
+  cards/boutons/champs). *Mise à jour du même jour (après-midi) : le rayon de 2 px a été
+  changé à 8 px sur tous les composants (```--radius-xs/sm/md/lg``` dans `globals.css`), à la
+  demande explicite — voir `DESIGN-TOKENS.md`. Le constat de cohérence ci-dessus reste vrai
+  (un seul jeu de tokens, aucune valeur en dur), seule la valeur du rayon a changé.*
 - **Ombres** : aucune ombre en dehors de `shadow-card-hover` (survol de card) et de l'anneau de
   focus ; les deux seules autres occurrences sont des `shadow-none` explicites.
 - **Or sans action de conversion** : les 6 usages de `variant="gold"` renvoient tous vers une
