@@ -60,8 +60,26 @@ suivre pour ajouter un écran.
 ## État du projet
 
 Les 17 écrans du périmètre initial sont livrés (desktop et mobile ; accueil, dashboard et
-lecteur également en arabe RTL complet). Le détail des écarts constatés lors de la recette
-finale et les décisions associées est dans [`FIDELITE.md`](./FIDELITE.md).
+lecteur également en arabe RTL complet), plus un 18ᵉ écran **Contact** (`/contact`) ajouté
+après la recette — voir ci-dessous. Le détail des écarts constatés lors de la recette finale
+et les décisions associées est dans [`FIDELITE.md`](./FIDELITE.md).
 
 Les maquettes de référence (`maquettes/*.dc.html`) restent dans le dépôt à titre de mémoire du
 design — ce sont des prototypes HTML statiques, pas du code à réutiliser.
+
+### Évolutions après la recette (PROMPT-09)
+
+Ajouts effectués après la clôture de `FIDELITE.md`, non couverts par sa revue initiale mais
+vérifiés par `pnpm check` + `pnpm build` + `pnpm test:e2e` à chaque étape :
+
+- **Palette verte recalée** sur le vert exact du logo (`#38B349`, identique pixel pour pixel —
+  `green-700` n'est plus assombri), et fonds sombres (hero, sidebar, footer) éclaircis pour se
+  rapprocher davantage de ce vert (`green-900`/`green-800`) — voir `DESIGN-TOKENS.md`.
+- **Rayon de bordure passé de 2 px à 8 px** sur tout le design system — voir `DESIGN-TOKENS.md`
+  et l'addendum dans `FIDELITE.md`.
+- **Micro-interactions** : transition de fondu entre routes (`PageTransition`), filet de header
+  qui se marque au scroll (`useScrolled`), zoom léger sur les covers de formation au survol,
+  compteurs animés sur l'accueil (`AnimatedCounter`), fondu skeleton → contenu sur les tables
+  admin.
+- **Page Contact** (`/contact`) — nouvel écran, WhatsApp uniquement (pas de formulaire),
+  accessible depuis le lien « Contact » des headers publics.
