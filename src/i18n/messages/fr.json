@@ -1,0 +1,767 @@
+{
+  "common": {
+    "orderStatus": {
+      "paid": "Payé",
+      "pending": "En attente",
+      "failed": "Échoué",
+      "refunded": "Remboursé",
+      "draft": "Brouillon",
+      "premium": "Premium"
+    },
+    "footer": {
+      "tagline": "Une académie numérique pour apprendre le Coran et les sciences islamiques depuis le Sénégal.",
+      "whatsappNumber": "+221 77 000 00 00",
+      "whatsappMobileCta": "Nous écrire sur WhatsApp",
+      "columns": [
+        {
+          "title": "Formations",
+          "items": [
+            "Rectification de la Fatiha",
+            "Nourania",
+            "Tajwid",
+            "Sciences du hadith"
+          ]
+        },
+        {
+          "title": "Académie",
+          "items": [
+            "À propos",
+            "Témoignages",
+            "Questions fréquentes",
+            "Contact"
+          ]
+        },
+        {
+          "title": "Légal",
+          "items": [
+            "Conditions d'utilisation",
+            "Politique de remboursement",
+            "Confidentialité"
+          ]
+        }
+      ],
+      "mobileLinks": [
+        "Formations",
+        "À propos",
+        "Témoignages",
+        "Contact",
+        "Conditions",
+        "Confidentialité"
+      ],
+      "copyright": "© 2026 Mouslih Academy · Dakar, Sénégal",
+      "copyrightMobile": "© 2026 Mouslih Academy · Dakar",
+      "paymentNote": "Paiement sécurisé par Wave"
+    }
+  },
+  "nav": {
+    "home": "Accueil",
+    "formations": "Formations",
+    "testimonials": "Témoignages",
+    "contact": "Contact",
+    "login": "Connexion",
+    "signup": "Créer un compte",
+    "dashboard": "Tableau de bord",
+    "myCourses": "Mes formations",
+    "catalog": "Catalogue",
+    "profile": "Profil",
+    "logout": "Déconnexion"
+  },
+  "home": {
+    "hero": {
+      "badge": "Enseignement vérifié · Sénégal",
+      "title": "Récitez la Fatiha comme elle doit être récitée.",
+      "description": "Une académie numérique pour apprendre le Coran, le Tajwid et les sciences islamiques — à votre rythme, corrigé leçon par leçon, en français, anglais ou arabe.",
+      "descriptionMobile": "Coran, Tajwid et sciences islamiques — à votre rythme, corrigé leçon par leçon.",
+      "ctaPrimary": "Découvrir les formations",
+      "ctaSecondary": "Voir une leçon gratuite",
+      "statLearnersValue": "1 240",
+      "statLearnersLabel": "apprenants inscrits",
+      "statLearnersLabelMobile": "apprenants",
+      "statCoursesValue": "6",
+      "statCoursesLabel": "formations complètes",
+      "statCoursesLabelMobile": "formations",
+      "statPaymentValue": "Wave",
+      "statPaymentLabel": "paiement en 30 s",
+      "statPaymentLabelMobile": "en 30 s",
+      "teacherPlaceholder": "Portrait de l'enseignant",
+      "teacherName": "Oustaz Mouslih",
+      "teacherCredentials": "Ijaza en récitation · 12 ans d'enseignement"
+    },
+    "video": {
+      "eyebrow": "En deux minutes",
+      "title": "Comment se déroule une formation",
+      "description": "Des leçons vidéo courtes, des exercices de récitation à renvoyer, une progression enregistrée automatiquement. Vous gardez l'accès à vie.",
+      "bullets": [
+        "Leçons téléchargeables pour les connexions faibles",
+        "Correction personnalisée par WhatsApp",
+        "Attestation à la fin du parcours"
+      ],
+      "captionDesktop": "Vidéo de présentation · 2 min 10",
+      "captionMobile": "2 min 10"
+    },
+    "featured": {
+      "eyebrow": "Le programme",
+      "title": "Formations en vedette",
+      "titleMobile": "En vedette",
+      "seeCatalog": "Tout le catalogue",
+      "seeAllMobile": "Tout voir",
+      "badgeFeatured": "Le plus suivi",
+      "discover": "Découvrir"
+    },
+    "testimonials": {
+      "eyebrow": "Ils ont suivi",
+      "title": "Témoignages d'apprenants",
+      "titleMobile": "Témoignages"
+    },
+    "cta": {
+      "title": "Commencez aujourd'hui, gardez l'accès à vie",
+      "description": "Paiement Wave · aucune reconduction · assistance WhatsApp du lundi au samedi.",
+      "ctaPrimary": "Voir les formations",
+      "ctaWhatsapp": "Poser une question"
+    },
+    "stickyCta": {
+      "priceLabel": "À partir de",
+      "action": "Découvrir les formations"
+    }
+  },
+  "catalog": {
+    "title": "Toutes les formations",
+    "description": "Six parcours complets, du premier alphabet aux sciences du hadith. Accès à vie, paiement unique par Wave.",
+    "searchPlaceholder": "Rechercher une formation…",
+    "searchPlaceholderMobile": "Rechercher…",
+    "levels": {
+      "all": "Tous les niveaux",
+      "beginner": "Débutant",
+      "intermediate": "Intermédiaire",
+      "advanced": "Avancé"
+    },
+    "count": "{count, plural, =0 {Aucun résultat} one {1 formation} other {# formations}}",
+    "discover": "Découvrir",
+    "empty": {
+      "title": "Aucune formation ne correspond à « {query} »",
+      "description": "Cette formation n'existe pas encore — dites-nous ce que vous cherchez, c'est ainsi que le programme s'étend.",
+      "reset": "Réinitialiser les filtres",
+      "suggest": "Suggérer une formation",
+      "titleMobile": "Aucun résultat pour « {query} »",
+      "descriptionMobile": "Dites-nous ce que vous cherchez.",
+      "resetMobile": "Réinitialiser"
+    },
+    "stickyCta": "Quelle formation me convient ?"
+  },
+  "course": {
+    "breadcrumb": {
+      "formations": "Formations",
+      "category": "Coran"
+    },
+    "badgeFeatured": "Le plus suivi",
+    "meta": {
+      "lessonsVideo": "{count} leçons vidéo",
+      "hoursContent": "{hours} de contenu",
+      "certificateIncluded": "Attestation incluse",
+      "languages": "FR · EN · AR",
+      "lessonsShort": "{count} leçons",
+      "hoursShort": "{hours}",
+      "certificateShort": "Attestation"
+    },
+    "purchaseCard": {
+      "previewCaption": "Aperçu gratuit · leçon 1",
+      "paymentNote": "Paiement unique · accès à vie",
+      "buyButton": "Acheter avec Wave",
+      "questionButton": "Poser une question",
+      "questionButtonMobile": "Une question ? Écrivez-nous",
+      "included": [
+        "Correction vocale personnalisée",
+        "Supports PDF téléchargeables",
+        "Remboursé 7 jours si insatisfait"
+      ]
+    },
+    "about": {
+      "title": "À propos de cette formation",
+      "titleMobile": "À propos",
+      "readMore": "Lire la suite"
+    },
+    "outcomes": {
+      "eyebrow": "À la fin, vous saurez",
+      "items": [
+        "Prononcer les lettres emphatiques correctement",
+        "Respecter la durée des prolongations",
+        "Marquer les arrêts sans couper le sens",
+        "Corriger seul vos erreurs récurrentes"
+      ]
+    },
+    "curriculum": {
+      "title": "Structure pédagogique",
+      "titleMobile": "Programme",
+      "summary": "{modules} modules · {lessons} leçons · {free} leçons en accès libre",
+      "summaryMobile": "{modules} modules · {lessons} leçons",
+      "freeLabel": "Aperçu gratuit",
+      "watchLabel": "Regarder",
+      "lockedTooltip": "Disponible après l'achat",
+      "previewDialogTitle": "Aperçu gratuit",
+      "moduleMeta": "{lessons} leçons · {duration}",
+      "moduleMetaWithSub": "{subCount} sous-modules · {lessons} leçons · {duration}",
+      "moduleMetaCertificateSuffix": " + attestation",
+      "minutesShort": "{count} min"
+    },
+    "teacher": {
+      "eyebrow": "L'enseignant",
+      "name": "Oustaz Mouslih",
+      "credentials": "Ijaza en récitation · Dakar",
+      "bio": "Douze ans d'enseignement du Coran, formé au Caire, corrige personnellement chaque récitation envoyée."
+    },
+    "faq": {
+      "eyebrow": "Questions fréquentes",
+      "items": [
+        "Ai-je un délai pour terminer ?",
+        "Puis-je payer en plusieurs fois ?",
+        "Les vidéos sont-elles sous-titrées ?"
+      ]
+    },
+    "sidebar": {
+      "paymentDelayTitle": "Besoin d'un délai de paiement ?",
+      "relatedTitle": "Formations liées"
+    },
+    "stickyCta": {
+      "lifetimeLabel": "Accès à vie",
+      "buyButton": "Acheter avec Wave"
+    }
+  },
+  "auth": {
+    "sidePanel": {
+      "bullets": [
+        "Accès à vie à vos formations achetées",
+        "Progression enregistrée leçon par leçon",
+        "Correction personnalisée de votre récitation"
+      ],
+      "statLine": "1 240 apprenants au Sénégal et en diaspora"
+    },
+    "passwordStrength": {
+      "weak": "Faible",
+      "medium": "Moyen",
+      "strong": "Robuste",
+      "hintMin": "8 caractères minimum",
+      "hintAddDigit": "ajoutez un chiffre",
+      "hintAddUppercase": "ajoutez une majuscule"
+    },
+    "login": {
+      "mobileTitle": "Content de vous revoir",
+      "sideTitle": "Reprenez là où vous vous êtes arrêté",
+      "sideBody": "Votre progression, vos corrections et vos attestations vous attendent.",
+      "formSubPrefix": "Pas encore de compte ?",
+      "formSwitchLabel": "Créez-en un",
+      "errorTitle": "E-mail ou mot de passe incorrect",
+      "errorDescription": "Vérifiez votre saisie, ou réinitialisez votre mot de passe.",
+      "emailLabel": "Adresse e-mail",
+      "passwordLabel": "Mot de passe",
+      "forgotPassword": "Mot de passe oublié ?",
+      "rememberMe": "Rester connecté sur cet appareil",
+      "submit": "Se connecter",
+      "submitLoading": "Connexion…",
+      "helpText": "Un problème de connexion ?",
+      "helpLink": "Écrivez-nous"
+    },
+    "signup": {
+      "mobileTitle": "Créer votre compte",
+      "sideTitle": "Une académie, pas une bibliothèque de vidéos",
+      "sideBody": "Un compte gratuit vous donne accès aux leçons d'aperçu, à votre progression et à vos corrections personnalisées.",
+      "formSubPrefix": "Vous avez déjà un compte ?",
+      "formSwitchLabel": "Connectez-vous",
+      "firstNameLabel": "Prénom",
+      "lastNameLabel": "Nom",
+      "emailLabel": "Adresse e-mail",
+      "emailPlaceholder": "vous@exemple.com",
+      "phoneLabel": "Téléphone (compte Wave)",
+      "phonePlaceholder": "77 000 00 00",
+      "phoneHelp": "Utilisé pour vos paiements — vous pourrez le modifier plus tard.",
+      "passwordLabel": "Mot de passe",
+      "termsPrefix": "J'accepte les",
+      "termsLink1": "conditions d'utilisation",
+      "termsMiddle": "et la",
+      "termsLink2": "politique de confidentialité",
+      "submit": "Créer mon compte",
+      "submitLoading": "Création…",
+      "finalHelp": "Vous recevrez un e-mail de confirmation. Aucun paiement à cette étape.",
+      "helpText": "Besoin d'aide ?",
+      "helpLink": "Écrivez-nous"
+    }
+  },
+  "contact": {
+    "eyebrow": "Nous écrire",
+    "title": "Une question ? Parlons-en sur WhatsApp",
+    "description": "Toute l'assistance de Mouslih Academy passe par WhatsApp — pas de formulaire, pas d'attente dans une boîte mail. Écrivez-nous, un enseignant ou un membre de l'équipe vous répond directement.",
+    "primaryCta": "Écrire sur WhatsApp",
+    "reasonsTitle": "Selon votre besoin",
+    "reasons": {
+      "course": {
+        "label": "Question sur une formation",
+        "message": "Bonjour, j'ai une question sur une formation."
+      },
+      "payment": {
+        "label": "Problème de paiement Wave",
+        "message": "Bonjour, j'ai un problème avec un paiement Wave."
+      },
+      "correction": {
+        "label": "Suivi d'une correction de récitation",
+        "message": "Bonjour, je voudrais un point sur ma correction de récitation."
+      },
+      "other": {
+        "label": "Autre demande",
+        "message": "Bonjour, j'ai une question."
+      }
+    },
+    "infoTitle": "Bon à savoir",
+    "infoHours": "Réponse du lundi au samedi, généralement en moins d'une journée.",
+    "infoLocation": "Équipe basée à Dakar, Sénégal — apprenants au Sénégal et dans la diaspora.",
+    "mobileCta": "Écrire sur WhatsApp"
+  },
+  "testimonials": {
+    "eyebrow": "Ils ont suivi les formations",
+    "title": "Ce que disent les apprenants",
+    "description": "Des récitations corrigées, des habitudes de mémorisation tenues, des prières récitées avec certitude. Voici ce qu'ils racontent, sans retouche.",
+    "descriptionMobile": "Sans retouche, avec leur formation et leur ville.",
+    "filters": {
+      "all": "Tous",
+      "video": "Vidéo",
+      "text": "Écrits"
+    },
+    "seeMore": "Voir plus de témoignages",
+    "mobileCta": "Découvrir les formations"
+  },
+  "dashboard": {
+    "salam": "السلام عليكم",
+    "welcomeTitle": "Bon retour, {name}",
+    "weeklyProgress": "Vous avez terminé {done} leçons cette semaine — il vous reste {remaining} leçons pour achever la {course}.",
+    "weeklyProgressMobile": "{done} leçons terminées cette semaine — il en reste {remaining}.",
+    "continueLabel": "Continuer votre apprentissage",
+    "contextLine": "{course} · {module} · Leçon {index} sur {total}",
+    "resumeAt": "Reprise à",
+    "resumeButton": "Reprendre la leçon",
+    "progressLabel": "{done} / {total} leçons · {pct} %",
+    "myCoursesTitle": "Mes formations",
+    "browseCatalog": "Parcourir le catalogue",
+    "status": {
+      "inProgress": "En cours",
+      "notStarted": "Non commencée",
+      "completed": "Terminée"
+    },
+    "lastSeenDaysAgo": "Dernière leçon vue il y a {days} jours",
+    "neverStarted": "Jamais commencée",
+    "completedOn": "Terminée le {date}",
+    "continueBtn": "Continuer",
+    "startBtn": "Commencer",
+    "certificateBtn": "Attestation",
+    "certificateBtnMobile": "Télécharger l'attestation",
+    "pendingCorrectionTitle": "Correction en attente",
+    "pendingCorrectionSubject": "Récitation du module {module}",
+    "pendingCorrectionMeta": "Envoyée il y a {days} jour · réponse sous 48 h",
+    "pendingCorrectionStatus": "En cours de correction",
+    "needHelpTitle": "Besoin d'aide ?",
+    "needHelpBody": "Une question sur une leçon, un paiement, un accès ? L'équipe répond du lundi au samedi.",
+    "whatsappCta": "Écrire sur WhatsApp",
+    "emptyLibrary": {
+      "title": "Votre bibliothèque est vide",
+      "description": "Choisissez une première formation — la Fatiha se termine en trois heures et pose les bases de tout le reste.",
+      "action": "Parcourir le catalogue"
+    }
+  },
+  "player": {
+    "backToDashboard": "Tableau de bord",
+    "progressLabel": "{done} / {total} leçons",
+    "percentLabel": "{pct} %",
+    "sidebarTitle": "Contenu du cours",
+    "sendRecitation": "Envoyer ma récitation",
+    "lockedTooltip": "Disponible après l'achat",
+    "moduleLessonLabel": "{module} · Leçon {index} sur {total}",
+    "lessonOfTotal": "Leçon {index} sur {total}",
+    "tabs": {
+      "overview": "Aperçu",
+      "resources": "Ressources",
+      "questions": "Questions"
+    },
+    "overview": {
+      "keyPointsTitle": "Points clés de la leçon"
+    },
+    "resources": {
+      "downloadNote": "Les PDF restent accessibles hors connexion après téléchargement.",
+      "sizeUnit": "{size} Ko"
+    },
+    "questions": {
+      "placeholder": "Posez une question sur cette leçon…",
+      "responseTime": "Réponse de l'enseignant sous 48 h",
+      "send": "Envoyer",
+      "teacherBadge": "Enseignant",
+      "pendingAnswer": "En attente de réponse",
+      "emptyTitle": "Aucune question sur cette leçon",
+      "emptyDescription": "Soyez le premier à demander une précision.",
+      "emptyAction": "Poser une question"
+    },
+    "nav": {
+      "previous": "Leçon précédente",
+      "markComplete": "Marquer comme terminée",
+      "next": "Leçon suivante"
+    },
+    "autoAdvance": {
+      "message": "Leçon suivante dans {seconds} s",
+      "cancel": "Annuler"
+    },
+    "mobile": {
+      "programBar": "Programme",
+      "drawerHint": "Touchez la barre « Programme » pour ouvrir et fermer le drawer de navigation."
+    }
+  },
+  "profile": {
+    "title": "Mon profil",
+    "nav": {
+      "personal": "Informations personnelles",
+      "security": "Sécurité",
+      "purchases": "Historique d'achats",
+      "language": "Préférences de langue"
+    },
+    "personal": {
+      "title": "Informations personnelles",
+      "changePhoto": "Changer la photo",
+      "photoHint": "JPG ou PNG · 2 Mo maximum",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "email": "Adresse e-mail",
+      "phone": "Téléphone",
+      "city": "Ville",
+      "save": "Enregistrer les modifications",
+      "saveMobile": "Enregistrer",
+      "cancel": "Annuler",
+      "savedToast": "Modifications enregistrées"
+    },
+    "security": {
+      "title": "Sécurité",
+      "lastChanged": "Dernière modification du mot de passe le {date}.",
+      "current": "Mot de passe actuel",
+      "new": "Nouveau mot de passe",
+      "confirm": "Confirmer le mot de passe",
+      "mismatch": "Les deux mots de passe ne correspondent pas",
+      "otherDevices": "Vous serez déconnecté des autres appareils.",
+      "update": "Mettre à jour le mot de passe"
+    },
+    "purchases": {
+      "title": "Historique d'achats",
+      "columns": {
+        "reference": "Référence",
+        "course": "Formation",
+        "amount": "Montant",
+        "status": "Statut",
+        "date": "Date",
+        "receipt": "Reçu"
+      },
+      "download": "Télécharger",
+      "downloadReceipt": "Télécharger le reçu",
+      "none": "—"
+    },
+    "language": {
+      "title": "Préférences de langue",
+      "note": "L'interface et les sous-titres disponibles suivent ce choix.",
+      "save": "Enregistrer"
+    }
+  },
+  "checkout": {
+    "steps": {
+      "summary": "Récapitulatif",
+      "payment": "Paiement Wave",
+      "unlocked": "Accès débloqué",
+      "confirming": "Confirmation en cours",
+      "failed": "Paiement échoué"
+    },
+    "cancel": "Annuler",
+    "summary": {
+      "title": "Vérifiez votre commande",
+      "subtitle": "Un paiement unique, aucun renouvellement automatique.",
+      "courseCardTitle": "Votre formation",
+      "lifetimeAccess": "Accès à vie",
+      "pdfIncluded": "Supports PDF inclus",
+      "finalCertificate": "Attestation finale",
+      "accountCardTitle": "Compte Wave à débiter",
+      "phoneLabel": "Numéro de téléphone",
+      "useOtherNumber": "Utiliser un autre numéro",
+      "phoneHelp": "Ce numéro doit être celui de votre compte Wave, pas nécessairement celui de votre profil.",
+      "howItWorksTitle": "Ce qui va se passer",
+      "step1": "Vous êtes redirigé vers la page sécurisée Wave.",
+      "step2": "Vous validez le paiement de {amount} dans l'app Wave.",
+      "step3": "Vous revenez automatiquement sur l'académie.",
+      "step4": "Votre formation est débloquée immédiatement.",
+      "step1Mobile": "Redirection vers la page sécurisée Wave",
+      "step2Mobile": "Validation de {amount} dans l'app Wave",
+      "step3Mobile": "Retour automatique sur l'académie",
+      "step4Mobile": "Formation débloquée immédiatement",
+      "summaryTitle": "Résumé",
+      "subtotal": "Sous-total",
+      "discount": "Remise de lancement",
+      "waveFee": "Frais Wave",
+      "total": "Total à payer",
+      "totalMobile": "Total",
+      "paymentUnique": "Paiement unique en francs CFA",
+      "payButton": "Payer avec Wave",
+      "secureTransaction": "Transaction sécurisée par Wave Sénégal",
+      "refundNote": "Remboursement intégral sous 7 jours si la formation ne vous convient pas.",
+      "questionBeforePaying": "Une question avant de payer ?"
+    },
+    "redirect": {
+      "title": "Redirection vers Wave…",
+      "body": "Ne fermez pas cette page. Validez le paiement de {amount} dans l'application Wave, puis revenez ici.",
+      "transactionLabel": "Transaction",
+      "reference": "Référence",
+      "amount": "Montant",
+      "cancelPayment": "Annuler le paiement",
+      "retryLink": "La page ne s'ouvre pas ? Relancer le paiement"
+    },
+    "confirmation": {
+      "success": {
+        "blessing": "بَارَكَ اللَّهُ فِيكَ",
+        "title": "Votre formation est débloquée",
+        "body": "Le paiement de {amount} a été confirmé par Wave. « {course} » vous est accessible à vie, dès maintenant.",
+        "startLesson": "Commencer la leçon 1",
+        "goDashboard": "Aller au tableau de bord",
+        "getStartedTitle": "Pour bien commencer",
+        "tip1Title": "Regardez les 3 premières leçons",
+        "tip1Body": "Elles posent le souffle et l'intention avant tout travail sur les lettres.",
+        "tip2Title": "Téléchargez les supports",
+        "tip2Body": "Les PDF restent lisibles hors connexion, utile en déplacement.",
+        "tip3Title": "Envoyez votre récitation",
+        "tip3Body": "À la fin du module 1, pour recevoir votre première correction.",
+        "receiptTitle": "Reçu",
+        "paidBadge": "Payé",
+        "reference": "Référence",
+        "date": "Date",
+        "method": "Moyen",
+        "amountPaid": "Montant payé",
+        "downloadReceipt": "Télécharger le reçu",
+        "emailedTo": "Un exemplaire a été envoyé à {email}."
+      },
+      "pending": {
+        "title": "Paiement en cours de traitement",
+        "body": "Wave confirme votre transaction. Cela prend généralement moins de deux minutes. Vous pouvez fermer cette page : un e-mail vous préviendra dès que l'accès sera ouvert.",
+        "transactionLabel": "Transaction",
+        "statusBadge": "En attente",
+        "reference": "Référence",
+        "course": "Formation",
+        "amount": "Montant",
+        "refresh": "Vérifier le statut",
+        "backToDashboard": "Retour au tableau de bord",
+        "timeoutNote": "Le traitement est plus long que prévu — nous vous envoyons un e-mail dès confirmation."
+      },
+      "failed": {
+        "title": "Le paiement n'a pas abouti",
+        "noDebit": "Aucun montant n'a été débité de votre compte Wave.",
+        "retryNote": "Vous pouvez réessayer immédiatement, la formation reste disponible au même tarif.",
+        "reasonTitle": "Motif renvoyé par Wave",
+        "reasonText": "Solde insuffisant sur le compte {phone}",
+        "referenceLine": "Référence {ref} · {date}",
+        "checklistTitle": "Avant de réessayer, vérifiez",
+        "check1": "Votre solde Wave couvre bien {amount}",
+        "check2": "Le numéro saisi est celui de votre compte Wave actif",
+        "check3": "L'application Wave est à jour et connectée au réseau",
+        "retryButton": "Réessayer le paiement",
+        "contactSupport": "Contacter l'assistance"
+      }
+    }
+  },
+  "admin": {
+    "sidebar": {
+      "wordmark": "Mouslih Academy",
+      "subtitle": "Administration",
+      "nav": {
+        "dashboard": "Tableau de bord",
+        "courses": "Formations",
+        "users": "Utilisateurs",
+        "orders": "Commandes",
+        "corrections": "Corrections",
+        "testimonials": "Témoignages"
+      },
+      "adminName": "Oustaz Mouslih",
+      "adminRole": "Formateur · admin"
+    },
+    "narrowScreen": {
+      "title": "L'administration nécessite un écran plus large",
+      "body": "Gérer une arborescence de modules et corriger des récitations ne se fait pas au doigt sur un petit écran. Reconnectez-vous depuis un ordinateur."
+    },
+    "dashboard": {
+      "searchPlaceholder": "Rechercher un apprenant, une commande…",
+      "newCourse": "Nouvelle formation",
+      "title": "Vue d'ensemble",
+      "subtitle": "30 derniers jours · comparé à la période précédente",
+      "range": { "30d": "30 j", "90d": "90 j", "year": "Année" },
+      "stats": {
+        "revenue": "Chiffre d'affaires",
+        "revenueChange": "+{pct} % · {amount} de plus",
+        "sales": "Ventes",
+        "salesChange": "+{count} · dont {topSales} sur la {topCourse}",
+        "learners": "Apprenants",
+        "learnersChange": "+{count} inscriptions",
+        "completionRate": "Taux d'achèvement",
+        "completionRateChange": "{pts} pts · à surveiller"
+      },
+      "recentPayments": {
+        "title": "Paiements récents",
+        "allOrders": "Toutes les commandes",
+        "columns": {
+          "learner": "Apprenant",
+          "course": "Formation",
+          "amount": "Montant",
+          "status": "Statut",
+          "date": "Date"
+        }
+      },
+      "salesByCourse": {
+        "title": "Ventes par formation",
+        "subtitle": "30 derniers jours",
+        "salesLabel": "{count} ventes · {amount}"
+      },
+      "queue": {
+        "title": "À traiter",
+        "recitations": "{count} récitations à corriger",
+        "recitationsDetail": "La plus ancienne attend depuis {days} jours",
+        "questions": "{count} questions sans réponse",
+        "questionsDetail": "Tajwid · leçon 6 et leçon 11",
+        "cta": "Ouvrir la file de traitement"
+      },
+      "recentSignups": {
+        "title": "Derniers inscrits",
+        "timeAgoHours": "il y a {hours} h",
+        "timeAgoYesterday": "hier"
+      },
+      "topCourse": {
+        "title": "Formation la plus rentable",
+        "body": "{sales} ventes ce mois-ci · {revenue} · taux d'achèvement {rate} %, le plus élevé du catalogue."
+      }
+    },
+    "course": {
+      "breadcrumb": "Formations",
+      "status": { "draft": "Brouillon", "published": "Publiée" },
+      "meta": "{modules} modules · {lessons} leçons · {duration} de vidéo · dernière modification il y a {minutes} min",
+      "previewLearner": "Aperçu apprenant",
+      "publish": "Publier la formation",
+      "delete": "Supprimer la formation",
+      "tabs": {
+        "content": "Contenu",
+        "info": "Informations",
+        "pricing": "Tarif & accès",
+        "learners": "Apprenants inscrits"
+      },
+      "translationCard": {
+        "label": "Langue du contenu",
+        "complete": "Contenu complet — {count} leçons traduites",
+        "partial": "Partiel — {done} leçons sur {total} traduites",
+        "empty": "Vide — aucune leçon traduite",
+        "titleLabel": "Titre de la formation",
+        "subtitleLabel": "Sous-titre",
+        "descriptionLabel": "Description"
+      },
+      "curriculum": {
+        "title": "Structure pédagogique",
+        "subtitle": "Glissez les poignées pour réorganiser",
+        "addModule": "Ajouter un module",
+        "addLesson": "Ajouter une leçon",
+        "subModuleLabel": "sous-module",
+        "videoReady": "Vidéo OK",
+        "videoMissing": "Vidéo manquante",
+        "uploading": "Envoi {pct} %",
+        "metaWithSubModules": "{subModules} sous-modules · {lessons} leçons",
+        "metaLessonsOnly": "{lessons} leçons"
+      },
+      "cover": { "title": "Image de couverture", "replace": "Remplacer l'image" },
+      "settings": {
+        "title": "Réglages",
+        "level": "Niveau",
+        "levels": {
+          "beginner": "Débutant",
+          "intermediate": "Intermédiaire",
+          "advanced": "Avancé"
+        },
+        "price": "Prix (FCFA)",
+        "freePreview": "Leçons d'aperçu gratuit",
+        "freePreviewHelp": "{count} leçons ouvertes",
+        "certificate": "Attestation de fin",
+        "certificateHelp": "Générée automatiquement",
+        "voiceCorrection": "Correction vocale",
+        "voiceCorrectionHelp": "Sous 48 h ouvrées"
+      },
+      "actionBar": {
+        "autosaved": "Brouillon enregistré automatiquement il y a {minutes} min"
+      }
+    },
+    "table": {
+      "exportCsv": "Exporter en CSV",
+      "noResults": "Aucun résultat pour cette recherche",
+      "rowCount": "{shown} sur {total}",
+      "pageLabel": "Page {page} sur {total}",
+      "previousPage": "Page précédente",
+      "nextPage": "Page suivante",
+      "users": {
+        "tab": "Liste des utilisateurs",
+        "title": "Utilisateurs",
+        "subtitle": "{total} apprenants inscrits · {change} ce mois-ci",
+        "searchPlaceholder": "Nom, e-mail ou téléphone…",
+        "filters": { "all": "Tous", "withPurchase": "Avec achat", "withoutPurchase": "Sans achat" },
+        "columns": {
+          "learner": "Apprenant",
+          "email": "E-mail",
+          "phone": "Téléphone",
+          "courses": "Formations",
+          "joined": "Inscrit le"
+        },
+        "coursesCount": "{count, plural, one {# formation} other {# formations}}"
+      },
+      "orders": {
+        "tab": "Liste des commandes",
+        "title": "Commandes",
+        "subtitle": "{total} commandes · {amount} sur 30 jours",
+        "searchPlaceholder": "Référence, apprenant ou formation…",
+        "filters": { "all": "Toutes", "paid": "Payées", "pending": "En attente", "failed": "Échouées" },
+        "columns": {
+          "ref": "Référence",
+          "learner": "Apprenant",
+          "course": "Formation",
+          "amount": "Montant",
+          "status": "Statut",
+          "date": "Date"
+        },
+        "emptyTitle": "Aucune commande sur cette période",
+        "emptyDescription": "Essayez d'élargir la plage de dates ou de retirer le filtre de statut.",
+        "emptyAction": "Voir les 30 derniers jours"
+      }
+    }
+  },
+  "states": {
+    "sectionError": {
+      "title": "Impossible de charger cette section",
+      "body": "Vérifiez votre connexion, puis réessayez.",
+      "retry": "Réessayer"
+    },
+    "pageError": {
+      "title": "Une erreur est survenue",
+      "body": "Nous n'avons pas pu afficher cette page. Réessayez dans un instant.",
+      "retryButton": "Réessayer",
+      "homeButton": "Retour à l'accueil",
+      "detailsLabel": "Détails techniques (développement)"
+    },
+    "notFound": {
+      "title": "Cette page n'existe pas",
+      "body": "Le lien est peut-être ancien, ou la formation a été retirée.",
+      "browseCoursesButton": "Parcourir les formations",
+      "homeButton": "Retour à l'accueil"
+    },
+    "offline": {
+      "message": "Vous êtes hors connexion. Vos progrès seront synchronisés au retour du réseau."
+    },
+    "networkError": {
+      "title": "Impossible de charger les formations",
+      "body": "Votre connexion semble interrompue. Vos formations déjà téléchargées restent accessibles hors ligne.",
+      "retry": "Réessayer",
+      "offlineContent": "Voir mon contenu hors ligne"
+    },
+    "videoError": {
+      "title": "Cette leçon ne peut pas être lue",
+      "body": "Un incident est survenu de notre côté. Votre progression est sauvegardée, rien n'est perdu.",
+      "incidentRef": "Référence de l'incident · ERR-5031-LV",
+      "reload": "Recharger la leçon",
+      "report": "Signaler le problème"
+    }
+  }
+}

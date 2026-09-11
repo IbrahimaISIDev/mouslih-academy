@@ -1,0 +1,753 @@
+{
+  "common": {
+    "orderStatus": {
+      "paid": "مدفوع",
+      "pending": "قيد الانتظار",
+      "failed": "فشل",
+      "refunded": "مسترد",
+      "draft": "مسودة",
+      "premium": "مميز"
+    },
+    "footer": {
+      "tagline": "أكاديمية رقمية لتعلّم القرآن والعلوم الإسلامية انطلاقًا من السنغال.",
+      "whatsappNumber": "+221 77 000 00 00",
+      "whatsappMobileCta": "راسلنا عبر واتساب",
+      "columns": [
+        {
+          "title": "الدورات",
+          "items": ["تصحيح سورة الفاتحة", "النورانية", "التجويد", "علوم الحديث"]
+        },
+        {
+          "title": "الأكاديمية",
+          "items": ["من نحن", "آراء الطلاب", "الأسئلة الشائعة", "تواصل معنا"]
+        },
+        {
+          "title": "قانوني",
+          "items": ["شروط الاستخدام", "سياسة الاسترداد", "الخصوصية"]
+        }
+      ],
+      "mobileLinks": [
+        "الدورات",
+        "من نحن",
+        "آراء الطلاب",
+        "تواصل معنا",
+        "الشروط",
+        "الخصوصية"
+      ],
+      "copyright": "© 2026 أكاديمية مصلح · دكار، السنغال",
+      "copyrightMobile": "© 2026 أكاديمية مصلح · دكار",
+      "paymentNote": "دفع آمن عبر Wave"
+    }
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "formations": "الدورات",
+    "testimonials": "آراء الطلاب",
+    "contact": "تواصل معنا",
+    "login": "تسجيل الدخول",
+    "signup": "إنشاء حساب",
+    "dashboard": "لوحة التحكم",
+    "myCourses": "دوراتي",
+    "catalog": "الدورات",
+    "profile": "الملف الشخصي",
+    "logout": "تسجيل الخروج"
+  },
+  "home": {
+    "hero": {
+      "badge": "تعليم موثّق · السنغال",
+      "title": "اتلُ الفاتحة كما يجب أن تُتلى.",
+      "description": "أكاديمية رقمية لتعلّم القرآن والتجويد والعلوم الإسلامية — بوتيرتك الخاصة، وبتصحيح درسًا بعد درس، بالفرنسية أو الإنجليزية أو العربية.",
+      "descriptionMobile": "القرآن والتجويد والعلوم الإسلامية — بوتيرتك الخاصة، وبتصحيح درسًا بعد درس.",
+      "ctaPrimary": "تصفّح الدورات",
+      "ctaSecondary": "شاهد درسًا مجانيًا",
+      "statLearnersValue": "١٢٤٠",
+      "statLearnersLabel": "متعلّم مسجّل",
+      "statLearnersLabelMobile": "متعلّم",
+      "statCoursesValue": "٦",
+      "statCoursesLabel": "دورات مكتملة",
+      "statCoursesLabelMobile": "دورات",
+      "statPaymentValue": "Wave",
+      "statPaymentLabel": "الدفع خلال 30 ثانية",
+      "statPaymentLabelMobile": "خلال 30 ثانية",
+      "teacherPlaceholder": "صورة الأستاذ",
+      "teacherName": "الأستاذ مصلح",
+      "teacherCredentials": "إجازة في التلاوة · 12 عامًا من التدريس"
+    },
+    "video": {
+      "eyebrow": "في دقيقتين",
+      "title": "كيف تسير الدورة",
+      "description": "دروس فيديو قصيرة، وتمارين تلاوة تُرسَل للتصحيح، وتقدّم يُسجَّل تلقائيًا. تحتفظ بالوصول مدى الحياة.",
+      "bullets": [
+        "دروس قابلة للتحميل لضعف الاتصال",
+        "تصحيح شخصي عبر واتساب",
+        "شهادة عند نهاية المسار"
+      ],
+      "captionDesktop": "فيديو تعريفي · دقيقتان و10 ثوانٍ",
+      "captionMobile": "دقيقتان و10 ثوانٍ"
+    },
+    "featured": {
+      "eyebrow": "البرنامج",
+      "title": "دورات مختارة",
+      "titleMobile": "مختارة",
+      "seeCatalog": "كل الدورات",
+      "seeAllMobile": "عرض الكل",
+      "badgeFeatured": "الأكثر متابعة",
+      "discover": "اكتشف"
+    },
+    "testimonials": {
+      "eyebrow": "تابعوا الدورة",
+      "title": "آراء المتعلمين",
+      "titleMobile": "آراء الطلاب"
+    },
+    "cta": {
+      "title": "ابدأ اليوم، واحتفظ بالوصول مدى الحياة",
+      "description": "الدفع عبر Wave · دون تجديد تلقائي · دعم عبر واتساب من الاثنين إلى السبت.",
+      "ctaPrimary": "تصفّح الدورات",
+      "ctaWhatsapp": "اطرح سؤالاً"
+    },
+    "stickyCta": {
+      "priceLabel": "ابتداءً من",
+      "action": "اكتشف الدورات"
+    }
+  },
+  "catalog": {
+    "title": "جميع الدورات",
+    "description": "ستة مسارات كاملة، من الحروف الأولى إلى علوم الحديث. وصول مدى الحياة، دفعة واحدة عبر Wave.",
+    "searchPlaceholder": "ابحث عن دورة…",
+    "searchPlaceholderMobile": "بحث…",
+    "levels": {
+      "all": "كل المستويات",
+      "beginner": "مبتدئ",
+      "intermediate": "متوسط",
+      "advanced": "متقدم"
+    },
+    "count": "{count, plural, =0 {لا نتائج} one {دورة واحدة} other {# دورات}}",
+    "discover": "اكتشف",
+    "empty": {
+      "title": "لا توجد دورة تطابق «{query}»",
+      "description": "هذه الدورة غير موجودة بعد — أخبرنا بما تبحث عنه، هكذا يتوسّع البرنامج.",
+      "reset": "إعادة ضبط التصفية",
+      "suggest": "اقترح دورة",
+      "titleMobile": "لا نتائج لـ «{query}»",
+      "descriptionMobile": "أخبرنا بما تبحث عنه.",
+      "resetMobile": "إعادة الضبط"
+    },
+    "stickyCta": "ما الدورة المناسبة لي؟"
+  },
+  "course": {
+    "breadcrumb": {
+      "formations": "الدورات",
+      "category": "القرآن"
+    },
+    "badgeFeatured": "الأكثر متابعة",
+    "meta": {
+      "lessonsVideo": "{count} درسًا مصورًا",
+      "hoursContent": "{hours} من المحتوى",
+      "certificateIncluded": "شهادة مضمّنة",
+      "languages": "FR · EN · AR",
+      "lessonsShort": "{count} درسًا",
+      "hoursShort": "{hours}",
+      "certificateShort": "شهادة"
+    },
+    "purchaseCard": {
+      "previewCaption": "معاينة مجانية · الدرس 1",
+      "paymentNote": "دفعة واحدة · وصول مدى الحياة",
+      "buyButton": "اشترِ عبر Wave",
+      "questionButton": "اطرح سؤالاً",
+      "questionButtonMobile": "لديك سؤال؟ راسلنا",
+      "included": [
+        "تصحيح صوتي شخصي",
+        "ملفات PDF قابلة للتحميل",
+        "استرداد خلال 7 أيام في حال عدم الرضا"
+      ]
+    },
+    "about": {
+      "title": "عن هذه الدورة",
+      "titleMobile": "نبذة",
+      "readMore": "قراءة المزيد"
+    },
+    "outcomes": {
+      "eyebrow": "في النهاية، ستكون قادرًا على",
+      "items": [
+        "نطق الحروف المفخّمة بشكل صحيح",
+        "احترام مقدار المدود",
+        "تحديد الوقوف دون كسر المعنى",
+        "تصحيح أخطائك المتكررة بنفسك"
+      ]
+    },
+    "curriculum": {
+      "title": "البنية التعليمية",
+      "titleMobile": "البرنامج",
+      "summary": "{modules} وحدات · {lessons} درسًا · {free} دروس بمعاينة مجانية",
+      "summaryMobile": "{modules} وحدات · {lessons} درسًا",
+      "freeLabel": "معاينة مجانية",
+      "watchLabel": "مشاهدة",
+      "lockedTooltip": "متاح بعد الشراء",
+      "previewDialogTitle": "معاينة مجانية",
+      "moduleMeta": "{lessons} درسًا · {duration}",
+      "moduleMetaWithSub": "{subCount} وحدات فرعية · {lessons} درسًا · {duration}",
+      "moduleMetaCertificateSuffix": " + شهادة",
+      "minutesShort": "{count} د"
+    },
+    "teacher": {
+      "eyebrow": "الأستاذ",
+      "name": "الأستاذ مصلح",
+      "credentials": "إجازة في التلاوة · دكار",
+      "bio": "اثنا عشر عامًا في تدريس القرآن، تكوّن في القاهرة، يصحّح شخصيًا كل تلاوة تُرسَل إليه."
+    },
+    "faq": {
+      "eyebrow": "الأسئلة الشائعة",
+      "items": [
+        "هل هناك مهلة لإنهاء الدورة؟",
+        "هل يمكنني الدفع على دفعات؟",
+        "هل الفيديوهات مترجمة؟"
+      ]
+    },
+    "sidebar": {
+      "paymentDelayTitle": "بحاجة إلى مهلة للدفع؟",
+      "relatedTitle": "دورات ذات صلة"
+    },
+    "stickyCta": {
+      "lifetimeLabel": "وصول مدى الحياة",
+      "buyButton": "اشترِ عبر Wave"
+    }
+  },
+  "auth": {
+    "sidePanel": {
+      "bullets": [
+        "وصول مدى الحياة إلى دوراتك المشتراة",
+        "تقدّم يُسجَّل درسًا بعد درس",
+        "تصحيح شخصي لتلاوتك"
+      ],
+      "statLine": "١٢٤٠ متعلمًا في السنغال والمهجر"
+    },
+    "passwordStrength": {
+      "weak": "ضعيفة",
+      "medium": "متوسطة",
+      "strong": "قوية",
+      "hintMin": "8 أحرف على الأقل",
+      "hintAddDigit": "أضف رقمًا",
+      "hintAddUppercase": "أضف حرفًا كبيرًا"
+    },
+    "login": {
+      "mobileTitle": "سعداء بعودتك",
+      "sideTitle": "تابع من حيث توقفت",
+      "sideBody": "تقدّمك وتصحيحاتك وشهاداتك في انتظارك.",
+      "formSubPrefix": "ليس لديك حساب بعد؟",
+      "formSwitchLabel": "أنشئ حسابًا",
+      "errorTitle": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+      "errorDescription": "تحقق من إدخالك، أو أعد تعيين كلمة المرور.",
+      "emailLabel": "البريد الإلكتروني",
+      "passwordLabel": "كلمة المرور",
+      "forgotPassword": "نسيت كلمة المرور؟",
+      "rememberMe": "البقاء متصلاً على هذا الجهاز",
+      "submit": "تسجيل الدخول",
+      "submitLoading": "جارٍ تسجيل الدخول…",
+      "helpText": "مشكلة في تسجيل الدخول؟",
+      "helpLink": "راسلنا"
+    },
+    "signup": {
+      "mobileTitle": "أنشئ حسابك",
+      "sideTitle": "أكاديمية، لا مكتبة فيديوهات",
+      "sideBody": "يمنحك الحساب المجاني الوصول إلى دروس المعاينة وتقدّمك وتصحيحاتك الشخصية.",
+      "formSubPrefix": "لديك حساب بالفعل؟",
+      "formSwitchLabel": "سجّل الدخول",
+      "firstNameLabel": "الاسم الأول",
+      "lastNameLabel": "اسم العائلة",
+      "emailLabel": "البريد الإلكتروني",
+      "emailPlaceholder": "anta@amthila.com",
+      "phoneLabel": "الهاتف (حساب Wave)",
+      "phonePlaceholder": "77 000 00 00",
+      "phoneHelp": "يُستخدم لمدفوعاتك — يمكنك تعديله لاحقًا.",
+      "passwordLabel": "كلمة المرور",
+      "termsPrefix": "أوافق على",
+      "termsLink1": "شروط الاستخدام",
+      "termsMiddle": "و",
+      "termsLink2": "سياسة الخصوصية",
+      "submit": "إنشاء حسابي",
+      "submitLoading": "جارٍ الإنشاء…",
+      "finalHelp": "ستتلقى رسالة تأكيد عبر البريد الإلكتروني. لا دفع في هذه الخطوة.",
+      "helpText": "بحاجة إلى مساعدة؟",
+      "helpLink": "راسلنا"
+    }
+  },
+  "contact": {
+    "eyebrow": "راسلنا",
+    "title": "لديك سؤال؟ تحدّث معنا عبر واتساب",
+    "description": "كل الدعم في أكاديمية مصلح يمر عبر واتساب — لا استمارة، لا انتظار في صندوق البريد. راسلنا، ويجيبك مباشرة أستاذ أو أحد أفراد الفريق.",
+    "primaryCta": "راسلنا عبر واتساب",
+    "reasonsTitle": "بحسب حاجتك",
+    "reasons": {
+      "course": {
+        "label": "سؤال حول دورة",
+        "message": "السلام عليكم، لدي سؤال حول إحدى الدورات."
+      },
+      "payment": {
+        "label": "مشكلة في دفعة عبر Wave",
+        "message": "السلام عليكم، لدي مشكلة في دفعة عبر Wave."
+      },
+      "correction": {
+        "label": "متابعة تصحيح تلاوة",
+        "message": "السلام عليكم، أريد معرفة آخر مستجدات تصحيح تلاوتي."
+      },
+      "other": {
+        "label": "طلب آخر",
+        "message": "السلام عليكم، لدي سؤال."
+      }
+    },
+    "infoTitle": "جدير بالمعرفة",
+    "infoHours": "نجيب من الاثنين إلى السبت، عادةً خلال أقل من يوم.",
+    "infoLocation": "فريق مقيم في داكار، السنغال — متعلّمون في السنغال والمهجر.",
+    "mobileCta": "راسلنا عبر واتساب"
+  },
+  "testimonials": {
+    "eyebrow": "تابعوا الدورات",
+    "title": "ماذا يقول المتعلمون",
+    "description": "تلاوات صُحِّحت، وعادات حفظ استمرت، وصلوات أُدّيت بيقين. إليك ما يروونه، دون تنقيح.",
+    "descriptionMobile": "دون تنقيح، مع دورتهم ومدينتهم.",
+    "filters": {
+      "all": "الكل",
+      "video": "فيديو",
+      "text": "مكتوب"
+    },
+    "seeMore": "عرض المزيد من الآراء",
+    "mobileCta": "اكتشف الدورات"
+  },
+  "dashboard": {
+    "salam": "السلام عليكم",
+    "welcomeTitle": "أهلاً بعودتك، {name}",
+    "weeklyProgress": "أنهيتَ {done} دروس هذا الأسبوع — تبقّى {remaining} دروس لإتمام {course}.",
+    "weeklyProgressMobile": "{done} دروس أُنجزت هذا الأسبوع — تبقّى {remaining}.",
+    "continueLabel": "تابع تعلّمك",
+    "contextLine": "{course} · {module} · الدرس {index} من {total}",
+    "resumeAt": "المتابعة عند",
+    "resumeButton": "متابعة الدرس",
+    "progressLabel": "{done} / {total} دروس · {pct}٪",
+    "myCoursesTitle": "دوراتي",
+    "browseCatalog": "تصفّح الدورات",
+    "status": {
+      "inProgress": "قيد التقدّم",
+      "notStarted": "لم تبدأ",
+      "completed": "مكتملة"
+    },
+    "lastSeenDaysAgo": "آخر درس شوهد منذ {days} أيام",
+    "neverStarted": "لم تبدأ بعد",
+    "completedOn": "اكتملت في {date}",
+    "continueBtn": "متابعة",
+    "startBtn": "ابدأ",
+    "certificateBtn": "الشهادة",
+    "certificateBtnMobile": "تحميل الشهادة",
+    "pendingCorrectionTitle": "تصحيح قيد الانتظار",
+    "pendingCorrectionSubject": "تلاوة الوحدة {module}",
+    "pendingCorrectionMeta": "أُرسلت منذ {days} يوم · الرد خلال 48 ساعة",
+    "pendingCorrectionStatus": "قيد التصحيح",
+    "needHelpTitle": "بحاجة إلى مساعدة؟",
+    "needHelpBody": "سؤال حول درس أو دفعة أو وصول؟ يجيب الفريق من الاثنين إلى السبت.",
+    "whatsappCta": "راسلنا عبر واتساب",
+    "emptyLibrary": {
+      "title": "مكتبتك فارغة",
+      "description": "اختر دورتك الأولى — تصحيح الفاتحة يستغرق ثلاث ساعات ويضع أسس كل ما يليه.",
+      "action": "تصفح الكتالوج"
+    }
+  },
+  "player": {
+    "backToDashboard": "لوحة التحكم",
+    "progressLabel": "{done} / {total} دروس",
+    "percentLabel": "{pct}٪",
+    "sidebarTitle": "محتوى الدورة",
+    "sendRecitation": "أرسل تلاوتي",
+    "lockedTooltip": "متاح بعد الشراء",
+    "moduleLessonLabel": "{module} · الدرس {index} من {total}",
+    "lessonOfTotal": "الدرس {index} من {total}",
+    "tabs": {
+      "overview": "نظرة عامة",
+      "resources": "الملفات",
+      "questions": "الأسئلة"
+    },
+    "overview": {
+      "keyPointsTitle": "النقاط الأساسية للدرس"
+    },
+    "resources": {
+      "downloadNote": "تبقى ملفات PDF متاحة دون اتصال بعد تحميلها.",
+      "sizeUnit": "{size} كيلوبايت"
+    },
+    "questions": {
+      "placeholder": "اطرح سؤالاً حول هذا الدرس…",
+      "responseTime": "يجيب الأستاذ خلال 48 ساعة",
+      "send": "إرسال",
+      "teacherBadge": "الأستاذ",
+      "pendingAnswer": "بانتظار الرد",
+      "emptyTitle": "لا أسئلة على هذا الدرس",
+      "emptyDescription": "كن أول من يطلب توضيحًا.",
+      "emptyAction": "طرح سؤال"
+    },
+    "nav": {
+      "previous": "الدرس السابق",
+      "markComplete": "وضع علامة مكتمل",
+      "next": "الدرس التالي"
+    },
+    "autoAdvance": {
+      "message": "الدرس التالي خلال {seconds} ث",
+      "cancel": "إلغاء"
+    },
+    "mobile": {
+      "programBar": "البرنامج",
+      "drawerHint": "المس شريط «البرنامج» لفتح وإغلاق قائمة التنقل."
+    }
+  },
+  "profile": {
+    "title": "ملفي الشخصي",
+    "nav": {
+      "personal": "المعلومات الشخصية",
+      "security": "الأمان",
+      "purchases": "سجل المشتريات",
+      "language": "تفضيلات اللغة"
+    },
+    "personal": {
+      "title": "المعلومات الشخصية",
+      "changePhoto": "تغيير الصورة",
+      "photoHint": "JPG أو PNG · بحد أقصى 2 ميغابايت",
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف",
+      "city": "المدينة",
+      "save": "حفظ التغييرات",
+      "saveMobile": "حفظ",
+      "cancel": "إلغاء",
+      "savedToast": "تم حفظ التغييرات"
+    },
+    "security": {
+      "title": "الأمان",
+      "lastChanged": "آخر تعديل لكلمة المرور في {date}.",
+      "current": "كلمة المرور الحالية",
+      "new": "كلمة المرور الجديدة",
+      "confirm": "تأكيد كلمة المرور",
+      "mismatch": "كلمتا المرور غير متطابقتين",
+      "otherDevices": "سيتم تسجيل خروجك من الأجهزة الأخرى.",
+      "update": "تحديث كلمة المرور"
+    },
+    "purchases": {
+      "title": "سجل المشتريات",
+      "columns": {
+        "reference": "المرجع",
+        "course": "الدورة",
+        "amount": "المبلغ",
+        "status": "الحالة",
+        "date": "التاريخ",
+        "receipt": "الإيصال"
+      },
+      "download": "تحميل",
+      "downloadReceipt": "تحميل الإيصال",
+      "none": "—"
+    },
+    "language": {
+      "title": "تفضيلات اللغة",
+      "note": "تتبع الواجهة والترجمات المتاحة هذا الاختيار.",
+      "save": "حفظ"
+    }
+  },
+  "checkout": {
+    "steps": {
+      "summary": "الملخص",
+      "payment": "الدفع عبر Wave",
+      "unlocked": "تم فتح الوصول",
+      "confirming": "التأكيد جارٍ",
+      "failed": "فشل الدفع"
+    },
+    "cancel": "إلغاء",
+    "summary": {
+      "title": "راجع طلبك",
+      "subtitle": "دفعة واحدة، دون تجديد تلقائي.",
+      "courseCardTitle": "دورتك",
+      "lifetimeAccess": "وصول مدى الحياة",
+      "pdfIncluded": "ملفات PDF مضمّنة",
+      "finalCertificate": "شهادة ختامية",
+      "accountCardTitle": "حساب Wave المراد خصمه",
+      "phoneLabel": "رقم الهاتف",
+      "useOtherNumber": "استخدام رقم آخر",
+      "phoneHelp": "يجب أن يكون هذا رقم حساب Wave الخاص بك، وليس بالضرورة رقم ملفك الشخصي.",
+      "howItWorksTitle": "ماذا سيحدث بعد ذلك",
+      "step1": "سيتم توجيهك إلى صفحة Wave الآمنة.",
+      "step2": "تؤكد دفع {amount} في تطبيق Wave.",
+      "step3": "تعود تلقائيًا إلى الأكاديمية.",
+      "step4": "يتم فتح دورتك فورًا.",
+      "step1Mobile": "التوجيه إلى صفحة Wave الآمنة",
+      "step2Mobile": "تأكيد {amount} في تطبيق Wave",
+      "step3Mobile": "العودة التلقائية إلى الأكاديمية",
+      "step4Mobile": "فتح الدورة فورًا",
+      "summaryTitle": "الملخص",
+      "subtotal": "المجموع الفرعي",
+      "discount": "خصم الإطلاق",
+      "waveFee": "رسوم Wave",
+      "total": "المبلغ الإجمالي المستحق",
+      "totalMobile": "المجموع",
+      "paymentUnique": "دفعة واحدة بالفرنك الأفريقي",
+      "payButton": "الدفع عبر Wave",
+      "secureTransaction": "معاملة آمنة عبر Wave السنغال",
+      "refundNote": "استرداد كامل خلال 7 أيام إذا لم تناسبك الدورة.",
+      "questionBeforePaying": "سؤال قبل الدفع؟"
+    },
+    "redirect": {
+      "title": "جارٍ التوجيه إلى Wave…",
+      "body": "لا تغلق هذه الصفحة. أكّد دفع {amount} في تطبيق Wave، ثم عد إلى هنا.",
+      "transactionLabel": "المعاملة",
+      "reference": "المرجع",
+      "amount": "المبلغ",
+      "cancelPayment": "إلغاء الدفع",
+      "retryLink": "الصفحة لا تفتح؟ أعد تشغيل الدفع"
+    },
+    "confirmation": {
+      "success": {
+        "blessing": "بَارَكَ اللَّهُ فِيكَ",
+        "title": "تم فتح دورتك",
+        "body": "تم تأكيد دفع {amount} بواسطة Wave. أصبحت «{course}» ملكًا لك مدى الحياة، ابتداءً من الآن.",
+        "startLesson": "ابدأ الدرس 1",
+        "goDashboard": "الذهاب إلى لوحة التحكم",
+        "getStartedTitle": "للبدء بشكل جيد",
+        "tip1Title": "شاهد الدروس الثلاثة الأولى",
+        "tip1Body": "تضع الأساس للنفَس والنية قبل أي عمل على الحروف.",
+        "tip2Title": "حمّل الملفات",
+        "tip2Body": "تبقى ملفات PDF قابلة للقراءة دون اتصال، مفيدة أثناء التنقل.",
+        "tip3Title": "أرسل تلاوتك",
+        "tip3Body": "في نهاية الوحدة 1، لتحصل على أول تصحيح.",
+        "receiptTitle": "الإيصال",
+        "paidBadge": "مدفوع",
+        "reference": "المرجع",
+        "date": "التاريخ",
+        "method": "الوسيلة",
+        "amountPaid": "المبلغ المدفوع",
+        "downloadReceipt": "تحميل الإيصال",
+        "emailedTo": "أُرسلت نسخة إلى {email}."
+      },
+      "pending": {
+        "title": "الدفع قيد المعالجة",
+        "body": "يقوم Wave بتأكيد معاملتك. يستغرق ذلك عادة أقل من دقيقتين. يمكنك إغلاق هذه الصفحة: سيصلك بريد إلكتروني فور فتح الوصول.",
+        "transactionLabel": "المعاملة",
+        "statusBadge": "قيد الانتظار",
+        "reference": "المرجع",
+        "course": "الدورة",
+        "amount": "المبلغ",
+        "refresh": "التحقق من الحالة",
+        "backToDashboard": "العودة إلى لوحة التحكم",
+        "timeoutNote": "تستغرق المعالجة وقتًا أطول من المتوقع — سنرسل إليك بريدًا إلكترونيًا فور التأكيد."
+      },
+      "failed": {
+        "title": "لم تنجح عملية الدفع",
+        "noDebit": "لم يتم خصم أي مبلغ من حساب Wave الخاص بك.",
+        "retryNote": "يمكنك إعادة المحاولة فورًا، تبقى الدورة متاحة بنفس السعر.",
+        "reasonTitle": "السبب الذي أعاده Wave",
+        "reasonText": "رصيد غير كافٍ في الحساب {phone}",
+        "referenceLine": "المرجع {ref} · {date}",
+        "checklistTitle": "قبل إعادة المحاولة، تحقق من",
+        "check1": "أن رصيدك في Wave يغطي {amount}",
+        "check2": "أن الرقم المُدخل هو حساب Wave النشط الخاص بك",
+        "check3": "أن تطبيق Wave محدّث ومتصل بالشبكة",
+        "retryButton": "إعادة محاولة الدفع",
+        "contactSupport": "التواصل مع الدعم"
+      }
+    }
+  },
+  "admin": {
+    "sidebar": {
+      "wordmark": "أكاديمية مصلح",
+      "subtitle": "الإدارة",
+      "nav": {
+        "dashboard": "لوحة القيادة",
+        "courses": "الدورات",
+        "users": "المستخدمون",
+        "orders": "الطلبات",
+        "corrections": "التصحيحات",
+        "testimonials": "آراء الطلاب"
+      },
+      "adminName": "أستاذ مصلح",
+      "adminRole": "مُدرِّس · إدارة"
+    },
+    "narrowScreen": {
+      "title": "تحتاج الإدارة إلى شاشة أوسع",
+      "body": "إدارة شجرة الوحدات وتصحيح التلاوات لا يتمّان بإصبع على شاشة صغيرة. يُرجى الدخول من حاسوب."
+    },
+    "dashboard": {
+      "searchPlaceholder": "ابحث عن متعلم أو طلب…",
+      "newCourse": "دورة جديدة",
+      "title": "نظرة عامة",
+      "subtitle": "آخر 30 يومًا · مقارنة بالفترة السابقة",
+      "range": { "30d": "30 يومًا", "90d": "90 يومًا", "year": "سنة" },
+      "stats": {
+        "revenue": "رقم الأعمال",
+        "revenueChange": "+{pct}٪ · {amount} إضافية",
+        "sales": "المبيعات",
+        "salesChange": "+{count} · منها {topSales} على دورة {topCourse}",
+        "learners": "المتعلمون",
+        "learnersChange": "+{count} تسجيلًا",
+        "completionRate": "معدّل الإتمام",
+        "completionRateChange": "{pts} نقطة · للمتابعة"
+      },
+      "recentPayments": {
+        "title": "المدفوعات الأخيرة",
+        "allOrders": "جميع الطلبات",
+        "columns": {
+          "learner": "المتعلم",
+          "course": "الدورة",
+          "amount": "المبلغ",
+          "status": "الحالة",
+          "date": "التاريخ"
+        }
+      },
+      "salesByCourse": {
+        "title": "المبيعات حسب الدورة",
+        "subtitle": "آخر 30 يومًا",
+        "salesLabel": "{count} مبيعات · {amount}"
+      },
+      "queue": {
+        "title": "قيد المعالجة",
+        "recitations": "{count} تلاوات بانتظار التصحيح",
+        "recitationsDetail": "أقدمها ينتظر منذ {days} يومًا",
+        "questions": "{count} أسئلة بلا إجابة",
+        "questionsDetail": "التجويد · الدرس 6 والدرس 11",
+        "cta": "فتح قائمة المعالجة"
+      },
+      "recentSignups": {
+        "title": "آخر المسجَّلين",
+        "timeAgoHours": "منذ {hours} ساعات",
+        "timeAgoYesterday": "أمس"
+      },
+      "topCourse": {
+        "title": "الدورة الأكثر ربحية",
+        "body": "{sales} مبيعات هذا الشهر · {revenue} · معدّل إتمام {rate}٪، الأعلى في الكتالوج."
+      }
+    },
+    "course": {
+      "breadcrumb": "الدورات",
+      "status": { "draft": "مسودة", "published": "منشورة" },
+      "meta": "{modules} وحدات · {lessons} دروس · {duration} من الفيديو · آخر تعديل منذ {minutes} دقيقة",
+      "previewLearner": "معاينة كمتعلم",
+      "publish": "نشر الدورة",
+      "delete": "حذف الدورة",
+      "tabs": {
+        "content": "المحتوى",
+        "info": "المعلومات",
+        "pricing": "السعر والوصول",
+        "learners": "المتعلمون المسجَّلون"
+      },
+      "translationCard": {
+        "label": "لغة المحتوى",
+        "complete": "مكتمل — تمت ترجمة {count} درسًا",
+        "partial": "جزئي — تُرجم {done} من {total} درسًا",
+        "empty": "فارغ — لم تُترجم أي دروس",
+        "titleLabel": "عنوان الدورة",
+        "subtitleLabel": "العنوان الفرعي",
+        "descriptionLabel": "الوصف"
+      },
+      "curriculum": {
+        "title": "البنية التعليمية",
+        "subtitle": "اسحب المقابض لإعادة الترتيب",
+        "addModule": "إضافة وحدة",
+        "addLesson": "إضافة درس",
+        "subModuleLabel": "وحدة فرعية",
+        "videoReady": "الفيديو جاهز",
+        "videoMissing": "الفيديو مفقود",
+        "uploading": "الإرسال {pct}٪",
+        "metaWithSubModules": "{subModules} وحدات فرعية · {lessons} دروس",
+        "metaLessonsOnly": "{lessons} دروس"
+      },
+      "cover": { "title": "صورة الغلاف", "replace": "استبدال الصورة" },
+      "settings": {
+        "title": "الإعدادات",
+        "level": "المستوى",
+        "levels": {
+          "beginner": "مبتدئ",
+          "intermediate": "متوسط",
+          "advanced": "متقدّم"
+        },
+        "price": "السعر (فرنك أفريقي)",
+        "freePreview": "دروس معاينة مجانية",
+        "freePreviewHelp": "{count} دروس مفتوحة",
+        "certificate": "شهادة الإتمام",
+        "certificateHelp": "تُصدر تلقائيًا",
+        "voiceCorrection": "التصحيح الصوتي",
+        "voiceCorrectionHelp": "خلال 48 ساعة عمل"
+      },
+      "actionBar": {
+        "autosaved": "تم حفظ المسودة تلقائيًا منذ {minutes} دقيقة"
+      }
+    },
+    "table": {
+      "exportCsv": "تصدير CSV",
+      "noResults": "لا نتائج لهذا البحث",
+      "rowCount": "{shown} من {total}",
+      "pageLabel": "صفحة {page} من {total}",
+      "previousPage": "الصفحة السابقة",
+      "nextPage": "الصفحة التالية",
+      "users": {
+        "tab": "قائمة المستخدمين",
+        "title": "المستخدمون",
+        "subtitle": "{total} متعلمًا مسجَّلًا · {change} هذا الشهر",
+        "searchPlaceholder": "الاسم أو البريد الإلكتروني أو الهاتف…",
+        "filters": { "all": "الكل", "withPurchase": "بشراء", "withoutPurchase": "بلا شراء" },
+        "columns": {
+          "learner": "المتعلم",
+          "email": "البريد الإلكتروني",
+          "phone": "الهاتف",
+          "courses": "الدورات",
+          "joined": "تاريخ التسجيل"
+        },
+        "coursesCount": "{count} دورات"
+      },
+      "orders": {
+        "tab": "قائمة الطلبات",
+        "title": "الطلبات",
+        "subtitle": "{total} طلبًا · {amount} خلال 30 يومًا",
+        "searchPlaceholder": "المرجع أو المتعلم أو الدورة…",
+        "filters": { "all": "الكل", "paid": "مدفوعة", "pending": "قيد الانتظار", "failed": "فاشلة" },
+        "columns": {
+          "ref": "المرجع",
+          "learner": "المتعلم",
+          "course": "الدورة",
+          "amount": "المبلغ",
+          "status": "الحالة",
+          "date": "التاريخ"
+        },
+        "emptyTitle": "لا طلبات خلال هذه الفترة",
+        "emptyDescription": "جرّب توسيع نطاق التاريخ أو إزالة تصفية الحالة.",
+        "emptyAction": "عرض آخر 30 يومًا"
+      }
+    }
+  },
+  "states": {
+    "sectionError": {
+      "title": "تعذّر تحميل هذا القسم",
+      "body": "تحقّق من اتصالك، ثم أعد المحاولة.",
+      "retry": "إعادة المحاولة"
+    },
+    "pageError": {
+      "title": "حدث خطأ ما",
+      "body": "لم نتمكن من عرض هذه الصفحة. أعد المحاولة بعد قليل.",
+      "retryButton": "إعادة المحاولة",
+      "homeButton": "العودة إلى الرئيسية",
+      "detailsLabel": "تفاصيل تقنية (بيئة التطوير)"
+    },
+    "notFound": {
+      "title": "هذه الصفحة غير موجودة",
+      "body": "قد يكون الرابط قديمًا، أو تمّت إزالة الدورة.",
+      "browseCoursesButton": "تصفّح الدورات",
+      "homeButton": "العودة إلى الرئيسية"
+    },
+    "offline": {
+      "message": "أنت غير متصل بالإنترنت. ستتم مزامنة تقدّمك عند عودة الاتصال."
+    },
+    "networkError": {
+      "title": "تعذّر تحميل الدورات",
+      "body": "يبدو أن اتصالك منقطع. تبقى الدورات التي حمّلتها سابقًا متاحة دون اتصال.",
+      "retry": "إعادة المحاولة",
+      "offlineContent": "عرض محتواي دون اتصال"
+    },
+    "videoError": {
+      "title": "لا يمكن تشغيل هذا الدرس",
+      "body": "حدث خلل من جانبنا. تقدّمك محفوظ، لم يُفقد شيء.",
+      "incidentRef": "مرجع الحادثة · ERR-5031-LV",
+      "reload": "إعادة تحميل الدرس",
+      "report": "الإبلاغ عن المشكلة"
+    }
+  }
+}
