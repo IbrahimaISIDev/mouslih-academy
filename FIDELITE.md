@@ -52,6 +52,14 @@ relecture du code au fil des 9 prompts — pas une garantie d'absence totale d'�
   changé à 8 px sur tous les composants (```--radius-xs/sm/md/lg``` dans `globals.css`), à la
   demande explicite — voir `DESIGN-TOKENS.md`. Le constat de cohérence ci-dessus reste vrai
   (un seul jeu de tokens, aucune valeur en dur), seule la valeur du rayon a changé.*
+- **Palette verte** : rebrandée le même jour (2026-09-05) sur le vert exact du logo Mouslih
+  Academie (`#38B349`). Une première passe avait assombri `green-700` pour préserver le
+  contraste du texte blanc des boutons (2,72:1 sur `#38B349` contre 4,5:1 requis) ; à la demande
+  explicite et réitérée du client, cette passe a été révisée dans la foulée pour que `green-700`
+  soit identique au logo. Le contraste a été préservé autrement : texte/icône en `green-ink`
+  (~6,1:1) plutôt qu'en blanc sur tout remplissage `green-700`/`green-600`, et le vert n'est plus
+  utilisé comme couleur de texte sur fond clair (liens, badges, bouton outline passent aussi à
+  `green-ink`). Voir `DESIGN-TOKENS.md` pour le détail token par token.
 - **Ombres** : aucune ombre en dehors de `shadow-card-hover` (survol de card) et de l'anneau de
   focus ; les deux seules autres occurrences sont des `shadow-none` explicites.
 - **Or sans action de conversion** : les 6 usages de `variant="gold"` renvoient tous vers une

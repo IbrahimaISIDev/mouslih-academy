@@ -2,17 +2,25 @@
 @import "tw-animate-css";
 
 @theme {
-  /* Palette verte de la charte Mouslih Academie. green-ink est un vert quasi noir dédié au
-     texte/icône : sur un fond clair ou sur un remplissage vert vif, il garde un contraste
-     confortable là où green-700 lui-même serait trop clair pour du texte. Ne jamais l'utiliser
-     comme fond. */
+  /* Palette verte recalée sur le vert EXACT du logo Mouslih Academie (#38B349, échantillonné
+     sur le visuel de marque) : green-700 — la couleur d'interaction/marque de toute la
+     plateforme (boutons, bordures, chips actifs, cases cochées) — est désormais identique au
+     logo, pixel pour pixel. Une première passe avait volontairement assombri green-700 pour
+     préserver le contraste du texte blanc des boutons ; à la demande explicite du client, cette
+     passe a été révisée pour que green-700 soit identique au logo.
+
+     Du texte blanc sur #38B349 ne tient qu'à 2,72:1 (WCAG AA exige 4,5:1) : green-ink, un vert
+     quasi noir dédié au texte/icône, prend le relais partout où du texte/icône repose sur un
+     remplissage green-700/green-600, et partout où le vert sert de couleur de texte sur fond
+     clair (liens, badges, bouton outline) — green-700 lui-même y est trop clair. Ne jamais
+     utiliser green-ink comme fond. */
   --color-green-ink: #0b230e;
   --color-green-900: #09200c;
   --color-green-800: #113b17;
-  --color-green-700: #1d7228;
-  --color-green-600: #21832e;
-  --color-green-300: #83b98c;
-  --color-green-100: #e6f4e9;
+  --color-green-700: #38b349;
+  --color-green-600: #45c557;
+  --color-green-300: #6bd179;
+  --color-green-100: #d8f3dc;
 
   --color-bg: #f5f3ee;
   --color-surface: #ffffff;

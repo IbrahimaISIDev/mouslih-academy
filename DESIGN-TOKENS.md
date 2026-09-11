@@ -6,19 +6,29 @@ Toutes ces valeurs sont **relevées dans les maquettes**. Elles sont la source d
 
 ### Primaire — vert académie
 
-```green-ink``` est un vert quasi noir dédié au texte/icône (liens, badges, texte sur un
-remplissage vert vif) : il garde un contraste confortable là où ```green-700``` lui-même serait
-trop clair pour du texte. Ne jamais l'utiliser comme fond.
+Palette recalée le 2026-09-05 sur le vert du logo Mouslih Academie (```#38B349```,
+échantillonné directement sur le visuel de marque). Une première passe avait volontairement
+assombri ```green-700``` pour préserver le contraste du texte blanc des boutons ; à la demande
+explicite du client, cette passe a été révisée le jour même pour que ```green-700``` — la couleur
+d'interaction de toute la plateforme — soit **identique, pixel pour pixel, au vert du logo**.
+
+Conséquence directe : à ```#38B349```, du texte blanc ne tient qu'à 2,72:1 de contraste (WCAG AA
+exige 4,5:1). La couleur de fond reste donc le vert exact du logo partout (boutons, bordures,
+chips actifs, cases cochées, interrupteurs), mais le texte/icône posé dessus passe en
+```green-ink``` (~6,1:1) plutôt qu'en blanc. Pour la même raison, le vert n'est plus utilisé comme
+couleur de **texte sur fond clair** (liens de paragraphe, libellés de badge, bouton outline) : ces
+usages passent aussi à ```green-ink```. Les bordures et remplissages décoratifs (accents de card,
+graphiques) restent en ```green-700``` exact.
 
 | Token | Hex | Usage |
 |---|---|---|
-| ```green-ink``` | ```#0B230E``` | **texte/icône uniquement** — liens, badges, bouton outline. Jamais un fond. |
+| ```green-ink``` | ```#0B230E``` | **texte/icône uniquement** — sur fond green-700/600, ou vert de texte sur fond clair (liens, badges, bouton outline). Jamais un fond. |
 | ```green-900``` | ```#09200C``` | hero, sidebar admin, footer — fonds sombres |
 | ```green-800``` | ```#113B17``` | second niveau sombre, bandeaux CTA |
-| ```green-700``` | ```#1D7228``` | **couleur d'action** : boutons, bordures, état actif |
-| ```green-600``` | ```#21832E``` | survol des boutons primaires, barres de progression |
-| ```green-300``` | ```#83B98C``` | texte secondaire sur fond sombre |
-| ```green-100``` | ```#E6F4E9``` | aplats, badges, ligne de leçon active, avatars |
+| ```green-700``` | ```#38B349``` | **vert exact du logo** — boutons, bordures, chips actifs (jamais comme couleur de texte) |
+| ```green-600``` | ```#45C557``` | survol des boutons primaires, barres de progression |
+| ```green-300``` | ```#6BD179``` | texte secondaire sur fond sombre |
+| ```green-100``` | ```#D8F3DC``` | aplats, badges, ligne de leçon active, avatars |
 
 ### Neutres chauds
 | Token | Hex | Usage |
@@ -142,10 +152,10 @@ Dans ```globals.css``` :
   --color-green-ink: #0B230E;
   --color-green-900: #09200C;
   --color-green-800: #113B17;
-  --color-green-700: #1D7228;
-  --color-green-600: #21832E;
-  --color-green-300: #83B98C;
-  --color-green-100: #E6F4E9;
+  --color-green-700: #38B349;
+  --color-green-600: #45C557;
+  --color-green-300: #6BD179;
+  --color-green-100: #D8F3DC;
 
   --color-bg: #F5F3EE;
   --color-surface: #FFFFFF;
