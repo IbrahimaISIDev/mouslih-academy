@@ -1,0 +1,168 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  /* Palette verte de la charte Mouslih Academie. green-ink est un vert quasi noir dédié au
+     texte/icône : sur un fond clair ou sur un remplissage vert vif, il garde un contraste
+     confortable là où green-700 lui-même serait trop clair pour du texte. Ne jamais l'utiliser
+     comme fond. */
+  --color-green-ink: #0b230e;
+  --color-green-900: #09200c;
+  --color-green-800: #113b17;
+  --color-green-700: #1d7228;
+  --color-green-600: #21832e;
+  --color-green-300: #83b98c;
+  --color-green-100: #e6f4e9;
+
+  --color-bg: #f5f3ee;
+  --color-surface: #ffffff;
+  --color-border-subtle: #e7e3db;
+  --color-border-strong: #cfc9bd;
+  --color-hairline: #f0ede7;
+  --color-text: #1c1b18;
+  --color-text-soft: #4a4741;
+  --color-text-muted: #6b6760;
+  --color-text-faint: #99948b;
+
+  --color-gold-600: #a8823c;
+  --color-gold-300: #c9b073;
+  --color-gold-200: #e5d3a8;
+  --color-gold-50: #faf2df;
+
+  --color-success: #2f7d53;
+  --color-success-bg: #e8f2eb;
+  --color-success-border: #cfe0d4;
+  --color-warning: #b5761f;
+  --color-warning-bg: #fbf3e4;
+  --color-warning-border: #e8d6ae;
+  --color-error: #a63a2e;
+  --color-error-bg: #faecea;
+  --color-error-border: #e7c3bc;
+  --color-whatsapp: #1f8a4c;
+  --color-whatsapp-hover: #1a7742;
+
+  /* Nuances additionnelles (survols, états) relevées dans les maquettes,
+     documentées en prose dans DESIGN-TOKENS.md mais absentes de son bloc @theme. */
+  --color-gold-hover: #dcc694;
+  --color-error-button-border: #e0b9b3;
+  --color-error-button-hover-bg: #fbf0ee;
+  --color-error-field-bg: #fdf7f6;
+  --color-premium-text: #7a5d1e;
+
+  --color-on-dark: #f1f6f2;
+  --color-on-dark-soft: #dce8e1;
+  --color-on-dark-muted: #b9ccc1;
+
+  /* Survol de ligne dans les tableaux admin (DataTable). */
+  --color-row-hover: #fcfbf9;
+
+  /* Skeletons : masses principales / secondaires (PROMPT-07). */
+  --color-skeleton-primary: #edeae3;
+  --color-skeleton-secondary: #f2efe9;
+
+  /* Anneau focus-visible — dérivé de green-ink, un seul endroit à retoucher si la marque
+     change. --color-focus-ring-on-dark sert sur les fonds sombres (sidebar admin, hero) où
+     l'anneau vert se fondrait dans le fond. */
+  --color-focus-ring: rgba(11, 35, 14, 0.16);
+  --color-focus-ring-on-dark: rgba(229, 211, 168, 0.35);
+
+  --font-serif: var(--font-spectral), Georgia, serif;
+  --font-sans: var(--font-work-sans), system-ui, sans-serif;
+  --font-arabic-serif: var(--font-amiri), serif;
+  --font-arabic-sans: var(--font-plex-arabic), sans-serif;
+
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+
+  --shadow-card-hover: 0 6px 22px rgba(12, 36, 29, 0.09);
+}
+
+/* En RTL, les familles arabes remplacent les familles latines */
+[dir="rtl"] {
+  --font-serif: var(--font-amiri), serif;
+  --font-sans: var(--font-plex-arabic), sans-serif;
+}
+[dir="rtl"] :is(p, li, dd) {
+  line-height: 1.95;
+}
+[dir="rtl"] .uppercase {
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+body {
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Dans @layer base (comme les styles par défaut de Tailwind) : toute classe Tailwind de
+   couleur posée sur un lien (ex. text-on-dark-muted) doit pouvoir le surcharger. Une règle
+   `a {}` hors layer gagnerait sur les utilitaires quelle que soit leur spécificité, ce qui a
+   provoqué de vrais textes de liens illisibles (contraste insuffisant, trouvé par axe). */
+@layer base {
+  a {
+    color: var(--color-green-ink);
+  }
+
+  a:hover {
+    color: var(--color-gold-600);
+  }
+}
+
+::selection {
+  background: var(--color-green-100);
+}
+
+@keyframes pulse-skeleton {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.5;
+  }
+  70%,
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
