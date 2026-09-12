@@ -1,4 +1,5 @@
 import { Check } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import { Logo } from "@/components/layout/logo";
 import { GeometricPattern } from "@/components/patterns/geometric-pattern";
 import { LanguageSwitcher } from "@/components/patterns/language-switcher";
@@ -26,7 +27,12 @@ function AuthSidePanel({
       <div className="absolute inset-0 bg-[linear-gradient(160deg,rgba(12,36,29,0.7)_0%,var(--color-green-900)_82%)]" />
 
       <div className="relative flex items-center justify-between lg:justify-start lg:gap-3">
-        <Logo wordmark={wordmark} variant="dark" />
+        <Link
+          href="/"
+          className="rounded-sm outline-none focus-visible:shadow-[0_0_0_3px_var(--color-focus-ring-on-dark)]"
+        >
+          <Logo wordmark={wordmark} variant="dark" />
+        </Link>
         <LanguageSwitcher
           variant="compact"
           className="text-on-dark lg:hidden"
