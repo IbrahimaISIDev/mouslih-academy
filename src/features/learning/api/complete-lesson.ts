@@ -1,5 +1,6 @@
 import { sleep } from "@/lib/sleep";
-import { apiFetch, USE_MOCKS } from "@/lib/api-client";
+import { USE_MOCKS } from "@/lib/use-mocks";
+import { clientApiFetch } from "@/lib/client-fetch";
 import { aminataEnrollments } from "@/mocks/enrollments";
 import { courses } from "@/mocks/courses";
 
@@ -18,7 +19,7 @@ export async function completeLesson(
   lessonId: string,
 ): Promise<{ progressPct: number }> {
   if (!USE_MOCKS) {
-    return apiFetch<{ progressPct: number }>(`/api/me/lessons/${lessonId}/complete`, {
+    return clientApiFetch<{ progressPct: number }>(`/api/me/lessons/${lessonId}/complete`, {
       method: "POST",
     });
   }

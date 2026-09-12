@@ -6,7 +6,7 @@ import { BookOpen, MessageCircleQuestion, Send } from "lucide-react";
 import type { Course, Locale, Order, OrderStatus } from "@/lib/types";
 import type { LearnerProfile } from "@/mocks/learner";
 import { formatPrice } from "@/lib/format";
-import { getOrder } from "@/features/checkout/api/get-order";
+import { getOrderClient } from "@/features/checkout/api/get-order-client";
 import { SuccessState } from "@/features/checkout/components/success-state";
 import { PendingState } from "@/features/checkout/components/pending-state";
 import { FailedState } from "@/features/checkout/components/failed-state";
@@ -51,7 +51,7 @@ function PaymentResult({ locale, course, profile, initialOrder, statusOverride }
 
   const refresh = useCallback(async () => {
     setRefreshing(true);
-    const fresh = await getOrder(order.ref);
+    const fresh = await getOrderClient(order.ref);
     if (fresh) setOrder(fresh);
     setRefreshing(false);
   }, [order.ref]);
@@ -61,7 +61,7 @@ function PaymentResult({ locale, course, profile, initialOrder, statusOverride }
 
     const interval = setInterval(async () => {
       attemptsRef.current += 1;
-      const fresh = await getOrder(order.ref);
+      const fresh = await getOrderClient(order.ref);
       if (fresh) setOrder(fresh);
       if (attemptsRef.current >= MAX_POLL_ATTEMPTS) {
         setTimedOut(true);

@@ -1,5 +1,6 @@
 import { sleep } from "@/lib/sleep";
-import { apiFetch, USE_MOCKS } from "@/lib/api-client";
+import { USE_MOCKS } from "@/lib/use-mocks";
+import { clientApiFetch } from "@/lib/client-fetch";
 import type { AdminOrderRow, AdminOrdersFilter, Locale, Paginated } from "@/lib/types";
 import { getInitials } from "@/lib/format";
 import { orders } from "@/mocks/orders";
@@ -26,7 +27,7 @@ export async function getAdminOrders({
     const search = new URLSearchParams({ page: String(page), locale });
     if (q) search.set("q", q);
     if (filter !== "all") search.set("status", filter);
-    return apiFetch<Paginated<AdminOrderRow>>(`/api/admin/orders?${search}`);
+    return clientApiFetch<Paginated<AdminOrderRow>>(`/api/admin/orders?${search}`);
   }
 
   await sleep(400);

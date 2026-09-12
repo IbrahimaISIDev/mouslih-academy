@@ -1,5 +1,6 @@
 import { sleep } from "@/lib/sleep";
-import { apiFetch, USE_MOCKS } from "@/lib/api-client";
+import { USE_MOCKS } from "@/lib/use-mocks";
+import { clientApiFetch } from "@/lib/client-fetch";
 import type { AdminUser, AdminUsersFilter, Paginated } from "@/lib/types";
 import { adminUsers } from "@/mocks/admin-users";
 import { adminStats } from "@/mocks/admin-stats";
@@ -21,7 +22,7 @@ export async function getAdminUsers({
     const search = new URLSearchParams({ page: String(page) });
     if (q) search.set("q", q);
     if (filter !== "all") search.set("filter", filter);
-    return apiFetch<Paginated<AdminUser>>(`/api/admin/users?${search}`);
+    return clientApiFetch<Paginated<AdminUser>>(`/api/admin/users?${search}`);
   }
 
   await sleep(400);

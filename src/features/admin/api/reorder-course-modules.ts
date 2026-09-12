@@ -1,5 +1,6 @@
 import { sleep } from "@/lib/sleep";
-import { apiFetch, USE_MOCKS } from "@/lib/api-client";
+import { USE_MOCKS } from "@/lib/use-mocks";
+import { clientApiFetch } from "@/lib/client-fetch";
 
 /** `POST /api/admin/courses/:id/reorder` — persistance non implémentée côté démo. */
 export async function reorderCourseModules(
@@ -7,7 +8,7 @@ export async function reorderCourseModules(
   moduleIds: string[],
 ): Promise<void> {
   if (!USE_MOCKS) {
-    await apiFetch<void>(`/api/admin/courses/${courseId}/reorder`, {
+    await clientApiFetch<void>(`/api/admin/courses/${courseId}/reorder`, {
       method: "POST",
       body: JSON.stringify({ scope: "modules", orderedIds: moduleIds }),
     });
@@ -23,7 +24,7 @@ export async function reorderCourseLessons(
   lessonIds: string[],
 ): Promise<void> {
   if (!USE_MOCKS) {
-    await apiFetch<void>(`/api/admin/courses/${courseId}/reorder`, {
+    await clientApiFetch<void>(`/api/admin/courses/${courseId}/reorder`, {
       method: "POST",
       body: JSON.stringify({ scope: "lessons", subModuleId, orderedIds: lessonIds }),
     });

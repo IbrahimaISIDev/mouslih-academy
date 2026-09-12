@@ -1,5 +1,6 @@
 import { sleep } from "@/lib/sleep";
-import { apiFetch, USE_MOCKS } from "@/lib/api-client";
+import { USE_MOCKS } from "@/lib/use-mocks";
+import { clientApiFetch } from "@/lib/client-fetch";
 import { aminataEnrollments } from "@/mocks/enrollments";
 import { courses } from "@/mocks/courses";
 
@@ -8,7 +9,7 @@ export async function saveLessonPosition(
   positionSeconds: number,
 ): Promise<void> {
   if (!USE_MOCKS) {
-    await apiFetch<void>(`/api/me/lessons/${lessonId}/position`, {
+    await clientApiFetch<void>(`/api/me/lessons/${lessonId}/position`, {
       method: "POST",
       body: JSON.stringify({ positionSeconds }),
     });
