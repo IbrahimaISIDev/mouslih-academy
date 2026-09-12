@@ -43,6 +43,7 @@ import { StickyCta } from "@/components/patterns/sticky-cta";
 
 import { PublicHeader } from "@/components/layout/public-header";
 import { LearnerHeader } from "@/components/layout/learner-header";
+import { logout } from "@/features/auth/api/logout";
 import { MobileTabBar } from "@/components/layout/mobile-tab-bar";
 import { AdminSidebar } from "@/components/layout/admin-sidebar";
 import { Footer } from "@/components/layout/footer";
@@ -510,10 +511,9 @@ export default async function DesignSystemPage({
             <LearnerHeader
               navItems={learnerNavItems}
               userName="Aminata Diallo"
-              userMenuItems={[
-                { label: t.profile, href: "/profil" },
-                { label: t.logout, href: "/connexion" },
-              ]}
+              userMenuItems={[{ label: t.profile, href: "/profil" }]}
+              logoutLabel={t.logout}
+              onLogout={logout.bind(null, locale)}
             />
           </div>
         </section>

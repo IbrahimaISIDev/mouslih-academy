@@ -7,6 +7,7 @@ import { formatDuration, localizeDigits } from "@/lib/format";
 import { getCourses } from "@/features/catalog/api/get-courses";
 import { getEnrollments } from "@/features/learning/api/get-enrollments";
 import { getProfile } from "@/features/account/api/get-profile";
+import { logout } from "@/features/auth/api/logout";
 import { findLessonLocation } from "@/features/learning/find-lesson";
 
 import { LearnerHeader } from "@/components/layout/learner-header";
@@ -93,10 +94,9 @@ export default async function DashboardPage({
       <LearnerHeader
         navItems={learnerNavItems}
         userName={profile.firstName}
-        userMenuItems={[
-          { label: tNav("profile"), href: "/profil" },
-          { label: tNav("logout"), href: "/connexion" },
-        ]}
+        userMenuItems={[{ label: tNav("profile"), href: "/profil" }]}
+        logoutLabel={tNav("logout")}
+        onLogout={logout.bind(null, locale)}
       />
 
       <div className="px-5 py-6 sm:px-6 lg:px-11 lg:py-11">

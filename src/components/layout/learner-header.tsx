@@ -19,6 +19,8 @@ export interface LearnerHeaderProps {
   navItems: NavItem[];
   userName: string;
   userMenuItems: { label: string; href: string }[];
+  logoutLabel: string;
+  onLogout: () => void | Promise<void>;
   wordmark?: string;
 }
 
@@ -26,6 +28,8 @@ function LearnerHeader({
   navItems,
   userName,
   userMenuItems,
+  logoutLabel,
+  onLogout,
   wordmark,
 }: LearnerHeaderProps) {
   const initial = userName.charAt(0).toUpperCase();
@@ -81,6 +85,13 @@ function LearnerHeader({
                 <Link href={item.href}>{item.label}</Link>
               </DropdownMenuItem>
             ))}
+            <DropdownMenuItem asChild>
+              <form action={onLogout} className="w-full">
+                <button type="submit" className="w-full text-start">
+                  {logoutLabel}
+                </button>
+              </form>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

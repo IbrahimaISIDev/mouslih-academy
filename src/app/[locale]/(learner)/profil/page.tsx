@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/lib/types";
 import { getProfile } from "@/features/account/api/get-profile";
 import { getPurchaseHistory } from "@/features/account/api/get-purchase-history";
+import { logout } from "@/features/auth/api/logout";
 import { getCourses } from "@/features/catalog/api/get-courses";
 
 import { LearnerHeader } from "@/components/layout/learner-header";
@@ -57,10 +58,9 @@ export default async function ProfilePage({
       <LearnerHeader
         navItems={learnerNavItems}
         userName={profile.firstName}
-        userMenuItems={[
-          { label: tNav("profile"), href: "/profil" },
-          { label: tNav("logout"), href: "/connexion" },
-        ]}
+        userMenuItems={[{ label: tNav("profile"), href: "/profil" }]}
+        logoutLabel={tNav("logout")}
+        onLogout={logout.bind(null, locale)}
       />
 
       <div className="px-5 py-6 sm:px-6 lg:px-11 lg:py-10">
