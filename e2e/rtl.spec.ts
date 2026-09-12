@@ -1,10 +1,22 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 
 /**
  * PROMPT-08 — vérifie que la bascule arabe est une vraie mise en page miroir,
  * pas seulement du texte inversé : dir="rtl", polices arabes, position de la
  * sidebar du lecteur, et isolement LTR des durées.
+ *
+ * Les écrans du tableau de bord et du lecteur sont protégés par une session réelle depuis le
+ * branchement du backend (middleware.ts) : il faut se connecter avant d'y naviguer, sous peine
+ * d'être redirigé vers /connexion.
  */
+
+async function login(page: Page): Promise<void> {
+  await page.goto("/fr/connexion");
+  await page.locator('input[type="email"]').fill("aminata.diallo@exemple.sn");
+  await page.locator('input[type="password"]').fill("password123");
+  await page.locator('button[type="submit"]').click();
+  await page.waitForURL("**/tableau-de-bord");
+}
 
 test.describe("Bascule FR → AR", () => {
   test("accueil : dir=rtl et police arabe appliquée", async ({ page }) => {
@@ -20,6 +32,7 @@ test.describe("Bascule FR → AR", () => {
   test("dashboard : compteurs en chiffres arabes-indiens, durée isolée en LTR", async ({
     page,
   }) => {
+    await login(page);
     await page.goto("/ar/tableau-de-bord");
     await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
 
@@ -31,6 +44,7 @@ test.describe("Bascule FR → AR", () => {
   });
 
   test("lecteur : la sidebar du programme passe à droite en RTL", async ({ page }) => {
+    await login(page);
     await page.goto(
       "/ar/formations/rectification-fatiha/lecons/pourquoi-rectifier-la-fatiha",
     );
