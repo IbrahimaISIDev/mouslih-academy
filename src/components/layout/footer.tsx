@@ -1,6 +1,5 @@
 import { Link } from "@/i18n/navigation";
 import { Logo } from "@/components/layout/logo";
-import { GeometricPattern } from "@/components/patterns/geometric-pattern";
 import { WhatsAppButton } from "@/components/patterns/whatsapp-button";
 
 export interface FooterColumn {
@@ -26,10 +25,8 @@ function Footer({
   wordmark,
 }: FooterProps) {
   return (
-    <footer className="relative overflow-hidden bg-green-900 text-on-dark-muted">
-      <GeometricPattern variant="khatam" opacity={0.3} />
-
-      <div className="relative grid grid-cols-2 gap-8 px-6 py-12 lg:grid-cols-4 lg:px-11">
+    <footer className="bg-green-900 text-on-dark-muted">
+      <div className="grid grid-cols-2 gap-8 px-6 py-12 lg:grid-cols-4 lg:px-11">
         <div className="col-span-2 flex flex-col gap-4 lg:col-span-1">
           <Logo wordmark={wordmark} variant="dark" />
           <WhatsAppButton
@@ -58,7 +55,7 @@ function Footer({
         ))}
       </div>
 
-      <div className="relative flex flex-col items-center justify-between gap-2 border-t border-white/10 px-6 py-5 text-xs sm:flex-row lg:px-11">
+      <div className="flex flex-col items-center justify-between gap-2 border-t border-white/10 px-6 py-5 text-xs sm:flex-row lg:px-11">
         <p>{copyright}</p>
         <p>{paymentNote}</p>
       </div>
