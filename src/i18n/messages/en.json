@@ -535,7 +535,8 @@
         "method": "Method",
         "amountPaid": "Amount paid",
         "downloadReceipt": "Download receipt",
-        "emailedTo": "A copy was sent to {email}."
+        "emailedTo": "A copy was sent to {email}.",
+        "downloadReceiptErrorToast": "The receipt download failed. Please try again."
       },
       "pending": {
         "title": "Payment being processed",

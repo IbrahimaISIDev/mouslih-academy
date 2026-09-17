@@ -535,7 +535,8 @@
         "method": "الوسيلة",
         "amountPaid": "المبلغ المدفوع",
         "downloadReceipt": "تحميل الإيصال",
-        "emailedTo": "أُرسلت نسخة إلى {email}."
+        "emailedTo": "أُرسلت نسخة إلى {email}.",
+        "downloadReceiptErrorToast": "فشل تحميل الإيصال. حاول مرة أخرى."
       },
       "pending": {
         "title": "الدفع قيد المعالجة",

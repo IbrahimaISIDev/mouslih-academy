@@ -1,9 +1,14 @@
+import { useState } from "react";
 import { BookOpen, Check, Download } from "lucide-react";
+import { toast } from "sonner";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { GeometricPattern } from "@/components/patterns/geometric-pattern";
+import { ClientApiError } from "@/lib/client-fetch";
+import { downloadReceipt } from "@/features/checkout/api/download-receipt";
 
 export interface SuccessStateProps {
+  orderRef: string;
   amountLabel: string;
   blessing: string;
   title: string;
@@ -23,10 +28,12 @@ export interface SuccessStateProps {
   methodValue: string;
   amountPaidLabel: string;
   downloadReceiptLabel: string;
+  downloadReceiptErrorToast: string;
   emailedToLabel: string;
 }
 
 function SuccessState({
+  orderRef,
   amountLabel,
   blessing,
   title,
@@ -46,8 +53,21 @@ function SuccessState({
   methodValue,
   amountPaidLabel,
   downloadReceiptLabel,
+  downloadReceiptErrorToast,
   emailedToLabel,
 }: SuccessStateProps) {
+  const [downloading, setDownloading] = useState(false);
+
+  async function handleDownload() {
+    setDownloading(true);
+    try {
+      await downloadReceipt(orderRef);
+    } catch (error) {
+      toast.error(error instanceof ClientApiError ? error.message : downloadReceiptErrorToast);
+    } finally {
+      setDownloading(false);
+    }
+  }
   return (
     <div>
       <div className="relative overflow-hidden bg-green-900 px-6 py-14 text-center text-on-dark lg:px-11 lg:py-18">
@@ -134,7 +154,7 @@ function SuccessState({
             <span className="text-[15px] font-semibold">{amountPaidLabel}</span>
             <span className="font-serif text-2xl font-semibold">{amountLabel}</span>
           </div>
-          <Button variant="secondary" className="w-full">
+          <Button variant="secondary" className="w-full" onClick={handleDownload} loading={downloading}>
             <Download className="size-4" strokeWidth={1.7} />
             {downloadReceiptLabel}
           </Button>

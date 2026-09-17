@@ -76,6 +76,7 @@ function PaymentResult({ locale, course, profile, initialOrder, statusOverride }
     const startLessonSlug = firstLessonSlug(course);
     return (
       <SuccessState
+        orderRef={order.ref}
         amountLabel={amountLabel}
         blessing={t("success.blessing")}
         title={t("success.title")}
@@ -99,6 +100,7 @@ function PaymentResult({ locale, course, profile, initialOrder, statusOverride }
         methodValue="Wave"
         amountPaidLabel={t("success.amountPaid")}
         downloadReceiptLabel={t("success.downloadReceipt")}
+        downloadReceiptErrorToast={t("success.downloadReceiptErrorToast")}
         emailedToLabel={t("success.emailedTo", { email: profile.email })}
       />
     );

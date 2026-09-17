@@ -535,7 +535,8 @@
         "method": "Moyen",
         "amountPaid": "Montant payé",
         "downloadReceipt": "Télécharger le reçu",
-        "emailedTo": "Un exemplaire a été envoyé à {email}."
+        "emailedTo": "Un exemplaire a été envoyé à {email}.",
+        "downloadReceiptErrorToast": "Le téléchargement du reçu a échoué. Réessayez."
       },
       "pending": {
         "title": "Paiement en cours de traitement",

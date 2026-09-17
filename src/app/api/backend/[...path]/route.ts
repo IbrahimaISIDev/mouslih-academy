@@ -27,10 +27,16 @@ async function handle(request: NextRequest, path: string[]): Promise<NextRespons
     return new NextResponse(null, { status: 204 });
   }
 
-  const body = await response.text();
+  // arrayBuffer() ici aussi : un .text() corromprait un PDF (reçu de commande) ou toute autre
+  // réponse binaire de la même façon qu'un corps de requête mal relayé (voir plus haut).
+  const body = await response.arrayBuffer();
+  const contentDisposition = response.headers.get("Content-Disposition");
   return new NextResponse(body, {
     status: response.status,
-    headers: { "Content-Type": response.headers.get("Content-Type") ?? "application/json" },
+    headers: {
+      "Content-Type": response.headers.get("Content-Type") ?? "application/json",
+      ...(contentDisposition ? { "Content-Disposition": contentDisposition } : {}),
+    },
   });
 }
 
