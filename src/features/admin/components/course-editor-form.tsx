@@ -165,7 +165,7 @@ function CourseEditorForm({ courseId, locale, initialCourse, initialVideoStatus,
         </div>
       </div>
 
-      <div className="flex-1 px-8.5 py-7">
+      <div className="flex-1 overflow-y-auto px-8.5 py-7">
         <div className="mb-6">
           <TranslationEditorCard
             translationStatus={course.translationStatus}

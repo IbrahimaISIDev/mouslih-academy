@@ -43,7 +43,7 @@ export default async function AdminCourseEditorPage({ params }: AdminCourseEdito
         className="shrink-0"
       />
 
-      <div className="flex min-w-0 flex-1 flex-col">
+      <div className="flex h-screen min-w-0 flex-1 flex-col overflow-hidden">
         <CourseEditorForm
           courseId={id}
           locale={locale}

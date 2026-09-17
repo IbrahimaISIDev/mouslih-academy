@@ -69,7 +69,7 @@ function CourseActionBar({
   }[saveState];
 
   return (
-    <div className="sticky bottom-0 flex items-center justify-between border-t border-border-subtle bg-surface px-8.5 py-4">
+    <div className="flex shrink-0 items-center justify-between border-t border-border-subtle bg-surface px-8.5 py-4">
       <div className="flex items-center gap-2.5 text-sm">{statusDisplay}</div>
       <div className="flex gap-2.5">
         <Button variant="destructive" onClick={onDelete} loading={deleting}>
