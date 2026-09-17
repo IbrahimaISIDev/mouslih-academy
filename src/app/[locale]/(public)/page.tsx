@@ -161,13 +161,13 @@ export default async function HomePage({ params }: HomePageProps) {
           </div>
 
           <div className="hidden border border-gold-600/35 bg-white/4 p-5.5 lg:block">
-            <div className="relative aspect-4/3 overflow-hidden border border-green-300/25 bg-green-800">
+            <div className="relative aspect-2/3 overflow-hidden border border-green-300/25 bg-green-800">
               <Image
                 src="/images/team/teacher-portrait.jpg"
                 alt=""
                 fill
                 sizes="(min-width: 1024px) 420px, 0px"
-                className="object-cover"
+                className="object-cover object-top"
               />
             </div>
             <div className="mt-4.5 font-serif text-lg">

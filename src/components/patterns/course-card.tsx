@@ -51,7 +51,7 @@ function CourseCard({
       <div
         className={cn(
           "relative w-full overflow-hidden bg-green-900",
-          size === "grid" ? "h-[132px]" : "h-[168px]",
+          size === "grid" ? "aspect-4/3" : "aspect-16/10",
         )}
       >
         <div className="absolute inset-0 transition-transform duration-300 group-hover:scale-105">
