@@ -44,7 +44,13 @@ export default async function AdminCourseEditorPage({ params }: AdminCourseEdito
       />
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <CourseEditorForm courseId={id} locale={locale} initialCourse={course} videoStatus={videoStatus} translationDoneCounts={{ en: 6 }} />
+        <CourseEditorForm
+          courseId={id}
+          locale={locale}
+          initialCourse={course}
+          initialVideoStatus={videoStatus}
+          translationDoneCounts={{ en: 6 }}
+        />
       </div>
     </div>
   );

@@ -201,7 +201,10 @@
       "moduleMeta": "{lessons} درسًا · {duration}",
       "moduleMetaWithSub": "{subCount} وحدات فرعية · {lessons} درسًا · {duration}",
       "moduleMetaCertificateSuffix": " + شهادة",
-      "minutesShort": "{count} د"
+      "minutesShort": "{count} د",
+      "summaryCompact": "{lessons} درسًا فيديو",
+      "placeholderTitle": "البرنامج التفصيلي قريبًا",
+      "placeholderBody": "{lessons} درسًا فيديو · {duration} من المحتوى جاهزة بالفعل — سيُنشر تفصيل الوحدات قريبًا."
     },
     "teacher": {
       "eyebrow": "الأستاذ",
@@ -670,11 +673,32 @@
         "videoMissing": "الفيديو مفقود",
         "uploading": "الإرسال {pct}٪",
         "metaWithSubModules": "{subModules} وحدات فرعية · {lessons} دروس",
-        "metaLessonsOnly": "{lessons} دروس"
+        "metaLessonsOnly": "{lessons} دروس",
+        "addModuleDialog": {
+          "title": "وحدة جديدة",
+          "fieldLabel": "العنوان (بالفرنسية)",
+          "placeholder": "مثال: أساسيات التجويد",
+          "cancel": "إلغاء",
+          "create": "إنشاء"
+        },
+        "addLessonDialog": {
+          "title": "درس جديد",
+          "fieldLabel": "العنوان (بالفرنسية)",
+          "placeholder": "مثال: نطق القاف",
+          "cancel": "إلغاء",
+          "create": "إنشاء"
+        },
+        "moduleAdded": "تمت إضافة الوحدة.",
+        "lessonAdded": "تمت إضافة الدرس.",
+        "addModuleError": "فشلت إضافة الوحدة. حاول مرة أخرى.",
+        "addLessonError": "فشلت إضافة الدرس. حاول مرة أخرى."
       },
       "cover": {
         "title": "صورة الغلاف",
-        "replace": "استبدال الصورة"
+        "replace": "استبدال الصورة",
+        "hint": "JPG أو PNG أو WebP · 5 ميغابايت كحد أقصى",
+        "uploaded": "تم تحديث صورة الغلاف.",
+        "uploadErrorToast": "فشل الرفع. حاول مرة أخرى."
       },
       "settings": {
         "title": "الإعدادات",

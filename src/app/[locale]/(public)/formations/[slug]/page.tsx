@@ -59,6 +59,8 @@ export default async function CourseDetailPage({
     { label: tNav("contact"), href: "/contact" },
   ];
 
+  const hasDetailedCurriculum = course.modules.length > 0;
+
   const lessonCount = course.modules.reduce(
     (n, m) => n + m.subModules.reduce((s, sm) => s + sm.lessons.length, 0),
     0,
@@ -327,27 +329,52 @@ export default async function CourseDetailPage({
               <span className="lg:hidden">{t("curriculum.titleMobile")}</span>
               <span className="hidden lg:inline">{t("curriculum.title")}</span>
             </h2>
-            <span className="hidden text-sm text-text-muted lg:inline">
-              {t("curriculum.summary", {
+            {hasDetailedCurriculum ? (
+              <span className="hidden text-sm text-text-muted lg:inline">
+                {t("curriculum.summary", {
+                  modules: course.modules.length,
+                  lessons: lessonCount,
+                  free: freeLessonCount,
+                })}
+              </span>
+            ) : (
+              <span className="hidden text-sm text-text-muted lg:inline">
+                {t("curriculum.summaryCompact", { lessons: course.lessonCount })}
+              </span>
+            )}
+          </div>
+          {hasDetailedCurriculum ? (
+            <div className="mb-4 text-xs text-text-muted lg:hidden">
+              {t("curriculum.summaryMobile", {
                 modules: course.modules.length,
                 lessons: lessonCount,
-                free: freeLessonCount,
               })}
-            </span>
-          </div>
-          <div className="mb-4 text-xs text-text-muted lg:hidden">
-            {t("curriculum.summaryMobile", {
-              modules: course.modules.length,
-              lessons: lessonCount,
-            })}
-          </div>
+            </div>
+          ) : (
+            <div className="mb-4 text-xs text-text-muted lg:hidden">
+              {t("curriculum.summaryCompact", { lessons: course.lessonCount })}
+            </div>
+          )}
 
-          <div className="border border-border-subtle bg-surface">
-            <CourseCurriculum
-              modules={curriculumModules}
-              defaultOpen={defaultOpen}
-            />
-          </div>
+          {hasDetailedCurriculum ? (
+            <div className="border border-border-subtle bg-surface">
+              <CourseCurriculum
+                modules={curriculumModules}
+                defaultOpen={defaultOpen}
+              />
+            </div>
+          ) : (
+            <div className="flex flex-col items-center gap-2 border border-dashed border-border-strong bg-bg px-6 py-9 text-center">
+              <Video className="size-6 text-text-faint" strokeWidth={1.4} />
+              <p className="text-sm font-medium text-text-soft">{t("curriculum.placeholderTitle")}</p>
+              <p className="text-[13px] text-text-muted">
+                {t("curriculum.placeholderBody", {
+                  lessons: course.lessonCount,
+                  duration: formatTotalDuration(course.totalDurationSeconds),
+                })}
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Sidebar collante */}

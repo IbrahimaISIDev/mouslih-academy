@@ -10,6 +10,7 @@ import { ClientApiError } from "@/lib/client-fetch";
 import { StatusBadge } from "@/components/patterns/status-badge";
 import { updateCourse } from "../api/update-course";
 import { deleteCourse } from "../api/delete-course";
+import type { CourseEditorData } from "../api/get-course-editor";
 import { TranslationEditorCard, type TranslationEditorValues } from "./translation-editor-card";
 import { CourseSettingsCard } from "./course-settings-card";
 import { CoverImageCard } from "./cover-image-card";
@@ -20,15 +21,16 @@ export interface CourseEditorFormProps {
   courseId: string;
   locale: Locale;
   initialCourse: Course;
-  videoStatus: Record<string, { status: "ready" | "uploading" | "missing"; uploadPct?: number }>;
+  initialVideoStatus: Record<string, { status: "ready" | "uploading" | "missing"; uploadPct?: number }>;
   translationDoneCounts?: Partial<Record<Locale, number>>;
 }
 
-function CourseEditorForm({ courseId, locale, initialCourse, videoStatus, translationDoneCounts }: CourseEditorFormProps) {
+function CourseEditorForm({ courseId, locale, initialCourse, initialVideoStatus, translationDoneCounts }: CourseEditorFormProps) {
   const t = useTranslations("admin.course");
   const router = useRouter();
 
   const [course, setCourse] = useState(initialCourse);
+  const [videoStatus, setVideoStatus] = useState(initialVideoStatus);
   const [translations, setTranslations] = useState<TranslationEditorValues>({
     title: initialCourse.title,
     subtitle: initialCourse.subtitle,
@@ -102,6 +104,11 @@ function CourseEditorForm({ courseId, locale, initialCourse, videoStatus, transl
     }
   }
 
+  function handleCurriculumDataChange(data: CourseEditorData) {
+    setCourse(data.course);
+    setVideoStatus(data.videoStatus);
+  }
+
   async function handleDelete() {
     if (!window.confirm(t("deleteConfirm", { title: course.title[locale] }))) return;
     setDeleting(true);
@@ -170,10 +177,28 @@ function CourseEditorForm({ courseId, locale, initialCourse, videoStatus, transl
         </div>
 
         <div className="grid grid-cols-[1fr_340px] items-start gap-6">
-          <CurriculumEditor courseId={course.id} initialModules={course.modules} videoStatus={videoStatus} addModuleLabel={t("curriculum.addModule")} />
+          <CurriculumEditor
+            courseId={course.id}
+            modules={course.modules}
+            videoStatus={videoStatus}
+            onModulesChange={(modules) => setCourse((prev) => ({ ...prev, modules }))}
+            onDataChange={handleCurriculumDataChange}
+            addModuleLabel={t("curriculum.addModule")}
+          />
 
           <div className="flex flex-col gap-5">
-            <CoverImageCard title={t("cover.title")} replaceLabel={t("cover.replace")} />
+            <CoverImageCard
+              courseId={course.id}
+              coverUrl={course.coverUrl}
+              title={t("cover.title")}
+              replaceLabel={t("cover.replace")}
+              hint={t("cover.hint")}
+              uploadErrorToast={t("cover.uploadErrorToast")}
+              onUploaded={({ course: updated }) => {
+                setCourse(updated);
+                toast.success(t("cover.uploaded"));
+              }}
+            />
             <CourseSettingsCard
               title={t("settings.title")}
               levelLabel={t("settings.level")}

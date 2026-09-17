@@ -201,7 +201,10 @@
       "moduleMeta": "{lessons} lessons · {duration}",
       "moduleMetaWithSub": "{subCount} sub-modules · {lessons} lessons · {duration}",
       "moduleMetaCertificateSuffix": " + certificate",
-      "minutesShort": "{count} min"
+      "minutesShort": "{count} min",
+      "summaryCompact": "{lessons} video lessons",
+      "placeholderTitle": "Detailed syllabus coming soon",
+      "placeholderBody": "{lessons} video lessons · {duration} of content already ready — the module-by-module breakdown will be published soon."
     },
     "teacher": {
       "eyebrow": "The teacher",
@@ -670,11 +673,32 @@
         "videoMissing": "Video missing",
         "uploading": "Uploading {pct}%",
         "metaWithSubModules": "{subModules} sub-modules · {lessons} lessons",
-        "metaLessonsOnly": "{lessons} lessons"
+        "metaLessonsOnly": "{lessons} lessons",
+        "addModuleDialog": {
+          "title": "New module",
+          "fieldLabel": "Title (French)",
+          "placeholder": "e.g. The basics of tajwid",
+          "cancel": "Cancel",
+          "create": "Create"
+        },
+        "addLessonDialog": {
+          "title": "New lesson",
+          "fieldLabel": "Title (French)",
+          "placeholder": "e.g. Pronouncing the qaf",
+          "cancel": "Cancel",
+          "create": "Create"
+        },
+        "moduleAdded": "Module added.",
+        "lessonAdded": "Lesson added.",
+        "addModuleError": "Adding the module failed. Please try again.",
+        "addLessonError": "Adding the lesson failed. Please try again."
       },
       "cover": {
         "title": "Cover image",
-        "replace": "Replace image"
+        "replace": "Replace image",
+        "hint": "JPG, PNG or WebP · 5 MB maximum",
+        "uploaded": "Cover image updated.",
+        "uploadErrorToast": "Upload failed. Please try again."
       },
       "settings": {
         "title": "Settings",

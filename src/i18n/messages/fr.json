@@ -201,7 +201,10 @@
       "moduleMeta": "{lessons} leçons · {duration}",
       "moduleMetaWithSub": "{subCount} sous-modules · {lessons} leçons · {duration}",
       "moduleMetaCertificateSuffix": " + attestation",
-      "minutesShort": "{count} min"
+      "minutesShort": "{count} min",
+      "summaryCompact": "{lessons} leçons vidéo",
+      "placeholderTitle": "Programme détaillé à venir",
+      "placeholderBody": "{lessons} leçons vidéo · {duration} de contenu déjà prêtes — le détail module par module sera publié prochainement."
     },
     "teacher": {
       "eyebrow": "L'enseignant",
@@ -670,11 +673,32 @@
         "videoMissing": "Vidéo manquante",
         "uploading": "Envoi {pct} %",
         "metaWithSubModules": "{subModules} sous-modules · {lessons} leçons",
-        "metaLessonsOnly": "{lessons} leçons"
+        "metaLessonsOnly": "{lessons} leçons",
+        "addModuleDialog": {
+          "title": "Nouveau module",
+          "fieldLabel": "Titre (français)",
+          "placeholder": "ex. Les bases du tajwid",
+          "cancel": "Annuler",
+          "create": "Créer"
+        },
+        "addLessonDialog": {
+          "title": "Nouvelle leçon",
+          "fieldLabel": "Titre (français)",
+          "placeholder": "ex. La prononciation du qaf",
+          "cancel": "Annuler",
+          "create": "Créer"
+        },
+        "moduleAdded": "Module ajouté.",
+        "lessonAdded": "Leçon ajoutée.",
+        "addModuleError": "L'ajout du module a échoué. Réessayez.",
+        "addLessonError": "L'ajout de la leçon a échoué. Réessayez."
       },
       "cover": {
         "title": "Image de couverture",
-        "replace": "Remplacer l'image"
+        "replace": "Remplacer l'image",
+        "hint": "JPG, PNG ou WebP · 5 Mo maximum",
+        "uploaded": "Image de couverture mise à jour.",
+        "uploadErrorToast": "Le téléversement a échoué. Réessayez."
       },
       "settings": {
         "title": "Réglages",

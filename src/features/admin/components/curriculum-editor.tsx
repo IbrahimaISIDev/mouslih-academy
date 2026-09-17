@@ -20,15 +20,23 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import { GripVertical, Pencil, Plus, PlayCircle, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 import type { AdminLessonVideoState, Lesson, Module } from "@/lib/types";
 import { formatDuration } from "@/lib/format";
 import { cn } from "@/lib/utils";
+import { ClientApiError } from "@/lib/client-fetch";
 import { reorderCourseLessons, reorderCourseModules } from "@/features/admin/api/reorder-course-modules";
+import { addCourseModule } from "@/features/admin/api/add-course-module";
+import { addCourseLesson } from "@/features/admin/api/add-course-lesson";
+import type { CourseEditorData } from "@/features/admin/api/get-course-editor";
+import { AddCurriculumItemDialog } from "./add-curriculum-item-dialog";
 
 export interface CurriculumEditorProps {
   courseId: string;
-  initialModules: Module[];
+  modules: Module[];
   videoStatus: Record<string, AdminLessonVideoState>;
+  onModulesChange: (modules: Module[]) => void;
+  onDataChange: (data: CourseEditorData) => void;
   addModuleLabel: string;
 }
 
@@ -119,6 +127,7 @@ function ModuleRow({
   onToggle,
   videoStatus,
   labels,
+  onAddLesson,
 }: {
   courseModule: Module;
   open: boolean;
@@ -132,7 +141,13 @@ function ModuleRow({
     uploading: (pct: number) => string;
     metaWithSubModules: (subModules: number, lessons: number) => string;
     metaLessonsOnly: (lessons: number) => string;
+    addLessonDialogTitle: string;
+    addLessonFieldLabel: string;
+    addLessonPlaceholder: string;
+    addLessonCancel: string;
+    addLessonCreate: string;
   };
+  onAddLesson: (subModuleId: string, title: string) => Promise<void>;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: moduleDndId(courseModule.id),
@@ -201,10 +216,20 @@ function ModuleRow({
                 ))}
               </SortableContext>
               <div className="border-t border-hairline py-2.5 ps-14 pe-6">
-                <span className="inline-flex cursor-pointer items-center gap-1.5 text-[13px] font-semibold text-green-ink">
-                  <Plus className="size-3.5" strokeWidth={2} />
-                  {labels.addLesson}
-                </span>
+                <AddCurriculumItemDialog
+                  trigger={
+                    <span className="inline-flex cursor-pointer items-center gap-1.5 text-[13px] font-semibold text-green-ink">
+                      <Plus className="size-3.5" strokeWidth={2} />
+                      {labels.addLesson}
+                    </span>
+                  }
+                  dialogTitle={labels.addLessonDialogTitle}
+                  fieldLabel={labels.addLessonFieldLabel}
+                  placeholder={labels.addLessonPlaceholder}
+                  cancelLabel={labels.addLessonCancel}
+                  createLabel={labels.addLessonCreate}
+                  onSubmit={(title) => onAddLesson(subModule.id, title)}
+                />
               </div>
             </div>
           ))}
@@ -214,10 +239,16 @@ function ModuleRow({
   );
 }
 
-function CurriculumEditor({ courseId, initialModules, videoStatus, addModuleLabel }: CurriculumEditorProps) {
+function CurriculumEditor({
+  courseId,
+  modules,
+  videoStatus,
+  onModulesChange,
+  onDataChange,
+  addModuleLabel,
+}: CurriculumEditorProps) {
   const t = useTranslations("admin.course.curriculum");
-  const [modules, setModules] = useState(initialModules);
-  const [openModuleId, setOpenModuleId] = useState<string | null>(initialModules[1]?.id ?? initialModules[0]?.id ?? null);
+  const [openModuleId, setOpenModuleId] = useState<string | null>(modules[1]?.id ?? modules[0]?.id ?? null);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -236,8 +267,8 @@ function CurriculumEditor({ courseId, initialModules, videoStatus, addModuleLabe
       if (oldIndex === -1 || newIndex === -1) return;
       const previous = modules;
       const reordered = arrayMove(modules, oldIndex, newIndex);
-      setModules(reordered);
-      reorderCourseModules(courseId, reordered.map((m) => m.id)).catch(() => setModules(previous));
+      onModulesChange(reordered);
+      reorderCourseModules(courseId, reordered.map((m) => m.id)).catch(() => onModulesChange(previous));
       return;
     }
 
@@ -250,7 +281,7 @@ function CurriculumEditor({ courseId, initialModules, videoStatus, addModuleLabe
       if (oldIndex === -1 || newIndex === -1) return;
       const previous = modules;
       const reorderedLessons = arrayMove(group.lessons, oldIndex, newIndex);
-      setModules(
+      onModulesChange(
         modules.map((m) =>
           m.id !== group.moduleId
             ? m
@@ -263,8 +294,32 @@ function CurriculumEditor({ courseId, initialModules, videoStatus, addModuleLabe
         ),
       );
       reorderCourseLessons(courseId, group.subModuleId, reorderedLessons.map((l) => l.id)).catch(() =>
-        setModules(previous),
+        onModulesChange(previous),
       );
+    }
+  }
+
+  async function handleAddModule(title: string) {
+    try {
+      const data = await addCourseModule(courseId, title);
+      onDataChange(data);
+      const newModule = data.course.modules[data.course.modules.length - 1];
+      if (newModule) setOpenModuleId(newModule.id);
+      toast.success(t("moduleAdded"));
+    } catch (error) {
+      toast.error(error instanceof ClientApiError ? error.message : t("addModuleError"));
+      throw error;
+    }
+  }
+
+  async function handleAddLesson(moduleId: string, subModuleId: string, title: string) {
+    try {
+      const data = await addCourseLesson(courseId, moduleId, subModuleId, title);
+      onDataChange(data);
+      toast.success(t("lessonAdded"));
+    } catch (error) {
+      toast.error(error instanceof ClientApiError ? error.message : t("addLessonError"));
+      throw error;
     }
   }
 
@@ -276,6 +331,11 @@ function CurriculumEditor({ courseId, initialModules, videoStatus, addModuleLabe
     uploading: (pct: number) => t("uploading", { pct }),
     metaWithSubModules: (subModules: number, lessons: number) => t("metaWithSubModules", { subModules, lessons }),
     metaLessonsOnly: (lessons: number) => t("metaLessonsOnly", { lessons }),
+    addLessonDialogTitle: t("addLessonDialog.title"),
+    addLessonFieldLabel: t("addLessonDialog.fieldLabel"),
+    addLessonPlaceholder: t("addLessonDialog.placeholder"),
+    addLessonCancel: t("addLessonDialog.cancel"),
+    addLessonCreate: t("addLessonDialog.create"),
   };
 
   return (
@@ -285,13 +345,23 @@ function CurriculumEditor({ courseId, initialModules, videoStatus, addModuleLabe
           <h2 className="mb-0.5 font-serif text-xl font-semibold">{t("title")}</h2>
           <p className="text-[13px] text-text-muted">{t("subtitle")}</p>
         </div>
-        <button
-          type="button"
-          className="flex items-center gap-2 rounded-sm border border-green-700 px-4 py-2.5 text-sm font-semibold text-green-ink"
-        >
-          <Plus className="size-[15px]" strokeWidth={2} />
-          {addModuleLabel}
-        </button>
+        <AddCurriculumItemDialog
+          trigger={
+            <button
+              type="button"
+              className="flex items-center gap-2 rounded-sm border border-green-700 px-4 py-2.5 text-sm font-semibold text-green-ink"
+            >
+              <Plus className="size-[15px]" strokeWidth={2} />
+              {addModuleLabel}
+            </button>
+          }
+          dialogTitle={t("addModuleDialog.title")}
+          fieldLabel={t("addModuleDialog.fieldLabel")}
+          placeholder={t("addModuleDialog.placeholder")}
+          cancelLabel={t("addModuleDialog.cancel")}
+          createLabel={t("addModuleDialog.create")}
+          onSubmit={handleAddModule}
+        />
       </div>
 
       <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
@@ -304,6 +374,7 @@ function CurriculumEditor({ courseId, initialModules, videoStatus, addModuleLabe
               onToggle={() => setOpenModuleId(openModuleId === courseModule.id ? null : courseModule.id)}
               videoStatus={videoStatus}
               labels={labels}
+              onAddLesson={(subModuleId, title) => handleAddLesson(courseModule.id, subModuleId, title)}
             />
           ))}
         </SortableContext>
