@@ -1,11 +1,5 @@
-import {
-  ArrowRight,
-  CheckCircle,
-  Image as ImageIcon,
-  MessageCircle,
-  Play,
-  Shield,
-} from "lucide-react";
+import { ArrowRight, CheckCircle, MessageCircle, Play, Shield } from "lucide-react";
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/lib/types";
@@ -168,13 +162,14 @@ export default async function HomePage({ params }: HomePageProps) {
           </div>
 
           <div className="hidden border border-gold-600/35 bg-white/4 p-5.5 lg:block">
-            <div className="grid aspect-4/3 place-items-center border border-green-300/25 bg-green-800">
-              <div className="text-center text-green-300">
-                <ImageIcon className="mx-auto size-8" strokeWidth={1.2} />
-                <div className="mt-3 text-[13px]">
-                  {t("hero.teacherPlaceholder")}
-                </div>
-              </div>
+            <div className="relative aspect-4/3 overflow-hidden border border-green-300/25 bg-green-800">
+              <Image
+                src="/images/team/teacher-portrait.jpg"
+                alt=""
+                fill
+                sizes="(min-width: 1024px) 420px, 0px"
+                className="object-cover"
+              />
             </div>
             <div className="mt-4.5 font-serif text-lg">
               {t("hero.teacherName")}

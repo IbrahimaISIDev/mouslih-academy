@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 export interface LogoProps {
@@ -6,7 +7,6 @@ export interface LogoProps {
   className?: string;
 }
 
-/** Logo losange : carré 30 px rotation 45°, lettre م contre-rotée, bordure gold-600. */
 function Logo({
   wordmark = "Mouslih Academy",
   variant = "light",
@@ -14,15 +14,14 @@ function Logo({
 }: LogoProps) {
   return (
     <span className={cn("inline-flex items-center gap-2.5", className)}>
-      <span className="grid size-[30px] rotate-45 place-items-center border border-gold-600">
-        <span
-          className={cn(
-            "-rotate-45 font-serif text-[15px] leading-none",
-            variant === "light" ? "text-green-700" : "text-on-dark",
-          )}
-        >
-          م
-        </span>
+      <span className="relative size-[30px] shrink-0 overflow-hidden rounded-full">
+        <Image
+          src="/images/brand/logo.jpg"
+          alt=""
+          fill
+          sizes="30px"
+          className="object-cover"
+        />
       </span>
       <span
         className={cn(
