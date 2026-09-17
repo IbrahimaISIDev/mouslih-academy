@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { PublicHeader } from "@/components/layout/public-header";
 import { Footer } from "@/components/layout/footer";
 import { GeometricPattern } from "@/components/patterns/geometric-pattern";
+import { YouTubeFacade } from "@/components/patterns/youtube-facade";
 import { CourseCard } from "@/components/patterns/course-card";
 import { StickyCta } from "@/components/patterns/sticky-cta";
 import { TestimonialCard } from "@/components/patterns/testimonial-card";
@@ -207,22 +208,12 @@ export default async function HomePage({ params }: HomePageProps) {
               ))}
             </ul>
           </div>
-          <div className="relative mt-4 grid aspect-video place-items-center overflow-hidden border border-border-strong bg-green-800 lg:mt-0">
-            <GeometricPattern variant="khatam" opacity={0.3} />
-            <div className="relative grid size-13 place-items-center rounded-full border border-gold-200 bg-green-900/55 lg:size-17">
-              <Play
-                className="size-5 text-gold-200"
-                fill="currentColor"
-                strokeWidth={0}
-              />
-            </div>
-            <span className="absolute bottom-2.5 start-3 text-[11px] text-on-dark-muted lg:bottom-3.5 lg:start-4">
-              <span className="lg:hidden">{t("video.captionMobile")}</span>
-              <span className="hidden lg:inline">
-                {t("video.captionDesktop")}
-              </span>
-            </span>
-          </div>
+          <YouTubeFacade
+            videoId="ku1romHwGCM"
+            title={t("video.title")}
+            caption={t("video.captionDesktop")}
+            className="group relative mt-4 grid aspect-video place-items-center overflow-hidden border border-border-strong bg-green-800 lg:mt-0"
+          />
         </div>
       </section>
 

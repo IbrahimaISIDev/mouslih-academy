@@ -12,18 +12,22 @@ const apiUrl = apiBaseUrl ? new URL(apiBaseUrl) : undefined;
 
 const nextConfig: NextConfig = {
   outputFileTracingRoot: path.join(__dirname),
-  images: apiUrl
-    ? {
-        remotePatterns: [
-          {
-            protocol: apiUrl.protocol.replace(":", "") as "http" | "https",
-            hostname: apiUrl.hostname,
-            port: apiUrl.port,
-            pathname: "/uploads/**",
-          },
-        ],
-      }
-    : undefined,
+  images: {
+    remotePatterns: [
+      // Vignettes des vidéos YouTube intégrées (voir YouTubeFacade).
+      { protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" },
+      ...(apiUrl
+        ? [
+            {
+              protocol: apiUrl.protocol.replace(":", "") as "http" | "https",
+              hostname: apiUrl.hostname,
+              port: apiUrl.port,
+              pathname: "/uploads/**",
+            },
+          ]
+        : []),
+    ],
+  },
 };
 
 export default withNextIntl(nextConfig);
