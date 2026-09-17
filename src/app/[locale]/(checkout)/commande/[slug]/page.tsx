@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Check } from "lucide-react";
 import type { Locale } from "@/lib/types";
@@ -68,7 +69,17 @@ export default async function OrderSummaryPage({ params }: OrderPageProps) {
               </p>
               <div className="flex gap-5">
                 <div className="relative hidden aspect-16/11 w-37.5 shrink-0 overflow-hidden bg-green-800 sm:block">
-                  <GeometricPattern variant="treillis" opacity={0.5} />
+                  {course.coverUrl ? (
+                    <Image
+                      src={course.coverUrl}
+                      alt=""
+                      fill
+                      sizes="150px"
+                      className="object-cover object-top"
+                    />
+                  ) : (
+                    <GeometricPattern variant="treillis" opacity={0.5} />
+                  )}
                 </div>
                 <div className="flex-1">
                   <LevelBadge level={course.level} label={tCatalog(`levels.${course.level}`)} className="mb-2.5" />
