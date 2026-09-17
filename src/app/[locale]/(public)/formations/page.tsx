@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { MessageCircle } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/lib/types";
@@ -12,6 +13,12 @@ const WHATSAPP_URL = "https://wa.me/221770000000";
 interface CataloguePageProps {
   params: Promise<{ locale: string }>;
   searchParams: Promise<{ q?: string; level?: string }>;
+}
+
+export async function generateMetadata({ params }: CataloguePageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "catalog" });
+  return { title: `${t("title")} — Mouslih Academy`, description: t("description") };
 }
 
 const LEVEL_VALUES = ["all", "beginner", "intermediate", "advanced"] as const;

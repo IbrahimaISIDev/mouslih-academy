@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   Check,
   Clock,
@@ -30,6 +31,26 @@ const WHATSAPP_URL = "https://wa.me/221770000000";
 interface CourseDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
   searchParams: Promise<{ module?: string }>;
+}
+
+export async function generateMetadata({ params }: CourseDetailPageProps): Promise<Metadata> {
+  const { locale: rawLocale, slug } = await params;
+  const locale = rawLocale as Locale;
+  const course = await getCourse(slug);
+  if (!course) return {};
+
+  const title = `${course.title[locale]} — Mouslih Academy`;
+  const description = course.cardDescription[locale];
+  // Partager le lien d'une formation précise (WhatsApp, Facebook) affiche sa vraie couverture au
+  // lieu de l'image générique du site — remplace entièrement openGraph.images, ne s'ajoute pas.
+  const images = course.coverUrl ? [{ url: course.coverUrl, width: 1280, height: 720 }] : undefined;
+
+  return {
+    title,
+    description,
+    openGraph: { title, description, images },
+    twitter: { title, description, images: course.coverUrl ? [course.coverUrl] : undefined },
+  };
 }
 
 export default async function CourseDetailPage({

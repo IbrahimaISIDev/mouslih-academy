@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import {
   Spectral,
@@ -46,10 +46,6 @@ const plexArabic = IBM_Plex_Sans_Arabic({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Mouslih Academy",
-};
-
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -57,6 +53,35 @@ export function generateStaticParams() {
 interface LocaleLayoutProps {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
+}
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
+export async function generateMetadata({ params }: LocaleLayoutProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "home.hero" });
+  const description = t("description");
+
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: "Mouslih Academy",
+    description,
+    // L'image de partage (opengraph-image.tsx, générée dynamiquement) est ce qui s'affiche
+    // quand un lien vers le site est partagé sur WhatsApp/Facebook — le principal canal de
+    // partage pour ce public, jusqu'ici un aperçu vide faute de configuration.
+    openGraph: {
+      type: "website",
+      siteName: "Mouslih Academy",
+      title: "Mouslih Academy",
+      description,
+      locale,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Mouslih Academy",
+      description,
+    },
+  };
 }
 
 export default async function LocaleLayout({
