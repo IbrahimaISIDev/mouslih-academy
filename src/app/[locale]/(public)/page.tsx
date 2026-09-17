@@ -308,8 +308,7 @@ export default async function HomePage({ params }: HomePageProps) {
           sizes="100vw"
           className="object-cover object-[center_25%]"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(9,32,18,0.94)_0%,rgba(9,32,18,0.8)_50%,rgba(9,32,18,0.6)_100%)]" />
-        <GeometricPattern variant="treillis" opacity={0.2} />
+        <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(9,32,18,0.95)_0%,rgba(9,32,18,0.9)_50%,rgba(9,32,18,0.82)_100%)]" />
         <div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <h2 className="mb-2 font-serif text-[26px] font-medium lg:text-[32px]">
