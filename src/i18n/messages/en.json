@@ -24,11 +24,20 @@
         },
         {
           "title": "Academy",
-          "items": ["About", "Testimonials", "FAQ", "Contact"]
+          "items": [
+            "About",
+            "Testimonials",
+            "FAQ",
+            "Contact"
+          ]
         },
         {
           "title": "Legal",
-          "items": ["Terms of use", "Refund policy", "Privacy"]
+          "items": [
+            "Terms of use",
+            "Refund policy",
+            "Privacy"
+          ]
         }
       ],
       "mobileLinks": [
@@ -577,7 +586,11 @@
       "newCourse": "New course",
       "title": "Overview",
       "subtitle": "Last 30 days · compared to the previous period",
-      "range": { "30d": "30 d", "90d": "90 d", "year": "Year" },
+      "range": {
+        "30d": "30 d",
+        "90d": "90 d",
+        "year": "Year"
+      },
       "stats": {
         "revenue": "Revenue",
         "revenueChange": "+{pct}% · {amount} more",
@@ -624,8 +637,11 @@
     },
     "course": {
       "breadcrumb": "Courses",
-      "status": { "draft": "Draft", "published": "Published" },
-      "meta": "{modules} modules · {lessons} lessons · {duration} of video · last edited {minutes} min ago",
+      "status": {
+        "draft": "Draft",
+        "published": "Published"
+      },
+      "meta": "{modules} modules · {lessons} lessons · {duration} of video",
       "previewLearner": "Preview as learner",
       "publish": "Publish course",
       "delete": "Delete course",
@@ -656,7 +672,10 @@
         "metaWithSubModules": "{subModules} sub-modules · {lessons} lessons",
         "metaLessonsOnly": "{lessons} lessons"
       },
-      "cover": { "title": "Cover image", "replace": "Replace image" },
+      "cover": {
+        "title": "Cover image",
+        "replace": "Replace image"
+      },
       "settings": {
         "title": "Settings",
         "level": "Level",
@@ -666,16 +685,24 @@
           "advanced": "Advanced"
         },
         "price": "Price (CFA francs)",
-        "freePreview": "Free preview lessons",
-        "freePreviewHelp": "{count} lessons open",
         "certificate": "Completion certificate",
         "certificateHelp": "Generated automatically",
         "voiceCorrection": "Voice correction",
         "voiceCorrectionHelp": "Within 48 business hours"
       },
       "actionBar": {
-        "autosaved": "Draft auto-saved {minutes} min ago"
-      }
+        "save": "Save",
+        "unsavedChanges": "Unsaved changes",
+        "saving": "Saving…",
+        "saved": "Changes saved",
+        "saveError": "Save failed",
+        "saveErrorToast": "Something went wrong. Please try again."
+      },
+      "unpublish": "Unpublish course",
+      "publishedToast": "Course published.",
+      "unpublishedToast": "Course moved back to draft.",
+      "deletedToast": "Course deleted.",
+      "deleteConfirm": "Permanently delete \"{title}\"? This action cannot be undone."
     },
     "table": {
       "exportCsv": "Export to CSV",
@@ -689,7 +716,11 @@
         "title": "Users",
         "subtitle": "{total} enrolled learners · {change} this month",
         "searchPlaceholder": "Name, email or phone…",
-        "filters": { "all": "All", "withPurchase": "With purchase", "withoutPurchase": "Without purchase" },
+        "filters": {
+          "all": "All",
+          "withPurchase": "With purchase",
+          "withoutPurchase": "Without purchase"
+        },
         "columns": {
           "learner": "Learner",
           "email": "Email",
@@ -704,7 +735,12 @@
         "title": "Orders",
         "subtitle": "{total} orders · {amount} over 30 days",
         "searchPlaceholder": "Reference, learner or course…",
-        "filters": { "all": "All", "paid": "Paid", "pending": "Pending", "failed": "Failed" },
+        "filters": {
+          "all": "All",
+          "paid": "Paid",
+          "pending": "Pending",
+          "failed": "Failed"
+        },
         "columns": {
           "ref": "Reference",
           "learner": "Learner",
@@ -716,6 +752,25 @@
         "emptyTitle": "No orders in this period",
         "emptyDescription": "Try widening the date range or removing the status filter.",
         "emptyAction": "View the last 30 days"
+      }
+    },
+    "coursesList": {
+      "title": "Courses",
+      "addButton": "+ New course",
+      "empty": "No courses yet.",
+      "columns": {
+        "title": "Course",
+        "level": "Level",
+        "status": "Status",
+        "price": "Price"
+      },
+      "newDialog": {
+        "title": "New course",
+        "titleFieldLabel": "Title (French)",
+        "titlePlaceholder": "e.g. Introduction to Fiqh",
+        "cancel": "Cancel",
+        "create": "Create and continue",
+        "creating": "Creating…"
       }
     }
   },

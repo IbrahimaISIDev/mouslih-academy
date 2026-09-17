@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import type { Level } from "@/lib/types";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -17,17 +16,19 @@ export interface CourseSettingsCardProps {
   title: string;
   levelLabel: string;
   levelOptions: Record<Level, string>;
-  initialLevel: Level;
+  level: Level;
+  onLevelChange: (level: Level) => void;
   priceLabel: string;
-  initialPriceXof: number;
-  freePreviewLabel: string;
-  freePreviewHelp: string;
+  priceXof: number;
+  onPriceChange: (priceXof: number) => void;
   certificateLabel: string;
   certificateHelp: string;
   voiceCorrectionLabel: string;
   voiceCorrectionHelp: string;
-  initialHasCertificate: boolean;
-  initialHasVoiceCorrection: boolean;
+  hasCertificate: boolean;
+  onHasCertificateChange: (value: boolean) => void;
+  hasVoiceCorrection: boolean;
+  onHasVoiceCorrectionChange: (value: boolean) => void;
 }
 
 function ToggleRow({
@@ -56,23 +57,20 @@ function CourseSettingsCard({
   title,
   levelLabel,
   levelOptions,
-  initialLevel,
+  level,
+  onLevelChange,
   priceLabel,
-  initialPriceXof,
-  freePreviewLabel,
-  freePreviewHelp,
+  priceXof,
+  onPriceChange,
   certificateLabel,
   certificateHelp,
   voiceCorrectionLabel,
   voiceCorrectionHelp,
-  initialHasCertificate,
-  initialHasVoiceCorrection,
+  hasCertificate,
+  onHasCertificateChange,
+  hasVoiceCorrection,
+  onHasVoiceCorrectionChange,
 }: CourseSettingsCardProps) {
-  const [level, setLevel] = useState<Level>(initialLevel);
-  const [freePreview, setFreePreview] = useState(true);
-  const [hasCertificate, setHasCertificate] = useState(initialHasCertificate);
-  const [hasVoiceCorrection, setHasVoiceCorrection] = useState(initialHasVoiceCorrection);
-
   return (
     <div className="border border-border-subtle bg-surface p-5.5">
       <p className="mb-4.5 text-xs font-semibold tracking-[0.14em] text-text-muted uppercase">{title}</p>
@@ -81,7 +79,7 @@ function CourseSettingsCard({
           <Label htmlFor="course-level" className="mb-2 block">
             {levelLabel}
           </Label>
-          <Select value={level} onValueChange={(value) => setLevel(value as Level)}>
+          <Select value={level} onValueChange={(value) => onLevelChange(value as Level)}>
             <SelectTrigger id="course-level" className="w-full">
               <SelectValue />
             </SelectTrigger>
@@ -101,22 +99,22 @@ function CourseSettingsCard({
             id="course-price"
             type="number"
             className="tabular-nums"
-            defaultValue={initialPriceXof}
+            value={priceXof}
+            onChange={(e) => onPriceChange(Number(e.target.value) || 0)}
           />
         </div>
 
-        <ToggleRow label={freePreviewLabel} help={freePreviewHelp} checked={freePreview} onCheckedChange={setFreePreview} />
         <ToggleRow
           label={certificateLabel}
           help={certificateHelp}
           checked={hasCertificate}
-          onCheckedChange={setHasCertificate}
+          onCheckedChange={onHasCertificateChange}
         />
         <ToggleRow
           label={voiceCorrectionLabel}
           help={voiceCorrectionHelp}
           checked={hasVoiceCorrection}
-          onCheckedChange={setHasVoiceCorrection}
+          onCheckedChange={onHasVoiceCorrectionChange}
         />
       </div>
     </div>

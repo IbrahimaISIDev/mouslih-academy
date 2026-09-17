@@ -7,6 +7,7 @@ function Toaster(props: ToasterProps) {
     <Sonner
       theme="light"
       className="toaster group"
+      position="top-center"
       style={
         {
           "--normal-bg": "var(--color-surface)",

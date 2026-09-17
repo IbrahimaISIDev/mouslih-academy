@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Info } from "lucide-react";
 import { useTranslations } from "next-intl";
-import type { Course, Locale } from "@/lib/types";
+import type { Course, I18nText, Locale } from "@/lib/types";
 import { isRtl } from "@/lib/rtl";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
@@ -18,33 +18,39 @@ const STATUS_DOT: Record<Course["translationStatus"][Locale], string> = {
   empty: "bg-border-strong",
 };
 
-export interface TranslationEditorCardProps {
-  course: Course;
-  translationDoneCounts?: Partial<Record<Locale, number>>;
+export interface TranslationEditorValues {
+  title: I18nText;
+  subtitle: I18nText;
+  description: I18nText;
 }
 
-function TranslationEditorCard({ course, translationDoneCounts = {} }: TranslationEditorCardProps) {
+export interface TranslationEditorCardProps {
+  translationStatus: Course["translationStatus"];
+  lessonCount: number;
+  translationDoneCounts?: Partial<Record<Locale, number>>;
+  values: TranslationEditorValues;
+  onChange: (field: keyof TranslationEditorValues, locale: Locale, value: string) => void;
+}
+
+function TranslationEditorCard({
+  translationStatus,
+  lessonCount,
+  translationDoneCounts = {},
+  values,
+  onChange,
+}: TranslationEditorCardProps) {
   const t = useTranslations("admin.course.translationCard");
   const [lang, setLang] = useState<Locale>("fr");
-  const [drafts, setDrafts] = useState({
-    title: course.title,
-    subtitle: course.subtitle,
-    description: course.description,
-  });
 
   const dir = isRtl(lang) ? "rtl" : "ltr";
-  const status = course.translationStatus[lang];
+  const status = translationStatus[lang];
   const statusNote =
     status === "complete"
-      ? t("complete", { count: course.lessonCount })
+      ? t("complete", { count: lessonCount })
       : status === "partial"
-        ? t("partial", { done: translationDoneCounts[lang] ?? 0, total: course.lessonCount })
+        ? t("partial", { done: translationDoneCounts[lang] ?? 0, total: lessonCount })
         : t("empty");
   const statusColor = status === "complete" ? "text-success" : status === "partial" ? "text-warning" : "text-text-faint";
-
-  function updateDraft(field: keyof typeof drafts, value: string) {
-    setDrafts((prev) => ({ ...prev, [field]: { ...prev[field], [lang]: value } }));
-  }
 
   return (
     <div className="border border-border-subtle bg-surface">
@@ -65,7 +71,7 @@ function TranslationEditorCard({ course, translationDoneCounts = {} }: Translati
                   )}
                 >
                   {value.toUpperCase()}
-                  <span className={cn("size-[7px] rounded-full", STATUS_DOT[course.translationStatus[value]])} />
+                  <span className={cn("size-[7px] rounded-full", STATUS_DOT[translationStatus[value]])} />
                 </button>
               );
             })}
@@ -83,7 +89,11 @@ function TranslationEditorCard({ course, translationDoneCounts = {} }: Translati
             <Label htmlFor="course-title" className="mb-2 block">
               {t("titleLabel")}
             </Label>
-            <Input id="course-title" value={drafts.title[lang]} onChange={(e) => updateDraft("title", e.target.value)} />
+            <Input
+              id="course-title"
+              value={values.title[lang]}
+              onChange={(e) => onChange("title", lang, e.target.value)}
+            />
           </div>
           <div>
             <Label htmlFor="course-subtitle" className="mb-2 block">
@@ -91,8 +101,8 @@ function TranslationEditorCard({ course, translationDoneCounts = {} }: Translati
             </Label>
             <Input
               id="course-subtitle"
-              value={drafts.subtitle[lang]}
-              onChange={(e) => updateDraft("subtitle", e.target.value)}
+              value={values.subtitle[lang]}
+              onChange={(e) => onChange("subtitle", lang, e.target.value)}
             />
           </div>
         </div>
@@ -102,8 +112,8 @@ function TranslationEditorCard({ course, translationDoneCounts = {} }: Translati
           </Label>
           <Textarea
             id="course-description"
-            value={drafts.description[lang]}
-            onChange={(e) => updateDraft("description", e.target.value)}
+            value={values.description[lang]}
+            onChange={(e) => onChange("description", lang, e.target.value)}
             className="min-h-21"
           />
         </div>

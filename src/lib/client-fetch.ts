@@ -28,7 +28,13 @@ export async function clientApiFetch<T>(path: string, init?: RequestInit): Promi
   });
 
   if (!response.ok) {
-    throw new ClientApiError(response.status, `${init?.method ?? "GET"} ${path} → ${response.status}`);
+    // NestJS renvoie { statusCode, message, error } sur les erreurs métier (ConflictException,
+    // BadRequestException...) : on remonte ce message quand il existe, pour l'afficher tel quel
+    // côté admin plutôt qu'un générique "PATCH /x → 409".
+    const fallback = `${init?.method ?? "GET"} ${path} → ${response.status}`;
+    const body = await response.json().catch(() => null);
+    const message = body && typeof body.message === "string" ? body.message : fallback;
+    throw new ClientApiError(response.status, message);
   }
   if (response.status === 204) return undefined as T;
   return (await response.json()) as T;

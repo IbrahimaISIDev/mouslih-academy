@@ -27,7 +27,7 @@ export function getAdminNavItems(
     },
     {
       label: labels.courses,
-      href: undefined,
+      href: "/admin/formations",
       icon: BookOpen,
       active: active === "courses",
     },

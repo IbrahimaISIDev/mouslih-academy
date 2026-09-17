@@ -586,7 +586,11 @@
       "newCourse": "Nouvelle formation",
       "title": "Vue d'ensemble",
       "subtitle": "30 derniers jours · comparé à la période précédente",
-      "range": { "30d": "30 j", "90d": "90 j", "year": "Année" },
+      "range": {
+        "30d": "30 j",
+        "90d": "90 j",
+        "year": "Année"
+      },
       "stats": {
         "revenue": "Chiffre d'affaires",
         "revenueChange": "+{pct} % · {amount} de plus",
@@ -633,8 +637,11 @@
     },
     "course": {
       "breadcrumb": "Formations",
-      "status": { "draft": "Brouillon", "published": "Publiée" },
-      "meta": "{modules} modules · {lessons} leçons · {duration} de vidéo · dernière modification il y a {minutes} min",
+      "status": {
+        "draft": "Brouillon",
+        "published": "Publiée"
+      },
+      "meta": "{modules} modules · {lessons} leçons · {duration} de vidéo",
       "previewLearner": "Aperçu apprenant",
       "publish": "Publier la formation",
       "delete": "Supprimer la formation",
@@ -665,7 +672,10 @@
         "metaWithSubModules": "{subModules} sous-modules · {lessons} leçons",
         "metaLessonsOnly": "{lessons} leçons"
       },
-      "cover": { "title": "Image de couverture", "replace": "Remplacer l'image" },
+      "cover": {
+        "title": "Image de couverture",
+        "replace": "Remplacer l'image"
+      },
       "settings": {
         "title": "Réglages",
         "level": "Niveau",
@@ -675,16 +685,24 @@
           "advanced": "Avancé"
         },
         "price": "Prix (FCFA)",
-        "freePreview": "Leçons d'aperçu gratuit",
-        "freePreviewHelp": "{count} leçons ouvertes",
         "certificate": "Attestation de fin",
         "certificateHelp": "Générée automatiquement",
         "voiceCorrection": "Correction vocale",
         "voiceCorrectionHelp": "Sous 48 h ouvrées"
       },
       "actionBar": {
-        "autosaved": "Brouillon enregistré automatiquement il y a {minutes} min"
-      }
+        "save": "Enregistrer",
+        "unsavedChanges": "Modifications non enregistrées",
+        "saving": "Enregistrement…",
+        "saved": "Modifications enregistrées",
+        "saveError": "Échec de l'enregistrement",
+        "saveErrorToast": "Une erreur est survenue. Réessayez."
+      },
+      "unpublish": "Dépublier la formation",
+      "publishedToast": "Formation publiée.",
+      "unpublishedToast": "Formation repassée en brouillon.",
+      "deletedToast": "Formation supprimée.",
+      "deleteConfirm": "Supprimer définitivement « {title} » ? Cette action est irréversible."
     },
     "table": {
       "exportCsv": "Exporter en CSV",
@@ -698,7 +716,11 @@
         "title": "Utilisateurs",
         "subtitle": "{total} apprenants inscrits · {change} ce mois-ci",
         "searchPlaceholder": "Nom, e-mail ou téléphone…",
-        "filters": { "all": "Tous", "withPurchase": "Avec achat", "withoutPurchase": "Sans achat" },
+        "filters": {
+          "all": "Tous",
+          "withPurchase": "Avec achat",
+          "withoutPurchase": "Sans achat"
+        },
         "columns": {
           "learner": "Apprenant",
           "email": "E-mail",
@@ -713,7 +735,12 @@
         "title": "Commandes",
         "subtitle": "{total} commandes · {amount} sur 30 jours",
         "searchPlaceholder": "Référence, apprenant ou formation…",
-        "filters": { "all": "Toutes", "paid": "Payées", "pending": "En attente", "failed": "Échouées" },
+        "filters": {
+          "all": "Toutes",
+          "paid": "Payées",
+          "pending": "En attente",
+          "failed": "Échouées"
+        },
         "columns": {
           "ref": "Référence",
           "learner": "Apprenant",
@@ -725,6 +752,25 @@
         "emptyTitle": "Aucune commande sur cette période",
         "emptyDescription": "Essayez d'élargir la plage de dates ou de retirer le filtre de statut.",
         "emptyAction": "Voir les 30 derniers jours"
+      }
+    },
+    "coursesList": {
+      "title": "Formations",
+      "addButton": "+ Nouvelle formation",
+      "empty": "Aucune formation pour le moment.",
+      "columns": {
+        "title": "Formation",
+        "level": "Niveau",
+        "status": "Statut",
+        "price": "Prix"
+      },
+      "newDialog": {
+        "title": "Nouvelle formation",
+        "titleFieldLabel": "Titre (français)",
+        "titlePlaceholder": "ex. Introduction au Fiqh",
+        "cancel": "Annuler",
+        "create": "Créer et continuer",
+        "creating": "Création…"
       }
     }
   },

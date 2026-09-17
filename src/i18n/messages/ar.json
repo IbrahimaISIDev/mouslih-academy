@@ -15,15 +15,29 @@
       "columns": [
         {
           "title": "الدورات",
-          "items": ["تصحيح سورة الفاتحة", "النورانية", "التجويد", "علوم الحديث"]
+          "items": [
+            "تصحيح سورة الفاتحة",
+            "النورانية",
+            "التجويد",
+            "علوم الحديث"
+          ]
         },
         {
           "title": "الأكاديمية",
-          "items": ["من نحن", "آراء الطلاب", "الأسئلة الشائعة", "تواصل معنا"]
+          "items": [
+            "من نحن",
+            "آراء الطلاب",
+            "الأسئلة الشائعة",
+            "تواصل معنا"
+          ]
         },
         {
           "title": "قانوني",
-          "items": ["شروط الاستخدام", "سياسة الاسترداد", "الخصوصية"]
+          "items": [
+            "شروط الاستخدام",
+            "سياسة الاسترداد",
+            "الخصوصية"
+          ]
         }
       ],
       "mobileLinks": [
@@ -572,7 +586,11 @@
       "newCourse": "دورة جديدة",
       "title": "نظرة عامة",
       "subtitle": "آخر 30 يومًا · مقارنة بالفترة السابقة",
-      "range": { "30d": "30 يومًا", "90d": "90 يومًا", "year": "سنة" },
+      "range": {
+        "30d": "30 يومًا",
+        "90d": "90 يومًا",
+        "year": "سنة"
+      },
       "stats": {
         "revenue": "رقم الأعمال",
         "revenueChange": "+{pct}٪ · {amount} إضافية",
@@ -619,8 +637,11 @@
     },
     "course": {
       "breadcrumb": "الدورات",
-      "status": { "draft": "مسودة", "published": "منشورة" },
-      "meta": "{modules} وحدات · {lessons} دروس · {duration} من الفيديو · آخر تعديل منذ {minutes} دقيقة",
+      "status": {
+        "draft": "مسودة",
+        "published": "منشورة"
+      },
+      "meta": "{modules} وحدات · {lessons} دروس · {duration} من الفيديو",
       "previewLearner": "معاينة كمتعلم",
       "publish": "نشر الدورة",
       "delete": "حذف الدورة",
@@ -651,7 +672,10 @@
         "metaWithSubModules": "{subModules} وحدات فرعية · {lessons} دروس",
         "metaLessonsOnly": "{lessons} دروس"
       },
-      "cover": { "title": "صورة الغلاف", "replace": "استبدال الصورة" },
+      "cover": {
+        "title": "صورة الغلاف",
+        "replace": "استبدال الصورة"
+      },
       "settings": {
         "title": "الإعدادات",
         "level": "المستوى",
@@ -661,16 +685,24 @@
           "advanced": "متقدّم"
         },
         "price": "السعر (فرنك أفريقي)",
-        "freePreview": "دروس معاينة مجانية",
-        "freePreviewHelp": "{count} دروس مفتوحة",
         "certificate": "شهادة الإتمام",
         "certificateHelp": "تُصدر تلقائيًا",
         "voiceCorrection": "التصحيح الصوتي",
         "voiceCorrectionHelp": "خلال 48 ساعة عمل"
       },
       "actionBar": {
-        "autosaved": "تم حفظ المسودة تلقائيًا منذ {minutes} دقيقة"
-      }
+        "save": "حفظ",
+        "unsavedChanges": "تعديلات غير محفوظة",
+        "saving": "جارٍ الحفظ…",
+        "saved": "تم حفظ التعديلات",
+        "saveError": "فشل الحفظ",
+        "saveErrorToast": "حدث خطأ ما. حاول مرة أخرى."
+      },
+      "unpublish": "إلغاء نشر الدورة",
+      "publishedToast": "تم نشر الدورة.",
+      "unpublishedToast": "أعيدت الدورة إلى المسودات.",
+      "deletedToast": "تم حذف الدورة.",
+      "deleteConfirm": "حذف « {title} » نهائيًا؟ لا يمكن التراجع عن هذا الإجراء."
     },
     "table": {
       "exportCsv": "تصدير CSV",
@@ -684,7 +716,11 @@
         "title": "المستخدمون",
         "subtitle": "{total} متعلمًا مسجَّلًا · {change} هذا الشهر",
         "searchPlaceholder": "الاسم أو البريد الإلكتروني أو الهاتف…",
-        "filters": { "all": "الكل", "withPurchase": "بشراء", "withoutPurchase": "بلا شراء" },
+        "filters": {
+          "all": "الكل",
+          "withPurchase": "بشراء",
+          "withoutPurchase": "بلا شراء"
+        },
         "columns": {
           "learner": "المتعلم",
           "email": "البريد الإلكتروني",
@@ -699,7 +735,12 @@
         "title": "الطلبات",
         "subtitle": "{total} طلبًا · {amount} خلال 30 يومًا",
         "searchPlaceholder": "المرجع أو المتعلم أو الدورة…",
-        "filters": { "all": "الكل", "paid": "مدفوعة", "pending": "قيد الانتظار", "failed": "فاشلة" },
+        "filters": {
+          "all": "الكل",
+          "paid": "مدفوعة",
+          "pending": "قيد الانتظار",
+          "failed": "فاشلة"
+        },
         "columns": {
           "ref": "المرجع",
           "learner": "المتعلم",
@@ -711,6 +752,25 @@
         "emptyTitle": "لا طلبات خلال هذه الفترة",
         "emptyDescription": "جرّب توسيع نطاق التاريخ أو إزالة تصفية الحالة.",
         "emptyAction": "عرض آخر 30 يومًا"
+      }
+    },
+    "coursesList": {
+      "title": "الدورات",
+      "addButton": "+ دورة جديدة",
+      "empty": "لا توجد دورات بعد.",
+      "columns": {
+        "title": "الدورة",
+        "level": "المستوى",
+        "status": "الحالة",
+        "price": "السعر"
+      },
+      "newDialog": {
+        "title": "دورة جديدة",
+        "titleFieldLabel": "العنوان (بالفرنسية)",
+        "titlePlaceholder": "مثال: مدخل إلى الفقه",
+        "cancel": "إلغاء",
+        "create": "إنشاء ومتابعة",
+        "creating": "جارٍ الإنشاء…"
       }
     }
   },
