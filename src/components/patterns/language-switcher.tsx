@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+import { isRtl } from "@/lib/rtl";
 
 const LOCALE_LABELS: Record<
   (typeof routing.locales)[number],
@@ -64,13 +65,16 @@ function LanguageSwitcherFallback({
   return (
     <div
       className={cn(
-        "inline-flex items-center overflow-hidden rounded-sm border",
+        "inline-flex items-center overflow-hidden rounded-full border p-0.5",
         tone === "onDark" ? "border-white/20" : "border-border-subtle",
         className,
       )}
     >
       {routing.locales.map((loc) => (
-        <span key={loc} className={cn("px-3 py-1.5 text-[13px] font-semibold", LOCALE_LABELS[loc].fontClassName)}>
+        <span
+          key={loc}
+          className={cn("rounded-full px-3 py-1.5 text-[13px] font-semibold", LOCALE_LABELS[loc].fontClassName)}
+        >
           {LOCALE_LABELS[loc].short}
         </span>
       ))}
@@ -118,27 +122,43 @@ function LanguageSwitcherContent({
     );
   }
 
+  const activeIndex = routing.locales.indexOf(locale as (typeof routing.locales)[number]);
+  // translateX(n * 100%) déplace la pastille de n fois SA PROPRE largeur (donc directement de
+  // 1/nombre-de-langues du conteneur), quel que soit le nombre de langues. En RTL, "start" (où
+  // la pastille est ancrée) correspond au bord physique droit : avancer vers la langue suivante
+  // doit donc translater vers la gauche, d'où le signe inversé.
+  const direction = isRtl(locale) ? -1 : 1;
+
   return (
     <div
       className={cn(
-        "inline-flex items-center overflow-hidden rounded-sm border",
+        "relative inline-grid items-center overflow-hidden rounded-full border p-0.5",
         tone === "onDark" ? "border-white/20" : "border-border-subtle",
         className,
       )}
+      style={{ gridTemplateColumns: `repeat(${routing.locales.length}, minmax(0, 1fr))` }}
     >
+      <span
+        aria-hidden
+        className="absolute inset-y-0.5 start-0.5 rounded-full bg-green-700 shadow-sm motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-out"
+        style={{
+          width: `calc((100% - 4px) / ${routing.locales.length})`,
+          transform: `translateX(${direction * activeIndex * 100}%)`,
+        }}
+      />
       {routing.locales.map((loc) => (
         <Link
           key={loc}
           href={href}
           locale={loc}
           className={cn(
-            "px-3 py-1.5 text-[13px] font-semibold transition-colors",
+            "relative z-10 rounded-full px-3 py-1.5 text-center text-[13px] font-semibold transition-colors motion-safe:active:scale-95",
             LOCALE_LABELS[loc].fontClassName,
             loc === locale
-              ? "bg-green-700 text-green-ink"
+              ? "text-green-ink"
               : tone === "onDark"
-                ? "text-on-dark-muted hover:bg-white/10"
-                : "text-text-muted hover:bg-hairline",
+                ? "text-on-dark-muted hover:text-on-dark"
+                : "text-text-muted hover:text-text",
           )}
         >
           {LOCALE_LABELS[loc].short}
