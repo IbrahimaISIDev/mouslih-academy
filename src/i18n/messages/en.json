@@ -692,7 +692,31 @@
         "moduleAdded": "Module added.",
         "lessonAdded": "Lesson added.",
         "addModuleError": "Adding the module failed. Please try again.",
-        "addLessonError": "Adding the lesson failed. Please try again."
+        "addLessonError": "Adding the lesson failed. Please try again.",
+        "editModuleDialog": {
+          "title": "Rename module",
+          "fieldLabel": "Title (French)",
+          "placeholder": "e.g. The basics of tajwid",
+          "cancel": "Cancel",
+          "create": "Save"
+        },
+        "editLessonDialog": {
+          "title": "Rename lesson",
+          "fieldLabel": "Title (French)",
+          "placeholder": "e.g. Pronouncing the qaf",
+          "cancel": "Cancel",
+          "create": "Save"
+        },
+        "moduleUpdated": "Module renamed.",
+        "lessonUpdated": "Lesson renamed.",
+        "moduleDeleted": "Module deleted.",
+        "lessonDeleted": "Lesson deleted.",
+        "updateModuleError": "Renaming the module failed. Please try again.",
+        "updateLessonError": "Renaming the lesson failed. Please try again.",
+        "deleteModuleError": "Deleting the module failed. Please try again.",
+        "deleteLessonError": "Deleting the lesson failed. Please try again.",
+        "deleteModuleConfirm": "Permanently delete the module \"{title}\" and all its content? This action cannot be undone.",
+        "deleteLessonConfirm": "Permanently delete the lesson \"{title}\"? This action cannot be undone."
       },
       "cover": {
         "title": "Cover image",

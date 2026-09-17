@@ -692,7 +692,31 @@
         "moduleAdded": "تمت إضافة الوحدة.",
         "lessonAdded": "تمت إضافة الدرس.",
         "addModuleError": "فشلت إضافة الوحدة. حاول مرة أخرى.",
-        "addLessonError": "فشلت إضافة الدرس. حاول مرة أخرى."
+        "addLessonError": "فشلت إضافة الدرس. حاول مرة أخرى.",
+        "editModuleDialog": {
+          "title": "إعادة تسمية الوحدة",
+          "fieldLabel": "العنوان (بالفرنسية)",
+          "placeholder": "مثال: أساسيات التجويد",
+          "cancel": "إلغاء",
+          "create": "حفظ"
+        },
+        "editLessonDialog": {
+          "title": "إعادة تسمية الدرس",
+          "fieldLabel": "العنوان (بالفرنسية)",
+          "placeholder": "مثال: نطق القاف",
+          "cancel": "إلغاء",
+          "create": "حفظ"
+        },
+        "moduleUpdated": "تمت إعادة تسمية الوحدة.",
+        "lessonUpdated": "تمت إعادة تسمية الدرس.",
+        "moduleDeleted": "تم حذف الوحدة.",
+        "lessonDeleted": "تم حذف الدرس.",
+        "updateModuleError": "فشلت إعادة تسمية الوحدة. حاول مرة أخرى.",
+        "updateLessonError": "فشلت إعادة تسمية الدرس. حاول مرة أخرى.",
+        "deleteModuleError": "فشل حذف الوحدة. حاول مرة أخرى.",
+        "deleteLessonError": "فشل حذف الدرس. حاول مرة أخرى.",
+        "deleteModuleConfirm": "حذف الوحدة «{title}» وكل محتواها نهائيًا؟ لا يمكن التراجع عن هذا الإجراء.",
+        "deleteLessonConfirm": "حذف الدرس «{title}» نهائيًا؟ لا يمكن التراجع عن هذا الإجراء."
       },
       "cover": {
         "title": "صورة الغلاف",

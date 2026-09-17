@@ -20,6 +20,8 @@ export interface AddCurriculumItemDialogProps {
   placeholder: string;
   cancelLabel: string;
   createLabel: string;
+  /** Pré-remplit le champ pour un renommage plutôt qu'une création vide. */
+  initialValue?: string;
   /** Doit rejeter (après avoir déjà affiché son propre toast d'erreur) pour garder le dialogue ouvert. */
   onSubmit: (title: string) => Promise<void>;
 }
@@ -31,12 +33,18 @@ function AddCurriculumItemDialog({
   placeholder,
   cancelLabel,
   createLabel,
+  initialValue = "",
   onSubmit,
 }: AddCurriculumItemDialogProps) {
   const inputId = useId();
   const [open, setOpen] = useState(false);
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState(initialValue);
   const [submitting, setSubmitting] = useState(false);
+
+  function handleOpenChange(next: boolean) {
+    if (next) setTitle(initialValue);
+    setOpen(next);
+  }
 
   async function handleSubmit() {
     if (title.trim().length < 1) return;
@@ -44,7 +52,6 @@ function AddCurriculumItemDialog({
     try {
       await onSubmit(title.trim());
       setOpen(false);
-      setTitle("");
     } catch {
       // Le onSubmit appelant affiche déjà un toast d'erreur : on garde juste le dialogue ouvert.
     } finally {
@@ -53,7 +60,7 @@ function AddCurriculumItemDialog({
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent>
         <DialogHeader>

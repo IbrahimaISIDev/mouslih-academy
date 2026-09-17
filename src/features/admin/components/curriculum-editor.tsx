@@ -28,6 +28,10 @@ import { ClientApiError } from "@/lib/client-fetch";
 import { reorderCourseLessons, reorderCourseModules } from "@/features/admin/api/reorder-course-modules";
 import { addCourseModule } from "@/features/admin/api/add-course-module";
 import { addCourseLesson } from "@/features/admin/api/add-course-lesson";
+import { updateCourseModule } from "@/features/admin/api/update-course-module";
+import { deleteCourseModule } from "@/features/admin/api/delete-course-module";
+import { updateCourseLesson } from "@/features/admin/api/update-course-lesson";
+import { deleteCourseLesson } from "@/features/admin/api/delete-course-lesson";
 import type { CourseEditorData } from "@/features/admin/api/get-course-editor";
 import { AddCurriculumItemDialog } from "./add-curriculum-item-dialog";
 
@@ -62,10 +66,23 @@ function LessonRow({
   lesson,
   video,
   labels,
+  onEdit,
+  onDelete,
 }: {
   lesson: Lesson;
   video: AdminLessonVideoState;
-  labels: { videoReady: string; videoMissing: string; uploading: (pct: number) => string };
+  labels: {
+    videoReady: string;
+    videoMissing: string;
+    uploading: (pct: number) => string;
+    editLessonDialogTitle: string;
+    editLessonFieldLabel: string;
+    editLessonPlaceholder: string;
+    editLessonCancel: string;
+    editLessonSave: string;
+  };
+  onEdit: (title: string) => Promise<void>;
+  onDelete: () => void;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: lessonDndId(lesson.id),
@@ -116,7 +133,23 @@ function LessonRow({
           {labels.videoMissing}
         </span>
       )}
-      <Trash2 className="size-4 shrink-0 text-text-faint" strokeWidth={1.6} />
+      <AddCurriculumItemDialog
+        trigger={
+          <button type="button" className="shrink-0 text-text-faint hover:text-text-soft">
+            <Pencil className="size-4" strokeWidth={1.6} />
+          </button>
+        }
+        dialogTitle={labels.editLessonDialogTitle}
+        fieldLabel={labels.editLessonFieldLabel}
+        placeholder={labels.editLessonPlaceholder}
+        cancelLabel={labels.editLessonCancel}
+        createLabel={labels.editLessonSave}
+        initialValue={lesson.title.fr}
+        onSubmit={onEdit}
+      />
+      <button type="button" onClick={onDelete} className="shrink-0 text-text-faint hover:text-error">
+        <Trash2 className="size-4" strokeWidth={1.6} />
+      </button>
     </div>
   );
 }
@@ -128,6 +161,10 @@ function ModuleRow({
   videoStatus,
   labels,
   onAddLesson,
+  onEditModule,
+  onDeleteModule,
+  onEditLesson,
+  onDeleteLesson,
 }: {
   courseModule: Module;
   open: boolean;
@@ -146,8 +183,22 @@ function ModuleRow({
     addLessonPlaceholder: string;
     addLessonCancel: string;
     addLessonCreate: string;
+    editModuleDialogTitle: string;
+    editModuleFieldLabel: string;
+    editModulePlaceholder: string;
+    editModuleCancel: string;
+    editModuleSave: string;
+    editLessonDialogTitle: string;
+    editLessonFieldLabel: string;
+    editLessonPlaceholder: string;
+    editLessonCancel: string;
+    editLessonSave: string;
   };
   onAddLesson: (subModuleId: string, title: string) => Promise<void>;
+  onEditModule: (title: string) => Promise<void>;
+  onDeleteModule: () => void;
+  onEditLesson: (subModuleId: string, lessonId: string, title: string) => Promise<void>;
+  onDeleteLesson: (subModuleId: string, lessonId: string, title: string) => void;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: moduleDndId(courseModule.id),
@@ -182,8 +233,23 @@ function ModuleRow({
               : labels.metaLessonsOnly(lessonCount)}
           </p>
         </button>
-        <Pencil className="size-[17px] shrink-0 text-text-muted" strokeWidth={1.6} />
-        <Trash2 className="size-[17px] shrink-0 text-text-muted" strokeWidth={1.6} />
+        <AddCurriculumItemDialog
+          trigger={
+            <button type="button" className="shrink-0 text-text-muted hover:text-text-soft">
+              <Pencil className="size-[17px]" strokeWidth={1.6} />
+            </button>
+          }
+          dialogTitle={labels.editModuleDialogTitle}
+          fieldLabel={labels.editModuleFieldLabel}
+          placeholder={labels.editModulePlaceholder}
+          cancelLabel={labels.editModuleCancel}
+          createLabel={labels.editModuleSave}
+          initialValue={courseModule.title.fr}
+          onSubmit={onEditModule}
+        />
+        <button type="button" onClick={onDeleteModule} className="shrink-0 text-text-muted hover:text-error">
+          <Trash2 className="size-[17px]" strokeWidth={1.6} />
+        </button>
         <button type="button" onClick={onToggle} className="w-3.5 shrink-0 text-center text-base text-text-muted">
           {open ? "−" : "+"}
         </button>
@@ -212,6 +278,8 @@ function ModuleRow({
                     lesson={lesson}
                     video={videoStatus[lesson.id] ?? { status: "ready" }}
                     labels={labels}
+                    onEdit={(title) => onEditLesson(subModule.id, lesson.id, title)}
+                    onDelete={() => onDeleteLesson(subModule.id, lesson.id, lesson.title.fr)}
                   />
                 ))}
               </SortableContext>
@@ -323,6 +391,50 @@ function CurriculumEditor({
     }
   }
 
+  async function handleEditModule(moduleId: string, title: string) {
+    try {
+      const data = await updateCourseModule(courseId, moduleId, title);
+      onDataChange(data);
+      toast.success(t("moduleUpdated"));
+    } catch (error) {
+      toast.error(error instanceof ClientApiError ? error.message : t("updateModuleError"));
+      throw error;
+    }
+  }
+
+  async function handleDeleteModule(moduleId: string, title: string) {
+    if (!window.confirm(t("deleteModuleConfirm", { title }))) return;
+    try {
+      const data = await deleteCourseModule(courseId, moduleId);
+      onDataChange(data);
+      toast.success(t("moduleDeleted"));
+    } catch (error) {
+      toast.error(error instanceof ClientApiError ? error.message : t("deleteModuleError"));
+    }
+  }
+
+  async function handleEditLesson(moduleId: string, subModuleId: string, lessonId: string, title: string) {
+    try {
+      const data = await updateCourseLesson(courseId, moduleId, subModuleId, lessonId, title);
+      onDataChange(data);
+      toast.success(t("lessonUpdated"));
+    } catch (error) {
+      toast.error(error instanceof ClientApiError ? error.message : t("updateLessonError"));
+      throw error;
+    }
+  }
+
+  async function handleDeleteLesson(moduleId: string, subModuleId: string, lessonId: string, title: string) {
+    if (!window.confirm(t("deleteLessonConfirm", { title }))) return;
+    try {
+      const data = await deleteCourseLesson(courseId, moduleId, subModuleId, lessonId);
+      onDataChange(data);
+      toast.success(t("lessonDeleted"));
+    } catch (error) {
+      toast.error(error instanceof ClientApiError ? error.message : t("deleteLessonError"));
+    }
+  }
+
   const labels = {
     subModuleLabel: t("subModuleLabel"),
     addLesson: t("addLesson"),
@@ -336,6 +448,16 @@ function CurriculumEditor({
     addLessonPlaceholder: t("addLessonDialog.placeholder"),
     addLessonCancel: t("addLessonDialog.cancel"),
     addLessonCreate: t("addLessonDialog.create"),
+    editModuleDialogTitle: t("editModuleDialog.title"),
+    editModuleFieldLabel: t("editModuleDialog.fieldLabel"),
+    editModulePlaceholder: t("editModuleDialog.placeholder"),
+    editModuleCancel: t("editModuleDialog.cancel"),
+    editModuleSave: t("editModuleDialog.create"),
+    editLessonDialogTitle: t("editLessonDialog.title"),
+    editLessonFieldLabel: t("editLessonDialog.fieldLabel"),
+    editLessonPlaceholder: t("editLessonDialog.placeholder"),
+    editLessonCancel: t("editLessonDialog.cancel"),
+    editLessonSave: t("editLessonDialog.create"),
   };
 
   return (
@@ -375,6 +497,14 @@ function CurriculumEditor({
               videoStatus={videoStatus}
               labels={labels}
               onAddLesson={(subModuleId, title) => handleAddLesson(courseModule.id, subModuleId, title)}
+              onEditModule={(title) => handleEditModule(courseModule.id, title)}
+              onDeleteModule={() => handleDeleteModule(courseModule.id, courseModule.title.fr)}
+              onEditLesson={(subModuleId, lessonId, title) =>
+                handleEditLesson(courseModule.id, subModuleId, lessonId, title)
+              }
+              onDeleteLesson={(subModuleId, lessonId, title) =>
+                handleDeleteLesson(courseModule.id, subModuleId, lessonId, title)
+              }
             />
           ))}
         </SortableContext>

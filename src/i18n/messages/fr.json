@@ -692,7 +692,31 @@
         "moduleAdded": "Module ajouté.",
         "lessonAdded": "Leçon ajoutée.",
         "addModuleError": "L'ajout du module a échoué. Réessayez.",
-        "addLessonError": "L'ajout de la leçon a échoué. Réessayez."
+        "addLessonError": "L'ajout de la leçon a échoué. Réessayez.",
+        "editModuleDialog": {
+          "title": "Renommer le module",
+          "fieldLabel": "Titre (français)",
+          "placeholder": "ex. Les bases du tajwid",
+          "cancel": "Annuler",
+          "create": "Enregistrer"
+        },
+        "editLessonDialog": {
+          "title": "Renommer la leçon",
+          "fieldLabel": "Titre (français)",
+          "placeholder": "ex. La prononciation du qaf",
+          "cancel": "Annuler",
+          "create": "Enregistrer"
+        },
+        "moduleUpdated": "Module renommé.",
+        "lessonUpdated": "Leçon renommée.",
+        "moduleDeleted": "Module supprimé.",
+        "lessonDeleted": "Leçon supprimée.",
+        "updateModuleError": "Le renommage du module a échoué. Réessayez.",
+        "updateLessonError": "Le renommage de la leçon a échoué. Réessayez.",
+        "deleteModuleError": "La suppression du module a échoué. Réessayez.",
+        "deleteLessonError": "La suppression de la leçon a échoué. Réessayez.",
+        "deleteModuleConfirm": "Supprimer définitivement le module « {title} » et tout son contenu ? Cette action est irréversible.",
+        "deleteLessonConfirm": "Supprimer définitivement la leçon « {title} » ? Cette action est irréversible."
       },
       "cover": {
         "title": "Image de couverture",
