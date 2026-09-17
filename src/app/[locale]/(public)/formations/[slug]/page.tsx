@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/lib/types";
 import { formatDuration, formatPrice, formatTotalDuration } from "@/lib/format";
@@ -224,7 +225,18 @@ export default async function CourseDetailPage({
             {/* Carte d'achat */}
             <div className="border border-gold-600 bg-surface text-text">
               <div className="relative grid aspect-16/10 place-items-center overflow-hidden bg-green-800">
-                <GeometricPattern variant="khatam" opacity={0.3} />
+                {course.coverUrl ? (
+                  <Image
+                    src={course.coverUrl}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 380px, 100vw"
+                    className="object-cover object-top"
+                  />
+                ) : (
+                  <GeometricPattern variant="khatam" opacity={0.3} />
+                )}
+                <div className="absolute inset-0 bg-green-900/35" />
                 <div className="relative grid size-14 place-items-center rounded-full border border-gold-200 bg-green-900/50">
                   <Play
                     className="size-5 text-gold-200"
@@ -385,7 +397,7 @@ export default async function CourseDetailPage({
             </p>
             <div className="mb-3.5 flex items-center gap-3.5">
               <Avatar className="size-13.5 shrink-0">
-                <AvatarFallback className="text-lg">OM</AvatarFallback>
+                <AvatarFallback className="text-lg">OS</AvatarFallback>
               </Avatar>
               <div>
                 <div className="font-serif text-lg font-semibold">

@@ -264,7 +264,7 @@ export default async function DashboardPage({
                 </p>
                 <div className="mb-4 flex gap-3">
                   <Avatar>
-                    <AvatarFallback>OM</AvatarFallback>
+                    <AvatarFallback>OS</AvatarFallback>
                   </Avatar>
                   <div>
                     <p className="mb-0.5 text-sm font-semibold">
