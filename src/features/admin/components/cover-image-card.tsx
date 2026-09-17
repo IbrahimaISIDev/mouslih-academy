@@ -50,7 +50,7 @@ function CoverImageCard({
       <p className="mb-4 text-xs font-semibold tracking-[0.14em] text-text-muted uppercase">{title}</p>
       <div className="relative mb-3.5 aspect-16/10 overflow-hidden bg-green-700">
         {coverUrl ? (
-          <Image src={coverUrl} alt="" fill className="object-cover" sizes="340px" />
+          <Image src={coverUrl} alt="" fill className="object-cover object-top" sizes="340px" />
         ) : (
           <GeometricPattern variant="khatam" opacity={0.6} />
         )}

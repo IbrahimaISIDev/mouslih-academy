@@ -56,7 +56,7 @@ function CourseCard({
       >
         <div className="absolute inset-0 transition-transform duration-300 group-hover:scale-105">
           {coverUrl ? (
-            <Image src={coverUrl} alt="" fill className="object-cover" />
+            <Image src={coverUrl} alt="" fill className="object-cover object-top" />
           ) : (
             <GeometricPattern variant="khatam" opacity={0.4} />
           )}
