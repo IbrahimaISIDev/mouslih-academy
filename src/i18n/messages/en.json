@@ -84,7 +84,7 @@
       "statPaymentLabel": "payment in 30 s",
       "statPaymentLabelMobile": "in 30 s",
       "teacherPlaceholder": "Teacher's portrait",
-      "teacherName": "Oustaz Mouslih",
+      "teacherName": "Oustaz Souleymane Diallo",
       "teacherCredentials": "Ijaza in recitation · 12 years of teaching"
     },
     "video": {
@@ -208,7 +208,7 @@
     },
     "teacher": {
       "eyebrow": "The teacher",
-      "name": "Oustaz Mouslih",
+      "name": "Oustaz Souleymane Diallo",
       "credentials": "Ijaza in recitation · Dakar",
       "bio": "Twelve years of teaching the Quran, trained in Cairo, personally corrects every recitation sent."
     },
@@ -577,7 +577,7 @@
         "corrections": "Corrections",
         "testimonials": "Testimonials"
       },
-      "adminName": "Oustaz Mouslih",
+      "adminName": "Oustaz Souleymane Diallo",
       "adminRole": "Teacher · admin"
     },
     "narrowScreen": {

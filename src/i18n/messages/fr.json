@@ -84,7 +84,7 @@
       "statPaymentLabel": "paiement en 30 s",
       "statPaymentLabelMobile": "en 30 s",
       "teacherPlaceholder": "Portrait de l'enseignant",
-      "teacherName": "Oustaz Mouslih",
+      "teacherName": "Oustaz Souleymane Diallo",
       "teacherCredentials": "Ijaza en récitation · 12 ans d'enseignement"
     },
     "video": {
@@ -208,7 +208,7 @@
     },
     "teacher": {
       "eyebrow": "L'enseignant",
-      "name": "Oustaz Mouslih",
+      "name": "Oustaz Souleymane Diallo",
       "credentials": "Ijaza en récitation · Dakar",
       "bio": "Douze ans d'enseignement du Coran, formé au Caire, corrige personnellement chaque récitation envoyée."
     },
@@ -577,7 +577,7 @@
         "corrections": "Corrections",
         "testimonials": "Témoignages"
       },
-      "adminName": "Oustaz Mouslih",
+      "adminName": "Oustaz Souleymane Diallo",
       "adminRole": "Formateur · admin"
     },
     "narrowScreen": {

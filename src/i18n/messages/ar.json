@@ -84,7 +84,7 @@
       "statPaymentLabel": "الدفع خلال 30 ثانية",
       "statPaymentLabelMobile": "خلال 30 ثانية",
       "teacherPlaceholder": "صورة الأستاذ",
-      "teacherName": "الأستاذ مصلح",
+      "teacherName": "الأستاذ سليمان جالو",
       "teacherCredentials": "إجازة في التلاوة · 12 عامًا من التدريس"
     },
     "video": {
@@ -208,7 +208,7 @@
     },
     "teacher": {
       "eyebrow": "الأستاذ",
-      "name": "الأستاذ مصلح",
+      "name": "الأستاذ سليمان جالو",
       "credentials": "إجازة في التلاوة · دكار",
       "bio": "اثنا عشر عامًا في تدريس القرآن، تكوّن في القاهرة، يصحّح شخصيًا كل تلاوة تُرسَل إليه."
     },
@@ -577,7 +577,7 @@
         "corrections": "التصحيحات",
         "testimonials": "آراء الطلاب"
       },
-      "adminName": "أستاذ مصلح",
+      "adminName": "الأستاذ سليمان جالو",
       "adminRole": "مُدرِّس · إدارة"
     },
     "narrowScreen": {
