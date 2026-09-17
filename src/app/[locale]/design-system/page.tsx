@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { BookOpen, Home, LayoutGrid, User } from "lucide-react";
 import { hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
@@ -218,6 +219,9 @@ interface DesignSystemPageProps {
 export default async function DesignSystemPage({
   params,
 }: DesignSystemPageProps) {
+  // Vitrine interne des composants (QA/dev) : jamais destinée aux visiteurs.
+  if (process.env.NODE_ENV === "production") notFound();
+
   const { locale: rawLocale } = await params;
   const locale = hasLocale(routing.locales, rawLocale)
     ? rawLocale

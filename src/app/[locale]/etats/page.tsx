@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { AlertCircle, BookOpen, Receipt, RefreshCcw, Search, ShieldAlert, WifiOff } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
@@ -35,6 +36,9 @@ function Frame({ label, children }: { label: string; children: React.ReactNode }
 }
 
 export default async function EtatsPage() {
+  // Référence interne pour QA/dev (galerie d'états transverses) : jamais destinée aux visiteurs.
+  if (process.env.NODE_ENV === "production") notFound();
+
   const [tCatalog, tError] = await Promise.all([
     getTranslations("catalog"),
     getTranslations("states"),

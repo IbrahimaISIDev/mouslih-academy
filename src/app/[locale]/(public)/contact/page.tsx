@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { BookOpen, Clock, MapPin, MessageCircle, MessageCircleQuestion, Mic, Smartphone } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Button } from "@/components/ui/button";
+import { buildFooterColumns } from "@/lib/footer-columns";
 import { PublicHeader } from "@/components/layout/public-header";
 import { Footer } from "@/components/layout/footer";
 import { GeometricPattern } from "@/components/patterns/geometric-pattern";
@@ -27,12 +28,9 @@ export default async function ContactPage() {
     { label: tNav("contact"), href: "/contact", active: true },
   ];
 
-  const footerColumns = (
-    tCommon.raw("footer.columns") as { title: string; items: string[] }[]
-  ).map((column) => ({
-    title: column.title,
-    links: column.items.map((label) => ({ label, href: "/" })),
-  }));
+  const footerColumns = buildFooterColumns(
+    tCommon.raw("footer.columns") as { title: string; items: string[] }[],
+  );
 
   return (
     <div className="pb-24 lg:pb-0">

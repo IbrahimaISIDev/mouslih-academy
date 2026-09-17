@@ -833,5 +833,180 @@
       "reload": "Reload the lesson",
       "report": "Report the issue"
     }
+  },
+  "legal": {
+    "nav": {
+      "terms": "Terms of use",
+      "refund": "Refund policy",
+      "privacy": "Privacy"
+    },
+    "terms": {
+      "metaTitle": "Terms of Use — Mouslih Academy",
+      "eyebrow": "Legal",
+      "title": "Terms of Use",
+      "lastUpdated": "Last updated: September 17, 2026",
+      "sections": [
+        {
+          "heading": "1. Purpose",
+          "body": [
+            "These terms govern access to and use of the Mouslih Academy platform, operated from Dakar, Senegal. By creating an account or purchasing a course, you accept these terms in full."
+          ]
+        },
+        {
+          "heading": "2. User account",
+          "body": [
+            "Creating an account is free and gives access to preview lessons, your progress, and your personalized corrections. You are responsible for keeping your password confidential and for all activity on your account. Please notify us immediately of any unauthorized access."
+          ]
+        },
+        {
+          "heading": "3. Access to courses",
+          "body": [
+            "Each course is sold as a one-time payment, with no subscription or automatic renewal. Purchase grants lifetime access, for strictly personal, non-transferable use: sharing credentials or reselling access is prohibited and may lead to account suspension."
+          ]
+        },
+        {
+          "heading": "4. Intellectual property",
+          "body": [
+            "All content (videos, text, PDF materials, audio corrections) is protected by copyright and remains the property of Mouslih Academy or its teachers. Any reproduction, distribution, or resale without written permission is prohibited."
+          ]
+        },
+        {
+          "heading": "5. Recitation correction",
+          "body": [
+            "Audio recordings submitted for correction are used exclusively for teaching purposes, by the teacher responsible for your course. The usual response time is 48 business hours."
+          ]
+        },
+        {
+          "heading": "6. Expected conduct",
+          "body": [
+            "You agree to use the platform respectfully toward others and in line with the academy's values, particularly in exchanges with teachers (lesson questions, WhatsApp)."
+          ]
+        },
+        {
+          "heading": "7. Liability",
+          "body": [
+            "Mouslih Academy does its best to ensure the service is available and of good quality, without guaranteeing uninterrupted availability. We cannot be held liable for indirect damages resulting from use of the platform."
+          ]
+        },
+        {
+          "heading": "8. Changes to these terms",
+          "body": [
+            "These terms may be updated; any substantial change will be communicated to you. Continuing to use the platform after a change constitutes acceptance."
+          ]
+        },
+        {
+          "heading": "9. Governing law",
+          "body": [
+            "These terms are governed by Senegalese law. Any dispute that cannot be resolved amicably falls under the jurisdiction of the competent courts of Dakar."
+          ]
+        },
+        {
+          "heading": "10. Contact",
+          "body": [
+            "For any question, write to us on WhatsApp — see the Contact page."
+          ]
+        }
+      ]
+    },
+    "refund": {
+      "metaTitle": "Refund Policy — Mouslih Academy",
+      "eyebrow": "Legal",
+      "title": "Refund Policy",
+      "lastUpdated": "Last updated: September 17, 2026",
+      "sections": [
+        {
+          "heading": "1. 7-day guarantee",
+          "body": [
+            "Every course is covered by a 7-day money-back guarantee from the date of purchase. If the content isn't right for you, we refund it in full, with no justification required."
+          ]
+        },
+        {
+          "heading": "2. How to request a refund",
+          "body": [
+            "Write to us on WhatsApp with your order reference, visible in your purchase history. We confirm the request within 48 business hours."
+          ]
+        },
+        {
+          "heading": "3. Refund timing and method",
+          "body": [
+            "The refund is made to the same Wave account used for payment, typically within 3 to 5 business days after confirmation."
+          ]
+        },
+        {
+          "heading": "4. After the 7-day window",
+          "body": [
+            "Beyond 7 days after purchase, no refund is possible; lifetime access to the course remains yours regardless."
+          ]
+        },
+        {
+          "heading": "5. Special cases",
+          "body": [
+            "A refund may be declined in case of clearly abusive use of the guarantee (for example, repeated requests after fully consuming several courses). A payment error (duplicate charge, incorrect amount) is handled separately and refunded promptly once identified."
+          ]
+        },
+        {
+          "heading": "6. Free or promotional access",
+          "body": [
+            "Access obtained for free or as part of a specific promotional offer is not covered by this guarantee, unless stated otherwise at the time of the offer."
+          ]
+        }
+      ]
+    },
+    "privacy": {
+      "metaTitle": "Privacy Policy — Mouslih Academy",
+      "eyebrow": "Legal",
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: September 17, 2026",
+      "sections": [
+        {
+          "heading": "1. Data we collect",
+          "body": [
+            "When you create an account or make a purchase, we collect: your name, email address, phone number (Wave account), city, your learning progress, and, if you submit them, your audio recitation recordings for correction."
+          ]
+        },
+        {
+          "heading": "2. Why we use it",
+          "body": [
+            "This data is used exclusively to provide the service: access to courses, progress tracking, personalized correction, payment processing, and WhatsApp support. We do not use it for any other commercial purpose."
+          ]
+        },
+        {
+          "heading": "3. Sharing with third parties",
+          "body": [
+            "Your payment data is processed by Wave Senegal, which applies its own security and privacy rules. Our technical hosting provider stores the data needed to run the platform. We do not sell or rent your data to third parties."
+          ]
+        },
+        {
+          "heading": "4. Retention",
+          "body": [
+            "Your data is kept for as long as your account is active. You may request deletion of your account and associated data at any time."
+          ]
+        },
+        {
+          "heading": "5. Your rights",
+          "body": [
+            "In accordance with Senegalese law n° 2008-12 on the protection of personal data, you have the right to access, rectify, and delete your data. To exercise it, contact us on WhatsApp."
+          ]
+        },
+        {
+          "heading": "6. Cookies",
+          "body": [
+            "We use a session cookie (to keep you signed in) and a language-preference cookie. No advertising or third-party tracking cookies are used."
+          ]
+        },
+        {
+          "heading": "7. Security",
+          "body": [
+            "Your passwords are stored encrypted. Access to the platform is protected by a secure connection. We limit access to your data to what is strictly necessary to run the service."
+          ]
+        },
+        {
+          "heading": "8. Contact",
+          "body": [
+            "For any question about your personal data, write to us on WhatsApp — see the Contact page."
+          ]
+        }
+      ]
+    }
   }
 }

@@ -833,5 +833,180 @@
       "reload": "Recharger la leçon",
       "report": "Signaler le problème"
     }
+  },
+  "legal": {
+    "nav": {
+      "terms": "Conditions d'utilisation",
+      "refund": "Politique de remboursement",
+      "privacy": "Confidentialité"
+    },
+    "terms": {
+      "metaTitle": "Conditions d'utilisation — Mouslih Academy",
+      "eyebrow": "Conditions générales",
+      "title": "Conditions d'utilisation",
+      "lastUpdated": "Dernière mise à jour : 17 septembre 2026",
+      "sections": [
+        {
+          "heading": "1. Objet",
+          "body": [
+            "Les présentes conditions régissent l'accès et l'utilisation de la plateforme Mouslih Academy, exploitée depuis Dakar, Sénégal. En créant un compte ou en achetant une formation, vous les acceptez pleinement et sans réserve."
+          ]
+        },
+        {
+          "heading": "2. Compte utilisateur",
+          "body": [
+            "La création d'un compte est gratuite et donne accès aux leçons d'aperçu, à votre progression et à vos corrections personnalisées. Vous êtes responsable de la confidentialité de votre mot de passe et de toute activité effectuée depuis votre compte. Signalez-nous immédiatement tout accès non autorisé."
+          ]
+        },
+        {
+          "heading": "3. Accès aux formations",
+          "body": [
+            "Chaque formation est vendue en paiement unique, sans abonnement ni reconduction automatique. L'achat donne un accès à vie, à usage strictement personnel et non transférable : le partage d'identifiants ou la revente d'accès sont interdits et peuvent entraîner la suspension du compte."
+          ]
+        },
+        {
+          "heading": "4. Propriété intellectuelle",
+          "body": [
+            "L'ensemble des contenus (vidéos, textes, supports PDF, corrections audio) est protégé par le droit d'auteur et reste la propriété de Mouslih Academy ou de ses formateurs. Toute reproduction, diffusion ou revente sans autorisation écrite est interdite."
+          ]
+        },
+        {
+          "heading": "5. Correction de récitation",
+          "body": [
+            "Les enregistrements audio envoyés pour correction sont utilisés exclusivement à des fins pédagogiques, par l'enseignant en charge de votre formation. Le délai de réponse habituel est de 48 heures ouvrées."
+          ]
+        },
+        {
+          "heading": "6. Comportement attendu",
+          "body": [
+            "Vous vous engagez à utiliser la plateforme dans le respect d'autrui et des valeurs de l'académie, notamment dans vos échanges avec les enseignants (questions de leçon, WhatsApp)."
+          ]
+        },
+        {
+          "heading": "7. Responsabilité",
+          "body": [
+            "Mouslih Academy met tout en œuvre pour assurer la disponibilité et la qualité du service, sans garantie de disponibilité ininterrompue. Notre responsabilité ne saurait être engagée pour un dommage indirect résultant de l'utilisation de la plateforme."
+          ]
+        },
+        {
+          "heading": "8. Modification des conditions",
+          "body": [
+            "Ces conditions peuvent être mises à jour ; toute modification substantielle vous sera communiquée. La poursuite de l'utilisation de la plateforme après modification vaut acceptation."
+          ]
+        },
+        {
+          "heading": "9. Droit applicable",
+          "body": [
+            "Les présentes conditions sont soumises au droit sénégalais. Tout litige relève, à défaut de résolution amiable, des juridictions compétentes de Dakar."
+          ]
+        },
+        {
+          "heading": "10. Contact",
+          "body": [
+            "Pour toute question, écrivez-nous sur WhatsApp — voir la page Contact."
+          ]
+        }
+      ]
+    },
+    "refund": {
+      "metaTitle": "Politique de remboursement — Mouslih Academy",
+      "eyebrow": "Conditions générales",
+      "title": "Politique de remboursement",
+      "lastUpdated": "Dernière mise à jour : 17 septembre 2026",
+      "sections": [
+        {
+          "heading": "1. Garantie 7 jours",
+          "body": [
+            "Chaque formation est couverte par une garantie satisfait ou remboursé de 7 jours à compter de la date d'achat. Si le contenu ne vous convient pas, nous vous remboursons intégralement, sans justification à fournir."
+          ]
+        },
+        {
+          "heading": "2. Comment demander un remboursement",
+          "body": [
+            "Écrivez-nous sur WhatsApp en indiquant la référence de votre commande, visible dans votre historique d'achats. Nous confirmons la demande sous 48 heures ouvrées."
+          ]
+        },
+        {
+          "heading": "3. Délai et moyen de remboursement",
+          "body": [
+            "Le remboursement est effectué sur le même compte Wave ayant servi au paiement, sous un délai habituel de 3 à 5 jours ouvrés après confirmation."
+          ]
+        },
+        {
+          "heading": "4. Passé le délai de 7 jours",
+          "body": [
+            "Au-delà de 7 jours après l'achat, aucun remboursement n'est possible ; l'accès à vie à la formation reste néanmoins acquis."
+          ]
+        },
+        {
+          "heading": "5. Cas particuliers",
+          "body": [
+            "Un remboursement peut être refusé en cas d'usage manifestement abusif de la garantie (par exemple des demandes répétées après consultation complète de plusieurs formations). Une erreur de paiement (débit en double, montant incorrect) est traitée séparément et remboursée sans délai particulier dès identification."
+          ]
+        },
+        {
+          "heading": "6. Formations offertes ou promotionnelles",
+          "body": [
+            "Les accès obtenus gratuitement ou dans le cadre d'une offre promotionnelle spécifique ne sont pas couverts par cette garantie, sauf mention contraire au moment de l'offre."
+          ]
+        }
+      ]
+    },
+    "privacy": {
+      "metaTitle": "Politique de confidentialité — Mouslih Academy",
+      "eyebrow": "Conditions générales",
+      "title": "Politique de confidentialité",
+      "lastUpdated": "Dernière mise à jour : 17 septembre 2026",
+      "sections": [
+        {
+          "heading": "1. Données que nous collectons",
+          "body": [
+            "Lors de la création d'un compte ou d'un achat, nous collectons : votre nom, votre adresse e-mail, votre numéro de téléphone (compte Wave), votre ville, ainsi que votre progression pédagogique et, si vous les envoyez, vos enregistrements audio de récitation pour correction."
+          ]
+        },
+        {
+          "heading": "2. Pourquoi nous les utilisons",
+          "body": [
+            "Ces données servent exclusivement à fournir le service : accès aux formations, suivi de votre progression, correction personnalisée, traitement des paiements et support via WhatsApp. Nous ne les utilisons à aucune autre fin commerciale."
+          ]
+        },
+        {
+          "heading": "3. Partage avec des tiers",
+          "body": [
+            "Vos données de paiement sont traitées par Wave Sénégal, qui applique ses propres règles de sécurité et de confidentialité. Notre hébergeur technique stocke les données nécessaires au fonctionnement de la plateforme. Nous ne vendons ni ne louons vos données à des tiers."
+          ]
+        },
+        {
+          "heading": "4. Conservation",
+          "body": [
+            "Vos données sont conservées tant que votre compte est actif. Vous pouvez demander la suppression de votre compte et des données associées à tout moment."
+          ]
+        },
+        {
+          "heading": "5. Vos droits",
+          "body": [
+            "Conformément à la loi sénégalaise n° 2008-12 sur la protection des données à caractère personnel, vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour l'exercer, contactez-nous sur WhatsApp."
+          ]
+        },
+        {
+          "heading": "6. Cookies",
+          "body": [
+            "Nous utilisons un cookie de session (pour rester connecté) et un cookie de préférence de langue. Aucun cookie publicitaire ou de suivi tiers n'est utilisé."
+          ]
+        },
+        {
+          "heading": "7. Sécurité",
+          "body": [
+            "Vos mots de passe sont stockés de façon chiffrée. L'accès à la plateforme est protégé par connexion sécurisée. Nous limitons l'accès à vos données au strict nécessaire pour faire fonctionner le service."
+          ]
+        },
+        {
+          "heading": "8. Contact",
+          "body": [
+            "Pour toute question relative à vos données personnelles, écrivez-nous sur WhatsApp — voir la page Contact."
+          ]
+        }
+      ]
+    }
   }
 }

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
-import { useRouter } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import { signupSchema, type SignupFormValues } from "@/features/auth/schemas";
 import { signup } from "@/features/auth/api/signup";
 import { getPasswordStrength } from "@/features/auth/password-strength";
@@ -190,13 +190,21 @@ function SignupForm() {
             />
             <label className="text-sm leading-[1.55] text-text-soft">
               {t("termsPrefix")}{" "}
-              <span className="font-semibold text-green-ink">
+              <Link
+                href="/conditions-utilisation"
+                target="_blank"
+                className="rounded-sm font-semibold text-green-ink outline-none hover:underline focus-visible:shadow-[0_0_0_3px_var(--color-focus-ring)]"
+              >
                 {t("termsLink1")}
-              </span>{" "}
+              </Link>{" "}
               {t("termsMiddle")}{" "}
-              <span className="font-semibold text-green-ink">
+              <Link
+                href="/confidentialite"
+                target="_blank"
+                className="rounded-sm font-semibold text-green-ink outline-none hover:underline focus-visible:shadow-[0_0_0_3px_var(--color-focus-ring)]"
+              >
                 {t("termsLink2")}
-              </span>
+              </Link>
               .
             </label>
           </div>

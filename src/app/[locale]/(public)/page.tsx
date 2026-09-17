@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/lib/types";
 import { formatPrice, formatTotalDuration } from "@/lib/format";
+import { buildFooterColumns } from "@/lib/footer-columns";
 import { getCourses } from "@/features/catalog/api/get-courses";
 import { getTestimonials } from "@/features/catalog/api/get-testimonials";
 
@@ -59,12 +60,9 @@ export default async function HomePage({ params }: HomePageProps) {
     { label: tNav("contact"), href: "/contact" },
   ];
 
-  const footerColumns = (
-    tCommon.raw("footer.columns") as { title: string; items: string[] }[]
-  ).map((column) => ({
-    title: column.title,
-    links: column.items.map((label) => ({ label, href: "/" })),
-  }));
+  const footerColumns = buildFooterColumns(
+    tCommon.raw("footer.columns") as { title: string; items: string[] }[],
+  );
 
   return (
     <div className="pb-24 lg:pb-0">

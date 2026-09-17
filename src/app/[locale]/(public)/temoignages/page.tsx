@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/lib/types";
 import { getCourses } from "@/features/catalog/api/get-courses";
 import { getTestimonials } from "@/features/catalog/api/get-testimonials";
+import { buildFooterColumns } from "@/lib/footer-columns";
 import { TestimonialsBrowser } from "@/features/catalog/components/testimonials-browser";
 import { PublicHeader } from "@/components/layout/public-header";
 import { Footer } from "@/components/layout/footer";
@@ -42,12 +43,9 @@ export default async function TemoignagesPage({
     { label: tNav("contact"), href: "/contact" },
   ];
 
-  const footerColumns = (
-    tCommon.raw("footer.columns") as { title: string; items: string[] }[]
-  ).map((column) => ({
-    title: column.title,
-    links: column.items.map((label) => ({ label, href: "/" })),
-  }));
+  const footerColumns = buildFooterColumns(
+    tCommon.raw("footer.columns") as { title: string; items: string[] }[],
+  );
 
   return (
     <div className="pb-24 lg:pb-0">
