@@ -9,6 +9,7 @@ import { signupSchema, type SignupFormValues } from "@/features/auth/schemas";
 import { signup } from "@/features/auth/api/signup";
 import { getPasswordStrength } from "@/features/auth/password-strength";
 import { cn } from "@/lib/utils";
+import { safeRedirectPath } from "@/lib/safe-redirect";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,7 +18,11 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { PasswordInput } from "@/components/patterns/password-input";
 import { FieldError } from "@/components/patterns/field-error";
 
-function SignupForm() {
+export interface SignupFormProps {
+  redirectTo?: string;
+}
+
+function SignupForm({ redirectTo }: SignupFormProps) {
   const t = useTranslations("auth.signup");
   const tStrength = useTranslations("auth.passwordStrength");
   const router = useRouter();
@@ -64,7 +69,7 @@ function SignupForm() {
 
   async function onSubmit(values: SignupFormValues) {
     await signup(signupSchema.parse(values));
-    router.push("/tableau-de-bord");
+    router.push(safeRedirectPath(redirectTo) ?? "/tableau-de-bord");
   }
 
   return (

@@ -8,6 +8,7 @@ import { useRouter } from "@/i18n/navigation";
 import { Link } from "@/i18n/navigation";
 import { loginSchema, type LoginFormValues } from "@/features/auth/schemas";
 import { login } from "@/features/auth/api/login";
+import { safeRedirectPath } from "@/lib/safe-redirect";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,7 +18,11 @@ import { PasswordInput } from "@/components/patterns/password-input";
 import { FieldError } from "@/components/patterns/field-error";
 import { Alert } from "@/components/patterns/alert";
 
-function LoginForm() {
+export interface LoginFormProps {
+  redirectTo?: string;
+}
+
+function LoginForm({ redirectTo }: LoginFormProps) {
   const t = useTranslations("auth.login");
   const router = useRouter();
   const [serverError, setServerError] = useState(false);
@@ -38,7 +43,7 @@ function LoginForm() {
     setServerError(false);
     try {
       await login(values);
-      router.push("/tableau-de-bord");
+      router.push(safeRedirectPath(redirectTo) ?? "/tableau-de-bord");
     } catch {
       setServerError(true);
     }

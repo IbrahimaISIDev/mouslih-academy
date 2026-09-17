@@ -12,11 +12,17 @@ export const metadata: Metadata = {
 
 const WHATSAPP_URL = "https://wa.me/221770000000";
 
-export default async function InscriptionPage() {
-  const [t, tSide] = await Promise.all([
+interface InscriptionPageProps {
+  searchParams: Promise<{ redirect?: string }>;
+}
+
+export default async function InscriptionPage({ searchParams }: InscriptionPageProps) {
+  const [{ redirect }, t, tSide] = await Promise.all([
+    searchParams,
     getTranslations("auth.signup"),
     getTranslations("auth.sidePanel"),
   ]);
+  const loginHref = redirect ? `/connexion?redirect=${encodeURIComponent(redirect)}` : "/connexion";
 
   return (
     <div className="lg:grid lg:min-h-[720px] lg:grid-cols-2">
@@ -39,12 +45,12 @@ export default async function InscriptionPage() {
           </h1>
           <p className="mb-6 text-[15px] text-text-muted lg:mb-7 lg:text-base">
             {t("formSubPrefix")}{" "}
-            <Link href="/connexion" className="font-semibold text-green-ink">
+            <Link href={loginHref} className="font-semibold text-green-ink">
               {t("formSwitchLabel")}
             </Link>
           </p>
 
-          <SignupForm />
+          <SignupForm redirectTo={redirect} />
         </div>
 
         <AuthHelpLine

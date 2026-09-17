@@ -10,11 +10,17 @@ export const metadata: Metadata = { title: "Connexion — Mouslih Academy" };
 
 const WHATSAPP_URL = "https://wa.me/221770000000";
 
-export default async function ConnexionPage() {
-  const [t, tSide] = await Promise.all([
+interface ConnexionPageProps {
+  searchParams: Promise<{ redirect?: string }>;
+}
+
+export default async function ConnexionPage({ searchParams }: ConnexionPageProps) {
+  const [{ redirect }, t, tSide] = await Promise.all([
+    searchParams,
     getTranslations("auth.login"),
     getTranslations("auth.sidePanel"),
   ]);
+  const signupHref = redirect ? `/inscription?redirect=${encodeURIComponent(redirect)}` : "/inscription";
 
   return (
     <div className="lg:grid lg:min-h-[720px] lg:grid-cols-2">
@@ -37,12 +43,12 @@ export default async function ConnexionPage() {
           </h1>
           <p className="mb-6 text-[15px] text-text-muted lg:mb-7 lg:text-base">
             {t("formSubPrefix")}{" "}
-            <Link href="/inscription" className="font-semibold text-green-ink">
+            <Link href={signupHref} className="font-semibold text-green-ink">
               {t("formSwitchLabel")}
             </Link>
           </p>
 
-          <LoginForm />
+          <LoginForm redirectTo={redirect} />
         </div>
 
         <AuthHelpLine

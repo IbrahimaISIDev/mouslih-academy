@@ -34,8 +34,16 @@ export default function middleware(request: NextRequest) {
   if (isProtected && !request.cookies.get(SESSION_COOKIE)) {
     const localeMatch = /^\/([a-z]{2})(\/|$)/.exec(request.nextUrl.pathname);
     const locale = localeMatch?.[1] ?? routing.defaultLocale;
-    const loginUrl = new URL(`/${locale}/connexion`, request.url);
-    return NextResponse.redirect(loginUrl);
+    // Un achat interrompu par une redirection vers /connexion perdrait le visiteur qui n'a pas
+    // encore de compte : on l'envoie créer un compte d'abord, /connexion restant le chemin par
+    // défaut pour les autres pages protégées (reprise de leçon, profil...).
+    const isCheckout = /^\/commande(\/|$)/.test(pathWithoutLocale);
+    const destination = isCheckout ? "inscription" : "connexion";
+    const authUrl = new URL(`/${locale}/${destination}`, request.url);
+    // Sans préfixe de locale : router.push (next-intl) le rajoute lui-même, un chemin qui
+    // l'inclut déjà donnerait /fr/fr/commande/... une fois poussé après connexion/inscription.
+    authUrl.searchParams.set("redirect", pathWithoutLocale + request.nextUrl.search);
+    return NextResponse.redirect(authUrl);
   }
 
   return intlMiddleware(request);
