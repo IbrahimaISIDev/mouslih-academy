@@ -42,8 +42,12 @@ function LoginForm({ redirectTo }: LoginFormProps) {
   async function onSubmit(values: LoginFormValues) {
     setServerError(false);
     try {
-      await login(values);
-      router.push(safeRedirectPath(redirectTo) ?? "/tableau-de-bord");
+      const { role } = await login(values);
+      // Un admin qui se connecte (page normale ou /admin/connexion) atterrit directement sur
+      // son espace, jamais sur le tableau de bord apprenant — sauf redirection explicite déjà en
+      // cours (ex. reprise d'une page /admin/* protégée par le middleware).
+      const fallback = role === "ADMIN" ? "/admin" : "/tableau-de-bord";
+      router.push(safeRedirectPath(redirectTo) ?? fallback);
     } catch {
       setServerError(true);
     }

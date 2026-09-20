@@ -567,6 +567,12 @@
     }
   },
   "admin": {
+    "login": {
+      "pageTitle": "Connexion administration — Mouslih Academy",
+      "badge": "Administration",
+      "heading": "Espace administration",
+      "description": "Réservé à l'équipe Mouslih Academy."
+    },
     "sidebar": {
       "wordmark": "Mouslih Academy",
       "subtitle": "Administration",

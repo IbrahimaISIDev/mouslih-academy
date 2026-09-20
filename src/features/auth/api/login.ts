@@ -5,11 +5,12 @@ import { apiFetch, USE_MOCKS } from "@/lib/api-client";
 import { setSession } from "@/lib/session";
 import { aminata } from "@/mocks/learner";
 import type { LoginFormValues } from "@/features/auth/schemas";
+import type { UserRole } from "@/lib/types";
 
 interface AuthTokens {
   accessToken: string;
   refreshToken: string;
-  user: { id: string };
+  user: { id: string; role: UserRole };
 }
 
 /**
@@ -20,7 +21,7 @@ interface AuthTokens {
  */
 export async function login(
   values: LoginFormValues,
-): Promise<{ userId: string }> {
+): Promise<{ userId: string; role: UserRole }> {
   if (!USE_MOCKS) {
     const data = await apiFetch<AuthTokens>("/api/auth/login", {
       method: "POST",
@@ -31,7 +32,7 @@ export async function login(
       refreshToken: data.refreshToken,
       userId: data.user.id,
     });
-    return { userId: data.user.id };
+    return { userId: data.user.id, role: data.user.role };
   }
 
   await sleep(400);
@@ -44,5 +45,5 @@ export async function login(
   }
 
   await setSession({ accessToken: "mock", refreshToken: "mock", userId: aminata.id });
-  return { userId: aminata.id };
+  return { userId: aminata.id, role: "LEARNER" };
 }

@@ -4,6 +4,7 @@ export type LessonState =
   "completed" | "current" | "upcoming" | "locked" | "free";
 export type OrderStatus = "paid" | "pending" | "failed" | "refunded";
 export type CourseStatus = "draft" | "published";
+export type UserRole = "LEARNER" | "TEACHER" | "ADMIN";
 
 /** Champ traduisible : toujours les 3 langues, la locale manquante retombe sur 'fr'. */
 export type I18nText = Record<Locale, string>;

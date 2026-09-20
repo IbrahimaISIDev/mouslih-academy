@@ -19,6 +19,11 @@ const PROTECTED_PATTERNS = [
   /^\/admin(\/|$)/,
 ];
 
+/** Page de connexion dédiée à l'espace admin — publique, à exclure explicitement de
+ * PROTECTED_PATTERNS (qui la matcherait sinon via /^\/admin(\/|$)/, provoquant une boucle de
+ * redirection puisqu'elle serait sa propre destination de connexion). */
+const ADMIN_LOGIN_PATTERN = /^\/admin\/connexion(\/|$)/;
+
 function stripLocalePrefix(pathname: string): string {
   const match = /^\/([a-z]{2})(\/|$)/.exec(pathname);
   if (match && routing.locales.includes(match[1] as (typeof routing.locales)[number])) {
@@ -29,16 +34,21 @@ function stripLocalePrefix(pathname: string): string {
 
 export default function middleware(request: NextRequest) {
   const pathWithoutLocale = stripLocalePrefix(request.nextUrl.pathname);
-  const isProtected = PROTECTED_PATTERNS.some((pattern) => pattern.test(pathWithoutLocale));
+  const isProtected =
+    PROTECTED_PATTERNS.some((pattern) => pattern.test(pathWithoutLocale)) &&
+    !ADMIN_LOGIN_PATTERN.test(pathWithoutLocale);
 
   if (isProtected && !request.cookies.get(SESSION_COOKIE)) {
     const localeMatch = /^\/([a-z]{2})(\/|$)/.exec(request.nextUrl.pathname);
     const locale = localeMatch?.[1] ?? routing.defaultLocale;
     // Un achat interrompu par une redirection vers /connexion perdrait le visiteur qui n'a pas
     // encore de compte : on l'envoie créer un compte d'abord, /connexion restant le chemin par
-    // défaut pour les autres pages protégées (reprise de leçon, profil...).
+    // défaut pour les autres pages protégées (reprise de leçon, profil...). Une page /admin/*
+    // renvoie vers sa propre page de connexion dédiée, pas la générale — l'espace admin ne doit
+    // rien partager avec le parcours apprenant.
+    const isAdmin = /^\/admin(\/|$)/.test(pathWithoutLocale);
     const isCheckout = /^\/commande(\/|$)/.test(pathWithoutLocale);
-    const destination = isCheckout ? "inscription" : "connexion";
+    const destination = isAdmin ? "admin/connexion" : isCheckout ? "inscription" : "connexion";
     const authUrl = new URL(`/${locale}/${destination}`, request.url);
     // Sans préfixe de locale : router.push (next-intl) le rajoute lui-même, un chemin qui
     // l'inclut déjà donnerait /fr/fr/commande/... une fois poussé après connexion/inscription.
