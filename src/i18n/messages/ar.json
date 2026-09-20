@@ -167,6 +167,7 @@
       "previewCaption": "معاينة مجانية · الدرس 1",
       "paymentNote": "دفعة واحدة · وصول مدى الحياة",
       "buyButton": "اشترِ عبر Wave",
+      "ownedButton": "متابعة الدورة",
       "questionButton": "اطرح سؤالاً",
       "questionButtonMobile": "لديك سؤال؟ راسلنا",
       "included": [
@@ -226,7 +227,8 @@
     },
     "stickyCta": {
       "lifetimeLabel": "وصول مدى الحياة",
-      "buyButton": "اشترِ عبر Wave"
+      "buyButton": "اشترِ عبر Wave",
+      "ownedButton": "متابعة الدورة"
     }
   },
   "auth": {

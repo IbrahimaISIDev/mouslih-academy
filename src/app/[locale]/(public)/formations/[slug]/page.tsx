@@ -16,6 +16,9 @@ import type { Locale } from "@/lib/types";
 import { formatDuration, formatPrice, formatTotalDuration } from "@/lib/format";
 import { getCourse } from "@/features/catalog/api/get-course";
 import { getLessonState } from "@/features/learning/get-lesson-state";
+import { getSession } from "@/lib/session";
+import { backendFetch } from "@/lib/backend-fetch";
+import { USE_MOCKS } from "@/lib/use-mocks";
 import type { CurriculumModule } from "@/components/patterns/curriculum-accordion";
 import { CourseCurriculum } from "@/features/catalog/components/course-curriculum";
 
@@ -27,6 +30,40 @@ import { GeometricPattern } from "@/components/patterns/geometric-pattern";
 import { StickyCta } from "@/components/patterns/sticky-cta";
 
 const WHATSAPP_URL = "https://wa.me/221770000000";
+
+/**
+ * Vérification d'appartenance "douce" : cette page reste publique (visiteurs anonymes inclus),
+ * donc on ne peut pas passer par apiFetch (qui redirige vers /connexion sur un 401 — correct
+ * pour une page protégée, mais pas ici). On parle directement à backendFetch et on retombe sur
+ * "non possédée" au moindre souci (pas de session, jeton mort, erreur réseau...).
+ */
+async function isCourseOwnedByCurrentUser(courseId: string): Promise<boolean> {
+  if (USE_MOCKS) return false;
+
+  const session = await getSession();
+  if (!session) return false;
+
+  try {
+    const response = await backendFetch("/api/me/enrollments");
+    if (!response.ok) return false;
+    const enrollments = (await response.json()) as { courseId: string }[];
+    return enrollments.some((e) => e.courseId === courseId);
+  } catch {
+    return false;
+  }
+}
+
+function firstLessonSlug(course: {
+  modules: { subModules: { lessons: { slug: string }[] }[] }[];
+}): string | null {
+  for (const courseModule of course.modules) {
+    for (const subModule of courseModule.subModules) {
+      const lesson = subModule.lessons[0];
+      if (lesson) return lesson.slug;
+    }
+  }
+  return null;
+}
 
 interface CourseDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -64,8 +101,13 @@ export default async function CourseDetailPage({
   const course = await getCourse(slug);
   if (!course) notFound();
 
-  // Non achetée par défaut ; l'authentification (PROMPT-03) déterminera cette valeur.
-  const isPurchased = false;
+  const isPurchased = await isCourseOwnedByCurrentUser(course.id);
+  const ownedLessonHref = isPurchased
+    ? (() => {
+        const slug = firstLessonSlug(course);
+        return slug ? `/formations/${course.slug}/lecons/${slug}` : `/formations/${course.slug}`;
+      })()
+    : null;
 
   const [t, tNav, tCommon, tCatalog] = await Promise.all([
     getTranslations("course"),
@@ -283,11 +325,19 @@ export default async function CourseDetailPage({
                 <div className="mb-5 text-sm text-text-muted">
                   {t("purchaseCard.paymentNote")}
                 </div>
-                <Button size="lg" className="mb-2.5 w-full" asChild>
-                  <Link href={`/commande/${course.slug}`}>
-                    {t("purchaseCard.buyButton")}
-                  </Link>
-                </Button>
+                {isPurchased ? (
+                  <Button size="lg" className="mb-2.5 w-full" asChild>
+                    <Link href={ownedLessonHref!}>
+                      {t("purchaseCard.ownedButton")}
+                    </Link>
+                  </Button>
+                ) : (
+                  <Button size="lg" className="mb-2.5 w-full" asChild>
+                    <Link href={`/commande/${course.slug}`}>
+                      {t("purchaseCard.buyButton")}
+                    </Link>
+                  </Button>
+                )}
                 <a
                   href={WHATSAPP_URL}
                   target="_blank"
@@ -471,8 +521,8 @@ export default async function CourseDetailPage({
         price={formatPrice(course.priceXof, locale)}
         action={
           <Button className="w-full" asChild>
-            <Link href={`/commande/${course.slug}`}>
-              {t("stickyCta.buyButton")}
+            <Link href={isPurchased ? ownedLessonHref! : `/commande/${course.slug}`}>
+              {isPurchased ? t("stickyCta.ownedButton") : t("stickyCta.buyButton")}
             </Link>
           </Button>
         }

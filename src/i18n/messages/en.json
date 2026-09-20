@@ -167,6 +167,7 @@
       "previewCaption": "Free preview · lesson 1",
       "paymentNote": "One-time payment · lifetime access",
       "buyButton": "Buy with Wave",
+      "ownedButton": "Continue the course",
       "questionButton": "Ask a question",
       "questionButtonMobile": "A question? Write to us",
       "included": [
@@ -226,7 +227,8 @@
     },
     "stickyCta": {
       "lifetimeLabel": "Lifetime access",
-      "buyButton": "Buy with Wave"
+      "buyButton": "Buy with Wave",
+      "ownedButton": "Continue the course"
     }
   },
   "auth": {
