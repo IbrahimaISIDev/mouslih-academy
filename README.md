@@ -4,8 +4,11 @@ Plateforme e-learning islamique sénégalaise (Coran, Tajwid, sciences islamique
 Wave, multilingue français / anglais / arabe avec RTL réel.
 
 Ce dépôt contient le **frontend Next.js**, livré avec des données de démonstration
-(`src/mocks/`). Le backend n'existe pas encore ; voir [`BACKEND.md`](./BACKEND.md) pour les
-contrats d'API attendus et le mécanisme de bascule.
+(`src/mocks/`) et un point de bascule vers l'API réelle
+([mouslih-academy-backend](https://github.com/IbrahimaISIDev/mouslih-academy-backend)) ; voir
+[`BACKEND.md`](./BACKEND.md) pour les contrats d'API et le mécanisme de bascule.
+
+Pour déployer en production (Vercel), voir [`DEPLOYMENT.md`](./DEPLOYMENT.md).
 
 ## Installation
 
