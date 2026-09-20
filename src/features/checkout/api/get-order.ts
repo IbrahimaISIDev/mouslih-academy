@@ -1,5 +1,5 @@
 import { sleep } from "@/lib/sleep";
-import { apiFetch, USE_MOCKS } from "@/lib/api-client";
+import { ApiError, apiFetch, USE_MOCKS } from "@/lib/api-client";
 import type { Order } from "@/lib/types";
 import { orders } from "@/mocks/orders";
 
@@ -10,8 +10,11 @@ export async function getOrder(ref: string): Promise<Order | null> {
   if (!USE_MOCKS) {
     try {
       return await apiFetch<Order>(`/api/orders/${ref}`);
-    } catch {
-      return null;
+    } catch (error) {
+      // Laisse remonter tout ce qui n'est pas une erreur métier attendue (404 introuvable,
+      // notamment) — en particulier la redirection interne déclenchée par apiFetch sur un 401.
+      if (error instanceof ApiError) return null;
+      throw error;
     }
   }
 

@@ -35,7 +35,6 @@ export default async function ProfilePage({
 
   const learnerNavItems = [
     { label: tNav("dashboard"), href: "/tableau-de-bord" },
-    { label: tNav("myCourses"), href: "/tableau-de-bord" },
     { label: tNav("catalog"), href: "/formations" },
   ];
 

@@ -39,10 +39,14 @@ export async function backendFetch(path: string, init?: RequestInit): Promise<Re
   if (response.status === 401 && session) {
     const refreshed = await refreshSession(session.refreshToken);
     if (refreshed) {
-      await setSession(refreshed);
+      // Persistance best-effort : depuis un Server Component (rendu de page), Next.js interdit
+      // l'écriture de cookies (réservée aux Server Actions / Route Handlers). Le jeton rafraîchi
+      // sert quand même à la requête en cours ; la persistance aboutira au prochain appel passant
+      // par le proxy /api/backend (Route Handler) ou une Server Action.
+      await setSession(refreshed).catch(() => {});
       response = await fetch(`${API_BASE_URL}${path}`, withAuth(refreshed.accessToken));
     } else {
-      await clearSession();
+      await clearSession().catch(() => {});
     }
   }
 

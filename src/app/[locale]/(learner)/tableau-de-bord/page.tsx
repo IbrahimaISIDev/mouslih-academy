@@ -54,7 +54,6 @@ export default async function DashboardPage({
 
   const learnerNavItems = [
     { label: tNav("dashboard"), href: "/tableau-de-bord", active: true },
-    { label: tNav("myCourses"), href: "/tableau-de-bord" },
     { label: tNav("catalog"), href: "/formations" },
   ];
 
