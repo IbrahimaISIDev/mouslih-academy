@@ -5,6 +5,7 @@ import { adminUsers } from "@/mocks/admin-users";
 import { recentSignups } from "@/mocks/admin-recent-signups";
 
 export interface AdminRecentSignup {
+  id: string;
   name: string;
   initials: string;
   city: string;
@@ -24,6 +25,7 @@ export async function getRecentSignups(): Promise<AdminRecentSignup[]> {
     if (!user) return [];
     return [
       {
+        id: user.id,
         name: user.name,
         initials: getInitials(user.name),
         city: user.city,

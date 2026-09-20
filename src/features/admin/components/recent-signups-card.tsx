@@ -1,4 +1,5 @@
 export interface RecentSignup {
+  id: string;
   name: string;
   initials: string;
   city: string;
@@ -16,7 +17,7 @@ function RecentSignupsCard({ title, signups }: RecentSignupsCardProps) {
       <p className="mb-4.5 text-xs font-semibold tracking-[0.14em] text-text-muted uppercase">{title}</p>
       <div className="flex flex-col gap-3.5">
         {signups.map((signup) => (
-          <div key={signup.name} className="flex items-center gap-2.5">
+          <div key={signup.id} className="flex items-center gap-2.5">
             <span className="grid size-8 shrink-0 place-items-center rounded-full bg-green-100 font-serif text-[13px] text-green-ink">
               {signup.initials}
             </span>

@@ -182,6 +182,7 @@ export default async function AdminDashboardPage({ params, searchParams }: Admin
               <RecentSignupsCard
                 title={t("recentSignups.title")}
                 signups={recentSignups.map((s) => ({
+                  id: s.id,
                   name: s.name,
                   initials: s.initials,
                   city: s.city,
