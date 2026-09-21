@@ -1,6 +1,6 @@
 "use server";
 
-import { redirect } from "@/i18n/navigation";
+import { redirect } from "next/navigation";
 import { USE_MOCKS } from "@/lib/api-client";
 import { clearSession, getSession } from "@/lib/session";
 import type { Locale } from "@/lib/types";
@@ -22,5 +22,5 @@ export async function logout(locale: Locale): Promise<void> {
   }
 
   await clearSession();
-  redirect({ href: "/connexion", locale });
+  redirect(`/${locale}/connexion`);
 }
