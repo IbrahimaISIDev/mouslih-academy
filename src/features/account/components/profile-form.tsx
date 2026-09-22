@@ -3,7 +3,6 @@
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { parsePhoneNumber } from "libphonenumber-js";
 import type { LearnerProfile } from "@/mocks/learner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -31,20 +30,10 @@ function ProfileForm({ profile }: { profile: LearnerProfile }) {
       firstName: profile.firstName,
       lastName: profile.lastName,
       email: profile.email,
-      phone: formatPhoneNumber(profile.phone),
+      phone: profile.phone || "",
       city: profile.city,
     },
   });
-
-  function formatPhoneNumber(phone: string): string {
-    if (!phone) return "";
-    try {
-      const phoneNumber = parsePhoneNumber(phone);
-      return phoneNumber ? phoneNumber.formatInternational() : phone;
-    } catch {
-      return phone;
-    }
-  }
 
   async function onSubmit() {
     await new Promise((resolve) => setTimeout(resolve, 400));

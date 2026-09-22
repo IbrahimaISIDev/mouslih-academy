@@ -1,5 +1,7 @@
 import { z } from "zod";
-import { parsePhoneNumber } from "libphonenumber-js";
+
+// E.164 format: +[country code][number] - starts with +, followed by 10-15 digits
+const E164_REGEX = /^\+[1-9]\d{1,14}$/;
 
 export const loginSchema = z.object({
   email: z.string().email("Format d'e-mail invalide"),
@@ -15,18 +17,8 @@ export const signupSchema = z.object({
   email: z.string().email("Format d'e-mail invalide"),
   phone: z
     .string()
-    .refine(
-      (value) => {
-        if (!value) return false;
-        try {
-          const phoneNumber = parsePhoneNumber(value);
-          return phoneNumber && phoneNumber.isValid();
-        } catch {
-          return false;
-        }
-      },
-      { message: "Numéro de téléphone invalide" },
-    ),
+    .min(1, "Numéro de téléphone requis")
+    .regex(E164_REGEX, "Format de numéro invalide (ex: +221771234567)"),
   password: z.string().min(8, "8 caractères minimum"),
   acceptTerms: z.boolean().refine((value) => value === true, {
     error: "Vous devez accepter les conditions pour continuer",
