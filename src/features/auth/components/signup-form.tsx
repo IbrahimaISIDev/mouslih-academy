@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
@@ -10,7 +11,12 @@ import { signup } from "@/features/auth/api/signup";
 import { getPasswordStrength } from "@/features/auth/password-strength";
 import { cn } from "@/lib/utils";
 import { safeRedirectPath } from "@/lib/safe-redirect";
-import PhoneInput from "react-phone-number-input";
+
+const PhoneInput = dynamic(() => import("react-phone-number-input"), {
+  ssr: false,
+  loading: () => <div className="h-11 animate-pulse bg-border-subtle rounded-sm" />,
+});
+
 import "react-phone-number-input/style.css";
 
 import { Button } from "@/components/ui/button";
