@@ -1,6 +1,5 @@
 import { z } from "zod";
-
-const SENEGAL_PHONE_REGEX = /^(77|78|76|70)\d{7}$/;
+import { parsePhoneNumber } from "libphonenumber-js";
 
 export const loginSchema = z.object({
   email: z.string().email("Format d'e-mail invalide"),
@@ -16,14 +15,17 @@ export const signupSchema = z.object({
   email: z.string().email("Format d'e-mail invalide"),
   phone: z
     .string()
-    .transform((value) => value.replace(/\s+/g, ""))
-    .pipe(
-      z
-        .string()
-        .regex(
-          SENEGAL_PHONE_REGEX,
-          "Numéro sénégalais attendu (77, 78, 76, 70)",
-        ),
+    .refine(
+      (value) => {
+        if (!value) return false;
+        try {
+          const phoneNumber = parsePhoneNumber(value);
+          return phoneNumber && phoneNumber.isValid();
+        } catch {
+          return false;
+        }
+      },
+      { message: "Numéro de téléphone invalide" },
     ),
   password: z.string().min(8, "8 caractères minimum"),
   acceptTerms: z.boolean().refine((value) => value === true, {

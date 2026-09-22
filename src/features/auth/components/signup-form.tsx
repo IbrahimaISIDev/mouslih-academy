@@ -10,6 +10,8 @@ import { signup } from "@/features/auth/api/signup";
 import { getPasswordStrength } from "@/features/auth/password-strength";
 import { cn } from "@/lib/utils";
 import { safeRedirectPath } from "@/lib/safe-redirect";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -124,24 +126,30 @@ function SignupForm({ redirectTo }: SignupFormProps) {
         <Label htmlFor="signup-phone" className="mb-2 block">
           {t("phoneLabel")}
         </Label>
-        <div
-          className={cn(
-            "flex h-11 items-center gap-2.5 rounded-sm border border-border-strong bg-surface px-3.5 transition-colors focus-within:border-green-700 focus-within:shadow-[0_0_0_3px_var(--color-focus-ring)]",
-            errors.phone && "border-error bg-error-field-bg",
+        <Controller
+          control={control}
+          name="phone"
+          render={({ field }) => (
+            <PhoneInput
+              id="signup-phone"
+              international
+              defaultCountry="SN"
+              placeholder={t("phonePlaceholder")}
+              value={field.value}
+              onChange={field.onChange}
+              className={cn(
+                "flex h-11 items-center rounded-sm border border-border-strong bg-surface px-3.5 transition-colors focus-within:border-green-700 focus-within:shadow-[0_0_0_3px_var(--color-focus-ring)]",
+                errors.phone && "border-error bg-error-field-bg",
+              )}
+              countrySelectProps={{
+                className: "text-[15px]",
+              }}
+              inputProps={{
+                className: "w-full flex-1 bg-transparent text-[15px] text-text outline-none placeholder:text-text-faint",
+              }}
+            />
           )}
-        >
-          <span className="text-[15px] text-text-muted">+221</span>
-          <span className="h-4.5 w-px bg-border-subtle" />
-          <input
-            id="signup-phone"
-            type="tel"
-            autoComplete="tel-national"
-            placeholder={t("phonePlaceholder")}
-            aria-invalid={!!errors.phone}
-            className="w-full flex-1 bg-transparent text-[15px] text-text outline-none placeholder:text-text-faint"
-            {...register("phone")}
-          />
-        </div>
+        />
         <FieldError message={errors.phone?.message} />
         {!errors.phone && (
           <p className="mt-1.5 text-[13px] text-text-muted">{t("phoneHelp")}</p>
