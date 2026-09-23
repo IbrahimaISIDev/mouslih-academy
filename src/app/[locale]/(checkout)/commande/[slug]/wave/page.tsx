@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import type { Locale } from "@/lib/types";
 import { formatPrice } from "@/lib/format";
 import { getCourse } from "@/features/catalog/api/get-course";
@@ -16,8 +16,16 @@ export default async function WaveRedirectPage({ params }: WaveRedirectPageProps
   const { locale: rawLocale, slug } = await params;
   const locale = rawLocale as Locale;
 
-  const [course, profile] = await Promise.all([getCourse(slug), getProfile()]);
+  const [course, profile] = await Promise.all([
+    getCourse(slug),
+    getProfile().catch(() => null),
+  ]);
   if (!course) notFound();
+
+  // Redirect to signup if not authenticated
+  if (!profile) {
+    redirect(`/inscription?redirect=/commande/${course.slug}`);
+  }
 
   return (
     <WaveRedirectView

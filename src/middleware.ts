@@ -6,7 +6,7 @@ const intlMiddleware = createMiddleware(routing);
 
 const SESSION_COOKIE = "mouslih_session";
 
-/** Groupes de routes protégées (learner)/(checkout)/admin — comparées au chemin sans préfixe
+/** Groupes de routes protégées (learner)/(admin) — comparées au chemin sans préfixe
  * de locale. Une vérification de présence de cookie seulement (pas de la signature du JWT :
  * ça nécessiterait une lib compatible Edge) ; une session invalide/expirée est de toute façon
  * rejetée par l'API au premier appel, geste dont les pages ne se remettent pas encore
@@ -15,7 +15,6 @@ const PROTECTED_PATTERNS = [
   /^\/tableau-de-bord(\/|$)/,
   /^\/profil(\/|$)/,
   /^\/formations\/[^/]+\/lecons(\/|$)/,
-  /^\/commande(\/|$)/,
   /^\/admin(\/|$)/,
 ];
 
@@ -41,14 +40,10 @@ export default function middleware(request: NextRequest) {
   if (isProtected && !request.cookies.get(SESSION_COOKIE)) {
     const localeMatch = /^\/([a-z]{2})(\/|$)/.exec(request.nextUrl.pathname);
     const locale = localeMatch?.[1] ?? routing.defaultLocale;
-    // Un achat interrompu par une redirection vers /connexion perdrait le visiteur qui n'a pas
-    // encore de compte : on l'envoie créer un compte d'abord, /connexion restant le chemin par
-    // défaut pour les autres pages protégées (reprise de leçon, profil...). Une page /admin/*
-    // renvoie vers sa propre page de connexion dédiée, pas la générale — l'espace admin ne doit
-    // rien partager avec le parcours apprenant.
+    // Les pages protégées (tableau-de-bord, profil, leçons) redirigent vers /connexion
+    // L'espace admin a sa propre page de connexion dédiée
     const isAdmin = /^\/admin(\/|$)/.test(pathWithoutLocale);
-    const isCheckout = /^\/commande(\/|$)/.test(pathWithoutLocale);
-    const destination = isAdmin ? "admin/connexion" : isCheckout ? "inscription" : "connexion";
+    const destination = isAdmin ? "admin/connexion" : "connexion";
     const authUrl = new URL(`/${locale}/${destination}`, request.url);
     // Sans préfixe de locale : router.push (next-intl) le rajoute lui-même, un chemin qui
     // l'inclut déjà donnerait /fr/fr/commande/... une fois poussé après connexion/inscription.

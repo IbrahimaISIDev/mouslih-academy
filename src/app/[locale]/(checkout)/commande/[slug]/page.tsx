@@ -33,7 +33,7 @@ export default async function OrderSummaryPage({ params }: OrderPageProps) {
     getTranslations("catalog"),
     getTranslations("course"),
     getCourse(slug),
-    getProfile(),
+    getProfile().catch(() => null), // Allow checkout without authentication
   ]);
 
   if (!course) notFound();
@@ -41,6 +41,7 @@ export default async function OrderSummaryPage({ params }: OrderPageProps) {
   const subtotalXof = course.compareAtPriceXof ?? course.priceXof;
   const discountXof = subtotalXof - course.priceXof;
   const payHref = `/commande/${course.slug}/wave`;
+  const isAuthenticated = profile !== null;
 
   return (
     <div className="pb-28 lg:pb-0">
@@ -52,7 +53,9 @@ export default async function OrderSummaryPage({ params }: OrderPageProps) {
         ]}
         cancelLabel={t("cancel")}
         cancelHref={`/formations/${course.slug}`}
-        userInitials={`${profile.firstName.charAt(0)}${profile.lastName.charAt(0)}`}
+        userInitials={
+          profile ? `${profile.firstName.charAt(0)}${profile.lastName.charAt(0)}` : undefined
+        }
       />
 
       <div className="px-5 py-6 sm:px-6 lg:px-11 lg:py-11">
@@ -109,7 +112,7 @@ export default async function OrderSummaryPage({ params }: OrderPageProps) {
             <WaveAccountCard
               title={t("summary.accountCardTitle")}
               phoneLabel={t("summary.phoneLabel")}
-              initialPhone={profile.phone}
+              initialPhone={profile?.phone ?? ""}
               useOtherNumberLabel={t("summary.useOtherNumber")}
               helpText={t("summary.phoneHelp")}
             />
