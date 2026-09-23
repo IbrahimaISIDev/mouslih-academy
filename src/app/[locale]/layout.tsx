@@ -13,6 +13,7 @@ import { Direction } from "radix-ui";
 import { routing } from "@/i18n/routing";
 import { isRtl } from "@/lib/rtl";
 import { QueryProvider } from "@/components/providers/query-provider";
+import { PWAProvider } from "@/components/providers/pwa-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { OfflineBanner } from "@/components/patterns/offline-banner";
 import { PageTransition } from "@/components/patterns/page-transition";
@@ -104,11 +105,22 @@ export default async function LocaleLayout({
       dir={dir}
       className={`${spectral.variable} ${workSans.variable} ${amiri.variable} ${plexArabic.variable}`}
     >
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#065f46" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Mouslih" />
+        <link rel="apple-touch-icon" href="/icon-192.svg" />
+        <link rel="icon" type="image/svg+xml" sizes="192x192" href="/icon-192.svg" />
+        <link rel="icon" type="image/svg+xml" sizes="512x512" href="/icon-512.svg" />
+      </head>
       <body>
         <NuqsAdapter>
           <NextIntlClientProvider>
             <Direction.Provider dir={dir}>
               <QueryProvider>
+                <PWAProvider />
                 <OfflineBanner />
                 <PageTransition>{children}</PageTransition>
                 <Toaster />
