@@ -14,6 +14,9 @@ import { HowItWorksCard } from "@/features/checkout/components/how-it-works-card
 import { OrderSummaryCard } from "@/features/checkout/components/order-summary-card";
 import { CheckoutStickyCta } from "@/features/checkout/components/checkout-sticky-cta";
 import { CountdownTimer } from "@/features/checkout/components/countdown-timer";
+import { CheckoutFaq } from "@/features/checkout/components/checkout-faq";
+import { CartNotificationWrapper } from "@/features/checkout/components/cart-notification-wrapper";
+import { CartSaver } from "@/features/checkout/components/cart-saver";
 import { LevelBadge } from "@/components/patterns/level-badge";
 import { GeometricPattern } from "@/components/patterns/geometric-pattern";
 import { Button } from "@/components/ui/button";
@@ -49,6 +52,8 @@ export default async function OrderSummaryPage({ params }: OrderPageProps) {
 
   return (
     <div className="pb-28 lg:pb-0">
+      <CartSaver courseSlug={course.slug} courseTitle={course.title[locale]} />
+      <CartNotificationWrapper currentSlug={course.slug} />
       <CheckoutHeader
         steps={[
           { label: t("steps.summary"), state: "active" },
@@ -172,6 +177,27 @@ export default async function OrderSummaryPage({ params }: OrderPageProps) {
                 t("summary.step2", { amount: formatPrice(course.priceXof, locale) }),
                 t("summary.step3"),
                 t("summary.step4"),
+              ]}
+            />
+
+            <CheckoutFaq
+              items={[
+                {
+                  question: "Comment accéder aux leçons après paiement ?",
+                  answer: "Une fois votre paiement validé, vous pourrez accéder immédiatement à toutes les leçons depuis votre tableau de bord. Vous recevrez également un email de confirmation.",
+                },
+                {
+                  question: "Puis-je payer en plusieurs fois ?",
+                  answer: "Actuellement, nous acceptons uniquement les paiements en une fois via Wave. Le paiement est sécurisé et instantané.",
+                },
+                {
+                  question: "Le certificat est-il reconnu ?",
+                  answer: "Oui, nos certificats sont reconnus et peuvent être partagés sur votre profil LinkedIn ou CV. Ils attestent de vos compétences acquises.",
+                },
+                {
+                  question: "Puis-je suivre la formation sur mobile ?",
+                  answer: "Absolument ! Notre plateforme est 100% responsive. Vous pouvez suivre vos formations sur ordinateur, tablette ou mobile, à tout moment.",
+                },
               ]}
             />
           </div>
