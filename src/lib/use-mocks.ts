@@ -5,4 +5,4 @@
  * — y compris son import dynamique de backend-fetch.ts (`next/headers`) — dans le bundle
  * client, ce que Next.js refuse même derrière un import dynamique.
  */
-export const USE_MOCKS = true;
+export const USE_MOCKS = process.env.NEXT_PUBLIC_USE_MOCKS !== "false";
