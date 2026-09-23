@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import { signupSchema, type SignupFormValues } from "@/features/auth/schemas";
@@ -10,6 +11,11 @@ import { signup } from "@/features/auth/api/signup";
 import { getPasswordStrength } from "@/features/auth/password-strength";
 import { cn } from "@/lib/utils";
 import { safeRedirectPath } from "@/lib/safe-redirect";
+
+const PhoneInput = dynamic(() => import("react-phone-number-input"), {
+  ssr: false,
+  loading: () => <div className="h-11 animate-pulse bg-border-subtle rounded-sm" />,
+});
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -126,13 +132,29 @@ function SignupForm({ redirectTo }: SignupFormProps) {
         <Label htmlFor="signup-phone" className="mb-2 block">
           {t("phoneLabel")}
         </Label>
-        <Input
-          id="signup-phone"
-          type="tel"
-          autoComplete="tel"
-          placeholder={t("phonePlaceholder")}
-          aria-invalid={!!errors.phone}
-          {...register("phone")}
+        <Controller
+          control={control}
+          name="phone"
+          render={({ field }) => (
+            <PhoneInput
+              id="signup-phone"
+              international
+              defaultCountry="SN"
+              placeholder={t("phonePlaceholder")}
+              value={field.value}
+              onChange={field.onChange}
+              className={cn(
+                "flex h-11 items-center rounded-sm border border-border-strong bg-surface px-3.5 transition-colors focus-within:border-green-700 focus-within:shadow-[0_0_0_3px_var(--color-focus-ring)]",
+                errors.phone && "border-error bg-error-field-bg",
+              )}
+              countrySelectProps={{
+                className: "text-[15px]",
+              }}
+              inputProps={{
+                className: "w-full flex-1 bg-transparent text-[15px] text-text outline-none placeholder:text-text-faint",
+              }}
+            />
+          )}
         />
         <FieldError message={errors.phone?.message} />
         {!errors.phone && (
@@ -174,35 +196,39 @@ function SignupForm({ redirectTo }: SignupFormProps) {
         )}
       </div>
 
-      <div className="flex items-start gap-2.5">
-        <Checkbox
-          id="signup-terms"
-          checked={watch("acceptTerms")}
-          onCheckedChange={(value) => setValue("acceptTerms", value as boolean)}
-          aria-invalid={!!errors.acceptTerms}
-          className="mt-0.5"
-          {...register("acceptTerms")}
-        />
-        <label htmlFor="signup-terms" className="text-sm leading-[1.55] text-text-soft">
-          {t("termsPrefix")}{" "}
-          <Link
-            href="/conditions-utilisation"
-            target="_blank"
-            className="rounded-sm font-semibold text-green-ink outline-none hover:underline focus-visible:shadow-[0_0_0_3px_var(--color-focus-ring)]"
-          >
-            {t("termsLink1")}
-          </Link>{" "}
-          {t("termsMiddle")}{" "}
-          <Link
-            href="/confidentialite"
-            target="_blank"
-            className="rounded-sm font-semibold text-green-ink outline-none hover:underline focus-visible:shadow-[0_0_0_3px_var(--color-focus-ring)]"
-          >
-            {t("termsLink2")}
-          </Link>
-          .
-        </label>
-      </div>
+      <Controller
+        control={control}
+        name="acceptTerms"
+        render={({ field }) => (
+          <div className="flex items-start gap-2.5">
+            <Checkbox
+              checked={field.value}
+              onCheckedChange={field.onChange}
+              aria-invalid={!!errors.acceptTerms}
+              className="mt-0.5"
+            />
+            <label className="text-sm leading-[1.55] text-text-soft">
+              {t("termsPrefix")}{" "}
+              <Link
+                href="/conditions-utilisation"
+                target="_blank"
+                className="rounded-sm font-semibold text-green-ink outline-none hover:underline focus-visible:shadow-[0_0_0_3px_var(--color-focus-ring)]"
+              >
+                {t("termsLink1")}
+              </Link>{" "}
+              {t("termsMiddle")}{" "}
+              <Link
+                href="/confidentialite"
+                target="_blank"
+                className="rounded-sm font-semibold text-green-ink outline-none hover:underline focus-visible:shadow-[0_0_0_3px_var(--color-focus-ring)]"
+              >
+                {t("termsLink2")}
+              </Link>
+              .
+            </label>
+          </div>
+        )}
+      />
       <FieldError message={errors.acceptTerms?.message} />
 
       <Button
