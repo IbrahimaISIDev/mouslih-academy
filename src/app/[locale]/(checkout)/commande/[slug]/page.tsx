@@ -13,8 +13,12 @@ import { WaveAccountCard } from "@/features/checkout/components/wave-account-car
 import { HowItWorksCard } from "@/features/checkout/components/how-it-works-card";
 import { OrderSummaryCard } from "@/features/checkout/components/order-summary-card";
 import { CheckoutStickyCta } from "@/features/checkout/components/checkout-sticky-cta";
+import { CountdownTimer } from "@/features/checkout/components/countdown-timer";
 import { LevelBadge } from "@/components/patterns/level-badge";
 import { GeometricPattern } from "@/components/patterns/geometric-pattern";
+import { Button } from "@/components/ui/button";
+import { User, LogOut, Shield } from "lucide-react";
+import { logout } from "@/features/auth/api/logout";
 
 export const metadata: Metadata = { title: "Vérifiez votre commande — Mouslih Academy" };
 
@@ -59,10 +63,54 @@ export default async function OrderSummaryPage({ params }: OrderPageProps) {
       />
 
       <div className="px-5 py-6 sm:px-6 lg:px-11 lg:py-11">
+        {/* Progress bar */}
+        <div className="mb-6">
+          <div className="mb-2 flex items-center justify-between text-xs font-semibold tracking-[0.16em] text-text-muted uppercase">
+            <span>{t("steps.summary")}</span>
+            <span className="text-green-700">1/3</span>
+          </div>
+          <div className="h-1.5 w-full overflow-hidden rounded-full bg-border-subtle">
+            <div className="h-full w-1/3 rounded-full bg-green-700 transition-all duration-500" />
+          </div>
+        </div>
+
         <h1 className="mb-2 font-serif text-[26px] font-medium tracking-[-0.01em] lg:text-[38px]">
           {t("summary.title")}
         </h1>
-        <p className="mb-6 text-sm text-text-muted lg:mb-8 lg:text-base">{t("summary.subtitle")}</p>
+        <p className="mb-4 text-sm text-text-muted lg:mb-6 lg:text-base">{t("summary.subtitle")}</p>
+
+        {/* Countdown timer for urgency */}
+        <div className="mb-6">
+          <CountdownTimer hours={23} minutes={59} />
+        </div>
+
+        {/* Continue as section for logged-in users */}
+        {isAuthenticated && profile && (
+          <div className="mb-6 flex items-center justify-between rounded-sm border border-border-subtle bg-surface px-4 py-3">
+            <div className="flex items-center gap-3">
+              <div className="flex size-10 items-center justify-center rounded-full bg-green-800 text-white">
+                <User className="size-5" strokeWidth={1.8} />
+              </div>
+              <div>
+                <p className="text-xs text-text-muted">Connecté en tant que</p>
+                <p className="text-sm font-semibold text-text-soft">
+                  {profile.firstName} {profile.lastName}
+                </p>
+              </div>
+            </div>
+            <form action={async () => await logout(locale)}>
+              <Button
+                type="submit"
+                variant="ghost"
+                size="sm"
+                className="h-8 text-xs text-text-muted hover:text-text-soft"
+              >
+                <LogOut className="mr-1.5 size-3.5" strokeWidth={2} />
+                Changer
+              </Button>
+            </form>
+          </div>
+        )}
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_400px] lg:gap-8.5">
           <div className="flex flex-col gap-5.5">
@@ -146,6 +194,32 @@ export default async function OrderSummaryPage({ params }: OrderPageProps) {
             questionLabel={t("summary.questionBeforePaying")}
             whatsappHref={WHATSAPP_URL}
           />
+
+          {/* Social proof */}
+          <div className="rounded-sm border border-border-subtle bg-surface p-5">
+            <div className="mb-3 flex items-center gap-2 text-xs font-semibold tracking-[0.16em] text-text-muted uppercase">
+              <span className="h-2 w-2 rounded-full bg-green-600" />
+              Tendance
+            </div>
+            <p className="text-sm text-text-soft">
+              <span className="font-semibold text-text">12 personnes</span> ont acheté cette formation cette semaine
+            </p>
+          </div>
+
+          {/* Guarantee badge */}
+          <div className="rounded-sm border border-success-border bg-success-bg p-5">
+            <div className="flex items-start gap-3">
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-green-800 text-white">
+                <Shield className="size-5" strokeWidth={1.8} />
+              </div>
+              <div>
+                <p className="mb-1 text-sm font-semibold text-whatsapp-hover">Satisfait ou remboursé</p>
+                <p className="text-xs text-whatsapp-muted">
+                  30 jours pour essayer. Si vous n'êtes pas satisfait, nous vous remboursons intégralement.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
