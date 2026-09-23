@@ -17,6 +17,8 @@ const PhoneInput = dynamic(() => import("react-phone-number-input"), {
   loading: () => <div className="h-11 animate-pulse bg-border-subtle rounded-sm" />,
 });
 
+import "react-phone-number-input/style.css";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
