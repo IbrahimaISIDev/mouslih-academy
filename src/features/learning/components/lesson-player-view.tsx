@@ -23,6 +23,7 @@ import { ProgressBar } from "@/components/patterns/progress-bar";
 import { DirectionalIcon } from "@/components/patterns/directional-icon";
 import { LessonSidebar } from "@/features/learning/components/lesson-sidebar";
 import { LessonTabs } from "@/features/learning/components/lesson-tabs";
+import { WHATSAPP_URL } from "@/lib/contact";
 
 const VideoPlayer = dynamic(
   () =>
@@ -31,8 +32,6 @@ const VideoPlayer = dynamic(
     ),
   { ssr: false, loading: () => <div className="aspect-video bg-green-900" /> },
 );
-
-const WHATSAPP_URL = "https://wa.me/221771542311";
 
 export interface LessonPlayerViewProps {
   course: Course;
@@ -141,7 +140,11 @@ function LessonPlayerView({
           href="/tableau-de-bord"
           className="flex items-center gap-2.5 text-sm"
         >
-          <DirectionalIcon icon={ArrowLeft} className="size-[18px]" strokeWidth={1.7} />
+          <DirectionalIcon
+            icon={ArrowLeft}
+            className="size-[18px]"
+            strokeWidth={1.7}
+          />
           <span className="hidden lg:inline">{t("backToDashboard")}</span>
         </Link>
         <span className="hidden h-5.5 w-px bg-green-300/30 lg:block" />
@@ -154,7 +157,10 @@ function LessonPlayerView({
             tone="onDark"
             className="hidden flex-1 lg:flex"
             label={localizeDigits(
-              t("progressLabel", { done: completedCount, total: course.lessonCount }),
+              t("progressLabel", {
+                done: completedCount,
+                total: course.lessonCount,
+              }),
               locale,
             )}
             labelClassName="whitespace-nowrap"
@@ -201,7 +207,10 @@ function LessonPlayerView({
             </span>
             <span className="text-[13px] tabular-nums text-text-muted">
               {localizeDigits(
-                t("progressLabel", { done: completedCount, total: course.lessonCount }),
+                t("progressLabel", {
+                  done: completedCount,
+                  total: course.lessonCount,
+                }),
                 locale,
               )}
             </span>
@@ -235,7 +244,10 @@ function LessonPlayerView({
           {autoAdvanceIn !== null && (
             <div className="mx-5 mb-5 flex items-center justify-between gap-3 border border-gold-300 bg-gold-50 px-4 py-3 text-sm text-green-ink lg:mx-7.5">
               <span>
-                {localizeDigits(t("autoAdvance.message", { seconds: autoAdvanceIn }), locale)}
+                {localizeDigits(
+                  t("autoAdvance.message", { seconds: autoAdvanceIn }),
+                  locale,
+                )}
               </span>
               <button
                 type="button"
@@ -255,12 +267,20 @@ function LessonPlayerView({
             >
               {previousHref ? (
                 <Link href={previousHref}>
-                  <DirectionalIcon icon={ArrowLeft} className="size-[17px]" strokeWidth={1.8} />
+                  <DirectionalIcon
+                    icon={ArrowLeft}
+                    className="size-[17px]"
+                    strokeWidth={1.8}
+                  />
                   {t("nav.previous")}
                 </Link>
               ) : (
                 <span>
-                  <DirectionalIcon icon={ArrowLeft} className="size-[17px]" strokeWidth={1.8} />
+                  <DirectionalIcon
+                    icon={ArrowLeft}
+                    className="size-[17px]"
+                    strokeWidth={1.8}
+                  />
                   {t("nav.previous")}
                 </span>
               )}
@@ -277,7 +297,11 @@ function LessonPlayerView({
               {nextHref ? (
                 <Link href={nextHref}>
                   {t("nav.next")}
-                  <DirectionalIcon icon={ArrowRight} className="size-[17px]" strokeWidth={1.8} />
+                  <DirectionalIcon
+                    icon={ArrowRight}
+                    className="size-[17px]"
+                    strokeWidth={1.8}
+                  />
                 </Link>
               ) : (
                 <span>{t("nav.next")}</span>
@@ -310,11 +334,19 @@ function LessonPlayerView({
         >
           {previousHref ? (
             <Link href={previousHref} aria-label={t("nav.previous")}>
-              <DirectionalIcon icon={ArrowLeft} className="size-[19px]" strokeWidth={1.8} />
+              <DirectionalIcon
+                icon={ArrowLeft}
+                className="size-[19px]"
+                strokeWidth={1.8}
+              />
             </Link>
           ) : (
             <span aria-hidden="true">
-              <DirectionalIcon icon={ArrowLeft} className="size-[19px]" strokeWidth={1.8} />
+              <DirectionalIcon
+                icon={ArrowLeft}
+                className="size-[19px]"
+                strokeWidth={1.8}
+              />
             </span>
           )}
         </Button>
@@ -322,7 +354,11 @@ function LessonPlayerView({
           {nextHref ? (
             <Link href={nextHref}>
               {t("nav.next")}
-              <DirectionalIcon icon={ArrowRight} className="size-[17px]" strokeWidth={1.8} />
+              <DirectionalIcon
+                icon={ArrowRight}
+                className="size-[17px]"
+                strokeWidth={1.8}
+              />
             </Link>
           ) : (
             <span>{t("nav.next")}</span>

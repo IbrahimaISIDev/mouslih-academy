@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { buildFooterColumns } from "@/lib/footer-columns";
-import { LegalPageLayout, type LegalSection } from "@/features/legal/components/legal-page-layout";
-
-const WHATSAPP_URL = "https://wa.me/221771542311";
+import {
+  LegalPageLayout,
+  type LegalSection,
+} from "@/features/legal/components/legal-page-layout";
+import { WHATSAPP_DISPLAY, WHATSAPP_URL } from "@/lib/contact";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("legal.terms");
@@ -35,7 +37,7 @@ export default async function TermsPage() {
       signupLabel={tNav("signup")}
       footerColumns={footerColumns}
       whatsappHref={WHATSAPP_URL}
-      whatsappLabel={tCommon("footer.whatsappNumber")}
+      whatsappLabel={WHATSAPP_DISPLAY}
       copyright={tCommon("footer.copyright")}
       paymentNote={tCommon("footer.paymentNote")}
       eyebrow={t("eyebrow")}

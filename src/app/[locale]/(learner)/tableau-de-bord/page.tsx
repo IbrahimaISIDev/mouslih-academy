@@ -22,12 +22,11 @@ import {
   type CourseRowStatus,
 } from "@/features/account/components/my-course-row";
 import { getLearnerTabItems } from "@/features/account/mobile-tabs";
+import { WHATSAPP_URL } from "@/lib/contact";
 
 export const metadata: Metadata = {
   title: "Tableau de bord — Mouslih Academy",
 };
-
-const WHATSAPP_URL = "https://wa.me/221771542311";
 
 export default async function DashboardPage({
   params,

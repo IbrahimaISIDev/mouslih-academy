@@ -6,6 +6,7 @@ import { BookOpen, MessageCircleQuestion, Send } from "lucide-react";
 import type { Course, Locale, Order, OrderStatus } from "@/lib/types";
 import type { LearnerProfile } from "@/mocks/learner";
 import { formatPrice } from "@/lib/format";
+import { WHATSAPP_URL } from "@/lib/contact";
 import { getOrderClient } from "@/features/checkout/api/get-order-client";
 import { useCart } from "@/lib/use-cart";
 import { SuccessState } from "@/features/checkout/components/success-state";
@@ -33,13 +34,21 @@ function firstLessonSlug(course: Course): string | null {
   return null;
 }
 
-function toDisplayStatus(status: OrderStatus): "success" | "pending" | "failed" {
+function toDisplayStatus(
+  status: OrderStatus,
+): "success" | "pending" | "failed" {
   if (status === "paid") return "success";
   if (status === "pending") return "pending";
   return "failed";
 }
 
-function PaymentResult({ locale, course, profile, initialOrder, statusOverride }: PaymentResultProps) {
+function PaymentResult({
+  locale,
+  course,
+  profile,
+  initialOrder,
+  statusOverride,
+}: PaymentResultProps) {
   const t = useTranslations("checkout.confirmation");
   const [order, setOrder] = useState(initialOrder);
   const [refreshing, setRefreshing] = useState(false);
@@ -92,20 +101,38 @@ function PaymentResult({ locale, course, profile, initialOrder, statusOverride }
         title={t("success.title")}
         body={t("success.body", { amount: amountLabel, course: title })}
         startLessonLabel={t("success.startLesson")}
-        startLessonHref={startLessonSlug ? `/formations/${course.slug}/lecons/${startLessonSlug}` : `/formations/${course.slug}`}
+        startLessonHref={
+          startLessonSlug
+            ? `/formations/${course.slug}/lecons/${startLessonSlug}`
+            : `/formations/${course.slug}`
+        }
         goDashboardLabel={t("success.goDashboard")}
         getStartedTitle={t("success.getStartedTitle")}
         tips={[
-          { icon: BookOpen, title: t("success.tip1Title"), body: t("success.tip1Body") },
-          { icon: Send, title: t("success.tip2Title"), body: t("success.tip2Body") },
-          { icon: MessageCircleQuestion, title: t("success.tip3Title"), body: t("success.tip3Body") },
+          {
+            icon: BookOpen,
+            title: t("success.tip1Title"),
+            body: t("success.tip1Body"),
+          },
+          {
+            icon: Send,
+            title: t("success.tip2Title"),
+            body: t("success.tip2Body"),
+          },
+          {
+            icon: MessageCircleQuestion,
+            title: t("success.tip3Title"),
+            body: t("success.tip3Body"),
+          },
         ]}
         receiptTitle={t("success.receiptTitle")}
         paidBadge={t("success.paidBadge")}
         reference={t("success.reference")}
         refValue={order.ref}
         dateLabel={t("success.date")}
-        dateValue={new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(new Date(order.createdAt))}
+        dateValue={new Intl.DateTimeFormat(locale, {
+          dateStyle: "long",
+        }).format(new Date(order.createdAt))}
         methodLabel={t("success.method")}
         methodValue="Wave"
         amountPaidLabel={t("success.amountPaid")}
@@ -126,7 +153,9 @@ function PaymentResult({ locale, course, profile, initialOrder, statusOverride }
         reasonText={t("failed.reasonText", { phone: profile.phone })}
         referenceLine={t("failed.referenceLine", {
           ref: order.ref,
-          date: new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(new Date(order.createdAt)),
+          date: new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(
+            new Date(order.createdAt),
+          ),
         })}
         checklistTitle={t("failed.checklistTitle")}
         checks={[
@@ -137,7 +166,7 @@ function PaymentResult({ locale, course, profile, initialOrder, statusOverride }
         retryButtonLabel={t("failed.retryButton")}
         retryHref={`/${locale}/commande/${course.slug}`}
         contactSupportLabel={t("failed.contactSupport")}
-        whatsappHref="https://wa.me/221771542311"
+        whatsappHref={WHATSAPP_URL}
       />
     );
   }

@@ -22,10 +22,11 @@ import { GeometricPattern } from "@/components/patterns/geometric-pattern";
 import { Button } from "@/components/ui/button";
 import { User, LogOut, Shield } from "lucide-react";
 import { logout } from "@/features/auth/api/logout";
+import { WHATSAPP_URL } from "@/lib/contact";
 
-export const metadata: Metadata = { title: "Vérifiez votre commande — Mouslih Academy" };
-
-const WHATSAPP_URL = "https://wa.me/221771542311";
+export const metadata: Metadata = {
+  title: "Vérifiez votre commande — Mouslih Academy",
+};
 
 interface OrderPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -63,7 +64,9 @@ export default async function OrderSummaryPage({ params }: OrderPageProps) {
         cancelLabel={t("cancel")}
         cancelHref={`/formations/${course.slug}`}
         userInitials={
-          profile ? `${profile.firstName.charAt(0)}${profile.lastName.charAt(0)}` : undefined
+          profile
+            ? `${profile.firstName.charAt(0)}${profile.lastName.charAt(0)}`
+            : undefined
         }
       />
 
@@ -82,11 +85,17 @@ export default async function OrderSummaryPage({ params }: OrderPageProps) {
         <h1 className="mb-2 font-serif text-[26px] font-medium tracking-[-0.01em] lg:text-[38px]">
           {t("summary.title")}
         </h1>
-        <p className="mb-4 text-sm text-text-muted lg:mb-6 lg:text-base">{t("summary.subtitle")}</p>
+        <p className="mb-4 text-sm text-text-muted lg:mb-6 lg:text-base">
+          {t("summary.subtitle")}
+        </p>
 
         {/* Countdown timer for urgency */}
         <div className="mb-6">
-          <CountdownTimer hours={23} minutes={59} label={t("countdown.label")} />
+          <CountdownTimer
+            hours={23}
+            minutes={59}
+            label={t("countdown.label")}
+          />
         </div>
 
         {/* Continue as section for logged-in users */}
@@ -97,7 +106,9 @@ export default async function OrderSummaryPage({ params }: OrderPageProps) {
                 <User className="size-5" strokeWidth={1.8} />
               </div>
               <div>
-                <p className="text-xs text-text-muted">{t("summary.loggedInAs")}</p>
+                <p className="text-xs text-text-muted">
+                  {t("summary.loggedInAs")}
+                </p>
                 <p className="text-sm font-semibold text-text-soft">
                   {profile.firstName} {profile.lastName}
                 </p>
@@ -138,23 +149,40 @@ export default async function OrderSummaryPage({ params }: OrderPageProps) {
                   )}
                 </div>
                 <div className="flex-1">
-                  <LevelBadge level={course.level} label={tCatalog(`levels.${course.level}`)} className="mb-2.5" />
-                  <h2 className="mb-2 font-serif text-xl font-semibold lg:text-2xl">{course.title[locale]}</h2>
+                  <LevelBadge
+                    level={course.level}
+                    label={tCatalog(`levels.${course.level}`)}
+                    className="mb-2.5"
+                  />
+                  <h2 className="mb-2 font-serif text-xl font-semibold lg:text-2xl">
+                    {course.title[locale]}
+                  </h2>
                   <p className="mb-3.5 text-sm text-text-muted">
-                    {tCourse("meta.lessonsVideo", { count: course.lessonCount })} ·{" "}
-                    {formatTotalDuration(course.totalDurationSeconds)}
+                    {tCourse("meta.lessonsVideo", {
+                      count: course.lessonCount,
+                    })}{" "}
+                    · {formatTotalDuration(course.totalDurationSeconds)}
                   </p>
                   <div className="flex flex-wrap gap-4">
                     <span className="flex items-center gap-1.5 text-[13px] text-text-soft">
-                      <Check className="size-4 text-success" strokeWidth={1.8} />
+                      <Check
+                        className="size-4 text-success"
+                        strokeWidth={1.8}
+                      />
                       {t("summary.lifetimeAccess")}
                     </span>
                     <span className="flex items-center gap-1.5 text-[13px] text-text-soft">
-                      <Check className="size-4 text-success" strokeWidth={1.8} />
+                      <Check
+                        className="size-4 text-success"
+                        strokeWidth={1.8}
+                      />
                       {t("summary.pdfIncluded")}
                     </span>
                     <span className="flex items-center gap-1.5 text-[13px] text-text-soft">
-                      <Check className="size-4 text-success" strokeWidth={1.8} />
+                      <Check
+                        className="size-4 text-success"
+                        strokeWidth={1.8}
+                      />
                       {t("summary.finalCertificate")}
                     </span>
                   </div>
@@ -174,13 +202,20 @@ export default async function OrderSummaryPage({ params }: OrderPageProps) {
               title={t("summary.howItWorksTitle")}
               steps={[
                 t("summary.step1"),
-                t("summary.step2", { amount: formatPrice(course.priceXof, locale) }),
+                t("summary.step2", {
+                  amount: formatPrice(course.priceXof, locale),
+                }),
                 t("summary.step3"),
                 t("summary.step4"),
               ]}
             />
 
-            <CheckoutFaq title={t("faq.title")} items={t.raw("faq.items") as { question: string; answer: string }[]} />
+            <CheckoutFaq
+              title={t("faq.title")}
+              items={
+                t.raw("faq.items") as { question: string; answer: string }[]
+              }
+            />
           </div>
 
           <OrderSummaryCard
@@ -210,7 +245,11 @@ export default async function OrderSummaryPage({ params }: OrderPageProps) {
                 <span className="h-2 w-2 rounded-full bg-green-600" />
                 {t("socialProof.trending")}
               </div>
-              <p className="text-sm text-text-soft">{t("socialProof.purchases", { count: course.recentPurchasesCount })}</p>
+              <p className="text-sm text-text-soft">
+                {t("socialProof.purchases", {
+                  count: course.recentPurchasesCount,
+                })}
+              </p>
             </div>
           )}
 
@@ -222,8 +261,12 @@ export default async function OrderSummaryPage({ params }: OrderPageProps) {
                 <Shield className="size-5" strokeWidth={1.8} />
               </div>
               <div>
-                <p className="mb-1 text-sm font-semibold text-whatsapp-hover">{t("guarantee.title")}</p>
-                <p className="text-xs text-whatsapp-muted">{t("guarantee.body")}</p>
+                <p className="mb-1 text-sm font-semibold text-whatsapp-hover">
+                  {t("guarantee.title")}
+                </p>
+                <p className="text-xs text-whatsapp-muted">
+                  {t("guarantee.body")}
+                </p>
               </div>
             </div>
           </div>

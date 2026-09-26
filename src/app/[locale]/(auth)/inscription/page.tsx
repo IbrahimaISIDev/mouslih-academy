@@ -5,24 +5,27 @@ import { AuthSidePanel } from "@/features/auth/components/auth-side-panel";
 import { AuthHelpLine } from "@/features/auth/components/auth-help-line";
 import { SignupForm } from "@/features/auth/components/signup-form";
 import { LanguageSwitcher } from "@/components/patterns/language-switcher";
+import { WHATSAPP_URL } from "@/lib/contact";
 
 export const metadata: Metadata = {
   title: "Créer un compte — Mouslih Academy",
 };
 
-const WHATSAPP_URL = "https://wa.me/221771542311";
-
 interface InscriptionPageProps {
   searchParams: Promise<{ redirect?: string }>;
 }
 
-export default async function InscriptionPage({ searchParams }: InscriptionPageProps) {
+export default async function InscriptionPage({
+  searchParams,
+}: InscriptionPageProps) {
   const [{ redirect }, t, tSide] = await Promise.all([
     searchParams,
     getTranslations("auth.signup"),
     getTranslations("auth.sidePanel"),
   ]);
-  const loginHref = redirect ? `/connexion?redirect=${encodeURIComponent(redirect)}` : "/connexion";
+  const loginHref = redirect
+    ? `/connexion?redirect=${encodeURIComponent(redirect)}`
+    : "/connexion";
 
   return (
     <div className="lg:grid lg:min-h-[720px] lg:grid-cols-2">

@@ -19,6 +19,7 @@ import { getLessonState } from "@/features/learning/get-lesson-state";
 import { getSession } from "@/lib/session";
 import { backendFetch } from "@/lib/backend-fetch";
 import { USE_MOCKS } from "@/lib/use-mocks";
+import { WHATSAPP_URL } from "@/lib/contact";
 import type { CurriculumModule } from "@/components/patterns/curriculum-accordion";
 import { CourseCurriculum } from "@/features/catalog/components/course-curriculum";
 
@@ -28,8 +29,6 @@ import { PublicHeader } from "@/components/layout/public-header";
 import { LevelBadge } from "@/components/patterns/level-badge";
 import { GeometricPattern } from "@/components/patterns/geometric-pattern";
 import { StickyCta } from "@/components/patterns/sticky-cta";
-
-const WHATSAPP_URL = "https://wa.me/221771542311";
 
 /**
  * Vérification d'appartenance "douce" : cette page reste publique (visiteurs anonymes inclus),
@@ -70,7 +69,9 @@ interface CourseDetailPageProps {
   searchParams: Promise<{ module?: string }>;
 }
 
-export async function generateMetadata({ params }: CourseDetailPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: CourseDetailPageProps): Promise<Metadata> {
   const { locale: rawLocale, slug } = await params;
   const locale = rawLocale as Locale;
   const course = await getCourse(slug);
@@ -80,13 +81,19 @@ export async function generateMetadata({ params }: CourseDetailPageProps): Promi
   const description = course.cardDescription[locale];
   // Partager le lien d'une formation précise (WhatsApp, Facebook) affiche sa vraie couverture au
   // lieu de l'image générique du site — remplace entièrement openGraph.images, ne s'ajoute pas.
-  const images = course.coverUrl ? [{ url: course.coverUrl, width: 1280, height: 720 }] : undefined;
+  const images = course.coverUrl
+    ? [{ url: course.coverUrl, width: 1280, height: 720 }]
+    : undefined;
 
   return {
     title,
     description,
     openGraph: { title, description, images },
-    twitter: { title, description, images: course.coverUrl ? [course.coverUrl] : undefined },
+    twitter: {
+      title,
+      description,
+      images: course.coverUrl ? [course.coverUrl] : undefined,
+    },
   };
 }
 
@@ -105,7 +112,9 @@ export default async function CourseDetailPage({
   const ownedLessonHref = isPurchased
     ? (() => {
         const slug = firstLessonSlug(course);
-        return slug ? `/formations/${course.slug}/lecons/${slug}` : `/formations/${course.slug}`;
+        return slug
+          ? `/formations/${course.slug}/lecons/${slug}`
+          : `/formations/${course.slug}`;
       })()
     : null;
 
@@ -202,8 +211,10 @@ export default async function CourseDetailPage({
         <GeometricPattern variant="khatam" opacity={0.32} />
         <div className="relative px-5 py-8 sm:px-6 lg:px-11 lg:py-11">
           <div className="mb-5 text-[13px] text-green-300 lg:mb-6.5">
-            {t("breadcrumb.formations")} <span className="mx-2 inline-block rtl:scale-x-[-1]">›</span>
-            {t("breadcrumb.category")} <span className="mx-2 inline-block rtl:scale-x-[-1]">›</span>
+            {t("breadcrumb.formations")}{" "}
+            <span className="mx-2 inline-block rtl:scale-x-[-1]">›</span>
+            {t("breadcrumb.category")}{" "}
+            <span className="mx-2 inline-block rtl:scale-x-[-1]">›</span>
             <span className="text-on-dark-muted">{course.title[locale]}</span>
           </div>
 
@@ -422,7 +433,9 @@ export default async function CourseDetailPage({
               </span>
             ) : (
               <span className="hidden text-sm text-text-muted lg:inline">
-                {t("curriculum.summaryCompact", { lessons: course.lessonCount })}
+                {t("curriculum.summaryCompact", {
+                  lessons: course.lessonCount,
+                })}
               </span>
             )}
           </div>
@@ -449,7 +462,9 @@ export default async function CourseDetailPage({
           ) : (
             <div className="flex flex-col items-center gap-2 border border-dashed border-border-strong bg-bg px-6 py-9 text-center">
               <Video className="size-6 text-text-faint" strokeWidth={1.4} />
-              <p className="text-sm font-medium text-text-soft">{t("curriculum.placeholderTitle")}</p>
+              <p className="text-sm font-medium text-text-soft">
+                {t("curriculum.placeholderTitle")}
+              </p>
               <p className="text-[13px] text-text-muted">
                 {t("curriculum.placeholderBody", {
                   lessons: course.lessonCount,
@@ -521,8 +536,12 @@ export default async function CourseDetailPage({
         price={formatPrice(course.priceXof, locale)}
         action={
           <Button className="w-full" asChild>
-            <Link href={isPurchased ? ownedLessonHref! : `/commande/${course.slug}`}>
-              {isPurchased ? t("stickyCta.ownedButton") : t("stickyCta.buyButton")}
+            <Link
+              href={isPurchased ? ownedLessonHref! : `/commande/${course.slug}`}
+            >
+              {isPurchased
+                ? t("stickyCta.ownedButton")
+                : t("stickyCta.buyButton")}
             </Link>
           </Button>
         }

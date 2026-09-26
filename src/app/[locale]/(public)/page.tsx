@@ -1,4 +1,10 @@
-import { ArrowRight, CheckCircle, MessageCircle, Play, Shield } from "lucide-react";
+import {
+  ArrowRight,
+  CheckCircle,
+  MessageCircle,
+  Play,
+  Shield,
+} from "lucide-react";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
@@ -18,8 +24,8 @@ import { StickyCta } from "@/components/patterns/sticky-cta";
 import { TestimonialCard } from "@/components/patterns/testimonial-card";
 import { DirectionalIcon } from "@/components/patterns/directional-icon";
 import { AnimatedCounter } from "@/components/patterns/animated-counter";
+import { WHATSAPP_DISPLAY, WHATSAPP_URL } from "@/lib/contact";
 
-const WHATSAPP_URL = "https://wa.me/221771542311";
 const HERO_LEARNERS_COUNT = 1240;
 const HERO_COURSES_COUNT = 6;
 
@@ -234,7 +240,11 @@ export default async function HomePage({ params }: HomePageProps) {
             className="hidden items-center gap-1.5 text-[15px] font-semibold text-green-ink lg:flex"
           >
             {t("featured.seeCatalog")}
-            <DirectionalIcon icon={ArrowRight} className="size-4" strokeWidth={1.9} />
+            <DirectionalIcon
+              icon={ArrowRight}
+              className="size-4"
+              strokeWidth={1.9}
+            />
           </Link>
           <Link
             href="/formations"
@@ -335,7 +345,7 @@ export default async function HomePage({ params }: HomePageProps) {
       <Footer
         columns={footerColumns}
         whatsappHref={WHATSAPP_URL}
-        whatsappLabel={tCommon("footer.whatsappNumber")}
+        whatsappLabel={WHATSAPP_DISPLAY}
         copyright={tCommon("footer.copyright")}
         paymentNote={tCommon("footer.paymentNote")}
       />

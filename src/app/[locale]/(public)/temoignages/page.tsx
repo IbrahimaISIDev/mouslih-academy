@@ -9,10 +9,9 @@ import { PublicHeader } from "@/components/layout/public-header";
 import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
+import { WHATSAPP_DISPLAY, WHATSAPP_URL } from "@/lib/contact";
 
 export const metadata: Metadata = { title: "Témoignages — Mouslih Academy" };
-
-const WHATSAPP_URL = "https://wa.me/221771542311";
 
 interface TemoignagesPageProps {
   params: Promise<{ locale: string }>;
@@ -67,7 +66,7 @@ export default async function TemoignagesPage({
       <Footer
         columns={footerColumns}
         whatsappHref={WHATSAPP_URL}
-        whatsappLabel={tCommon("footer.whatsappNumber")}
+        whatsappLabel={WHATSAPP_DISPLAY}
         copyright={tCommon("footer.copyright")}
         paymentNote={tCommon("footer.paymentNote")}
       />

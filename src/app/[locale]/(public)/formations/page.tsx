@@ -7,18 +7,22 @@ import { buildFooterColumns } from "@/lib/footer-columns";
 import { CatalogBrowser } from "@/features/catalog/components/catalog-browser";
 import { PublicHeader } from "@/components/layout/public-header";
 import { Footer } from "@/components/layout/footer";
-
-const WHATSAPP_URL = "https://wa.me/221771542311";
+import { WHATSAPP_DISPLAY, WHATSAPP_URL } from "@/lib/contact";
 
 interface CataloguePageProps {
   params: Promise<{ locale: string }>;
   searchParams: Promise<{ q?: string; level?: string }>;
 }
 
-export async function generateMetadata({ params }: CataloguePageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: CataloguePageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "catalog" });
-  return { title: `${t("title")} — Mouslih Academy`, description: t("description") };
+  return {
+    title: `${t("title")} — Mouslih Academy`,
+    description: t("description"),
+  };
 }
 
 const LEVEL_VALUES = ["all", "beginner", "intermediate", "advanced"] as const;
@@ -75,7 +79,7 @@ export default async function CataloguePage({
       <Footer
         columns={footerColumns}
         whatsappHref={WHATSAPP_URL}
-        whatsappLabel={tCommon("footer.whatsappNumber")}
+        whatsappLabel={WHATSAPP_DISPLAY}
         copyright={tCommon("footer.copyright")}
         paymentNote={tCommon("footer.paymentNote")}
       />

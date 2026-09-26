@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
-import { BookOpen, Clock, MapPin, MessageCircle, MessageCircleQuestion, Mic, Smartphone } from "lucide-react";
+import {
+  BookOpen,
+  Clock,
+  MapPin,
+  MessageCircle,
+  MessageCircleQuestion,
+  Mic,
+  Smartphone,
+} from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Button } from "@/components/ui/button";
 import { buildFooterColumns } from "@/lib/footer-columns";
@@ -7,12 +15,17 @@ import { PublicHeader } from "@/components/layout/public-header";
 import { Footer } from "@/components/layout/footer";
 import { GeometricPattern } from "@/components/patterns/geometric-pattern";
 import { SectionEyebrow } from "@/components/patterns/section-eyebrow";
+import { WHATSAPP_DISPLAY, WHATSAPP_URL } from "@/lib/contact";
 
 export const metadata: Metadata = { title: "Contact — Mouslih Academy" };
 
-const WHATSAPP_URL = "https://wa.me/221771542311";
 const REASON_KEYS = ["course", "payment", "correction", "other"] as const;
-const REASON_ICONS = { course: BookOpen, payment: Smartphone, correction: Mic, other: MessageCircleQuestion };
+const REASON_ICONS = {
+  course: BookOpen,
+  payment: Smartphone,
+  correction: Mic,
+  other: MessageCircleQuestion,
+};
 
 export default async function ContactPage() {
   const [t, tNav, tCommon] = await Promise.all([
@@ -45,7 +58,9 @@ export default async function ContactPage() {
       <section className="relative overflow-hidden bg-green-900 text-on-dark">
         <GeometricPattern variant="khatam" opacity={0.32} />
         <div className="relative mx-auto max-w-[720px] px-5 py-14 text-center sm:px-6 lg:px-11 lg:py-20">
-          <SectionEyebrow className="mb-3.5 lg:mb-4">{t("eyebrow")}</SectionEyebrow>
+          <SectionEyebrow className="mb-3.5 lg:mb-4">
+            {t("eyebrow")}
+          </SectionEyebrow>
           <h1 className="mb-4 font-serif text-[28px] leading-[1.2] font-medium tracking-[-0.01em] lg:text-[42px] lg:leading-[1.15]">
             {t("title")}
           </h1>
@@ -100,12 +115,22 @@ export default async function ContactPage() {
             {t("infoTitle")}
           </p>
           <div className="flex flex-1 gap-3">
-            <Clock className="mt-0.5 size-[18px] shrink-0 text-green-ink" strokeWidth={1.6} />
-            <p className="text-[15px] leading-[1.6] text-text-soft">{t("infoHours")}</p>
+            <Clock
+              className="mt-0.5 size-[18px] shrink-0 text-green-ink"
+              strokeWidth={1.6}
+            />
+            <p className="text-[15px] leading-[1.6] text-text-soft">
+              {t("infoHours")}
+            </p>
           </div>
           <div className="flex flex-1 gap-3">
-            <MapPin className="mt-0.5 size-[18px] shrink-0 text-green-ink" strokeWidth={1.6} />
-            <p className="text-[15px] leading-[1.6] text-text-soft">{t("infoLocation")}</p>
+            <MapPin
+              className="mt-0.5 size-[18px] shrink-0 text-green-ink"
+              strokeWidth={1.6}
+            />
+            <p className="text-[15px] leading-[1.6] text-text-soft">
+              {t("infoLocation")}
+            </p>
           </div>
         </div>
       </section>
@@ -113,7 +138,7 @@ export default async function ContactPage() {
       <Footer
         columns={footerColumns}
         whatsappHref={WHATSAPP_URL}
-        whatsappLabel={tCommon("footer.whatsappNumber")}
+        whatsappLabel={WHATSAPP_DISPLAY}
         copyright={tCommon("footer.copyright")}
         paymentNote={tCommon("footer.paymentNote")}
       />
