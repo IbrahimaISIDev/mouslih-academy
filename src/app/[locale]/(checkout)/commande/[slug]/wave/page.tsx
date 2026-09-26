@@ -3,7 +3,7 @@ import { notFound, redirect } from "next/navigation";
 import type { Locale } from "@/lib/types";
 import { formatPrice } from "@/lib/format";
 import { getCourse } from "@/features/catalog/api/get-course";
-import { getProfile } from "@/features/account/api/get-profile";
+import { getProfileOptional } from "@/features/account/api/get-profile";
 import { WaveRedirectView } from "@/features/checkout/components/wave-redirect-view";
 
 export const metadata: Metadata = { title: "Redirection vers Wave — Mouslih Academy" };
@@ -18,13 +18,15 @@ export default async function WaveRedirectPage({ params }: WaveRedirectPageProps
 
   const [course, profile] = await Promise.all([
     getCourse(slug),
-    getProfile().catch(() => null),
+    getProfileOptional(),
   ]);
   if (!course) notFound();
 
-  // Redirect to signup if not authenticated
+  // Redirige vers l'inscription si non connecté — retour direct sur CETTE page (pas le
+  // récapitulatif) pour reprendre le paiement immédiatement : l'utilisateur a déjà exprimé son
+  // intention d'achat en cliquant "Payer", il ne doit pas avoir à recliquer après inscription.
   if (!profile) {
-    redirect(`/inscription?redirect=/commande/${course.slug}`);
+    redirect(`/inscription?redirect=/commande/${course.slug}/wave`);
   }
 
   return (

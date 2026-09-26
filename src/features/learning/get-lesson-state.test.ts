@@ -21,6 +21,7 @@ function makeEnrollment(overrides: Partial<Enrollment> = {}): Enrollment {
     currentLessonId: "",
     resumeAtSeconds: 0,
     completedAt: null,
+    lastActivityAt: null,
     ...overrides,
   };
 }

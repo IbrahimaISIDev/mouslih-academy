@@ -1,34 +1,33 @@
 "use client";
 
+import { useEffect } from "react";
 import { useCart } from "@/lib/use-cart";
 import { CartNotification } from "./cart-notification";
 import { useRouter } from "@/i18n/navigation";
 
 export function CartNotificationWrapper({ currentSlug }: { currentSlug: string }) {
-  const { cartItem, showNotification, dismissNotification, clearCart } = useCart();
+  const { cartItem, showNotification, dismissNotification } = useCart();
   const router = useRouter();
+  const isSameCourse = cartItem?.courseSlug === currentSlug;
 
-  if (!showNotification || !cartItem) return null;
+  // Un changement d'état pendant le rendu (plutôt que dans un effet) est interdit par React —
+  // provoque un avertissement, potentiellement une boucle de rendu.
+  useEffect(() => {
+    if (showNotification && isSameCourse) {
+      dismissNotification();
+    }
+  }, [showNotification, isSameCourse, dismissNotification]);
 
-  // Don't show notification if already on the same course page
-  if (cartItem.courseSlug === currentSlug) {
-    dismissNotification();
-    return null;
-  }
+  if (!showNotification || !cartItem || isSameCourse) return null;
 
   const handleContinue = () => {
     router.push(`/commande/${cartItem.courseSlug}`);
   };
 
-  const handleDismiss = () => {
-    dismissNotification();
-  };
-
   return (
     <CartNotification
       courseTitle={cartItem.courseTitle}
-      courseSlug={cartItem.courseSlug}
-      onDismiss={handleDismiss}
+      onDismiss={dismissNotification}
       onContinue={handleContinue}
     />
   );

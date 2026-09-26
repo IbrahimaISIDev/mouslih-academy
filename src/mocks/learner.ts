@@ -14,6 +14,7 @@ export interface LearnerProfile {
   joinedAt: string;
   passwordChangedAt: string;
   pendingRecitation: PendingRecitation | null;
+  lessonsCompletedThisWeek: number;
 }
 
 /** Apprenante de démo : Aminata Diallo. */
@@ -31,4 +32,5 @@ export const aminata: LearnerProfile = {
     moduleOrder: 1,
     submittedDaysAgo: 1,
   },
+  lessonsCompletedThisWeek: 3,
 };

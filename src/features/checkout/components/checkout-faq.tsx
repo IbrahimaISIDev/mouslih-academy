@@ -10,18 +10,19 @@ interface FAQItem {
 }
 
 interface CheckoutFaqProps {
+  title: string;
   items: FAQItem[];
   className?: string;
 }
 
-export function CheckoutFaq({ items, className = "" }: CheckoutFaqProps) {
+export function CheckoutFaq({ title, items, className = "" }: CheckoutFaqProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
     <div className={cn("border border-border-subtle bg-surface", className)}>
       <div className="p-5">
         <p className="mb-4 text-xs font-semibold tracking-[0.16em] text-text-muted uppercase">
-          Questions fréquentes
+          {title}
         </p>
         <div className="flex flex-col gap-3">
           {items.map((item, index) => (
@@ -31,7 +32,7 @@ export function CheckoutFaq({ items, className = "" }: CheckoutFaqProps) {
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="flex w-full items-center justify-between px-4 py-3.5 text-left text-sm font-medium text-text-soft transition-colors hover:bg-border-subtle"
+                className="flex w-full items-center justify-between px-4 py-3.5 text-start text-sm font-medium text-text-soft transition-colors hover:bg-border-subtle"
               >
                 <span>{item.question}</span>
                 <ChevronDown

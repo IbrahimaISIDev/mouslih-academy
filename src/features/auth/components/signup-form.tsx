@@ -39,8 +39,6 @@ function SignupForm({ redirectTo }: SignupFormProps) {
   const {
     register,
     handleSubmit,
-    watch,
-    setValue,
     control,
     formState: { errors, isSubmitted, isValid, isSubmitting },
   } = useForm<SignupFormValues>({
@@ -152,7 +150,7 @@ function SignupForm({ redirectTo }: SignupFormProps) {
               countrySelectProps={{
                 className: "text-[15px]",
               }}
-              inputProps={{
+              numberInputProps={{
                 className: "w-full flex-1 bg-transparent text-[15px] text-text outline-none placeholder:text-text-faint",
               }}
             />

@@ -6,7 +6,7 @@ import { Check } from "lucide-react";
 import type { Locale } from "@/lib/types";
 import { formatPrice, formatTotalDuration } from "@/lib/format";
 import { getCourse } from "@/features/catalog/api/get-course";
-import { getProfile } from "@/features/account/api/get-profile";
+import { getProfileOptional } from "@/features/account/api/get-profile";
 
 import { CheckoutHeader } from "@/features/checkout/components/checkout-header";
 import { WaveAccountCard } from "@/features/checkout/components/wave-account-card";
@@ -40,7 +40,7 @@ export default async function OrderSummaryPage({ params }: OrderPageProps) {
     getTranslations("catalog"),
     getTranslations("course"),
     getCourse(slug),
-    getProfile().catch(() => null), // Allow checkout without authentication
+    getProfileOptional(),
   ]);
 
   if (!course) notFound();
@@ -86,7 +86,7 @@ export default async function OrderSummaryPage({ params }: OrderPageProps) {
 
         {/* Countdown timer for urgency */}
         <div className="mb-6">
-          <CountdownTimer hours={23} minutes={59} />
+          <CountdownTimer hours={23} minutes={59} label={t("countdown.label")} />
         </div>
 
         {/* Continue as section for logged-in users */}
@@ -97,21 +97,21 @@ export default async function OrderSummaryPage({ params }: OrderPageProps) {
                 <User className="size-5" strokeWidth={1.8} />
               </div>
               <div>
-                <p className="text-xs text-text-muted">Connecté en tant que</p>
+                <p className="text-xs text-text-muted">{t("summary.loggedInAs")}</p>
                 <p className="text-sm font-semibold text-text-soft">
                   {profile.firstName} {profile.lastName}
                 </p>
               </div>
             </div>
-            <form action={async () => await logout(locale)}>
+            <form action={logout.bind(null, locale)}>
               <Button
                 type="submit"
                 variant="ghost"
                 size="sm"
                 className="h-8 text-xs text-text-muted hover:text-text-soft"
               >
-                <LogOut className="mr-1.5 size-3.5" strokeWidth={2} />
-                Changer
+                <LogOut className="me-1.5 size-3.5" strokeWidth={2} />
+                {t("summary.changeAccount")}
               </Button>
             </form>
           </div>
@@ -180,26 +180,7 @@ export default async function OrderSummaryPage({ params }: OrderPageProps) {
               ]}
             />
 
-            <CheckoutFaq
-              items={[
-                {
-                  question: "Comment accéder aux leçons après paiement ?",
-                  answer: "Une fois votre paiement validé, vous pourrez accéder immédiatement à toutes les leçons depuis votre tableau de bord. Vous recevrez également un email de confirmation.",
-                },
-                {
-                  question: "Puis-je payer en plusieurs fois ?",
-                  answer: "Actuellement, nous acceptons uniquement les paiements en une fois via Wave. Le paiement est sécurisé et instantané.",
-                },
-                {
-                  question: "Le certificat est-il reconnu ?",
-                  answer: "Oui, nos certificats sont reconnus et peuvent être partagés sur votre profil LinkedIn ou CV. Ils attestent de vos compétences acquises.",
-                },
-                {
-                  question: "Puis-je suivre la formation sur mobile ?",
-                  answer: "Absolument ! Notre plateforme est 100% responsive. Vous pouvez suivre vos formations sur ordinateur, tablette ou mobile, à tout moment.",
-                },
-              ]}
-            />
+            <CheckoutFaq title={t("faq.title")} items={t.raw("faq.items") as { question: string; answer: string }[]} />
           </div>
 
           <OrderSummaryCard
@@ -221,28 +202,28 @@ export default async function OrderSummaryPage({ params }: OrderPageProps) {
             whatsappHref={WHATSAPP_URL}
           />
 
-          {/* Social proof */}
-          <div className="rounded-sm border border-border-subtle bg-surface p-5">
-            <div className="mb-3 flex items-center gap-2 text-xs font-semibold tracking-[0.16em] text-text-muted uppercase">
-              <span className="h-2 w-2 rounded-full bg-green-600" />
-              Tendance
+          {/* Preuve sociale — uniquement affichée si des ventes réelles existent (voir
+              CoursesService.findBySlug) : pas de chiffre inventé. */}
+          {!!course.recentPurchasesCount && course.recentPurchasesCount > 0 && (
+            <div className="rounded-sm border border-border-subtle bg-surface p-5">
+              <div className="mb-3 flex items-center gap-2 text-xs font-semibold tracking-[0.16em] text-text-muted uppercase">
+                <span className="h-2 w-2 rounded-full bg-green-600" />
+                {t("socialProof.trending")}
+              </div>
+              <p className="text-sm text-text-soft">{t("socialProof.purchases", { count: course.recentPurchasesCount })}</p>
             </div>
-            <p className="text-sm text-text-soft">
-              <span className="font-semibold text-text">12 personnes</span> ont acheté cette formation cette semaine
-            </p>
-          </div>
+          )}
 
-          {/* Guarantee badge */}
+          {/* Guarantee badge — même politique (7 jours) que refundNote ci-dessus et la page
+              légale /politique-remboursement, pour ne pas afficher deux durées différentes. */}
           <div className="rounded-sm border border-success-border bg-success-bg p-5">
             <div className="flex items-start gap-3">
               <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-green-800 text-white">
                 <Shield className="size-5" strokeWidth={1.8} />
               </div>
               <div>
-                <p className="mb-1 text-sm font-semibold text-whatsapp-hover">Satisfait ou remboursé</p>
-                <p className="text-xs text-whatsapp-muted">
-                  30 jours pour essayer. Si vous n'êtes pas satisfait, nous vous remboursons intégralement.
-                </p>
+                <p className="mb-1 text-sm font-semibold text-whatsapp-hover">{t("guarantee.title")}</p>
+                <p className="text-xs text-whatsapp-muted">{t("guarantee.body")}</p>
               </div>
             </div>
           </div>

@@ -13,6 +13,12 @@ export function localizeDigits(value: string, locale: Locale): string {
   return locale === "ar" ? toArabicDigits(value) : value;
 }
 
+/** Nombre de jours pleins écoulés depuis une date ISO (0 = aujourd'hui). */
+export function daysAgo(dateIso: string): number {
+  const elapsedMs = Date.now() - new Date(dateIso).getTime();
+  return Math.max(0, Math.floor(elapsedMs / 86_400_000));
+}
+
 /** Formate un prix en francs CFA : "15 000 F" (fr/en) ou "١٥٠٠٠ فرنك" (ar). */
 export function formatPrice(amountXof: number, locale: Locale): string {
   if (locale === "ar") {

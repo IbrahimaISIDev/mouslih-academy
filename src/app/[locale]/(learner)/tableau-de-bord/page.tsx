@@ -3,7 +3,7 @@ import { BookOpen, MessageCircle } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/lib/types";
-import { formatDuration, localizeDigits } from "@/lib/format";
+import { daysAgo, formatDuration, localizeDigits } from "@/lib/format";
 import { getCourses } from "@/features/catalog/api/get-courses";
 import { getEnrollments } from "@/features/learning/api/get-enrollments";
 import { getProfile } from "@/features/account/api/get-profile";
@@ -64,16 +64,19 @@ export default async function DashboardPage({
     profile: tNav("profile"),
   });
 
-  const doneThisWeek = 3;
-  const remainingThisWeek = 6;
-  const fatiha = courses.find((c) => c.slug === "rectification-fatiha")!;
-
   const inProgress = enrollments.find(
     (e) => !e.completedAt && e.currentLessonId,
   );
   const inProgressCourse = inProgress
     ? courses.find((c) => c.id === inProgress.courseId)
     : undefined;
+  const lessonsRemainingInCourse =
+    inProgress && inProgressCourse
+      ? Math.max(
+          0,
+          inProgressCourse.lessonCount - inProgress.completedLessonIds.length,
+        )
+      : 0;
   const location =
     inProgress && inProgressCourse
       ? findLessonLocation(inProgressCourse, inProgress.currentLessonId)
@@ -110,24 +113,29 @@ export default async function DashboardPage({
           <h1 className="mb-1.5 font-serif text-[28px] font-medium tracking-[-0.01em] lg:mb-2 lg:text-[40px]">
             {t("welcomeTitle", { name: profile.firstName })}
           </h1>
-          <p className="text-sm text-text-muted lg:text-base">
-            <span className="lg:hidden">
-              {localizeDigits(
-                t("weeklyProgressMobile", { done: doneThisWeek, remaining: remainingThisWeek }),
-                locale,
-              )}
-            </span>
-            <span className="hidden lg:inline">
-              {localizeDigits(
-                t("weeklyProgress", {
-                  done: doneThisWeek,
-                  remaining: remainingThisWeek,
-                  course: fatiha.title[locale],
-                }),
-                locale,
-              )}
-            </span>
-          </p>
+          {inProgress && inProgressCourse && (
+            <p className="text-sm text-text-muted lg:text-base">
+              <span className="lg:hidden">
+                {localizeDigits(
+                  t("weeklyProgressMobile", {
+                    done: profile.lessonsCompletedThisWeek,
+                    remaining: lessonsRemainingInCourse,
+                  }),
+                  locale,
+                )}
+              </span>
+              <span className="hidden lg:inline">
+                {localizeDigits(
+                  t("weeklyProgress", {
+                    done: profile.lessonsCompletedThisWeek,
+                    remaining: lessonsRemainingInCourse,
+                    course: inProgressCourse.title[locale],
+                  }),
+                  locale,
+                )}
+              </span>
+            </p>
+          )}
         </div>
 
         {inProgress && inProgressCourse && location && (
@@ -215,7 +223,14 @@ export default async function DashboardPage({
                         })
                       : status === "notStarted"
                         ? t("neverStarted")
-                        : localizeDigits(t("lastSeenDaysAgo", { days: 2 }), locale);
+                        : localizeDigits(
+                            t("lastSeenDaysAgo", {
+                              days: enrollment.lastActivityAt
+                                ? daysAgo(enrollment.lastActivityAt)
+                                : 0,
+                            }),
+                            locale,
+                          );
 
                   const actionLabel =
                     status === "completed"
@@ -243,7 +258,11 @@ export default async function DashboardPage({
                       statusLabel={t(`status.${status}`)}
                       progressPct={pct}
                       progressLabel={localizeDigits(
-                        t("progressLabel", { done: doneCount, total: course.lessonCount, pct }),
+                        t("progressLabel", {
+                          done: doneCount,
+                          total: course.lessonCount,
+                          pct,
+                        }),
                         locale,
                       )}
                       actionLabel={actionLabel}

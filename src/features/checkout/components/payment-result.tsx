@@ -7,6 +7,7 @@ import type { Course, Locale, Order, OrderStatus } from "@/lib/types";
 import type { LearnerProfile } from "@/mocks/learner";
 import { formatPrice } from "@/lib/format";
 import { getOrderClient } from "@/features/checkout/api/get-order-client";
+import { useCart } from "@/lib/use-cart";
 import { SuccessState } from "@/features/checkout/components/success-state";
 import { PendingState } from "@/features/checkout/components/pending-state";
 import { FailedState } from "@/features/checkout/components/failed-state";
@@ -48,6 +49,15 @@ function PaymentResult({ locale, course, profile, initialOrder, statusOverride }
   const displayStatus = statusOverride ?? toDisplayStatus(order.status);
   const amountLabel = formatPrice(order.amountXof, locale);
   const title = course.title[locale];
+
+  const { cartItem, clearCart } = useCart();
+  useEffect(() => {
+    // Sans ça, le rappel "commande en cours" (voir CartNotification) continuerait d'apparaître
+    // sur d'autres pages alors que l'achat est déjà finalisé.
+    if (displayStatus === "success" && cartItem?.courseSlug === course.slug) {
+      clearCart();
+    }
+  }, [displayStatus, cartItem, clearCart, course.slug]);
 
   const refresh = useCallback(async () => {
     setRefreshing(true);

@@ -6,10 +6,11 @@ import { Clock } from "lucide-react";
 interface CountdownTimerProps {
   hours?: number;
   minutes?: number;
+  label: string;
   className?: string;
 }
 
-export function CountdownTimer({ hours = 23, minutes = 59, className = "" }: CountdownTimerProps) {
+export function CountdownTimer({ hours = 23, minutes = 59, label, className = "" }: CountdownTimerProps) {
   const [timeLeft, setTimeLeft] = useState({
     hours,
     minutes,
@@ -40,7 +41,7 @@ export function CountdownTimer({ hours = 23, minutes = 59, className = "" }: Cou
   return (
     <div className={`flex items-center gap-2 text-sm font-semibold text-orange-600 ${className}`}>
       <Clock className="size-4" strokeWidth={2} />
-      <span>Offre expirée dans</span>
+      <span>{label}</span>
       <span className="font-mono">
         {formatTime(timeLeft.hours)}:{formatTime(timeLeft.minutes)}:{formatTime(timeLeft.seconds)}
       </span>

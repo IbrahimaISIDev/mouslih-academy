@@ -505,7 +505,47 @@
       "payButton": "Pay with Wave",
       "secureTransaction": "Secure transaction by Wave Senegal",
       "refundNote": "Full refund within 7 days if the course isn't right for you.",
-      "questionBeforePaying": "A question before paying?"
+      "questionBeforePaying": "A question before paying?",
+      "loggedInAs": "Logged in as",
+      "changeAccount": "Switch"
+    },
+    "countdown": {
+      "label": "Offer expires in"
+    },
+    "socialProof": {
+      "trending": "Trending",
+      "purchases": "{count} people bought this course this week"
+    },
+    "guarantee": {
+      "title": "Satisfaction guaranteed",
+      "body": "7 days to try it out. If you're not satisfied, we'll refund you in full."
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "items": [
+        {
+          "question": "How do I access the lessons after paying?",
+          "answer": "Once your payment is confirmed, you'll get immediate access to all lessons from your dashboard. You'll also receive a confirmation e-mail."
+        },
+        {
+          "question": "Can I pay in installments?",
+          "answer": "Right now we only accept one-time payments via Wave. Payment is secure and instant."
+        },
+        {
+          "question": "Is the certificate recognized?",
+          "answer": "Yes, our certificates are personalized and can be shared on your LinkedIn profile or CV. They attest to the skills acquired during the course."
+        },
+        {
+          "question": "Can I follow the course on mobile?",
+          "answer": "Absolutely! Our platform is fully mobile-friendly. You can follow your courses on computer, tablet, or phone, anytime."
+        }
+      ]
+    },
+    "cartNotification": {
+      "title": "Order in progress",
+      "body": "You have an order in progress for \"{course}\".",
+      "continueBtn": "Continue",
+      "dismissBtn": "Dismiss"
     },
     "redirect": {
       "title": "Redirecting to Wave…",

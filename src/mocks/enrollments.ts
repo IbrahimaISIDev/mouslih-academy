@@ -8,6 +8,7 @@ export const aminataEnrollments: Enrollment[] = [
     currentLessonId: "l6",
     resumeAtSeconds: 252,
     completedAt: null,
+    lastActivityAt: "2026-08-29",
   },
   {
     courseId: "c-initiation-nourania",
@@ -15,6 +16,7 @@ export const aminataEnrollments: Enrollment[] = [
     currentLessonId: "",
     resumeAtSeconds: 0,
     completedAt: null,
+    lastActivityAt: null,
   },
   {
     courseId: "c-fiqh-priere",
@@ -35,5 +37,6 @@ export const aminataEnrollments: Enrollment[] = [
     currentLessonId: "fiqh-l12",
     resumeAtSeconds: 0,
     completedAt: "2026-07-12",
+    lastActivityAt: "2026-07-12",
   },
 ];

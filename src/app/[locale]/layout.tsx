@@ -107,7 +107,10 @@ export default async function LocaleLayout({
     >
       <head>
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#065f46" />
+        {/* Un <meta> HTML ne peut pas référencer une variable CSS : valeur en dur alignée sur
+            --color-green-800 (globals.css) volontairement, pas de token Tailwind possible ici. */}
+        {/* eslint-disable-next-line no-restricted-syntax */}
+        <meta name="theme-color" content="#1d5d26" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Mouslih" />

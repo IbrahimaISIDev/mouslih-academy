@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const CART_STORAGE_KEY = "mouslih_cart";
 
@@ -35,7 +35,10 @@ export function useCart() {
     }
   }, []);
 
-  const saveToCart = (courseSlug: string, courseTitle: string) => {
+  // Références stables (useCallback) : sinon chaque render de useCart() renvoie de nouvelles
+  // fonctions, et un useEffect qui les liste en dépendance (CartSaver, CartNotificationWrapper)
+  // se redéclenche à l'infini — "Maximum update depth exceeded" observé sur la page de commande.
+  const saveToCart = useCallback((courseSlug: string, courseTitle: string) => {
     const item: CartItem = {
       courseSlug,
       courseTitle,
@@ -43,17 +46,17 @@ export function useCart() {
     };
     localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(item));
     setCartItem(item);
-  };
+  }, []);
 
-  const clearCart = () => {
+  const clearCart = useCallback(() => {
     localStorage.removeItem(CART_STORAGE_KEY);
     setCartItem(null);
     setShowNotification(false);
-  };
+  }, []);
 
-  const dismissNotification = () => {
+  const dismissNotification = useCallback(() => {
     setShowNotification(false);
-  };
+  }, []);
 
   return {
     cartItem,

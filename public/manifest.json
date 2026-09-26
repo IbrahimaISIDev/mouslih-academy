@@ -1,11 +1,11 @@
 {
   "name": "Mouslih Academy",
   "short_name": "Mouslih",
-  "description": "Plateforme d'apprentissage en ligne pour les formations professionnelles",
+  "description": "Apprenez le Coran, le Tajwid et les sciences islamiques à votre rythme, avec correction personnalisée.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#065f46",
+  "theme_color": "#1d5d26",
   "orientation": "portrait-primary",
   "icons": [
     {

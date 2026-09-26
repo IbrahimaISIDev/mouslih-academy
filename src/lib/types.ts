@@ -67,6 +67,9 @@ export interface Course {
   hasCertificate: boolean;
   hasVoiceCorrection: boolean;
   translationStatus: Record<Locale, "complete" | "partial" | "empty">;
+  /** Ventes réelles des 7 derniers jours — uniquement renseigné sur la page de commande (voir
+   *  CoursesService.findBySlug côté API), absent ailleurs (catalogue, accueil). */
+  recentPurchasesCount?: number;
 }
 
 export interface Enrollment {
@@ -75,6 +78,7 @@ export interface Enrollment {
   currentLessonId: string;
   resumeAtSeconds: number;
   completedAt: string | null;
+  lastActivityAt: string | null;
 }
 
 export interface Order {

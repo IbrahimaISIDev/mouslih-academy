@@ -505,7 +505,47 @@
       "payButton": "Payer avec Wave",
       "secureTransaction": "Transaction sécurisée par Wave Sénégal",
       "refundNote": "Remboursement intégral sous 7 jours si la formation ne vous convient pas.",
-      "questionBeforePaying": "Une question avant de payer ?"
+      "questionBeforePaying": "Une question avant de payer ?",
+      "loggedInAs": "Connecté en tant que",
+      "changeAccount": "Changer"
+    },
+    "countdown": {
+      "label": "Offre expirée dans"
+    },
+    "socialProof": {
+      "trending": "Tendance",
+      "purchases": "{count} personnes ont acheté cette formation cette semaine"
+    },
+    "guarantee": {
+      "title": "Satisfait ou remboursé",
+      "body": "7 jours pour essayer. Si vous n'êtes pas satisfait, nous vous remboursons intégralement."
+    },
+    "faq": {
+      "title": "Questions fréquentes",
+      "items": [
+        {
+          "question": "Comment accéder aux leçons après paiement ?",
+          "answer": "Une fois votre paiement validé, vous pourrez accéder immédiatement à toutes les leçons depuis votre tableau de bord. Vous recevrez également un e-mail de confirmation."
+        },
+        {
+          "question": "Puis-je payer en plusieurs fois ?",
+          "answer": "Actuellement, nous acceptons uniquement les paiements en une fois via Wave. Le paiement est sécurisé et instantané."
+        },
+        {
+          "question": "Le certificat est-il reconnu ?",
+          "answer": "Oui, nos attestations sont nominatives et peuvent être partagées sur votre profil LinkedIn ou CV. Elles attestent des compétences acquises pendant la formation."
+        },
+        {
+          "question": "Puis-je suivre la formation sur mobile ?",
+          "answer": "Absolument ! Notre plateforme est entièrement adaptée au mobile. Vous pouvez suivre vos formations sur ordinateur, tablette ou téléphone, à tout moment."
+        }
+      ]
+    },
+    "cartNotification": {
+      "title": "Commande en cours",
+      "body": "Vous avez une commande en cours pour « {course} ».",
+      "continueBtn": "Continuer",
+      "dismissBtn": "Ignorer"
     },
     "redirect": {
       "title": "Redirection vers Wave…",
