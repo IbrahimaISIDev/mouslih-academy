@@ -21,7 +21,21 @@ export class ClientApiError extends Error {
   }
 }
 
-export async function clientApiFetch<T>(path: string, init?: RequestInit): Promise<T> {
+function extractErrorMessage(body: unknown, fallback: string): string {
+  if (body && typeof body === "object" && "message" in body) {
+    const message = (body as { message: unknown }).message;
+    if (typeof message === "string") return message;
+    if (Array.isArray(message) && message.every((m) => typeof m === "string")) {
+      return message.join(" ");
+    }
+  }
+  return fallback;
+}
+
+export async function clientApiFetch<T>(
+  path: string,
+  init?: RequestInit,
+): Promise<T> {
   const response = await fetch(`/api/backend${path}`, {
     ...init,
     headers: { "Content-Type": "application/json", ...init?.headers },
@@ -33,8 +47,10 @@ export async function clientApiFetch<T>(path: string, init?: RequestInit): Promi
     // côté admin plutôt qu'un générique "PATCH /x → 409".
     const fallback = `${init?.method ?? "GET"} ${path} → ${response.status}`;
     const body = await response.json().catch(() => null);
-    const message = body && typeof body.message === "string" ? body.message : fallback;
-    throw new ClientApiError(response.status, message);
+    throw new ClientApiError(
+      response.status,
+      extractErrorMessage(body, fallback),
+    );
   }
   if (response.status === 204) return undefined as T;
   return (await response.json()) as T;

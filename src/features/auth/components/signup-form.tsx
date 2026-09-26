@@ -11,10 +11,13 @@ import { signup } from "@/features/auth/api/signup";
 import { getPasswordStrength } from "@/features/auth/password-strength";
 import { cn } from "@/lib/utils";
 import { safeRedirectPath } from "@/lib/safe-redirect";
+import { Alert } from "@/components/patterns/alert";
 
 const PhoneInput = dynamic(() => import("react-phone-number-input"), {
   ssr: false,
-  loading: () => <div className="h-11 animate-pulse bg-border-subtle rounded-sm" />,
+  loading: () => (
+    <div className="h-11 animate-pulse bg-border-subtle rounded-sm" />
+  ),
 });
 
 import "react-phone-number-input/style.css";
@@ -35,12 +38,13 @@ function SignupForm({ redirectTo }: SignupFormProps) {
   const tStrength = useTranslations("auth.passwordStrength");
   const router = useRouter();
   const [password, setPassword] = useState("");
+  const [serverError, setServerError] = useState<string | null>(null);
 
   const {
     register,
     handleSubmit,
     control,
-    formState: { errors, isSubmitted, isValid, isSubmitting },
+    formState: { errors, isSubmitted, isSubmitting },
   } = useForm<SignupFormValues>({
     resolver: zodResolver(signupSchema),
     mode: "onBlur",
@@ -76,7 +80,14 @@ function SignupForm({ redirectTo }: SignupFormProps) {
         : tStrength("hintAddUppercase");
 
   async function onSubmit(values: SignupFormValues) {
-    await signup(signupSchema.parse(values));
+    setServerError(null);
+    const result = await signup(signupSchema.parse(values));
+    if (!result.success) {
+      setServerError(
+        result.message === "unknown" ? t("errorFallback") : result.message,
+      );
+      return;
+    }
     router.push(safeRedirectPath(redirectTo) ?? "/tableau-de-bord");
   }
 
@@ -86,6 +97,14 @@ function SignupForm({ redirectTo }: SignupFormProps) {
       noValidate
       className="flex flex-col gap-4.5"
     >
+      {serverError && (
+        <Alert
+          variant="failed"
+          title={t("errorTitle")}
+          description={serverError}
+        />
+      )}
+
       <div className="grid grid-cols-2 gap-4">
         <div>
           <Label htmlFor="signup-firstname" className="mb-2 block">
@@ -151,7 +170,8 @@ function SignupForm({ redirectTo }: SignupFormProps) {
                 className: "text-[15px]",
               }}
               numberInputProps={{
-                className: "w-full flex-1 bg-transparent text-[15px] text-text outline-none placeholder:text-text-faint",
+                className:
+                  "w-full flex-1 bg-transparent text-[15px] text-text outline-none placeholder:text-text-faint",
               }}
             />
           )}
@@ -231,12 +251,16 @@ function SignupForm({ redirectTo }: SignupFormProps) {
       />
       <FieldError message={errors.acceptTerms?.message} />
 
+      {/* `errors` plutôt que `formState.isValid` : avec des champs Controller (téléphone, case à
+          cocher) et mode "onBlur", isValid reste bloqué à false même une fois le formulaire
+          validé avec succès (aucune erreur), ce qui désactivait le bouton en permanence après
+          toute soumission — validation ou non. */}
       <Button
         type="submit"
         size="lg"
         loading={isSubmitting}
         loadingLabel={t("submitLoading")}
-        disabled={isSubmitted && !isValid}
+        disabled={isSubmitted && Object.keys(errors).length > 0}
       >
         {t("submit")}
       </Button>

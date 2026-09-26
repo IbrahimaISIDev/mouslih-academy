@@ -31,7 +31,7 @@ function LoginForm({ redirectTo }: LoginFormProps) {
     register,
     handleSubmit,
     control,
-    formState: { errors, isSubmitted, isValid, isSubmitting },
+    formState: { errors, isSubmitted, isSubmitting },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     mode: "onBlur",
@@ -111,12 +111,15 @@ function LoginForm({ redirectTo }: LoginFormProps) {
         )}
       />
 
+      {/* `errors` plutôt que `formState.isValid` : avec un champ Controller (case à cocher) et
+          mode "onBlur", isValid reste bloqué à false même après une soumission sans aucune
+          erreur — voir le même correctif sur SignupForm. */}
       <Button
         type="submit"
         size="lg"
         loading={isSubmitting}
         loadingLabel={t("submitLoading")}
-        disabled={isSubmitted && !isValid}
+        disabled={isSubmitted && Object.keys(errors).length > 0}
       >
         {t("submit")}
       </Button>

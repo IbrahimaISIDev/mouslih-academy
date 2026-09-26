@@ -285,6 +285,8 @@
       "submit": "Créer mon compte",
       "submitLoading": "Création…",
       "finalHelp": "Vous recevrez un e-mail de confirmation. Aucun paiement à cette étape.",
+      "errorTitle": "Impossible de créer le compte",
+      "errorFallback": "Une erreur est survenue. Réessayez.",
       "helpText": "Besoin d'aide ?",
       "helpLink": "Écrivez-nous"
     }

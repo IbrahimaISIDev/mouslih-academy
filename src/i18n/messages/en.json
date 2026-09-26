@@ -285,6 +285,8 @@
       "submit": "Create my account",
       "submitLoading": "Creating…",
       "finalHelp": "You will receive a confirmation email. No payment at this step.",
+      "errorTitle": "Could not create your account",
+      "errorFallback": "Something went wrong. Please try again.",
       "helpText": "Need help?",
       "helpLink": "Write to us"
     }
