@@ -8,7 +8,7 @@ import { LanguageSwitcher } from "@/components/patterns/language-switcher";
 
 export const metadata: Metadata = { title: "Connexion — Mouslih Academy" };
 
-const WHATSAPP_URL = "https://wa.me/221770000000";
+const WHATSAPP_URL = "https://wa.me/221771542311";
 
 interface ConnexionPageProps {
   searchParams: Promise<{ redirect?: string }>;

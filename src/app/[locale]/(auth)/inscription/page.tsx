@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: "Créer un compte — Mouslih Academy",
 };
 
-const WHATSAPP_URL = "https://wa.me/221770000000";
+const WHATSAPP_URL = "https://wa.me/221771542311";
 
 interface InscriptionPageProps {
   searchParams: Promise<{ redirect?: string }>;

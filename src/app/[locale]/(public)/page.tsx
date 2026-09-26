@@ -19,7 +19,7 @@ import { TestimonialCard } from "@/components/patterns/testimonial-card";
 import { DirectionalIcon } from "@/components/patterns/directional-icon";
 import { AnimatedCounter } from "@/components/patterns/animated-counter";
 
-const WHATSAPP_URL = "https://wa.me/221770000000";
+const WHATSAPP_URL = "https://wa.me/221771542311";
 const HERO_LEARNERS_COUNT = 1240;
 const HERO_COURSES_COUNT = 6;
 

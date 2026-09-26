@@ -29,7 +29,7 @@ import { LevelBadge } from "@/components/patterns/level-badge";
 import { GeometricPattern } from "@/components/patterns/geometric-pattern";
 import { StickyCta } from "@/components/patterns/sticky-cta";
 
-const WHATSAPP_URL = "https://wa.me/221770000000";
+const WHATSAPP_URL = "https://wa.me/221771542311";
 
 /**
  * Vérification d'appartenance "douce" : cette page reste publique (visiteurs anonymes inclus),

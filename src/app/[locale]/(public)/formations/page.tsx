@@ -8,7 +8,7 @@ import { CatalogBrowser } from "@/features/catalog/components/catalog-browser";
 import { PublicHeader } from "@/components/layout/public-header";
 import { Footer } from "@/components/layout/footer";
 
-const WHATSAPP_URL = "https://wa.me/221770000000";
+const WHATSAPP_URL = "https://wa.me/221771542311";
 
 interface CataloguePageProps {
   params: Promise<{ locale: string }>;

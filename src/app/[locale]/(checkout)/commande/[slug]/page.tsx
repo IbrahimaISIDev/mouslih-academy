@@ -25,7 +25,7 @@ import { logout } from "@/features/auth/api/logout";
 
 export const metadata: Metadata = { title: "Vérifiez votre commande — Mouslih Academy" };
 
-const WHATSAPP_URL = "https://wa.me/221770000000";
+const WHATSAPP_URL = "https://wa.me/221771542311";
 
 interface OrderPageProps {
   params: Promise<{ locale: string; slug: string }>;

@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { buildFooterColumns } from "@/lib/footer-columns";
 import { LegalPageLayout, type LegalSection } from "@/features/legal/components/legal-page-layout";
 
-const WHATSAPP_URL = "https://wa.me/221770000000";
+const WHATSAPP_URL = "https://wa.me/221771542311";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("legal.refund");

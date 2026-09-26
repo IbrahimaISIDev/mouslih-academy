@@ -10,7 +10,7 @@ import { SectionEyebrow } from "@/components/patterns/section-eyebrow";
 
 export const metadata: Metadata = { title: "Contact — Mouslih Academy" };
 
-const WHATSAPP_URL = "https://wa.me/221770000000";
+const WHATSAPP_URL = "https://wa.me/221771542311";
 const REASON_KEYS = ["course", "payment", "correction", "other"] as const;
 const REASON_ICONS = { course: BookOpen, payment: Smartphone, correction: Mic, other: MessageCircleQuestion };
 

@@ -137,7 +137,7 @@ function PaymentResult({ locale, course, profile, initialOrder, statusOverride }
         retryButtonLabel={t("failed.retryButton")}
         retryHref={`/${locale}/commande/${course.slug}`}
         contactSupportLabel={t("failed.contactSupport")}
-        whatsappHref="https://wa.me/221770000000"
+        whatsappHref="https://wa.me/221771542311"
       />
     );
   }

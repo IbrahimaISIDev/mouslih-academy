@@ -12,7 +12,7 @@ import { Link } from "@/i18n/navigation";
 
 export const metadata: Metadata = { title: "Témoignages — Mouslih Academy" };
 
-const WHATSAPP_URL = "https://wa.me/221770000000";
+const WHATSAPP_URL = "https://wa.me/221771542311";
 
 interface TemoignagesPageProps {
   params: Promise<{ locale: string }>;
