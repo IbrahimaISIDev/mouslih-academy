@@ -38,7 +38,9 @@ export default async function TermsPage() {
       footerColumns={footerColumns}
       whatsappHref={WHATSAPP_URL}
       whatsappLabel={WHATSAPP_DISPLAY}
-      copyright={tCommon("footer.copyright")}
+      copyright={tCommon("footer.copyright", {
+        year: new Date().getFullYear(),
+      })}
       paymentNote={tCommon("footer.paymentNote")}
       eyebrow={t("eyebrow")}
       title={t("title")}

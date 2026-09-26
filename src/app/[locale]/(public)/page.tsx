@@ -346,7 +346,9 @@ export default async function HomePage({ params }: HomePageProps) {
         columns={footerColumns}
         whatsappHref={WHATSAPP_URL}
         whatsappLabel={WHATSAPP_DISPLAY}
-        copyright={tCommon("footer.copyright")}
+        copyright={tCommon("footer.copyright", {
+          year: new Date().getFullYear(),
+        })}
         paymentNote={tCommon("footer.paymentNote")}
       />
 

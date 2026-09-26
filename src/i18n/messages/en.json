@@ -47,8 +47,8 @@
         "Terms",
         "Privacy"
       ],
-      "copyright": "© 2026 Mouslih Academy · Dakar, Senegal",
-      "copyrightMobile": "© 2026 Mouslih Academy · Dakar",
+      "copyright": "© {year} Mouslih Academy · Dakar, Senegal",
+      "copyrightMobile": "© {year} Mouslih Academy · Dakar",
       "paymentNote": "Secure payment by Wave"
     }
   },
