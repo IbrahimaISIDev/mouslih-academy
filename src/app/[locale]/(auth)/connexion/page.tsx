@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import type { Locale } from "@/lib/types";
+import { formatCount } from "@/lib/format";
+import { getPublicStats } from "@/features/catalog/api/get-public-stats";
 import { AuthSidePanel } from "@/features/auth/components/auth-side-panel";
 import { AuthHelpLine } from "@/features/auth/components/auth-help-line";
 import { LoginForm } from "@/features/auth/components/login-form";
@@ -9,18 +12,28 @@ import { WHATSAPP_URL } from "@/lib/contact";
 
 export const metadata: Metadata = { title: "Connexion — Mouslih Academy" };
 
+// Page pré-rendue statiquement : sans revalidation, le nombre réel d'apprenants (statLine)
+// resterait figé à sa valeur au moment du build.
+export const revalidate = 3600;
+
 interface ConnexionPageProps {
+  params: Promise<{ locale: string }>;
   searchParams: Promise<{ redirect?: string }>;
 }
 
 export default async function ConnexionPage({
+  params,
   searchParams,
 }: ConnexionPageProps) {
-  const [{ redirect }, t, tSide] = await Promise.all([
-    searchParams,
-    getTranslations("auth.login"),
-    getTranslations("auth.sidePanel"),
-  ]);
+  const [{ locale: rawLocale }, { redirect }, t, tSide, publicStats] =
+    await Promise.all([
+      params,
+      searchParams,
+      getTranslations("auth.login"),
+      getTranslations("auth.sidePanel"),
+      getPublicStats(),
+    ]);
+  const locale = rawLocale as Locale;
   const signupHref = redirect
     ? `/inscription?redirect=${encodeURIComponent(redirect)}`
     : "/inscription";
@@ -32,7 +45,9 @@ export default async function ConnexionPage({
         sideTitle={t("sideTitle")}
         sideBody={t("sideBody")}
         bullets={tSide.raw("bullets")}
-        statLine={tSide("statLine")}
+        statLine={tSide("statLine", {
+          count: formatCount(publicStats.learnersCount, locale),
+        })}
       />
 
       <div className="flex flex-col px-5 py-7 lg:h-full lg:px-15 lg:py-10">

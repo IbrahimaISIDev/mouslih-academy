@@ -27,6 +27,14 @@ export function formatPrice(amountXof: number, locale: Locale): string {
   return `${new Intl.NumberFormat("fr-FR").format(amountXof)} F`;
 }
 
+/** Formate un compteur éditorial (ex. nombre d'apprenants) : "1 240" (fr/en) ou "١٢٤٠" (ar). */
+export function formatCount(value: number, locale: Locale): string {
+  if (locale === "ar") {
+    return toArabicDigits(String(value));
+  }
+  return new Intl.NumberFormat("fr-FR").format(value);
+}
+
 /** Formate une durée de leçon en mm:ss : formatDuration(1090) → "18:10". */
 export function formatDuration(durationSeconds: number): string {
   const minutes = Math.floor(durationSeconds / 60);

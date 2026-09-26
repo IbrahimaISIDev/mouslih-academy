@@ -237,7 +237,7 @@
         "Progression enregistrée leçon par leçon",
         "Correction personnalisée de votre récitation"
       ],
-      "statLine": "1 240 apprenants au Sénégal et en diaspora"
+      "statLine": "{count} apprenants au Sénégal et en diaspora"
     },
     "passwordStrength": {
       "weak": "Faible",

@@ -237,7 +237,7 @@
         "Progress saved lesson by lesson",
         "Personalized correction of your recitation"
       ],
-      "statLine": "1,240 learners in Senegal and abroad"
+      "statLine": "{count} learners in Senegal and abroad"
     },
     "passwordStrength": {
       "weak": "Weak",

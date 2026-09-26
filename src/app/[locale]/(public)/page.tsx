@@ -12,6 +12,7 @@ import type { Locale } from "@/lib/types";
 import { formatPrice, formatTotalDuration } from "@/lib/format";
 import { buildFooterColumns } from "@/lib/footer-columns";
 import { getCourses } from "@/features/catalog/api/get-courses";
+import { getPublicStats } from "@/features/catalog/api/get-public-stats";
 import { getTestimonials } from "@/features/catalog/api/get-testimonials";
 
 import { Button } from "@/components/ui/button";
@@ -26,8 +27,9 @@ import { DirectionalIcon } from "@/components/patterns/directional-icon";
 import { AnimatedCounter } from "@/components/patterns/animated-counter";
 import { WHATSAPP_DISPLAY, WHATSAPP_URL } from "@/lib/contact";
 
-const HERO_LEARNERS_COUNT = 1240;
-const HERO_COURSES_COUNT = 6;
+// Page pré-rendue statiquement (generateStaticParams) : sans revalidation, le nombre réel
+// d'apprenants et de formations resterait figé à sa valeur au moment du build.
+export const revalidate = 3600;
 
 interface HomePageProps {
   params: Promise<{ locale: string }>;
@@ -43,7 +45,7 @@ export default async function HomePage({ params }: HomePageProps) {
     "t-fatou-ndiaye",
   ];
 
-  const [t, tNav, tCommon, tCatalog, featured, allTestimonials] =
+  const [t, tNav, tCommon, tCatalog, featured, allTestimonials, publicStats] =
     await Promise.all([
       getTranslations("home"),
       getTranslations("nav"),
@@ -51,6 +53,7 @@ export default async function HomePage({ params }: HomePageProps) {
       getTranslations("catalog"),
       getCourses({ featured: true }),
       getTestimonials(),
+      getPublicStats(),
     ]);
 
   const testimonials = HOME_TESTIMONIAL_IDS.map((id) =>
@@ -122,7 +125,7 @@ export default async function HomePage({ params }: HomePageProps) {
             <div className="mt-8 flex gap-6 border-t border-green-300/25 pt-4.5 lg:mt-11 lg:gap-10 lg:border-t-0 lg:pt-0">
               <div>
                 <AnimatedCounter
-                  value={HERO_LEARNERS_COUNT}
+                  value={publicStats.learnersCount}
                   locale={locale}
                   className="font-serif text-xl lg:text-[27px]"
                 />
@@ -137,7 +140,7 @@ export default async function HomePage({ params }: HomePageProps) {
               </div>
               <div>
                 <AnimatedCounter
-                  value={HERO_COURSES_COUNT}
+                  value={publicStats.coursesCount}
                   locale={locale}
                   className="font-serif text-xl lg:text-[27px]"
                 />
