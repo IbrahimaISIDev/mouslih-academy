@@ -35,6 +35,7 @@ import { DirectionalIcon } from "@/components/patterns/directional-icon";
 import { LessonSidebar } from "@/features/learning/components/lesson-sidebar";
 import { LessonTabs } from "@/features/learning/components/lesson-tabs";
 import { WHATSAPP_URL } from "@/lib/contact";
+import { ClientApiError } from "@/lib/client-fetch";
 
 const VideoPlayer = dynamic(
   () =>
@@ -73,7 +74,16 @@ function LessonPlayerView({
   const router = useRouter();
   const { lesson, module, lessonIndex, totalLessons } = location;
 
-  const { data: enrollment } = useEnrollment(course.id, isAuthenticated);
+  const { data: enrollment, error: enrollmentError } = useEnrollment(
+    course.id,
+    isAuthenticated,
+  );
+  // Cookie de session présent mais jeton expiré : on traite l'utilisateur comme un visiteur
+  // (bandeau de connexion, retour à la formation) plutôt que comme un apprenant connecté.
+  const isGuest =
+    !isAuthenticated ||
+    (enrollmentError instanceof ClientApiError &&
+      enrollmentError.status === 401);
   const completeLessonMutation = useCompleteLesson();
   // Progression côté serveur réservée aux inscrits ; sinon, reprise sur cet appareil seulement.
   const savePosition = useSaveLessonPosition(
@@ -178,9 +188,7 @@ function LessonPlayerView({
       {/* Barre supérieure */}
       <div className="flex h-14 items-center gap-5 bg-green-900 px-5 text-on-dark-soft lg:px-5.5">
         <Link
-          href={
-            isAuthenticated ? "/tableau-de-bord" : `/formations/${course.slug}`
-          }
+          href={isGuest ? `/formations/${course.slug}` : "/tableau-de-bord"}
           className="flex items-center gap-2.5 text-sm"
         >
           <DirectionalIcon
@@ -189,7 +197,7 @@ function LessonPlayerView({
             strokeWidth={1.7}
           />
           <span className="hidden lg:inline">
-            {isAuthenticated ? t("backToDashboard") : t("backToCourse")}
+            {isGuest ? t("backToCourse") : t("backToDashboard")}
           </span>
         </Link>
         <span className="hidden h-5.5 w-px bg-green-300/30 lg:block" />
@@ -279,7 +287,7 @@ function LessonPlayerView({
             </div>
           )}
 
-          {!isAuthenticated && playback && (
+          {isGuest && playback && (
             <div className="flex flex-col gap-3 border-b border-border-subtle bg-gold-50 px-5 py-4 sm:flex-row sm:items-center lg:px-7.5">
               <UserPlus
                 className="hidden size-5 shrink-0 text-gold-600 sm:block"

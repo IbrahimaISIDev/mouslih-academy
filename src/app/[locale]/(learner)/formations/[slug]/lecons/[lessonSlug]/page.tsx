@@ -44,14 +44,17 @@ export default async function LessonPage({ params }: LessonPageProps) {
   const previousLesson = flatLessons[location.lessonIndex - 2] ?? null;
   const nextLesson = flatLessons[location.lessonIndex] ?? null;
 
-  // Visiteur sans compte : seule une vidéo en accès libre est lisible, via l'URL publique que
-  // le catalogue expose déjà pour elle. Avec une session, l'API décide (inscription vérifiée).
+  // Vidéo en accès libre : toujours lue via l'URL publique du catalogue, quel que soit l'état de
+  // la session — une session expirée ne doit jamais renvoyer vers /connexion pour un contenu
+  // gratuit. Seule une vidéo payante passe par l'API connectée (inscription vérifiée).
   const isAuthenticated = USE_MOCKS || (await getSession()) !== null;
   const [questions, playback] = await Promise.all([
     getLessonQuestions(currentLesson.id),
-    isAuthenticated
-      ? getLessonPlayback(currentLesson.id)
-      : Promise.resolve(publicPlayback(currentLesson)),
+    currentLesson.isFreePreview
+      ? Promise.resolve(publicPlayback(currentLesson))
+      : isAuthenticated
+        ? getLessonPlayback(currentLesson.id)
+        : Promise.resolve(null),
   ]);
 
   // Numérotation continue des erreurs sur toute la formation (01 → 10).
