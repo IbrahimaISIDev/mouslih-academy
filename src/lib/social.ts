@@ -6,7 +6,7 @@
 export type SocialNetwork = "tiktok" | "youtube" | "whatsappGroup";
 
 export const SOCIAL_LINKS: Record<SocialNetwork, string | null> = {
-  tiktok: null, // à renseigner : https://www.tiktok.com/@…
+  tiktok: "https://www.tiktok.com/@mouslih.academie",
   youtube: "https://www.youtube.com/@mouslihacademiesenegal500",
   whatsappGroup: null, // à renseigner : https://chat.whatsapp.com/…
 };
