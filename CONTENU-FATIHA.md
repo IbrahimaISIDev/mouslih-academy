@@ -17,10 +17,10 @@ de contenu commence ici.
 | Titre | « Rectifiez votre Fâtiḥah » — vouvoiement sur tout le site. |
 | Structure | 5 séances × 1 vidéo, 2 erreurs par vidéo = 10 erreurs. |
 | Prix | 10 150 F CFA. |
-| Accès libre | Vidéo 01. |
-| Vidéos | Liens YouTube provisoires, remplacés plus tard. |
+| Accès libre | Vidéo 01. **Phase de test (paiement non configuré) : les 5 vidéos sont en accès libre** (`DEMO_ALL_FREE`). |
+| Vidéos | Vidéos YouTube d'**exemple** (sans rapport avec le contenu), une par leçon, à remplacer par les vraies depuis l'admin. |
 | Masqué pour l'instant | Exercices téléchargeables (PDF), envoi de récitation / correction vocale. |
-| Durées | Provisoires (§ 5), remplacées par les durées réelles des vidéos. |
+| Durées | Celles des vidéos d'exemple (§ 5), à remplacer par celles des vraies vidéos. |
 
 ## 2. Charte de translittération
 
@@ -64,16 +64,16 @@ L'atout reste vrai si chaque vidéo contient des répétitions guidées ; sinon,
 
 ## 5. Les 5 séances
 
-Durées provisoires : environ 10 à 13 min par vidéo, assez pour présenter l'erreur, expliquer
-le *makhraj*, faire une démonstration lente puis une répétition guidée. Total ≈ 56 min.
+Durées cibles des vraies vidéos : environ 10 à 13 min chacune. En attendant, chaque leçon
+pointe vers une vidéo YouTube d'exemple (sans rapport avec le contenu), avec sa durée réelle.
 
-| N° | Slug | Durée prov. | Accès |
-|---|---|---|---|
-| 01 | ```corriger-al-hamdu``` | 09:30 (570 s) | libre |
-| 02 | ```al-alamin-et-iyyaka``` | 11:15 (675 s) | payant |
-| 03 | ```ihdina-s-sirat``` | 10:20 (620 s) | payant |
-| 04 | ```alladhina-et-maghdubi``` | 12:05 (725 s) | payant |
-| 05 | ```wa-la-d-dallin``` | 12:40 (760 s) | payant |
+| N° | Slug | Vidéo d'exemple | Durée | Accès |
+|---|---|---|---|---|
+| 01 | ```corriger-al-hamdu``` | ```7023DoO7TL4``` | 06:25 | libre |
+| 02 | ```al-alamin-et-iyyaka``` | ```GSCyCtWtj1c``` | 04:24 | libre (test) |
+| 03 | ```ihdina-s-sirat``` | ```dDdqkQ3TAYk``` | 07:42 | libre (test) |
+| 04 | ```alladhina-et-maghdubi``` | ```lquZH_0Fsnk``` | 09:07 | libre (test) |
+| 05 | ```wa-la-d-dallin``` | ```zTHNmEi30Ys``` | 10:17 | libre (test) |
 
 ### Séance 01 — Corriger les deux erreurs dans « Al-ḥamdu »
 **Passage** : الْحَمْدُ

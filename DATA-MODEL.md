@@ -98,7 +98,7 @@ brouillons), visibles et republiables depuis l'admin.
 
 | Slug | Titre FR | Statut | Prix | Vidéos | Durée |
 |---|---|---|---|---|---|
-| ```rectification-fatiha``` | Rectifiez votre Fâtiḥah | **publiée**, vedette | 10 150 F | 5 | 56 min |
+| ```rectification-fatiha``` | Rectifiez votre Fâtiḥah | **publiée**, vedette | 10 150 F | 5 | 38 min (vidéos d'exemple) |
 | ```initiation-nourania``` | Initiation à la lecture — Nourania | brouillon | 25 000 F | 14 | 6 h 20 |
 | ```regles-tajwid``` | Les règles du Tajwid | brouillon | 40 000 F | 22 | 11 h 05 |
 | ```fiqh-priere``` | Fiqh de la prière | brouillon | 20 000 F | 12 | 4 h 30 |
@@ -118,16 +118,18 @@ Structure : 1 module (« Les 10 erreurs, vidéo par vidéo »), 1 sous-module sa
 5 leçons (= 5 vidéos), 2 ```LessonMistake``` par leçon. Chaque leçon porte aussi
 ```passage``` (arabe vocalisé), ```description``` et ```objective```.
 
-| # | id / slug | Passage | Durée prov. | Accès |
+| # | id / slug | Passage | Vidéo d'exemple | Durée |
 |---|---|---|---|---|
-| 01 | ```fatiha-v01``` / ```corriger-al-hamdu``` | الْحَمْدُ | 09:30 | libre |
-| 02 | ```fatiha-v02``` / ```al-alamin-et-iyyaka``` | الْعَالَمِينَ — إِيَّاكَ | 11:15 | payant |
-| 03 | ```fatiha-v03``` / ```ihdina-s-sirat``` | اهْدِنَا الصِّرَاطَ | 10:20 | payant |
-| 04 | ```fatiha-v04``` / ```alladhina-et-maghdubi``` | الَّذِينَ — الْمَغْضُوبِ | 12:05 | payant |
-| 05 | ```fatiha-v05``` / ```wa-la-d-dallin``` | وَلَا الضَّالِّينَ | 12:40 | payant |
+| 01 | ```fatiha-v01``` / ```corriger-al-hamdu``` | الْحَمْدُ | ```7023DoO7TL4``` | 06:25 |
+| 02 | ```fatiha-v02``` / ```al-alamin-et-iyyaka``` | الْعَالَمِينَ — إِيَّاكَ | ```GSCyCtWtj1c``` | 04:24 |
+| 03 | ```fatiha-v03``` / ```ihdina-s-sirat``` | اهْدِنَا الصِّرَاطَ | ```dDdqkQ3TAYk``` | 07:42 |
+| 04 | ```fatiha-v04``` / ```alladhina-et-maghdubi``` | الَّذِينَ — الْمَغْضُوبِ | ```lquZH_0Fsnk``` | 09:07 |
+| 05 | ```fatiha-v05``` / ```wa-la-d-dallin``` | وَلَا الضَّالِّينَ | ```zTHNmEi30Ys``` | 10:17 |
 
-Vidéos : YouTube provisoire (```ku1romHwGCM```) sur les 5 leçons, à remplacer depuis l'éditeur
-admin (icône ▶ de chaque leçon : lien, durée, accès libre).
+**Phase de test** (paiement Wave non configuré) : les 5 vidéos sont en accès libre
+(```DEMO_ALL_FREE``` dans la source de contenu). À l'ouverture des paiements, seule la vidéo 01
+restera libre — basculer depuis l'admin (interrupteur « Accès libre » de chaque leçon).
+Les vidéos sont des exemples YouTube sans rapport avec le contenu, à remplacer depuis l'admin.
 
 ## Apprenant de démo
 

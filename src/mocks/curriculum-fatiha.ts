@@ -50,9 +50,9 @@ export const fatihaModules: Module[] = [
               },
             ],
             passage: "الْحَمْدُ",
-            durationSeconds: 570,
+            durationSeconds: 385,
             isFreePreview: true,
-            videoUrl: "https://www.youtube.com/embed/ku1romHwGCM",
+            videoUrl: "https://www.youtube.com/embed/7023DoO7TL4",
             resources: [],
             mistakes: [
               {
@@ -141,8 +141,9 @@ export const fatihaModules: Module[] = [
               },
             ],
             passage: "الْعَالَمِينَ — إِيَّاكَ",
-            durationSeconds: 675,
-            isFreePreview: false,
+            durationSeconds: 264,
+            isFreePreview: true,
+            videoUrl: "https://www.youtube.com/embed/GSCyCtWtj1c",
             resources: [],
             mistakes: [
               {
@@ -231,8 +232,9 @@ export const fatihaModules: Module[] = [
               },
             ],
             passage: "اهْدِنَا الصِّرَاطَ",
-            durationSeconds: 620,
-            isFreePreview: false,
+            durationSeconds: 462,
+            isFreePreview: true,
+            videoUrl: "https://www.youtube.com/embed/dDdqkQ3TAYk",
             resources: [],
             mistakes: [
               {
@@ -316,8 +318,9 @@ export const fatihaModules: Module[] = [
               },
             ],
             passage: "الَّذِينَ — الْمَغْضُوبِ",
-            durationSeconds: 725,
-            isFreePreview: false,
+            durationSeconds: 547,
+            isFreePreview: true,
+            videoUrl: "https://www.youtube.com/embed/lquZH_0Fsnk",
             resources: [],
             mistakes: [
               {
@@ -406,8 +409,9 @@ export const fatihaModules: Module[] = [
               },
             ],
             passage: "وَلَا الضَّالِّينَ",
-            durationSeconds: 760,
-            isFreePreview: false,
+            durationSeconds: 617,
+            isFreePreview: true,
+            videoUrl: "https://www.youtube.com/embed/zTHNmEi30Ys",
             resources: [],
             mistakes: [
               {
@@ -508,7 +512,13 @@ export const fatihaCourseText: Record<
   },
 };
 
-export const FATIHA_TOTAL_DURATION_SECONDS = 3350;
+export const FATIHA_TOTAL_DURATION_SECONDS = 2275;
 
-/** Vidéo YouTube provisoire, en attendant les vraies vidéos (à remplacer depuis l'admin). */
-export const FATIHA_PLACEHOLDER_YOUTUBE_ID = "ku1romHwGCM";
+/** Vidéos YouTube d'exemple par leçon (phase de test), remplaçables depuis l'admin. */
+export const FATIHA_LESSON_YOUTUBE_IDS: Record<string, string> = {
+  "fatiha-v01": "7023DoO7TL4",
+  "fatiha-v02": "GSCyCtWtj1c",
+  "fatiha-v03": "dDdqkQ3TAYk",
+  "fatiha-v04": "lquZH_0Fsnk",
+  "fatiha-v05": "zTHNmEi30Ys",
+};
