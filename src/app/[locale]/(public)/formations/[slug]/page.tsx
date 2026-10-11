@@ -5,6 +5,7 @@ import {
   GraduationCap,
   ListChecks,
   MessageCircle,
+  Play,
   Plus,
   Video,
 } from "lucide-react";
@@ -14,7 +15,7 @@ import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/lib/types";
 import { formatPrice, formatTotalDuration, localizeDigits } from "@/lib/format";
-import { parseYouTubeVideoId } from "@/lib/youtube";
+import { parseYouTubeVideoId, youTubeThumbnailUrl } from "@/lib/youtube";
 import { getCourse } from "@/features/catalog/api/get-course";
 import { getSession } from "@/lib/session";
 import { backendFetch } from "@/lib/backend-fetch";
@@ -29,7 +30,6 @@ import { PublicHeader } from "@/components/layout/public-header";
 import { LevelBadge } from "@/components/patterns/level-badge";
 import { GeometricPattern } from "@/components/patterns/geometric-pattern";
 import { StickyCta } from "@/components/patterns/sticky-cta";
-import { YouTubeFacade } from "@/components/patterns/youtube-facade";
 
 /**
  * Vérification d'appartenance "douce" : cette page reste publique (visiteurs anonymes inclus),
@@ -140,7 +140,10 @@ export default async function CourseDetailPage({
   const previewVideoId = previewLesson?.videoUrl
     ? parseYouTubeVideoId(previewLesson.videoUrl)
     : null;
-  const totalDuration = formatTotalDuration(course.totalDurationSeconds, locale);
+  const totalDuration = formatTotalDuration(
+    course.totalDurationSeconds,
+    locale,
+  );
 
   const faqItems = t.raw("faq.items") as { question: string; answer: string }[];
 
@@ -224,12 +227,32 @@ export default async function CourseDetailPage({
             {/* Carte d'achat */}
             <div className="border border-gold-600 bg-surface text-text">
               {previewVideoId && previewLesson ? (
-                <YouTubeFacade
-                  videoId={previewVideoId}
-                  title={previewLesson.title[locale]}
-                  caption={t("purchaseCard.previewCaption")}
+                // Mène au lecteur de séance (vidéo en grand, erreurs détaillées, vidéo suivante)
+                // plutôt qu'à une lecture réduite dans la carte.
+                <Link
+                  href={`/formations/${course.slug}/lecons/${previewLesson.slug}`}
+                  aria-label={`${t("purchaseCard.previewCaption")} — ${previewLesson.title[locale]}`}
                   className="group relative grid aspect-video w-full place-items-center overflow-hidden bg-green-800"
-                />
+                >
+                  <Image
+                    src={youTubeThumbnailUrl(previewVideoId)}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 380px, 100vw"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-green-900/30 transition-colors group-hover:bg-green-900/15" />
+                  <div className="relative grid size-14 place-items-center rounded-full border border-gold-200 bg-green-900/60 transition-transform group-hover:scale-105">
+                    <Play
+                      className="size-5 text-gold-200"
+                      fill="currentColor"
+                      strokeWidth={0}
+                    />
+                  </div>
+                  <span className="absolute bottom-2.5 start-3 text-xs text-on-dark-muted">
+                    {t("purchaseCard.previewCaption")}
+                  </span>
+                </Link>
               ) : (
                 <div className="relative grid aspect-video place-items-center overflow-hidden bg-green-800">
                   {course.coverUrl ? (
@@ -403,7 +426,6 @@ export default async function CourseDetailPage({
                 watch: t("programme.watch"),
                 locked: t("programme.locked"),
                 objective: t("programme.objective"),
-                previewCaption: t("purchaseCard.previewCaption"),
                 learnTitle: t("programme.learnTitle"),
                 passageLabel: t("programme.passageLabel"),
               }}

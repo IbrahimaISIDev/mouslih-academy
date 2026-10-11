@@ -5,6 +5,10 @@ import { getCourse } from "@/features/catalog/api/get-course";
 import { getLessonQuestions } from "@/features/learning/api/get-lesson-questions";
 import { findLessonLocation } from "@/features/learning/find-lesson";
 import { getLessonPlayback } from "@/features/learning/api/get-lesson-playback";
+import { getSession } from "@/lib/session";
+import { USE_MOCKS } from "@/lib/use-mocks";
+import { parseYouTubeVideoId } from "@/lib/youtube";
+import type { Lesson, LessonPlayback } from "@/lib/types";
 import { LessonPlayerView } from "@/features/learning/components/lesson-player-view";
 
 interface LessonPageProps {
@@ -12,6 +16,12 @@ interface LessonPageProps {
 }
 
 export const metadata: Metadata = { title: "Vidéo — Mouslih Academy" };
+
+function publicPlayback(lesson: Lesson): LessonPlayback | null {
+  if (!lesson.isFreePreview || !lesson.videoUrl) return null;
+  const videoId = parseYouTubeVideoId(lesson.videoUrl);
+  return videoId ? { provider: "youtube", videoId } : { provider: null };
+}
 
 export default async function LessonPage({ params }: LessonPageProps) {
   const { locale: rawLocale, slug, lessonSlug } = await params;
@@ -34,9 +44,14 @@ export default async function LessonPage({ params }: LessonPageProps) {
   const previousLesson = flatLessons[location.lessonIndex - 2] ?? null;
   const nextLesson = flatLessons[location.lessonIndex] ?? null;
 
+  // Visiteur sans compte : seule une vidéo en accès libre est lisible, via l'URL publique que
+  // le catalogue expose déjà pour elle. Avec une session, l'API décide (inscription vérifiée).
+  const isAuthenticated = USE_MOCKS || (await getSession()) !== null;
   const [questions, playback] = await Promise.all([
     getLessonQuestions(currentLesson.id),
-    getLessonPlayback(currentLesson.id),
+    isAuthenticated
+      ? getLessonPlayback(currentLesson.id)
+      : Promise.resolve(publicPlayback(currentLesson)),
   ]);
 
   // Numérotation continue des erreurs sur toute la formation (01 → 10).
@@ -51,6 +66,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
       location={location}
       locale={locale}
       playback={playback}
+      isAuthenticated={isAuthenticated}
       firstMistakeNumber={firstMistakeNumber}
       questions={questions}
       previousHref={

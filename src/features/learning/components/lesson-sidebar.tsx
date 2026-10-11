@@ -7,11 +7,18 @@ import { ProgressBar } from "@/components/patterns/progress-bar";
 
 export interface LessonSidebarProps {
   title: string;
-  progressLabel: string;
-  progressPct: number;
+  /** Absents sans inscription : aucune progression suivie, on n'affiche pas « 0 / 5 ». */
+  progressLabel?: string;
+  progressPct?: number;
   modules: CurriculumModule[];
   defaultOpen: string[];
   lockedTooltipLabel: string;
+  /** Lien de chaque leçon de la liste (les leçons verrouillées restent non cliquables). */
+  getLessonHref?: (lesson: {
+    id: string;
+    title: string;
+    duration: string;
+  }) => string;
   /** Absent : bouton masqué (formation sans correction vocale). */
   sendRecitationLabel?: string;
   whatsappHref: string;
@@ -25,6 +32,7 @@ function LessonSidebar({
   modules,
   defaultOpen,
   lockedTooltipLabel,
+  getLessonHref,
   sendRecitationLabel,
   whatsappHref,
   className,
@@ -32,19 +40,28 @@ function LessonSidebar({
   return (
     <div className={className}>
       <div className="border-b border-border-subtle p-5.5">
-        <div className="mb-3 flex items-baseline justify-between">
+        <div
+          className={
+            progressPct !== undefined
+              ? "mb-3 flex items-baseline justify-between"
+              : "flex items-baseline justify-between"
+          }
+        >
           <span className="font-serif text-lg font-semibold">{title}</span>
-          <span className="text-[13px] tabular-nums text-text-muted">
-            {progressLabel}
-          </span>
+          {progressLabel && (
+            <span className="text-[13px] tabular-nums text-text-muted">
+              {progressLabel}
+            </span>
+          )}
         </div>
-        <ProgressBar percent={progressPct} />
+        {progressPct !== undefined && <ProgressBar percent={progressPct} />}
       </div>
 
       <CurriculumAccordion
         modules={modules}
         defaultOpen={defaultOpen}
         lockedTooltipLabel={lockedTooltipLabel}
+        getLessonHref={getLessonHref}
       />
 
       {sendRecitationLabel && (

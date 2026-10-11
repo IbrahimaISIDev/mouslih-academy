@@ -428,6 +428,13 @@
       "title": "This video is part of the course",
       "body": "Get all 5 videos and the 10 corrected mistakes for {price}, one-time payment.",
       "cta": "Unlock the course"
+    },
+    "backToCourse": "The course",
+    "guest": {
+      "title": "You are watching without an account.",
+      "body": "Create a free account to save your progress and find it on all your devices.",
+      "signup": "Create a free account",
+      "login": "Log in"
     }
   },
   "profile": {

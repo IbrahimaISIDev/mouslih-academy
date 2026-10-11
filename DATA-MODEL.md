@@ -131,6 +131,12 @@ Structure : 1 module (« Les 10 erreurs, vidéo par vidéo »), 1 sous-module sa
 restera libre — basculer depuis l'admin (interrupteur « Accès libre » de chaque leçon).
 Les vidéos sont des exemples YouTube sans rapport avec le contenu, à remplacer depuis l'admin.
 
+**Lecture** : « Regarder » mène toujours au lecteur de séance (vidéo en grand, erreurs
+détaillées, vidéo suivante) — plus de fenêtre d'aperçu. Une vidéo en accès libre se regarde
+**sans compte** (bandeau « Créer un compte gratuit » ; reprise de lecture sur l'appareil
+seulement) ; la progression côté serveur et « Marquer comme terminée » sont réservés aux
+inscrits. Une vidéo payante reste réservée aux inscrits (écran « Débloquer la formation »).
+
 ## Apprenant de démo
 
 Aminata Diallo · Dakar · ```aminata.diallo@exemple.sn``` · +221 77 123 45 67 · inscrite le

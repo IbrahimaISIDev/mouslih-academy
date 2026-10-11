@@ -437,6 +437,13 @@
       "title": "Cette vidéo fait partie de la formation",
       "body": "Accédez aux 5 vidéos et aux 10 erreurs corrigées pour {price}, en paiement unique.",
       "cta": "Débloquer la formation"
+    },
+    "backToCourse": "La formation",
+    "guest": {
+      "title": "Vous regardez sans compte.",
+      "body": "Créez un compte gratuit pour enregistrer votre progression et la retrouver sur tous vos appareils.",
+      "signup": "Créer un compte gratuit",
+      "login": "Se connecter"
     }
   },
   "profile": {

@@ -56,7 +56,15 @@ export default async function HomePage({ params }: HomePageProps) {
   // 2026-10-10). Toute la page s'articule autour d'elle.
   const course = featured[0];
   const courseHref = course ? `/formations/${course.slug}` : "/formations";
-  const programmeHref = `${courseHref}#programme`;
+  // « Regarder la vidéo 1 » mène droit au lecteur de la première vidéo en accès libre.
+  const firstFreeLesson =
+    course?.modules
+      .flatMap((m) => m.subModules.flatMap((sm) => sm.lessons))
+      .find((l) => l.isFreePreview) ?? null;
+  const programmeHref =
+    course && firstFreeLesson
+      ? `${courseHref}/lecons/${firstFreeLesson.slug}`
+      : `${courseHref}#programme`;
   const lessons =
     course?.modules.flatMap((m) => m.subModules.flatMap((sm) => sm.lessons)) ??
     [];
@@ -308,7 +316,6 @@ export default async function HomePage({ params }: HomePageProps) {
                 watch: tCourse("programme.watch"),
                 locked: tCourse("programme.locked"),
                 objective: tCourse("programme.objective"),
-                previewCaption: tCourse("purchaseCard.previewCaption"),
                 learnTitle: tCourse("programme.learnTitle"),
                 passageLabel: tCourse("programme.passageLabel"),
               }}

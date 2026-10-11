@@ -2,7 +2,14 @@
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { ArrowLeft, ArrowRight, CheckCircle, Lock, Menu } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  CheckCircle,
+  Lock,
+  Menu,
+  UserPlus,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter, Link } from "@/i18n/navigation";
 import type {
@@ -44,6 +51,8 @@ export interface LessonPlayerViewProps {
   /** `null` : leçon payante d'une formation non achetée. */
   playback: LessonPlayback | null;
   firstMistakeNumber: number;
+  /** Faux : visiteur sans compte (vidéos en accès libre seulement, progression locale). */
+  isAuthenticated: boolean;
   questions: LessonQuestion[];
   previousHref: string | null;
   nextHref: string | null;
@@ -55,6 +64,7 @@ function LessonPlayerView({
   locale,
   playback,
   firstMistakeNumber,
+  isAuthenticated,
   questions,
   previousHref,
   nextHref,
@@ -63,9 +73,20 @@ function LessonPlayerView({
   const router = useRouter();
   const { lesson, module, lessonIndex, totalLessons } = location;
 
-  const { data: enrollment } = useEnrollment(course.id);
+  const { data: enrollment } = useEnrollment(course.id, isAuthenticated);
   const completeLessonMutation = useCompleteLesson();
-  const savePosition = useSaveLessonPosition(course.id, lesson.id);
+  // Progression côté serveur réservée aux inscrits ; sinon, reprise sur cet appareil seulement.
+  const savePosition = useSaveLessonPosition(
+    course.id,
+    lesson.id,
+    !!enrollment,
+  );
+  const lessonPath = `/formations/${course.slug}/lecons/${lesson.slug}`;
+  const lessonSlugById = new Map(
+    course.modules.flatMap((m) =>
+      m.subModules.flatMap((sm) => sm.lessons.map((l) => [l.id, l.slug])),
+    ),
+  );
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [autoAdvanceIn, setAutoAdvanceIn] = useState<number | null>(null);
@@ -119,21 +140,32 @@ function LessonPlayerView({
   );
 
   function handleComplete() {
-    completeLessonMutation.mutate(lesson.id);
+    if (enrollment) completeLessonMutation.mutate(lesson.id);
     if (nextHref) setAutoAdvanceIn(3);
   }
 
   const sidebar = (
     <LessonSidebar
       title={t("sidebarTitle")}
-      progressLabel={localizeDigits(
-        t("progressLabel", { done: completedCount, total: course.lessonCount }),
-        locale,
-      )}
-      progressPct={progressPct}
+      progressLabel={
+        enrollment
+          ? localizeDigits(
+              t("progressLabel", {
+                done: completedCount,
+                total: course.lessonCount,
+              }),
+              locale,
+            )
+          : undefined
+      }
+      progressPct={enrollment ? progressPct : undefined}
       modules={sidebarModules}
       defaultOpen={[module.id]}
       lockedTooltipLabel={t("lockedTooltip")}
+      getLessonHref={(l) => {
+        const slug = lessonSlugById.get(l.id);
+        return slug ? `/formations/${course.slug}/lecons/${slug}` : lessonPath;
+      }}
       sendRecitationLabel={
         course.hasVoiceCorrection ? t("sendRecitation") : undefined
       }
@@ -146,7 +178,9 @@ function LessonPlayerView({
       {/* Barre supérieure */}
       <div className="flex h-14 items-center gap-5 bg-green-900 px-5 text-on-dark-soft lg:px-5.5">
         <Link
-          href="/tableau-de-bord"
+          href={
+            isAuthenticated ? "/tableau-de-bord" : `/formations/${course.slug}`
+          }
           className="flex items-center gap-2.5 text-sm"
         >
           <DirectionalIcon
@@ -154,29 +188,35 @@ function LessonPlayerView({
             className="size-[18px]"
             strokeWidth={1.7}
           />
-          <span className="hidden lg:inline">{t("backToDashboard")}</span>
+          <span className="hidden lg:inline">
+            {isAuthenticated ? t("backToDashboard") : t("backToCourse")}
+          </span>
         </Link>
         <span className="hidden h-5.5 w-px bg-green-300/30 lg:block" />
         <span className="hidden font-serif text-base text-on-dark lg:inline">
           {course.title[locale]}
         </span>
         <div className="ms-auto flex flex-1 items-center gap-3.5 lg:max-w-95 lg:flex-none">
-          <ProgressBar
-            percent={progressPct}
-            tone="onDark"
-            className="hidden flex-1 lg:flex"
-            label={localizeDigits(
-              t("progressLabel", {
-                done: completedCount,
-                total: course.lessonCount,
-              }),
-              locale,
-            )}
-            labelClassName="whitespace-nowrap"
-          />
-          <span className="text-[13px] tabular-nums text-on-dark-muted lg:hidden">
-            {localizeDigits(t("percentLabel", { pct: progressPct }), locale)}
-          </span>
+          {enrollment && (
+            <ProgressBar
+              percent={progressPct}
+              tone="onDark"
+              className="hidden flex-1 lg:flex"
+              label={localizeDigits(
+                t("progressLabel", {
+                  done: completedCount,
+                  total: course.lessonCount,
+                }),
+                locale,
+              )}
+              labelClassName="whitespace-nowrap"
+            />
+          )}
+          {enrollment && (
+            <span className="text-[13px] tabular-nums text-on-dark-muted lg:hidden">
+              {localizeDigits(t("percentLabel", { pct: progressPct }), locale)}
+            </span>
+          )}
         </div>
         <Avatar
           size="sm"
@@ -187,12 +227,14 @@ function LessonPlayerView({
           </AvatarFallback>
         </Avatar>
       </div>
-      <div className="h-[3px] bg-white/15 lg:hidden">
-        <div
-          className="h-full bg-gold-200"
-          style={{ width: `${progressPct}%` }}
-        />
-      </div>
+      {enrollment && (
+        <div className="h-[3px] bg-white/15 lg:hidden">
+          <div
+            className="h-full bg-gold-200"
+            style={{ width: `${progressPct}%` }}
+          />
+        </div>
+      )}
 
       <div className="lg:grid lg:grid-cols-[1fr_380px]">
         <div className="lg:border-e lg:border-border-subtle">
@@ -237,6 +279,35 @@ function LessonPlayerView({
             </div>
           )}
 
+          {!isAuthenticated && playback && (
+            <div className="flex flex-col gap-3 border-b border-border-subtle bg-gold-50 px-5 py-4 sm:flex-row sm:items-center lg:px-7.5">
+              <UserPlus
+                className="hidden size-5 shrink-0 text-gold-600 sm:block"
+                strokeWidth={1.7}
+              />
+              <p className="flex-1 text-sm leading-[1.55] text-text">
+                <span className="font-semibold">{t("guest.title")}</span>{" "}
+                {t("guest.body")}
+              </p>
+              <div className="flex shrink-0 gap-2">
+                <Button size="sm" asChild>
+                  <Link
+                    href={`/inscription?redirect=${encodeURIComponent(lessonPath)}`}
+                  >
+                    {t("guest.signup")}
+                  </Link>
+                </Button>
+                <Button size="sm" variant="secondary" asChild>
+                  <Link
+                    href={`/connexion?redirect=${encodeURIComponent(lessonPath)}`}
+                  >
+                    {t("guest.login")}
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          )}
+
           {/* Déclencheur du drawer mobile */}
           <button
             type="button"
@@ -247,15 +318,17 @@ function LessonPlayerView({
             <span className="flex-1 text-start text-[15px] font-semibold">
               {t("mobile.programBar")}
             </span>
-            <span className="text-[13px] tabular-nums text-text-muted">
-              {localizeDigits(
-                t("progressLabel", {
-                  done: completedCount,
-                  total: course.lessonCount,
-                }),
-                locale,
-              )}
-            </span>
+            {enrollment && (
+              <span className="text-[13px] tabular-nums text-text-muted">
+                {localizeDigits(
+                  t("progressLabel", {
+                    done: completedCount,
+                    total: course.lessonCount,
+                  }),
+                  locale,
+                )}
+              </span>
+            )}
           </button>
 
           <div className="px-5 pt-5 lg:px-7.5 lg:pt-6.5">

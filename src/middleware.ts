@@ -14,7 +14,9 @@ const SESSION_COOKIE = "mouslih_session";
 const PROTECTED_PATTERNS = [
   /^\/tableau-de-bord(\/|$)/,
   /^\/profil(\/|$)/,
-  /^\/formations\/[^/]+\/lecons(\/|$)/,
+  // Les pages de leçon ne sont plus protégées ici : une vidéo en accès libre se regarde sans
+  // compte. La page elle-même vérifie l'accès (lecture via l'API pour une session, URL publique
+  // du catalogue sinon — jamais de vidéo payante sans inscription).
   /^\/admin(\/|$)/,
 ];
 

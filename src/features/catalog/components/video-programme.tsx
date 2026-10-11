@@ -1,19 +1,8 @@
-"use client";
-
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { CheckCircle2, Clock, Lock, Play, Target } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import type { Lesson, Locale } from "@/lib/types";
 import { formatDuration, localizeDigits } from "@/lib/format";
-import { parseYouTubeVideoId } from "@/lib/youtube";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { YouTubeFacade } from "@/components/patterns/youtube-facade";
 import { GeometricPattern } from "@/components/patterns/geometric-pattern";
 import { TextWithArabic } from "@/components/patterns/text-with-arabic";
 
@@ -33,7 +22,6 @@ export interface VideoProgrammeProps {
     watch: string;
     locked: string;
     objective: string;
-    previewCaption: string;
     /** Intitulé de la liste à puces, ex. « Dans cette vidéo, vous apprendrez à : ». */
     learnTitle: string;
     /** Légende de l'encadré du passage arabe, ex. « Passage étudié ». */
@@ -50,11 +38,6 @@ function VideoProgramme({
   variant,
   labels,
 }: VideoProgrammeProps) {
-  const [preview, setPreview] = useState<Lesson | null>(null);
-  const previewVideoId = preview?.videoUrl
-    ? parseYouTubeVideoId(preview.videoUrl)
-    : null;
-
   return (
     <>
       <ol
@@ -81,9 +64,8 @@ function VideoProgramme({
               {labels.watch}
             </Link>
           ) : canPreview ? (
-            <button
-              type="button"
-              onClick={() => setPreview(lesson)}
+            <Link
+              href={lessonHref}
               className={
                 variant === "detailed"
                   ? "inline-flex items-center gap-2 rounded-sm bg-green-700 px-4.5 py-2.5 text-sm font-semibold text-on-dark transition-colors hover:bg-green-800"
@@ -92,7 +74,7 @@ function VideoProgramme({
             >
               <Play className="size-3.5" fill="currentColor" strokeWidth={0} />
               {labels.watchFree}
-            </button>
+            </Link>
           ) : (
             <span
               className="inline-flex items-center gap-1.5 text-[13px] text-text-muted"
@@ -175,35 +157,6 @@ function VideoProgramme({
           );
         })}
       </ol>
-
-      <Dialog
-        open={preview !== null}
-        onOpenChange={(open) => !open && setPreview(null)}
-      >
-        <DialogContent className="max-w-3xl">
-          <DialogHeader>
-            <DialogTitle>{preview?.title[locale]}</DialogTitle>
-            {preview?.passage && (
-              <DialogDescription
-                dir="rtl"
-                lang="ar"
-                className="text-start font-arabic-serif text-xl text-green-ink"
-              >
-                {preview.passage}
-              </DialogDescription>
-            )}
-          </DialogHeader>
-          {preview && previewVideoId && (
-            <YouTubeFacade
-              key={preview.id}
-              videoId={previewVideoId}
-              title={preview.title[locale]}
-              caption={labels.previewCaption}
-              className="group relative grid aspect-video w-full place-items-center overflow-hidden bg-green-800"
-            />
-          )}
-        </DialogContent>
-      </Dialog>
     </>
   );
 }
