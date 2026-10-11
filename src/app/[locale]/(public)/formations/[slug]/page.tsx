@@ -23,6 +23,7 @@ import { USE_MOCKS } from "@/lib/use-mocks";
 import { WHATSAPP_URL } from "@/lib/contact";
 import { VideoProgramme } from "@/features/catalog/components/video-programme";
 import { MistakesOverview } from "@/features/catalog/components/mistakes-overview";
+import { RichDescription } from "@/components/patterns/rich-description";
 
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -331,18 +332,12 @@ export default async function CourseDetailPage({
             <span className="lg:hidden">{t("about.titleMobile")}</span>
             <span className="hidden lg:inline">{t("about.title")}</span>
           </h2>
-          {course.description[locale].split("\n\n").map((paragraph, i) => (
-            <p
-              key={i}
-              className={
-                i === 0
-                  ? "mb-2.5 max-w-[62ch] text-[15px] leading-[1.7] text-text-soft lg:text-[17px] lg:leading-[1.75]"
-                  : "mb-4 max-w-[62ch] text-[15px] leading-[1.7] text-text-soft last:mb-0 lg:mb-8.5 lg:text-[17px] lg:leading-[1.75]"
-              }
-            >
-              {paragraph}
-            </p>
-          ))}
+          <div className="mb-8 lg:mb-10">
+            <RichDescription
+              text={course.description[locale]}
+              locale={locale}
+            />
+          </div>
 
           <div className="mb-8 border border-border-subtle bg-bg p-6 lg:mb-10">
             <p className="mb-3.5 text-xs font-semibold tracking-[0.16em] text-gold-600 uppercase">
