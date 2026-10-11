@@ -324,7 +324,12 @@
       "text": "Written"
     },
     "seeMore": "See more testimonials",
-    "mobileCta": "Discover the course"
+    "mobileCta": "Discover the course",
+    "empty": {
+      "title": "The first testimonials are coming soon",
+      "description": "The course has just opened: feedback from our first learners will be published here.",
+      "action": "Discover the course"
+    }
   },
   "dashboard": {
     "salam": "السلام عليكم",

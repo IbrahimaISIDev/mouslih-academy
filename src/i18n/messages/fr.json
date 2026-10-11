@@ -333,7 +333,12 @@
       "text": "Écrits"
     },
     "seeMore": "Voir plus de témoignages",
-    "mobileCta": "Découvrir la formation"
+    "mobileCta": "Découvrir la formation",
+    "empty": {
+      "title": "Les premiers témoignages arrivent bientôt",
+      "description": "La formation vient d'ouvrir : les retours de nos premiers apprenants seront publiés ici.",
+      "action": "Découvrir la formation"
+    }
   },
   "dashboard": {
     "salam": "السلام عليكم",

@@ -41,12 +41,6 @@ export default async function HomePage({ params }: HomePageProps) {
   const { locale: rawLocale } = await params;
   const locale = rawLocale as Locale;
 
-  const HOME_TESTIMONIAL_IDS = [
-    "t-aminata-diallo",
-    "t-ibrahima-sarr",
-    "t-fatou-ndiaye",
-  ];
-
   const [t, tNav, tCommon, tCourse, featured, allTestimonials, publicStats] =
     await Promise.all([
       getTranslations("home"),
@@ -68,12 +62,9 @@ export default async function HomePage({ params }: HomePageProps) {
     [];
   const mistakeCount = lessons.reduce((n, l) => n + l.mistakes.length, 0);
 
-  const testimonials = HOME_TESTIMONIAL_IDS.map((id) =>
-    allTestimonials.find((testimonial) => testimonial.id === id),
-  ).filter(
-    (testimonial): testimonial is (typeof allTestimonials)[number] =>
-      !!testimonial,
-  );
+  // Les 3 premiers témoignages publiés (l'API les renvoie dans l'ordre éditorial) : aucune
+  // dépendance à des identifiants précis, la section suit ce qui est réellement en base.
+  const testimonials = allTestimonials.slice(0, 3);
 
   const navItems = [
     { label: tNav("home"), href: "/", active: true },
@@ -295,7 +286,10 @@ export default async function HomePage({ params }: HomePageProps) {
               <span className="text-sm text-text-muted">
                 {localizeDigits(
                   t("programme.meta", {
-                    duration: formatTotalDuration(course.totalDurationSeconds, locale),
+                    duration: formatTotalDuration(
+                      course.totalDurationSeconds,
+                      locale,
+                    ),
                   }),
                   locale,
                 )}
@@ -336,39 +330,41 @@ export default async function HomePage({ params }: HomePageProps) {
         </section>
       )}
 
-      {/* Témoignages */}
-      <section className="border-t border-border-subtle bg-bg px-5 py-8 sm:px-6 lg:px-11 lg:py-16">
-        <p className="mb-2.5 text-[11px] font-semibold tracking-[0.18em] text-gold-600 uppercase lg:mb-3 lg:text-xs">
-          {t("testimonials.eyebrow")}
-        </p>
-        <h2 className="mb-5 font-serif text-2xl font-medium lg:mb-8 lg:text-[34px]">
-          <span className="lg:hidden">{t("testimonials.titleMobile")}</span>
-          <span className="hidden lg:inline">{t("testimonials.title")}</span>
-        </h2>
+      {/* Témoignages — section masquée tant qu'aucun n'est publié */}
+      {testimonials.length > 0 && (
+        <section className="border-t border-border-subtle bg-bg px-5 py-8 sm:px-6 lg:px-11 lg:py-16">
+          <p className="mb-2.5 text-[11px] font-semibold tracking-[0.18em] text-gold-600 uppercase lg:mb-3 lg:text-xs">
+            {t("testimonials.eyebrow")}
+          </p>
+          <h2 className="mb-5 font-serif text-2xl font-medium lg:mb-8 lg:text-[34px]">
+            <span className="lg:hidden">{t("testimonials.titleMobile")}</span>
+            <span className="hidden lg:inline">{t("testimonials.title")}</span>
+          </h2>
 
-        <div className="hidden grid-cols-3 gap-[26px] lg:grid">
-          {testimonials.map((testimonial) => (
-            <TestimonialCard
-              key={testimonial.id}
-              testimonial={testimonial}
-              locale={locale}
-            />
-          ))}
-        </div>
-
-        <div className="lg:hidden">
-          {testimonials
-            .filter((testimonial) => testimonial.kind === "text")
-            .slice(0, 1)
-            .map((testimonial) => (
+          <div className="hidden grid-cols-3 gap-[26px] lg:grid">
+            {testimonials.map((testimonial) => (
               <TestimonialCard
                 key={testimonial.id}
                 testimonial={testimonial}
                 locale={locale}
               />
             ))}
-        </div>
-      </section>
+          </div>
+
+          <div className="lg:hidden">
+            {testimonials
+              .filter((testimonial) => testimonial.kind === "text")
+              .slice(0, 1)
+              .map((testimonial) => (
+                <TestimonialCard
+                  key={testimonial.id}
+                  testimonial={testimonial}
+                  locale={locale}
+                />
+              ))}
+          </div>
+        </section>
+      )}
 
       {/* CTA permanent */}
       <section className="relative overflow-hidden bg-green-800 px-5 py-8 text-on-dark sm:px-6 lg:px-11 lg:py-12">

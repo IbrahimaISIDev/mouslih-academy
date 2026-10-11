@@ -10,6 +10,8 @@ import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { WHATSAPP_DISPLAY, WHATSAPP_URL } from "@/lib/contact";
+import { Quote } from "lucide-react";
+import { EmptyState } from "@/components/patterns/empty-state";
 
 export const metadata: Metadata = { title: "Témoignages — Mouslih Academy" };
 
@@ -56,12 +58,29 @@ export default async function TemoignagesPage({
         signupHref="/inscription"
       />
 
-      <TestimonialsBrowser
-        testimonials={testimonials}
-        courses={courses}
-        locale={locale}
-        initialFilter={filter ?? "all"}
-      />
+      {testimonials.length > 0 ? (
+        <TestimonialsBrowser
+          testimonials={testimonials}
+          courses={courses}
+          locale={locale}
+          initialFilter={filter ?? "all"}
+        />
+      ) : (
+        <section className="px-5 py-16 sm:px-6 lg:px-11 lg:py-24">
+          <EmptyState
+            icon={Quote}
+            title={tTestimonials("empty.title")}
+            description={tTestimonials("empty.description")}
+            action={
+              <Button asChild>
+                <Link href="/formations/rectification-fatiha">
+                  {tTestimonials("empty.action")}
+                </Link>
+              </Button>
+            }
+          />
+        </section>
+      )}
 
       <Footer
         columns={footerColumns}
