@@ -30,12 +30,8 @@
           ]
         },
         {
-          "title": "Légal",
-          "items": [
-            "Conditions d'utilisation",
-            "Politique de remboursement",
-            "Confidentialité"
-          ]
+          "title": "Nos réseaux sociaux",
+          "items": ["TikTok", "YouTube", "Groupe WhatsApp"]
         }
       ],
       "mobileLinks": [
@@ -48,7 +44,13 @@
       ],
       "copyright": "© {year} Mouslih Academy · Dakar, Sénégal",
       "copyrightMobile": "© {year} Mouslih Academy · Dakar",
-      "paymentNote": "Paiement sécurisé par Wave"
+      "paymentNote": "Paiement sécurisé par Wave",
+      "legalLinks": [
+        "Conditions d'utilisation",
+        "Politique de remboursement",
+        "Confidentialité"
+      ],
+      "legalNavLabel": "Informations légales"
     }
   },
   "nav": {
@@ -106,7 +108,7 @@
     },
     "cta": {
       "title": "Commencez aujourd'hui, gardez l'accès à vie",
-      "description": "Paiement Wave · aucune reconduction · assistance WhatsApp du lundi au samedi.",
+      "description": "Paiement Wave · assistance WhatsApp possible.",
       "ctaPrimary": "Voir la formation",
       "ctaWhatsapp": "Poser une question"
     },

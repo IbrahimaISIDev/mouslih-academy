@@ -25,8 +25,8 @@
           "items": ["About", "Testimonials", "FAQ", "Contact"]
         },
         {
-          "title": "Legal",
-          "items": ["Terms of use", "Refund policy", "Privacy"]
+          "title": "Our social media",
+          "items": ["TikTok", "YouTube", "WhatsApp group"]
         }
       ],
       "mobileLinks": [
@@ -39,7 +39,9 @@
       ],
       "copyright": "© {year} Mouslih Academy · Dakar, Senegal",
       "copyrightMobile": "© {year} Mouslih Academy · Dakar",
-      "paymentNote": "Secure payment by Wave"
+      "paymentNote": "Secure payment by Wave",
+      "legalLinks": ["Terms of use", "Refund policy", "Privacy"],
+      "legalNavLabel": "Legal information"
     }
   },
   "nav": {
@@ -97,7 +99,7 @@
     },
     "cta": {
       "title": "Start today, keep lifetime access",
-      "description": "Wave payment · no renewal · WhatsApp support Monday to Saturday.",
+      "description": "Wave payment · WhatsApp support available.",
       "ctaPrimary": "See the course",
       "ctaWhatsapp": "Ask a question"
     },
