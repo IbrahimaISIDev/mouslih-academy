@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { MessageCircle } from "lucide-react";
 import { getTranslations } from "next-intl/server";
+import { redirect } from "@/i18n/navigation";
 import type { Locale } from "@/lib/types";
 import { getCourses } from "@/features/catalog/api/get-courses";
 import { buildFooterColumns } from "@/lib/footer-columns";
@@ -47,6 +48,13 @@ export default async function CataloguePage({
     getTranslations("catalog"),
     getCourses(),
   ]);
+
+  // Une seule formation publiée (recentrage sur la Fâtiḥah, 2026-10-10) : un catalogue à filtres
+  // n'apporte rien, on mène directement à la formation. Redevient un catalogue dès qu'une
+  // deuxième formation est publiée.
+  if (courses.length === 1 && !q && initialLevel === "all") {
+    redirect({ href: `/formations/${courses[0].slug}`, locale });
+  }
 
   const navItems = [
     { label: tNav("home"), href: "/" },

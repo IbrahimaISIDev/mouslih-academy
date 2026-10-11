@@ -44,7 +44,7 @@ function Footer({
             </p>
             {column.links.map((link) => (
               <Link
-                key={link.href}
+                key={link.label}
                 href={link.href}
                 className="w-fit rounded-sm text-sm outline-none transition-colors hover:text-on-dark focus-visible:shadow-[0_0_0_3px_var(--color-focus-ring-on-dark)]"
               >

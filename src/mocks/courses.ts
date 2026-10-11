@@ -1,52 +1,28 @@
 import type { Course } from "@/lib/types";
-import { fatihaModules } from "@/mocks/curriculum-fatiha";
+import {
+  FATIHA_TOTAL_DURATION_SECONDS,
+  fatihaCourseText,
+  fatihaModules,
+} from "@/mocks/curriculum-fatiha";
 
 export const courses: Course[] = [
   {
     id: "c-rectification-fatiha",
     slug: "rectification-fatiha",
-    title: {
-      fr: "Rectification de la Fatiha",
-      en: "Perfecting Al-Fatiha",
-      ar: "تصحيح سورة الفاتحة",
-    },
-    subtitle: {
-      fr: "Onze leçons pour réciter juste",
-      en: "Eleven lessons to recite it right",
-      ar: "أحد عشر درسًا للتلاوة الصحيحة",
-    },
-    cardDescription: {
-      fr: "Lettre par lettre, corrigez la sourate que vous récitez dix-sept fois par jour.",
-      en: "Letter by letter, correct the surah you recite seventeen times a day.",
-      ar: "حرفًا حرفًا، صحّح السورة التي تتلوها سبع عشرة مرة يوميًا.",
-    },
-    heroTagline: {
-      fr: "Vous la récitez dix-sept fois par jour. Onze leçons pour la réciter juste : chaque lettre, chaque prolongation, chaque arrêt — avec correction personnalisée de votre récitation.",
-      en: "You recite it seventeen times a day. Eleven lessons to recite it right: every letter, every prolongation, every stop — with personalized correction of your recitation.",
-      ar: "تتلوها سبع عشرة مرة يوميًا. أحد عشر درسًا لتلاوتها بشكل صحيح: كل حرف، كل مدّ، كل وقفة — مع تصحيح شخصي لتلاوتك.",
-    },
-    heroTaglineMobile: {
-      fr: "Vous la récitez dix-sept fois par jour. Onze leçons pour la réciter juste.",
-      en: "You recite it seventeen times a day. Eleven lessons to recite it right.",
-      ar: "تتلوها سبع عشرة مرة يوميًا. أحد عشر درسًا لتلاوتها بشكل صحيح.",
-    },
-    description: {
-      fr: "La Fatiha est la seule sourate obligatoire à chaque unité de prière. Une lettre mal prononcée peut changer le sens du verset — et pourtant, la plupart des fidèles n'ont jamais eu de correction individuelle depuis l'enfance.\n\nCette formation reprend la sourate verset par verset. Vous enregistrez votre récitation à la fin de chaque module, et recevez une correction vocale sous 48 heures.",
-      en: "Al-Fatiha is the only surah obligatory in every unit of prayer. A mispronounced letter can change the meaning of a verse — yet most worshippers have never had individual correction since childhood.\n\nThis course goes through the surah verse by verse. You record your recitation at the end of each module, and receive voice correction within 48 hours.",
-      ar: "سورة الفاتحة هي السورة الوحيدة الواجبة في كل ركعة. قد يغيّر حرف يُنطق خطأً معنى الآية — ومع ذلك لم يحظَ معظم المصلين بتصحيح فردي منذ الطفولة.\n\nتتناول هذه الدورة السورة آية بآية. تُسجّل تلاوتك في نهاية كل وحدة، وتحصل على تصحيح صوتي خلال 48 ساعة.",
-    },
+    ...fatihaCourseText,
     level: "beginner",
-    priceXof: 15000,
-    compareAtPriceXof: 20000,
+    priceXof: 10150,
     coverUrl: null,
-    lessonCount: 11,
-    totalDurationSeconds: 10800,
+    lessonCount: 5,
+    totalDurationSeconds: FATIHA_TOTAL_DURATION_SECONDS,
     modules: fatihaModules,
     status: "published",
     isFeatured: true,
-    hasCertificate: true,
-    hasVoiceCorrection: true,
-    translationStatus: { fr: "complete", en: "partial", ar: "complete" },
+    // Exercices, correction vocale et attestation masqués tant que l'offre se limite aux
+    // 5 vidéos (décision du 2026-10-10).
+    hasCertificate: false,
+    hasVoiceCorrection: false,
+    translationStatus: { fr: "complete", en: "complete", ar: "complete" },
   },
   {
     id: "c-initiation-nourania",
@@ -77,8 +53,9 @@ export const courses: Course[] = [
     lessonCount: 14,
     totalDurationSeconds: 22800,
     modules: [],
-    status: "published",
-    isFeatured: true,
+    // Masquée : le site se concentre sur « Rectifiez votre Fâtiḥah » (2026-10-10).
+    status: "draft",
+    isFeatured: false,
     hasCertificate: true,
     hasVoiceCorrection: true,
     translationStatus: { fr: "complete", en: "partial", ar: "complete" },
@@ -112,8 +89,9 @@ export const courses: Course[] = [
     lessonCount: 22,
     totalDurationSeconds: 39900,
     modules: [],
-    status: "published",
-    isFeatured: true,
+    // Masquée : le site se concentre sur « Rectifiez votre Fâtiḥah » (2026-10-10).
+    status: "draft",
+    isFeatured: false,
     hasCertificate: true,
     hasVoiceCorrection: true,
     translationStatus: { fr: "complete", en: "partial", ar: "complete" },
@@ -147,7 +125,8 @@ export const courses: Course[] = [
     lessonCount: 12,
     totalDurationSeconds: 16200,
     modules: [],
-    status: "published",
+    // Masquée : le site se concentre sur « Rectifiez votre Fâtiḥah » (2026-10-10).
+    status: "draft",
     isFeatured: false,
     hasCertificate: true,
     hasVoiceCorrection: false,
@@ -182,7 +161,8 @@ export const courses: Course[] = [
     lessonCount: 16,
     totalDurationSeconds: 25800,
     modules: [],
-    status: "published",
+    // Masquée : le site se concentre sur « Rectifiez votre Fâtiḥah » (2026-10-10).
+    status: "draft",
     isFeatured: false,
     hasCertificate: true,
     hasVoiceCorrection: false,
@@ -217,7 +197,8 @@ export const courses: Course[] = [
     lessonCount: 18,
     totalDurationSeconds: 34800,
     modules: [],
-    status: "published",
+    // Masquée : le site se concentre sur « Rectifiez votre Fâtiḥah » (2026-10-10).
+    status: "draft",
     isFeatured: false,
     hasCertificate: true,
     hasVoiceCorrection: false,

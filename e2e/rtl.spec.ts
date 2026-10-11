@@ -36,7 +36,8 @@ test.describe("Bascule FR → AR", () => {
     await page.goto("/ar/tableau-de-bord");
     await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
 
-    await expect(page.getByText("٥ / ١١ دروس · ٤٥٪").first()).toBeVisible();
+    // Démo : vidéos 1 et 2 terminées sur 5.
+    await expect(page.getByText("٢ / ٥ دروس · ٤٠٪").first()).toBeVisible();
 
     const ltrTime = page.locator('[dir="ltr"]', { hasText: /^\d{2}:\d{2}$/ }).first();
     await expect(ltrTime).toBeVisible();
@@ -46,14 +47,15 @@ test.describe("Bascule FR → AR", () => {
   test("lecteur : la sidebar du programme passe à droite en RTL", async ({ page }) => {
     await login(page);
     await page.goto(
-      "/ar/formations/rectification-fatiha/lecons/pourquoi-rectifier-la-fatiha",
+      "/ar/formations/rectification-fatiha/lecons/corriger-al-hamdu",
     );
     await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
 
     await page.setViewportSize({ width: 1440, height: 900 });
 
     const lessonHeading = page.getByRole("heading", { level: 1 });
-    const sidebarLink = page.getByRole("link", { name: "أرسل تلاوتي" });
+    // Titre de la sidebar du programme (le bouton d'envoi de récitation est masqué).
+    const sidebarLink = page.getByText("الدروس الخمسة").first();
 
     const headingBox = await lessonHeading.boundingBox();
     const sidebarBox = await sidebarLink.boundingBox();

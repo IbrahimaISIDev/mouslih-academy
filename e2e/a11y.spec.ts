@@ -10,7 +10,7 @@ const PAGES = [
   "/fr/connexion",
   "/fr/temoignages",
   "/fr/tableau-de-bord",
-  "/fr/formations/rectification-fatiha/lecons/pourquoi-rectifier-la-fatiha",
+  "/fr/formations/rectification-fatiha/lecons/corriger-al-hamdu",
   "/fr/profil",
   "/fr/commande/rectification-fatiha",
   "/fr/admin",
@@ -20,6 +20,12 @@ const PAGES = [
 for (const path of PAGES) {
   test(`axe : aucune violation critique sur ${path}`, async ({ page }) => {
     await page.goto(path);
+    // Une seule formation publiée : /fr/formations redirige (côté client, après l'écran de
+    // chargement) vers sa page — on analyse la page d'arrivée, pas l'écran transitoire.
+    if (path === "/fr/formations") {
+      await page.waitForURL("**/formations/rectification-fatiha");
+    }
+    await page.waitForLoadState("networkidle");
     const results = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa"])
       .analyze();

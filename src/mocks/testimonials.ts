@@ -1,5 +1,6 @@
 import type { Testimonial } from "@/lib/types";
 
+/** Témoignages FICTIFS (démonstration) — à remplacer par de vrais témoignages avant mise en ligne. */
 export const testimonials: Testimonial[] = [
   {
     id: "t-aminata-diallo",
@@ -8,41 +9,41 @@ export const testimonials: Testimonial[] = [
     courseId: "c-rectification-fatiha",
     kind: "text",
     quote: {
-      fr: "Je récitais la Fatiha depuis vingt ans avec trois erreurs que personne ne m'avait signalées. Onze leçons ont suffi.",
-      en: "I had been reciting Al-Fatiha for twenty years with three mistakes no one had ever pointed out. Eleven lessons were enough.",
-      ar: "كنت أتلو الفاتحة منذ عشرين عامًا بثلاثة أخطاء لم ينبهني إليها أحد. كفتني أحد عشر درسًا.",
+      fr: "Je récitais la Fâtiḥah depuis vingt ans avec des erreurs que personne ne m'avait signalées. Cinq vidéos ont suffi à les corriger.",
+      en: "I had been reciting Al-Fâtiḥah for twenty years with mistakes no one had ever pointed out. Five videos were enough to correct them.",
+      ar: "كنت أتلو الفاتحة منذ عشرين عامًا بأخطاء لم ينبهني إليها أحد. كفتني خمسة دروس مرئية لتصحيحها.",
     },
   },
   {
     id: "t-moussa-ba",
     authorName: "Moussa Bâ",
     authorCity: "Kaolack",
-    courseId: "c-memorisation-cinq-lignes",
+    courseId: "c-rectification-fatiha",
     kind: "text",
     quote: {
-      fr: "La méthode des cinq lignes m'a fait tenir six mois là où j'abandonnais après deux semaines. Le secret, c'est la révision imposée.",
-      en: "The five-lines method kept me going for six months, when I used to give up after two weeks. The secret is the mandatory revision.",
-      ar: "منهج الأسطر الخمسة جعلني أستمر ستة أشهر بينما كنت أتوقف بعد أسبوعين. السر هو المراجعة الإلزامية.",
+      fr: "Je confondais le ذ et le ز sans même m'en rendre compte. La quatrième vidéo m'a appris à placer ma langue.",
+      en: "I was confusing ذ and ز without even realising it. The fourth video taught me where to place my tongue.",
+      ar: "كنت أخلط بين الذال والزاي دون أن أنتبه، فعلّمني الدرس الرابع أين أضع لساني.",
     },
   },
   {
     id: "t-ibrahima-sarr",
     authorName: "Ibrahima Sarr",
     authorCity: "Thiès",
-    courseId: "c-regles-tajwid",
+    courseId: "c-rectification-fatiha",
     kind: "video",
     videoDuration: "1 min 05",
     quote: {
-      fr: "Les corrections vocales par WhatsApp changent tout — on entend son erreur, on ne la lit pas.",
-      en: "Voice corrections over WhatsApp change everything — you hear your mistake, you don't just read it.",
-      ar: "التصحيحات الصوتية عبر واتساب تغيّر كل شيء — تسمع خطأك، لا تكتفي بقراءته.",
+      fr: "Entendre l'erreur puis la bonne prononciation, l'une après l'autre : c'est ce qui m'a enfin fait comprendre le ض.",
+      en: "Hearing the mistake and then the correct pronunciation, one after the other, is what finally made me understand the ض.",
+      ar: "سماع الخطأ ثم النطق الصحيح، الواحد تلو الآخر، هو ما جعلني أفهم الضاد أخيرًا.",
     },
   },
   {
     id: "t-fatou-ndiaye",
     authorName: "Fatou Ndiaye",
     authorCity: "Saint-Louis",
-    courseId: "c-initiation-nourania",
+    courseId: "c-rectification-fatiha",
     kind: "text",
     quote: {
       fr: "Payé avec Wave en trente secondes, la formation était débloquée avant que je range mon téléphone.",
@@ -54,26 +55,26 @@ export const testimonials: Testimonial[] = [
     id: "t-khadija-fall",
     authorName: "Khadija Fall",
     authorCity: "Milan",
-    courseId: "c-fiqh-priere",
+    courseId: "c-rectification-fatiha",
     kind: "text",
     highlighted: true,
     quote: {
-      fr: "Je vis à Milan. Trouver un enseignant sénégalais rigoureux qui corrige vraiment, c'était impossible avant.",
-      en: "I live in Milan. Finding a rigorous Senegalese teacher who truly corrects you was impossible before.",
-      ar: "أعيش في ميلانو. كان إيجاد أستاذ سنغالي صارم يصحّح فعليًا أمرًا مستحيلاً من قبل.",
+      fr: "Je vis à Milan. Trouver un enseignement rigoureux de la récitation, en français, était impossible avant.",
+      en: "I live in Milan. Finding rigorous recitation teaching, in French, was impossible before.",
+      ar: "أعيش في ميلانو. كان إيجاد تعليم دقيق للتلاوة باللغة الفرنسية أمرًا مستحيلاً من قبل.",
     },
   },
   {
     id: "t-seynabou-gueye",
     authorName: "Seynabou Gueye",
     authorCity: "Rufisque",
-    courseId: "c-initiation-nourania",
+    courseId: "c-rectification-fatiha",
     kind: "video",
     videoDuration: "2 min 20",
     quote: {
-      fr: "Mon fils de neuf ans suit la Nourania avec moi le soir.",
-      en: "My nine-year-old son follows the Nourania course with me in the evening.",
-      ar: "ابني البالغ من العمر تسع سنوات يتابع معي درس النورانية في المساء.",
+      fr: "Mon fils de neuf ans regarde les vidéos avec moi le soir.",
+      en: "My nine-year-old son watches the videos with me in the evening.",
+      ar: "ابني البالغ من العمر تسع سنوات يشاهد الدروس معي في المساء.",
     },
   },
 ];

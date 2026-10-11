@@ -12,7 +12,8 @@ export interface LessonSidebarProps {
   modules: CurriculumModule[];
   defaultOpen: string[];
   lockedTooltipLabel: string;
-  sendRecitationLabel: string;
+  /** Absent : bouton masqué (formation sans correction vocale). */
+  sendRecitationLabel?: string;
   whatsappHref: string;
   className?: string;
 }
@@ -46,17 +47,19 @@ function LessonSidebar({
         lockedTooltipLabel={lockedTooltipLabel}
       />
 
-      <div className="p-5.5">
-        <a
-          href={whatsappHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex w-full items-center justify-center gap-2.5 rounded-sm border border-success-border px-4 py-3.5 text-[14px] font-semibold text-whatsapp-hover transition-colors hover:bg-success-bg"
-        >
-          <MessageCircle className="size-4" strokeWidth={1.8} />
-          {sendRecitationLabel}
-        </a>
-      </div>
+      {sendRecitationLabel && (
+        <div className="p-5.5">
+          <a
+            href={whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex w-full items-center justify-center gap-2.5 rounded-sm border border-success-border px-4 py-3.5 text-[14px] font-semibold text-whatsapp-hover transition-colors hover:bg-success-bg"
+          >
+            <MessageCircle className="size-4" strokeWidth={1.8} />
+            {sendRecitationLabel}
+          </a>
+        </div>
+      )}
     </div>
   );
 }

@@ -16,6 +16,8 @@ export interface MyCourseRowProps {
   progressLabel: string;
   actionLabel: string;
   actionHref: string;
+  /** Icône d'attestation sur le bouton d'une formation terminée qui en délivre une. */
+  showCertificateIcon?: boolean;
 }
 
 function MyCourseRow({
@@ -27,6 +29,7 @@ function MyCourseRow({
   progressLabel,
   actionLabel,
   actionHref,
+  showCertificateIcon = false,
 }: MyCourseRowProps) {
   const isCompleted = status === "completed";
 
@@ -76,7 +79,7 @@ function MyCourseRow({
             asChild
           >
             <Link href={actionHref}>
-              {isCompleted && (
+              {showCertificateIcon && (
                 <Shield className="size-[15px]" strokeWidth={1.7} />
               )}
               {actionLabel}

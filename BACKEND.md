@@ -60,12 +60,23 @@ Consommé par `completeLesson(lessonId)`.
   encore ce cas côté mock (elle retourne `{ progressPct: 0 }`), à aligner avec un vrai code
   d'erreur distinct côté backend.
 
+### `GET /api/me/lessons/:id/playback`
+Consommé par `getLessonPlayback(lessonId)` (page du lecteur, côté serveur).
+- Réponse : `{ provider: "youtube", videoId }` · `{ provider: "stream", url }` (URL Cloudflare
+  signée) · `{ provider: null }` (pas encore de vidéo).
+- Leçon payante d'une formation non achetée → `404` (même réponse qu'une leçon inexistante) ;
+  le lecteur affiche alors l'écran « Débloquer la formation ». Aperçu gratuit : servi à tout
+  utilisateur connecté.
+- Seule source d'une vidéo payante : le catalogue public n'expose `videoUrl` que pour les
+  aperçus gratuits. Limite connue : un identifiant YouTube « non répertorié » reste
+  partageable par un inscrit ; seul Cloudflare Stream protège réellement une vidéo payante.
+
 ### `POST /api/me/lessons/:id/position`
 Consommé par `saveLessonPosition(lessonId, positionSeconds)`.
 - Corps : `{ positionSeconds: number }`.
 - Réponse : `204` (aucun corps).
-- Débounce 10 s recommandé côté client avant l'appel (voir `ARCHITECTURE.md`) — pas de temps
-  réel nécessaire, cet appel est fire-and-forget.
+- Envoi étranglé côté client (au plus un appel toutes les 10 s pendant la lecture, plus un
+  dernier envoi en quittant la leçon) — fire-and-forget, localStorage sert de filet.
 
 ### `GET /api/lessons/:id/questions`
 Consommé par `getLessonQuestions(lessonId)`. Réponse : `LessonQuestion[]`.
@@ -135,6 +146,17 @@ Consommé par `reorderCourseModules(courseId, moduleIds)` et
 - **Temps réel** : l'état d'upload vidéo (`uploadPct`) affiché dans la ligne de la leçon
   nécessitera un flux de progression (SSE ou polling court, 1–2 s) une fois l'upload réel
   branché — non implémenté aujourd'hui (le mock a un pourcentage figé).
+
+### `PATCH /api/admin/courses/:id/modules/:moduleId/submodules/:subModuleId/lessons/:lessonId`
+Consommé par `updateCourseLesson` (renommage) et `updateCourseLessonVideo` (dialogue
+« Vidéo de la leçon » de l'éditeur de programme). Corps, tous champs optionnels :
+`{ title?, youtubeUrl?: string | null, durationSeconds?, isFreePreview? }`.
+- `youtubeUrl` accepte un lien youtu.be, watch?v=, /embed/, /shorts/ ou l'identifiant seul ;
+  tout autre lien → `400` avec un message affichable. `null` retire la vidéo.
+- La durée est saisie à la main (lire celle d'une vidéo YouTube exigerait une clé d'API
+  Google) ; `lessonCount` / `totalDurationSeconds` de la formation sont recalculés à chaque
+  modification du programme.
+- Réponse : `CourseEditorData`, dont `videoStatus[lessonId].youtubeId` (admin uniquement).
 
 ### `PATCH /api/admin/courses/:id`
 Prévu par `DATA-MODEL.md` (autosave, débounce 2 s) mais **non consommé par un composant

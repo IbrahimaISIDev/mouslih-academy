@@ -1,15 +1,17 @@
 import {
   ArrowRight,
-  CheckCircle,
+  Dumbbell,
+  GraduationCap,
   MessageCircle,
   Play,
   Shield,
+  Video,
 } from "lucide-react";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/lib/types";
-import { formatPrice, formatTotalDuration } from "@/lib/format";
+import { formatPrice, formatTotalDuration, localizeDigits } from "@/lib/format";
 import { buildFooterColumns } from "@/lib/footer-columns";
 import { getCourses } from "@/features/catalog/api/get-courses";
 import { getPublicStats } from "@/features/catalog/api/get-public-stats";
@@ -20,11 +22,11 @@ import { PublicHeader } from "@/components/layout/public-header";
 import { Footer } from "@/components/layout/footer";
 import { GeometricPattern } from "@/components/patterns/geometric-pattern";
 import { YouTubeFacade } from "@/components/patterns/youtube-facade";
-import { CourseCard } from "@/components/patterns/course-card";
 import { StickyCta } from "@/components/patterns/sticky-cta";
 import { TestimonialCard } from "@/components/patterns/testimonial-card";
 import { DirectionalIcon } from "@/components/patterns/directional-icon";
 import { AnimatedCounter } from "@/components/patterns/animated-counter";
+import { VideoProgramme } from "@/features/catalog/components/video-programme";
 import { WHATSAPP_DISPLAY, WHATSAPP_URL } from "@/lib/contact";
 
 // Page pré-rendue statiquement (generateStaticParams) : sans revalidation, le nombre réel
@@ -45,16 +47,26 @@ export default async function HomePage({ params }: HomePageProps) {
     "t-fatou-ndiaye",
   ];
 
-  const [t, tNav, tCommon, tCatalog, featured, allTestimonials, publicStats] =
+  const [t, tNav, tCommon, tCourse, featured, allTestimonials, publicStats] =
     await Promise.all([
       getTranslations("home"),
       getTranslations("nav"),
       getTranslations("common"),
-      getTranslations("catalog"),
+      getTranslations("course"),
       getCourses({ featured: true }),
       getTestimonials(),
       getPublicStats(),
     ]);
+
+  // Formation mise en avant : « Rectifiez votre Fâtiḥah » (seule formation publiée depuis le
+  // 2026-10-10). Toute la page s'articule autour d'elle.
+  const course = featured[0];
+  const courseHref = course ? `/formations/${course.slug}` : "/formations";
+  const programmeHref = `${courseHref}#programme`;
+  const lessons =
+    course?.modules.flatMap((m) => m.subModules.flatMap((sm) => sm.lessons)) ??
+    [];
+  const mistakeCount = lessons.reduce((n, l) => n + l.mistakes.length, 0);
 
   const testimonials = HOME_TESTIMONIAL_IDS.map((id) =>
     allTestimonials.find((testimonial) => testimonial.id === id),
@@ -108,10 +120,10 @@ export default async function HomePage({ params }: HomePageProps) {
                 asChild
                 className="w-full sm:w-auto"
               >
-                <Link href="/formations">{t("hero.ctaPrimary")}</Link>
+                <Link href={courseHref}>{t("hero.ctaPrimary")}</Link>
               </Button>
               <Link
-                href="/formations"
+                href={programmeHref}
                 className="inline-flex w-full items-center justify-center gap-2.5 rounded-sm border border-on-dark/40 px-6 py-4 text-[16px] font-semibold transition-colors hover:bg-white/8 sm:w-auto"
               >
                 <Play
@@ -140,16 +152,16 @@ export default async function HomePage({ params }: HomePageProps) {
               </div>
               <div>
                 <AnimatedCounter
-                  value={publicStats.coursesCount}
+                  value={mistakeCount}
                   locale={locale}
                   className="font-serif text-xl lg:text-[27px]"
                 />
                 <div className="mt-0.5 text-[11px] text-green-300 lg:text-[13px]">
                   <span className="lg:hidden">
-                    {t("hero.statCoursesLabelMobile")}
+                    {t("hero.statMistakesLabelMobile")}
                   </span>
                   <span className="hidden lg:inline">
-                    {t("hero.statCoursesLabel")}
+                    {t("hero.statMistakesLabel")}
                   </span>
                 </div>
               </div>
@@ -189,94 +201,140 @@ export default async function HomePage({ params }: HomePageProps) {
         </div>
       </section>
 
-      {/* Vidéo de présentation */}
-      <section className="border-b border-border-subtle bg-bg px-5 py-8 sm:px-6 lg:px-11 lg:py-16">
-        <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-12">
-          <div>
-            <p className="mb-2.5 text-[11px] font-semibold tracking-[0.18em] text-gold-600 uppercase lg:mb-3.5 lg:text-xs">
-              {t("video.eyebrow")}
-            </p>
-            <h2 className="mb-4 font-serif text-2xl font-medium lg:text-[34px] lg:leading-[1.2]">
-              {t("video.title")}
-            </h2>
-            <p className="mb-0 text-[15px] leading-[1.7] text-text-soft lg:mb-5.5 lg:text-base">
-              {t("video.description")}
-            </p>
-            <ul className="hidden flex-col gap-2.5 lg:flex">
-              {t.raw("video.bullets").map((bullet: string) => (
-                <li
-                  key={bullet}
-                  className="flex gap-2.5 text-[15px] text-text-soft"
-                >
-                  <CheckCircle
-                    className="mt-0.5 size-[18px] shrink-0 text-green-ink"
-                    strokeWidth={1.7}
-                  />
-                  {bullet}
-                </li>
-              ))}
-            </ul>
-          </div>
+      {/* Vidéo de présentation, puis présentation de la formation juste en dessous */}
+      <section className="border-b border-border-subtle bg-bg px-5 py-9 sm:px-6 lg:px-11 lg:py-18">
+        <div className="mx-auto max-w-[960px]">
+          <p className="mb-4 text-center text-[11px] font-semibold tracking-[0.18em] text-gold-600 uppercase lg:mb-5 lg:text-xs">
+            {t("video.eyebrow")}
+          </p>
           <YouTubeFacade
             videoId="ku1romHwGCM"
             title={t("video.title")}
-            caption={t("video.captionDesktop")}
-            className="group relative mt-4 grid aspect-video place-items-center overflow-hidden border border-border-strong bg-green-800 lg:mt-0"
+            caption={t("video.caption")}
+            className="group relative grid aspect-video w-full place-items-center overflow-hidden border border-border-strong bg-green-800"
           />
+
+          <div className="mx-auto mt-8 max-w-[720px] text-center lg:mt-11">
+            <h2 className="font-serif text-[30px] leading-[1.15] font-medium tracking-[-0.01em] lg:text-[44px]">
+              {course?.title[locale] ?? t("video.title")}
+            </h2>
+            <p className="mt-2.5 font-serif text-lg text-green-ink lg:mt-3 lg:text-[22px]">
+              {localizeDigits(t("video.subtitle"), locale)}
+            </p>
+            <p className="mx-auto mt-4 max-w-[60ch] text-[15px] leading-[1.7] text-text-soft lg:mt-5 lg:text-[17px]">
+              {t("video.description")}
+            </p>
+
+            <ul className="mt-6 flex flex-wrap justify-center gap-2.5 lg:mt-7">
+              {[
+                { icon: Video, label: t("video.features.recorded") },
+                { icon: Dumbbell, label: t("video.features.exercises") },
+                { icon: GraduationCap, label: t("video.features.beginners") },
+              ].map(({ icon: Icon, label }) => (
+                <li
+                  key={label}
+                  className="inline-flex items-center gap-2 rounded-sm border border-border-subtle bg-surface px-3.5 py-2 text-sm text-text-soft"
+                >
+                  <Icon
+                    className="size-4 shrink-0 text-green-ink"
+                    strokeWidth={1.7}
+                  />
+                  {label}
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-7 flex flex-col justify-center gap-2.5 sm:flex-row lg:mt-8">
+              <Button size="lg" asChild>
+                <Link href={courseHref}>{t("video.ctaPrimary")}</Link>
+              </Button>
+              <Button variant="secondary" size="lg" asChild>
+                <Link href={programmeHref}>
+                  <Play
+                    className="size-4"
+                    strokeWidth={1.6}
+                    fill="currentColor"
+                  />
+                  {t("video.ctaSecondary")}
+                </Link>
+              </Button>
+            </div>
+            {course && (
+              <p className="mt-3.5 text-[13px] text-text-muted">
+                {localizeDigits(
+                  t("video.priceNote", {
+                    price: formatPrice(course.priceXof, locale),
+                  }),
+                  locale,
+                )}
+              </p>
+            )}
+          </div>
         </div>
       </section>
 
-      {/* Formations en vedette */}
-      <section className="bg-surface px-5 py-8 sm:px-6 lg:px-11 lg:py-16">
-        <div className="mb-5 flex items-end justify-between lg:mb-8">
-          <div>
-            <p className="mb-2.5 text-[11px] font-semibold tracking-[0.18em] text-gold-600 uppercase lg:mb-3 lg:text-xs">
-              {t("featured.eyebrow")}
-            </p>
-            <h2 className="font-serif text-2xl font-medium lg:text-[34px]">
-              <span className="lg:hidden">{t("featured.titleMobile")}</span>
-              <span className="hidden lg:inline">{t("featured.title")}</span>
-            </h2>
+      {/* Le programme : les 5 vidéos */}
+      {course && lessons.length > 0 && (
+        <section className="bg-surface px-5 py-9 sm:px-6 lg:px-11 lg:py-16">
+          <div className="mx-auto max-w-[960px]">
+            <div className="mb-5 flex flex-wrap items-end justify-between gap-3 lg:mb-7">
+              <div>
+                <p className="mb-2.5 text-[11px] font-semibold tracking-[0.18em] text-gold-600 uppercase lg:mb-3 lg:text-xs">
+                  {t("programme.eyebrow")}
+                </p>
+                <h2 className="font-serif text-2xl font-medium lg:text-[34px]">
+                  {localizeDigits(
+                    t("programme.title", {
+                      videos: lessons.length,
+                      mistakes: mistakeCount,
+                    }),
+                    locale,
+                  )}
+                </h2>
+              </div>
+              <span className="text-sm text-text-muted">
+                {localizeDigits(
+                  t("programme.meta", {
+                    duration: formatTotalDuration(course.totalDurationSeconds, locale),
+                  }),
+                  locale,
+                )}
+              </span>
+            </div>
+            <VideoProgramme
+              lessons={lessons}
+              courseSlug={course.slug}
+              locale={locale}
+              isPurchased={false}
+              variant="compact"
+              labels={{
+                videoNumber: tCourse.raw("programme.videoNumber") as string,
+                free: tCourse("programme.free"),
+                watchFree: tCourse("programme.watchFree"),
+                watch: tCourse("programme.watch"),
+                locked: tCourse("programme.locked"),
+                objective: tCourse("programme.objective"),
+                previewCaption: tCourse("purchaseCard.previewCaption"),
+                learnTitle: tCourse("programme.learnTitle"),
+                passageLabel: tCourse("programme.passageLabel"),
+              }}
+            />
+            <div className="mt-6 text-center">
+              <Link
+                href={courseHref}
+                className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-green-ink hover:underline"
+              >
+                {t("programme.seeDetails")}
+                <DirectionalIcon
+                  icon={ArrowRight}
+                  className="size-4"
+                  strokeWidth={1.9}
+                />
+              </Link>
+            </div>
           </div>
-          <Link
-            href="/formations"
-            className="hidden items-center gap-1.5 text-[15px] font-semibold text-green-ink lg:flex"
-          >
-            {t("featured.seeCatalog")}
-            <DirectionalIcon
-              icon={ArrowRight}
-              className="size-4"
-              strokeWidth={1.9}
-            />
-          </Link>
-          <Link
-            href="/formations"
-            className="text-[13px] font-semibold text-green-ink lg:hidden"
-          >
-            {t("featured.seeAllMobile")}
-          </Link>
-        </div>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-[26px]">
-          {featured.slice(0, 3).map((course) => (
-            <CourseCard
-              key={course.id}
-              href={`/formations/${course.slug}`}
-              title={course.title[locale]}
-              meta={`${course.lessonCount} leçons · ${formatTotalDuration(course.totalDurationSeconds)}`}
-              price={formatPrice(course.priceXof, locale)}
-              level={course.level}
-              levelLabel={tCatalog(`levels.${course.level}`)}
-              coverUrl={course.coverUrl}
-              discoverLabel={t("featured.discover")}
-              promoLabel={
-                course.id === "c-rectification-fatiha"
-                  ? t("featured.badgeFeatured")
-                  : undefined
-              }
-            />
-          ))}
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Témoignages */}
       <section className="border-t border-border-subtle bg-bg px-5 py-8 sm:px-6 lg:px-11 lg:py-16">
@@ -333,7 +391,7 @@ export default async function HomePage({ params }: HomePageProps) {
           </div>
           <div className="flex flex-col gap-2.5 sm:flex-row">
             <Button variant="gold" size="lg" asChild>
-              <Link href="/formations">{t("cta.ctaPrimary")}</Link>
+              <Link href={courseHref}>{t("cta.ctaPrimary")}</Link>
             </Button>
             <Button variant="whatsapp" size="lg" asChild>
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
@@ -357,10 +415,10 @@ export default async function HomePage({ params }: HomePageProps) {
 
       <StickyCta
         priceLabel={t("stickyCta.priceLabel")}
-        price={formatPrice(featured[0]?.priceXof ?? 0, locale)}
+        price={formatPrice(course?.priceXof ?? 0, locale)}
         action={
           <Button className="w-full" asChild>
-            <Link href="/formations">{t("stickyCta.action")}</Link>
+            <Link href={courseHref}>{t("stickyCta.action")}</Link>
           </Button>
         }
       />

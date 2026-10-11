@@ -4,7 +4,7 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Check } from "lucide-react";
 import type { Locale } from "@/lib/types";
-import { formatPrice, formatTotalDuration } from "@/lib/format";
+import { formatPrice, formatTotalDuration, localizeDigits } from "@/lib/format";
 import { getCourse } from "@/features/catalog/api/get-course";
 import { getProfileOptional } from "@/features/account/api/get-profile";
 
@@ -89,14 +89,16 @@ export default async function OrderSummaryPage({ params }: OrderPageProps) {
           {t("summary.subtitle")}
         </p>
 
-        {/* Countdown timer for urgency */}
-        <div className="mb-6">
-          <CountdownTimer
-            hours={23}
-            minutes={59}
-            label={t("countdown.label")}
-          />
-        </div>
+        {/* Compte à rebours : seulement quand une offre (prix barré) existe réellement. */}
+        {discountXof > 0 && (
+          <div className="mb-6">
+            <CountdownTimer
+              hours={23}
+              minutes={59}
+              label={t("countdown.label")}
+            />
+          </div>
+        )}
 
         {/* Continue as section for logged-in users */}
         {isAuthenticated && profile && (
@@ -158,10 +160,12 @@ export default async function OrderSummaryPage({ params }: OrderPageProps) {
                     {course.title[locale]}
                   </h2>
                   <p className="mb-3.5 text-sm text-text-muted">
-                    {tCourse("meta.lessonsVideo", {
-                      count: course.lessonCount,
-                    })}{" "}
-                    · {formatTotalDuration(course.totalDurationSeconds)}
+                    {localizeDigits(
+                      `${tCourse("meta.lessonsVideo", {
+                        count: course.lessonCount,
+                      })} · ${formatTotalDuration(course.totalDurationSeconds, locale)}`,
+                      locale,
+                    )}
                   </p>
                   <div className="flex flex-wrap gap-4">
                     <span className="flex items-center gap-1.5 text-[13px] text-text-soft">
@@ -176,14 +180,14 @@ export default async function OrderSummaryPage({ params }: OrderPageProps) {
                         className="size-4 text-success"
                         strokeWidth={1.8}
                       />
-                      {t("summary.pdfIncluded")}
+                      {t("summary.mistakesIncluded")}
                     </span>
                     <span className="flex items-center gap-1.5 text-[13px] text-text-soft">
                       <Check
                         className="size-4 text-success"
                         strokeWidth={1.8}
                       />
-                      {t("summary.finalCertificate")}
+                      {t("summary.mobileAccess")}
                     </span>
                   </div>
                 </div>

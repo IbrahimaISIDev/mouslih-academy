@@ -2,13 +2,17 @@
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { ArrowLeft, ArrowRight, CheckCircle, Menu } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle, Lock, Menu } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter, Link } from "@/i18n/navigation";
-import type { Course, LessonQuestion, Locale } from "@/lib/types";
+import type {
+  Course,
+  LessonPlayback,
+  LessonQuestion,
+  Locale,
+} from "@/lib/types";
 import type { LessonLocation } from "@/features/learning/find-lesson";
-import type { LessonOverviewContent } from "@/mocks/lesson-content";
-import { formatDuration, localizeDigits } from "@/lib/format";
+import { formatDuration, formatPrice, localizeDigits } from "@/lib/format";
 import { getLessonState } from "@/features/learning/get-lesson-state";
 import { useEnrollment } from "@/features/learning/hooks/use-enrollment";
 import { useCompleteLesson } from "@/features/learning/hooks/use-complete-lesson";
@@ -37,7 +41,9 @@ export interface LessonPlayerViewProps {
   course: Course;
   location: LessonLocation;
   locale: Locale;
-  overviewContent: LessonOverviewContent | null;
+  /** `null` : leçon payante d'une formation non achetée. */
+  playback: LessonPlayback | null;
+  firstMistakeNumber: number;
   questions: LessonQuestion[];
   previousHref: string | null;
   nextHref: string | null;
@@ -47,7 +53,8 @@ function LessonPlayerView({
   course,
   location,
   locale,
-  overviewContent,
+  playback,
+  firstMistakeNumber,
   questions,
   previousHref,
   nextHref,
@@ -105,7 +112,7 @@ function LessonPlayerView({
           state:
             l.id === lesson.id
               ? "current"
-              : getLessonState(l, enrollment ?? null, true),
+              : getLessonState(l, enrollment ?? null, !!enrollment),
         })),
       })),
     }),
@@ -127,7 +134,9 @@ function LessonPlayerView({
       modules={sidebarModules}
       defaultOpen={[module.id]}
       lockedTooltipLabel={t("lockedTooltip")}
-      sendRecitationLabel={t("sendRecitation")}
+      sendRecitationLabel={
+        course.hasVoiceCorrection ? t("sendRecitation") : undefined
+      }
       whatsappHref={WHATSAPP_URL}
     />
   );
@@ -187,13 +196,46 @@ function LessonPlayerView({
 
       <div className="lg:grid lg:grid-cols-[1fr_380px]">
         <div className="lg:border-e lg:border-border-subtle">
-          <VideoPlayer
-            durationSeconds={lesson.durationSeconds}
-            initialPositionSeconds={initialPosition}
-            verseText={overviewContent?.verseText}
-            onProgress={savePosition}
-            onComplete={handleComplete}
-          />
+          {playback ? (
+            <VideoPlayer
+              playback={playback}
+              title={lesson.title[locale]}
+              passage={lesson.passage}
+              initialPositionSeconds={initialPosition}
+              locale={locale}
+              labels={{
+                play: t("video.play"),
+                resumeAt: t("video.resumeAt"),
+                unavailableTitle: t("video.unavailableTitle"),
+                unavailableBody: t("video.unavailableBody"),
+                loadError: t("video.loadError"),
+              }}
+              onProgress={savePosition}
+              onComplete={handleComplete}
+            />
+          ) : (
+            <div className="relative grid aspect-video place-items-center overflow-hidden bg-green-900 px-6 text-center text-on-dark">
+              <div className="relative">
+                <Lock
+                  className="mx-auto mb-3 size-6 text-gold-200"
+                  strokeWidth={1.6}
+                />
+                <p className="mb-1.5 font-serif text-xl lg:text-2xl">
+                  {t("locked.title")}
+                </p>
+                <p className="mx-auto mb-5 max-w-[46ch] text-sm text-on-dark-muted">
+                  {t("locked.body", {
+                    price: formatPrice(course.priceXof, locale),
+                  })}
+                </p>
+                <Button variant="gold" asChild>
+                  <Link href={`/commande/${course.slug}`}>
+                    {t("locked.cta")}
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          )}
 
           {/* Déclencheur du drawer mobile */}
           <button
@@ -219,11 +261,7 @@ function LessonPlayerView({
           <div className="px-5 pt-5 lg:px-7.5 lg:pt-6.5">
             <p className="mb-2.5 text-xs font-semibold tracking-[0.16em] text-gold-600 uppercase">
               {localizeDigits(
-                t("moduleLessonLabel", {
-                  module: module.title[locale],
-                  index: lessonIndex,
-                  total: totalLessons,
-                }),
+                t("videoOfTotal", { index: lessonIndex, total: totalLessons }),
                 locale,
               )}
             </p>
@@ -234,8 +272,8 @@ function LessonPlayerView({
 
           <div className="px-5 lg:px-7.5">
             <LessonTabs
-              overview={overviewContent}
-              resources={lesson.resources}
+              lesson={lesson}
+              firstMistakeNumber={firstMistakeNumber}
               questions={questions}
               locale={locale}
             />
@@ -285,14 +323,18 @@ function LessonPlayerView({
                 </span>
               )}
             </Button>
-            <button
-              type="button"
-              onClick={handleComplete}
-              className="flex items-center gap-2.5 text-[15px] font-semibold text-green-ink"
-            >
-              <CheckCircle className="size-[18px]" strokeWidth={1.7} />
-              {t("nav.markComplete")}
-            </button>
+            {playback && enrollment ? (
+              <button
+                type="button"
+                onClick={handleComplete}
+                className="flex items-center gap-2.5 text-[15px] font-semibold text-green-ink"
+              >
+                <CheckCircle className="size-[18px]" strokeWidth={1.7} />
+                {t("nav.markComplete")}
+              </button>
+            ) : (
+              <span />
+            )}
             <Button disabled={!nextHref} asChild={!!nextHref}>
               {nextHref ? (
                 <Link href={nextHref}>

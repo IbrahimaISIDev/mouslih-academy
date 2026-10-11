@@ -6,7 +6,11 @@ import { courses } from "@/mocks/courses";
 export async function getCourse(slug: string): Promise<Course | null> {
   if (USE_MOCKS) {
     await sleep(400);
-    return courses.find((course) => course.slug === slug) ?? null;
+    return (
+      courses.find(
+        (course) => course.slug === slug && course.status === "published",
+      ) ?? null
+    );
   }
 
   try {
@@ -22,7 +26,11 @@ export async function getCourse(slug: string): Promise<Course | null> {
 export async function getCourseById(id: string): Promise<Course | null> {
   if (USE_MOCKS) {
     await sleep(400);
-    return courses.find((course) => course.id === id) ?? null;
+    return (
+      courses.find(
+        (course) => course.id === id && course.status === "published",
+      ) ?? null
+    );
   }
 
   try {

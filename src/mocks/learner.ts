@@ -27,10 +27,7 @@ export const aminata: LearnerProfile = {
   phone: "+221 77 123 45 67",
   joinedAt: "2026-08-14",
   passwordChangedAt: "2026-03-03",
-  pendingRecitation: {
-    courseId: "c-rectification-fatiha",
-    moduleOrder: 1,
-    submittedDaysAgo: 1,
-  },
-  lessonsCompletedThisWeek: 3,
+  // Envoi de récitation masqué pour l'instant (2026-10-10).
+  pendingRecitation: null,
+  lessonsCompletedThisWeek: 2,
 };

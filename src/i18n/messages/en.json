@@ -9,38 +9,28 @@
       "premium": "Premium"
     },
     "footer": {
-      "tagline": "A digital academy to learn the Quran and Islamic sciences from Senegal.",
+      "tagline": "A digital academy to learn to recite the Quran accurately, from Senegal.",
       "whatsappMobileCta": "Write to us on WhatsApp",
       "columns": [
         {
-          "title": "Courses",
+          "title": "The course",
           "items": [
-            "Perfecting Al-Fatiha",
-            "Nourania",
-            "Tajwid",
-            "Sciences of Hadith"
+            "Perfect Your Al-Fâtiḥah",
+            "The 10 mistakes corrected",
+            "The 5 videos"
           ]
         },
         {
           "title": "Academy",
-          "items": [
-            "About",
-            "Testimonials",
-            "FAQ",
-            "Contact"
-          ]
+          "items": ["About", "Testimonials", "FAQ", "Contact"]
         },
         {
           "title": "Legal",
-          "items": [
-            "Terms of use",
-            "Refund policy",
-            "Privacy"
-          ]
+          "items": ["Terms of use", "Refund policy", "Privacy"]
         }
       ],
       "mobileLinks": [
-        "Courses",
+        "The course",
         "About",
         "Testimonials",
         "Contact",
@@ -68,44 +58,37 @@
   "home": {
     "hero": {
       "badge": "Verified teaching · Senegal",
-      "title": "Recite Al-Fatiha the way it should be recited.",
-      "description": "A digital academy to learn the Quran, Tajwid and Islamic sciences — at your own pace, corrected lesson by lesson, in French, English or Arabic.",
-      "descriptionMobile": "Quran, Tajwid and Islamic sciences — at your own pace, corrected lesson by lesson.",
-      "ctaPrimary": "Discover the courses",
-      "ctaSecondary": "See a free lesson",
+      "title": "Recite Al-Fâtiḥah the way it should be recited.",
+      "description": "Mouslih Académie helps you correct, one by one, the most common pronunciation mistakes in the surah you recite in every prayer — at your own pace, from your phone.",
+      "descriptionMobile": "Correct, one by one, the most common mistakes in the surah you recite in every prayer.",
+      "ctaPrimary": "Discover the course",
+      "ctaSecondary": "Watch video 1 for free",
       "statLearnersValue": "1,240",
       "statLearnersLabel": "enrolled learners",
       "statLearnersLabelMobile": "learners",
-      "statCoursesValue": "6",
-      "statCoursesLabel": "complete courses",
-      "statCoursesLabelMobile": "courses",
       "statPaymentValue": "Wave",
       "statPaymentLabel": "payment in 30 s",
       "statPaymentLabelMobile": "in 30 s",
       "teacherPlaceholder": "Teacher's portrait",
       "teacherName": "Oustaz Souleymane Diallo",
-      "teacherCredentials": "Ijaza in recitation · 12 years of teaching"
+      "teacherCredentials": "Ijaza in recitation · 12 years of teaching",
+      "statMistakesLabel": "mistakes corrected",
+      "statMistakesLabelMobile": "mistakes"
     },
     "video": {
-      "eyebrow": "In two minutes",
-      "title": "How a course unfolds",
-      "description": "Short video lessons, recitation exercises to send back, progress saved automatically. You keep lifetime access.",
-      "bullets": [
-        "Downloadable lessons for weak connections",
-        "Personalized correction over WhatsApp",
-        "Certificate at the end of the course"
-      ],
-      "captionDesktop": "Presentation video · 2 min 10",
-      "captionMobile": "2 min 10"
-    },
-    "featured": {
-      "eyebrow": "The program",
-      "title": "Featured courses",
-      "titleMobile": "Featured",
-      "seeCatalog": "See the full catalog",
-      "seeAllMobile": "See all",
-      "badgeFeatured": "Most followed",
-      "discover": "Discover"
+      "eyebrow": "Introduction",
+      "title": "Introducing Mouslih Académie",
+      "description": "Learn to recognise pronunciation mistakes, master the difficult letters and recite Al-Fâtiḥah with greater precision.",
+      "subtitle": "10 common mistakes corrected in 5 videos",
+      "features": {
+        "recorded": "Recorded course",
+        "exercises": "Practical exercises",
+        "beginners": "Beginner-friendly"
+      },
+      "ctaPrimary": "Discover the programme",
+      "ctaSecondary": "Watch video 1 for free",
+      "priceNote": "{price} · one-time payment with Wave · lifetime access",
+      "caption": "Introduction video"
     },
     "testimonials": {
       "eyebrow": "They joined",
@@ -115,12 +98,18 @@
     "cta": {
       "title": "Start today, keep lifetime access",
       "description": "Wave payment · no renewal · WhatsApp support Monday to Saturday.",
-      "ctaPrimary": "See the courses",
+      "ctaPrimary": "See the course",
       "ctaWhatsapp": "Ask a question"
     },
     "stickyCta": {
-      "priceLabel": "Starting at",
-      "action": "Discover the courses"
+      "priceLabel": "Lifetime access",
+      "action": "Discover the course"
+    },
+    "programme": {
+      "eyebrow": "The programme",
+      "title": "{videos} videos, {mistakes} mistakes corrected",
+      "meta": "{duration} in total · in the order of the surah",
+      "seeDetails": "See the 10 mistakes in detail"
     }
   },
   "catalog": {
@@ -152,26 +141,23 @@
       "formations": "Courses",
       "category": "Quran"
     },
-    "badgeFeatured": "Most followed",
     "meta": {
-      "lessonsVideo": "{count} video lessons",
-      "hoursContent": "{hours} of content",
-      "certificateIncluded": "Certificate included",
-      "languages": "FR · EN · AR",
-      "lessonsShort": "{count} lessons",
-      "hoursShort": "{hours}",
-      "certificateShort": "Certificate"
+      "lessonsVideo": "{count} videos",
+      "videos": "{count} videos",
+      "duration": "{duration} of video",
+      "mistakes": "{count} mistakes corrected",
+      "beginners": "Beginner-friendly"
     },
     "purchaseCard": {
-      "previewCaption": "Free preview · lesson 1",
+      "previewCaption": "Free preview · video 1",
       "paymentNote": "One-time payment · lifetime access",
       "buyButton": "Buy with Wave",
       "ownedButton": "Continue the course",
       "questionButton": "Ask a question",
       "questionButtonMobile": "A question? Write to us",
       "included": [
-        "Personalized voice correction",
-        "Downloadable PDF resources",
+        "All 5 videos, lifetime access",
+        "The 10 mistakes explained, rule by rule",
         "Refunded within 7 days if unsatisfied"
       ]
     },
@@ -183,59 +169,66 @@
     "outcomes": {
       "eyebrow": "By the end, you will be able to",
       "items": [
-        "Pronounce the emphatic letters correctly",
-        "Respect the duration of prolongations",
-        "Mark stops without breaking the meaning",
-        "Correct your recurring mistakes on your own"
+        "Pronounce the letters ح, ع, ذ, غ, ط and ض correctly",
+        "Respect the shadda on the يّ and the لّ",
+        "Hold the prolongations, up to the six counts of الضَّالِّينَ",
+        "Link words without adding a vowel"
       ]
-    },
-    "curriculum": {
-      "title": "Course structure",
-      "titleMobile": "Program",
-      "summary": "{modules} modules · {lessons} lessons · {free} lessons in free access",
-      "summaryMobile": "{modules} modules · {lessons} lessons",
-      "freeLabel": "Free preview",
-      "watchLabel": "Watch",
-      "lockedTooltip": "Available after purchase",
-      "previewDialogTitle": "Free preview",
-      "moduleMeta": "{lessons} lessons · {duration}",
-      "moduleMetaWithSub": "{subCount} sub-modules · {lessons} lessons · {duration}",
-      "moduleMetaCertificateSuffix": " + certificate",
-      "minutesShort": "{count} min",
-      "summaryCompact": "{lessons} video lessons",
-      "placeholderTitle": "Detailed syllabus coming soon",
-      "placeholderBody": "{lessons} video lessons · {duration} of content already ready — the module-by-module breakdown will be published soon."
     },
     "teacher": {
       "eyebrow": "The teacher",
       "name": "Oustaz Souleymane Diallo",
       "credentials": "Ijaza in recitation · Dakar",
-      "bio": "Twelve years of teaching the Quran, trained in Cairo, personally corrects every recitation sent."
+      "bio": "Twelve years of teaching the Quran, trained in Cairo."
     },
     "faq": {
       "eyebrow": "Frequently asked questions",
       "items": [
-        "Do I have a deadline to finish?",
-        "Can I pay in installments?",
-        "Are the videos subtitled?"
+        {
+          "question": "Is there a deadline to finish?",
+          "answer": "None. Access is for life: you progress at your own pace and rewatch the videos as often as you need."
+        },
+        {
+          "question": "Do I need to read Arabic?",
+          "answer": "Knowing how to read the Arabic letters is enough. Every passage studied is shown in fully vowelled Arabic, with written explanations in French, English or Arabic."
+        },
+        {
+          "question": "Can I follow the course on my phone?",
+          "answer": "Yes. The site adapts to your phone, and each video resumes where you left off."
+        }
       ]
-    },
-    "sidebar": {
-      "paymentDelayTitle": "Need a payment delay?",
-      "relatedTitle": "Related courses"
     },
     "stickyCta": {
       "lifetimeLabel": "Lifetime access",
       "buyButton": "Buy with Wave",
       "ownedButton": "Continue the course"
+    },
+    "badgeRecorded": "Recorded course",
+    "mistakes": {
+      "eyebrow": "The heart of the programme",
+      "title": "The {count} mistakes corrected",
+      "intro": "In the order of the surah, two mistakes per video: for each one, what is commonly heard, the correct pronunciation and the rule behind it.",
+      "videoLabel": "Video {number}"
+    },
+    "programme": {
+      "title": "The {count} videos",
+      "summary": "{videos} videos · {duration} · {free} free to watch",
+      "videoNumber": "Video {number}",
+      "free": "Free",
+      "watchFree": "Watch for free",
+      "watch": "Watch",
+      "locked": "After purchase",
+      "objective": "Objective:",
+      "learnTitle": "In this video, you will learn to:",
+      "passageLabel": "Passage studied"
     }
   },
   "auth": {
     "sidePanel": {
       "bullets": [
-        "Lifetime access to your purchased courses",
-        "Progress saved lesson by lesson",
-        "Personalized correction of your recitation"
+        "Lifetime access to your course",
+        "Progress saved video by video",
+        "Pick up where you left off"
       ],
       "statLine": "{count} learners in Senegal and abroad"
     },
@@ -250,7 +243,7 @@
     "login": {
       "mobileTitle": "Good to see you again",
       "sideTitle": "Pick up right where you left off",
-      "sideBody": "Your progress, corrections and certificates are waiting for you.",
+      "sideBody": "Your progress and your videos are waiting for you.",
       "formSubPrefix": "Don't have an account yet?",
       "formSwitchLabel": "Create one",
       "errorTitle": "Incorrect email or password",
@@ -267,7 +260,7 @@
     "signup": {
       "mobileTitle": "Create your account",
       "sideTitle": "An academy, not a video library",
-      "sideBody": "A free account gives you access to preview lessons, your progress and your personalized corrections.",
+      "sideBody": "A free account gives you access to the free first video and saves your progress.",
       "formSubPrefix": "Already have an account?",
       "formSwitchLabel": "Log in",
       "firstNameLabel": "First name",
@@ -307,8 +300,8 @@
         "message": "Hello, I have an issue with a Wave payment."
       },
       "correction": {
-        "label": "Follow-up on a recitation correction",
-        "message": "Hello, I'd like an update on my recitation correction."
+        "label": "A pronunciation question",
+        "message": "Hello, I have a question about the pronunciation of a passage of Al-Fâtiḥah."
       },
       "other": {
         "label": "Something else",
@@ -321,9 +314,9 @@
     "mobileCta": "Message us on WhatsApp"
   },
   "testimonials": {
-    "eyebrow": "They took the courses",
+    "eyebrow": "They took the course",
     "title": "What learners say",
-    "description": "Corrected recitations, memorization habits kept, prayers recited with certainty. Here's what they say, unedited.",
+    "description": "Letters finally well placed, prolongations held, Al-Fâtiḥah recited with more confidence. Here is what they took away.",
     "descriptionMobile": "Unedited, with their course and their city.",
     "filters": {
       "all": "All",
@@ -331,26 +324,26 @@
       "text": "Written"
     },
     "seeMore": "See more testimonials",
-    "mobileCta": "Discover the courses"
+    "mobileCta": "Discover the course"
   },
   "dashboard": {
     "salam": "السلام عليكم",
     "welcomeTitle": "Welcome back, {name}",
-    "weeklyProgress": "You completed {done} lessons this week — {remaining} lessons left to finish {course}.",
-    "weeklyProgressMobile": "{done} lessons completed this week — {remaining} left.",
+    "weeklyProgress": "{done, plural, =0 {No videos completed this week} one {You completed # video this week} other {You completed # videos this week}} — {remaining} left to finish “{course}”.",
+    "weeklyProgressMobile": "{done, plural, =0 {No videos completed this week} one {# video completed this week} other {# videos completed this week}} — {remaining} left.",
     "continueLabel": "Continue your learning",
-    "contextLine": "{course} · {module} · Lesson {index} of {total}",
+    "contextLine": "{course} · Video {index} of {total}",
     "resumeAt": "Resume at",
-    "resumeButton": "Resume the lesson",
-    "progressLabel": "{done} / {total} lessons · {pct}%",
+    "resumeButton": "Resume the video",
+    "progressLabel": "{done} / {total} videos · {pct}%",
     "myCoursesTitle": "My courses",
-    "browseCatalog": "Browse the catalog",
+    "browseCatalog": "See the course",
     "status": {
       "inProgress": "In progress",
       "notStarted": "Not started",
       "completed": "Completed"
     },
-    "lastSeenDaysAgo": "Last lesson viewed {days} days ago",
+    "lastSeenDaysAgo": "{days, plural, =0 {Last video viewed today} one {Last video viewed yesterday} other {Last video viewed # days ago}}",
     "neverStarted": "Never started",
     "completedOn": "Completed on {date}",
     "continueBtn": "Continue",
@@ -362,57 +355,74 @@
     "pendingCorrectionMeta": "Sent {days} day ago · reply within 48 h",
     "pendingCorrectionStatus": "Being corrected",
     "needHelpTitle": "Need help?",
-    "needHelpBody": "A question about a lesson, a payment, an access issue? The team replies Monday to Saturday.",
+    "needHelpBody": "A question about a video, a payment, an access issue? The team replies Monday to Saturday.",
     "whatsappCta": "Write on WhatsApp",
     "emptyLibrary": {
       "title": "Your library is empty",
-      "description": "Choose a first course — Al-Fatiha takes three hours and lays the foundation for everything else.",
-      "action": "Browse the catalogue"
-    }
+      "description": "Start with “Perfect Your Al-Fâtiḥah”: 10 common mistakes corrected in 5 videos, the first one is free to watch.",
+      "action": "Discover the course"
+    },
+    "reviewBtn": "Watch again"
   },
   "player": {
     "backToDashboard": "Dashboard",
-    "progressLabel": "{done} / {total} lessons",
+    "progressLabel": "{done} / {total} videos",
     "percentLabel": "{pct}%",
-    "sidebarTitle": "Course content",
+    "sidebarTitle": "The 5 videos",
     "sendRecitation": "Send my recitation",
     "lockedTooltip": "Available after purchase",
-    "moduleLessonLabel": "{module} · Lesson {index} of {total}",
-    "lessonOfTotal": "Lesson {index} of {total}",
     "tabs": {
       "overview": "Overview",
       "resources": "Resources",
       "questions": "Questions"
     },
     "overview": {
-      "keyPointsTitle": "Key points of the lesson"
+      "objectiveTitle": "Objective",
+      "mistakesTitle": "The {count} mistakes corrected in this video",
+      "mistakeLabel": "Common mistake",
+      "correctionLabel": "Correction",
+      "ruleLabel": "Rule",
+      "learnTitle": "In this video, you will learn to:"
     },
     "resources": {
       "downloadNote": "PDFs remain accessible offline once downloaded.",
       "sizeUnit": "{size} KB"
     },
     "questions": {
-      "placeholder": "Ask a question about this lesson…",
+      "placeholder": "Ask a question about this video…",
       "responseTime": "Teacher replies within 48 h",
       "send": "Send",
       "teacherBadge": "Teacher",
       "pendingAnswer": "Awaiting a reply",
-      "emptyTitle": "No questions on this lesson",
+      "emptyTitle": "No questions on this video",
       "emptyDescription": "Be the first to ask for a clarification.",
       "emptyAction": "Ask a question"
     },
     "nav": {
-      "previous": "Previous lesson",
+      "previous": "Previous video",
       "markComplete": "Mark as complete",
-      "next": "Next lesson"
+      "next": "Next video"
     },
     "autoAdvance": {
-      "message": "Next lesson in {seconds}s",
+      "message": "Next video in {seconds}s",
       "cancel": "Cancel"
     },
     "mobile": {
       "programBar": "Program",
       "drawerHint": "Tap the \"Program\" bar to open and close the navigation drawer."
+    },
+    "videoOfTotal": "Video {index} of {total}",
+    "video": {
+      "play": "Play the video",
+      "resumeAt": "Resume at",
+      "unavailableTitle": "Video coming soon",
+      "unavailableBody": "The recording of this session is being finalised. The explanations and corrected mistakes are already available below.",
+      "loadError": "The video player could not load. Check your connection, then reload the page."
+    },
+    "locked": {
+      "title": "This video is part of the course",
+      "body": "Get all 5 videos and the 10 corrected mistakes for {price}, one-time payment.",
+      "cta": "Unlock the course"
     }
   },
   "profile": {
@@ -481,8 +491,6 @@
       "subtitle": "A one-time payment, no automatic renewal.",
       "courseCardTitle": "Your course",
       "lifetimeAccess": "Lifetime access",
-      "pdfIncluded": "PDF resources included",
-      "finalCertificate": "Final certificate",
       "accountCardTitle": "Wave account to be charged",
       "phoneLabel": "Phone number",
       "useOtherNumber": "Use another number",
@@ -508,7 +516,9 @@
       "refundNote": "Full refund within 7 days if the course isn't right for you.",
       "questionBeforePaying": "A question before paying?",
       "loggedInAs": "Logged in as",
-      "changeAccount": "Switch"
+      "changeAccount": "Switch",
+      "mistakesIncluded": "10 mistakes corrected in detail",
+      "mobileAccess": "On phone and computer"
     },
     "countdown": {
       "label": "Offer expires in"
@@ -525,20 +535,20 @@
       "title": "Frequently asked questions",
       "items": [
         {
-          "question": "How do I access the lessons after paying?",
-          "answer": "Once your payment is confirmed, you'll get immediate access to all lessons from your dashboard. You'll also receive a confirmation e-mail."
+          "question": "How do I access the videos after payment?",
+          "answer": "As soon as Wave confirms the payment, all 5 videos are unlocked in your dashboard. You also receive a confirmation email."
         },
         {
-          "question": "Can I pay in installments?",
-          "answer": "Right now we only accept one-time payments via Wave. Payment is secure and instant."
+          "question": "Can I pay in instalments?",
+          "answer": "No: payment is made in one go via Wave. It is secure and instant."
         },
         {
-          "question": "Is the certificate recognized?",
-          "answer": "Yes, our certificates are personalized and can be shared on your LinkedIn profile or CV. They attest to the skills acquired during the course."
+          "question": "Do I need to read Arabic?",
+          "answer": "Knowing how to read the Arabic letters is enough. Every passage studied is shown in fully vowelled Arabic."
         },
         {
           "question": "Can I follow the course on mobile?",
-          "answer": "Absolutely! Our platform is fully mobile-friendly. You can follow your courses on computer, tablet, or phone, anytime."
+          "answer": "Yes. The platform works on phone, tablet and computer, and each video resumes where you left off."
         }
       ]
     },
@@ -562,15 +572,15 @@
         "blessing": "بَارَكَ اللَّهُ فِيكَ",
         "title": "Your course is unlocked",
         "body": "The {amount} payment was confirmed by Wave. \"{course}\" is now yours for life.",
-        "startLesson": "Start lesson 1",
+        "startLesson": "Start video 1",
         "goDashboard": "Go to dashboard",
         "getStartedTitle": "To get started",
-        "tip1Title": "Watch the first 3 lessons",
-        "tip1Body": "They set the breath and intention before any work on the letters.",
-        "tip2Title": "Download the resources",
-        "tip2Body": "PDFs stay readable offline, useful while on the move.",
-        "tip3Title": "Send your recitation",
-        "tip3Body": "At the end of module 1, to receive your first correction.",
+        "tip1Title": "Follow the order of the videos",
+        "tip1Body": "They follow the order of the surah, from الْحَمْدُ to الضَّالِّينَ.",
+        "tip2Title": "Repeat out loud",
+        "tip2Body": "After each video, reread the two mistakes in the “Overview” tab and recite the passage several times.",
+        "tip3Title": "Ask your questions",
+        "tip3Body": "Below each video, the teacher answers your pronunciation questions.",
         "receiptTitle": "Receipt",
         "paidBadge": "Paid",
         "reference": "Reference",
@@ -694,7 +704,7 @@
         "draft": "Draft",
         "published": "Published"
       },
-      "meta": "{modules} modules · {lessons} lessons · {duration} of video",
+      "meta": "{modules, plural, one {# module} other {# modules}} · {lessons, plural, one {# lesson} other {# lessons}} · {duration} of video",
       "previewLearner": "Preview as learner",
       "publish": "Publish course",
       "delete": "Delete course",
@@ -765,7 +775,25 @@
         "deleteModuleError": "Deleting the module failed. Please try again.",
         "deleteLessonError": "Deleting the lesson failed. Please try again.",
         "deleteModuleConfirm": "Permanently delete the module \"{title}\" and all its content? This action cannot be undone.",
-        "deleteLessonConfirm": "Permanently delete the lesson \"{title}\"? This action cannot be undone."
+        "deleteLessonConfirm": "Permanently delete the lesson \"{title}\"? This action cannot be undone.",
+        "editVideo": "YouTube link, duration and access",
+        "freePreview": "Free",
+        "videoUpdated": "Video saved.",
+        "updateVideoError": "Saving the video failed. Please try again.",
+        "videoDialog": {
+          "title": "Lesson video",
+          "urlLabel": "YouTube link",
+          "urlHelp": "Paste the video's share link (preferably an “unlisted” video).",
+          "urlInvalid": "Link not recognised: use a youtu.be/… or youtube.com/watch?v=… link",
+          "previewAlt": "Video thumbnail",
+          "durationLabel": "Duration (min:s)",
+          "durationHelp": "Shown in the programme and used for the course's total duration.",
+          "durationInvalid": "Expected format: 12:05",
+          "freePreviewLabel": "Free access",
+          "freePreviewHelp": "Visible to everyone without purchase, as a preview of the course.",
+          "cancel": "Cancel",
+          "save": "Save"
+        }
       },
       "cover": {
         "title": "Cover image",

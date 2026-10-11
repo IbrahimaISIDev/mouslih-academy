@@ -24,3 +24,29 @@ export async function updateCourseLesson(
   await sleep(400);
   throw new Error("Modification indisponible en mode démo (NEXT_PUBLIC_USE_MOCKS=true).");
 }
+
+export interface LessonVideoInput {
+  /** Lien ou identifiant YouTube ; `null` retire la vidéo. */
+  youtubeUrl: string | null;
+  durationSeconds: number;
+  isFreePreview: boolean;
+}
+
+/** Même endpoint que le renommage : rattache une vidéo YouTube, sa durée et l'accès libre. */
+export async function updateCourseLessonVideo(
+  courseId: string,
+  moduleId: string,
+  subModuleId: string,
+  lessonId: string,
+  input: LessonVideoInput,
+): Promise<CourseEditorData> {
+  if (!USE_MOCKS) {
+    return clientApiFetch<CourseEditorData>(
+      `/api/admin/courses/${courseId}/modules/${moduleId}/submodules/${subModuleId}/lessons/${lessonId}`,
+      { method: "PATCH", body: JSON.stringify(input) },
+    );
+  }
+
+  await sleep(400);
+  throw new Error("Modification indisponible en mode démo (NEXT_PUBLIC_USE_MOCKS=true).");
+}

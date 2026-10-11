@@ -16,6 +16,8 @@ export async function getCourses(
     await sleep(400);
 
     return courses.filter((course) => {
+      // Comme l'API (CoursesService.list) : une formation en brouillon n'est jamais publique.
+      if (course.status !== "published") return false;
       if (params.level && course.level !== params.level) return false;
       if (params.featured !== undefined && course.isFeatured !== params.featured)
         return false;

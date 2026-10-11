@@ -144,7 +144,6 @@ export default async function DashboardPage({
             contextLine={localizeDigits(
               t("contextLine", {
                 course: inProgressCourse.title[locale],
-                module: location.module.title[locale],
                 index: location.lessonIndex,
                 total: location.totalLessons,
               }),
@@ -231,9 +230,13 @@ export default async function DashboardPage({
                             locale,
                           );
 
+                  const showCertificate =
+                    status === "completed" && course.hasCertificate;
                   const actionLabel =
                     status === "completed"
-                      ? t("certificateBtn")
+                      ? showCertificate
+                        ? t("certificateBtn")
+                        : t("reviewBtn")
                       : status === "notStarted"
                         ? t("startBtn")
                         : t("continueBtn");
@@ -266,6 +269,7 @@ export default async function DashboardPage({
                       )}
                       actionLabel={actionLabel}
                       actionHref={actionHref}
+                      showCertificateIcon={showCertificate}
                     />
                   );
                 })}

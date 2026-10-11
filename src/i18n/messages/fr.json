@@ -9,16 +9,15 @@
       "premium": "Premium"
     },
     "footer": {
-      "tagline": "Une académie numérique pour apprendre le Coran et les sciences islamiques depuis le Sénégal.",
+      "tagline": "Une académie numérique pour apprendre à réciter le Coran avec justesse, depuis le Sénégal.",
       "whatsappMobileCta": "Nous écrire sur WhatsApp",
       "columns": [
         {
-          "title": "Formations",
+          "title": "La formation",
           "items": [
-            "Rectification de la Fatiha",
-            "Nourania",
-            "Tajwid",
-            "Sciences du hadith"
+            "Rectifiez votre Fâtiḥah",
+            "Les 10 erreurs corrigées",
+            "Les 5 vidéos"
           ]
         },
         {
@@ -40,7 +39,7 @@
         }
       ],
       "mobileLinks": [
-        "Formations",
+        "La formation",
         "À propos",
         "Témoignages",
         "Contact",
@@ -68,44 +67,37 @@
   "home": {
     "hero": {
       "badge": "Enseignement vérifié · Sénégal",
-      "title": "Récitez la Fatiha comme elle doit être récitée.",
-      "description": "Une académie numérique pour apprendre le Coran, le Tajwid et les sciences islamiques — à votre rythme, corrigé leçon par leçon, en français, anglais ou arabe.",
-      "descriptionMobile": "Coran, Tajwid et sciences islamiques — à votre rythme, corrigé leçon par leçon.",
-      "ctaPrimary": "Découvrir les formations",
-      "ctaSecondary": "Voir une leçon gratuite",
+      "title": "Récitez Al-Fâtiḥah comme elle doit être récitée.",
+      "description": "Mouslih Académie vous accompagne pour corriger, une à une, les erreurs de prononciation les plus fréquentes dans la sourate que vous récitez à chaque prière — à votre rythme, depuis votre téléphone.",
+      "descriptionMobile": "Corrigez, une à une, les erreurs les plus fréquentes dans la sourate que vous récitez à chaque prière.",
+      "ctaPrimary": "Découvrir la formation",
+      "ctaSecondary": "Voir la vidéo 1 gratuite",
       "statLearnersValue": "1 240",
       "statLearnersLabel": "apprenants inscrits",
       "statLearnersLabelMobile": "apprenants",
-      "statCoursesValue": "6",
-      "statCoursesLabel": "formations complètes",
-      "statCoursesLabelMobile": "formations",
       "statPaymentValue": "Wave",
       "statPaymentLabel": "paiement en 30 s",
       "statPaymentLabelMobile": "en 30 s",
       "teacherPlaceholder": "Portrait de l'enseignant",
       "teacherName": "Oustaz Souleymane Diallo",
-      "teacherCredentials": "Ijaza en récitation · 12 ans d'enseignement"
+      "teacherCredentials": "Ijaza en récitation · 12 ans d'enseignement",
+      "statMistakesLabel": "erreurs corrigées",
+      "statMistakesLabelMobile": "erreurs"
     },
     "video": {
-      "eyebrow": "En deux minutes",
-      "title": "Comment se déroule une formation",
-      "description": "Des leçons vidéo courtes, des exercices de récitation à renvoyer, une progression enregistrée automatiquement. Vous gardez l'accès à vie.",
-      "bullets": [
-        "Leçons téléchargeables pour les connexions faibles",
-        "Correction personnalisée par WhatsApp",
-        "Attestation à la fin du parcours"
-      ],
-      "captionDesktop": "Vidéo de présentation · 2 min 10",
-      "captionMobile": "2 min 10"
-    },
-    "featured": {
-      "eyebrow": "Le programme",
-      "title": "Formations en vedette",
-      "titleMobile": "En vedette",
-      "seeCatalog": "Tout le catalogue",
-      "seeAllMobile": "Tout voir",
-      "badgeFeatured": "Le plus suivi",
-      "discover": "Découvrir"
+      "eyebrow": "Présentation",
+      "title": "Présentation de Mouslih Académie",
+      "description": "Apprenez à reconnaître les erreurs de prononciation, à maîtriser les lettres difficiles et à réciter Al-Fâtiḥah avec davantage de précision.",
+      "subtitle": "10 erreurs fréquentes corrigées en 5 vidéos",
+      "features": {
+        "recorded": "Formation enregistrée",
+        "exercises": "Exercices pratiques",
+        "beginners": "Accessible aux débutants"
+      },
+      "ctaPrimary": "Découvrir le programme",
+      "ctaSecondary": "Regarder la vidéo 1 gratuitement",
+      "priceNote": "{price} · paiement unique avec Wave · accès à vie",
+      "caption": "Vidéo de présentation"
     },
     "testimonials": {
       "eyebrow": "Ils ont suivi",
@@ -115,12 +107,18 @@
     "cta": {
       "title": "Commencez aujourd'hui, gardez l'accès à vie",
       "description": "Paiement Wave · aucune reconduction · assistance WhatsApp du lundi au samedi.",
-      "ctaPrimary": "Voir les formations",
+      "ctaPrimary": "Voir la formation",
       "ctaWhatsapp": "Poser une question"
     },
     "stickyCta": {
-      "priceLabel": "À partir de",
-      "action": "Découvrir les formations"
+      "priceLabel": "Accès à vie",
+      "action": "Découvrir la formation"
+    },
+    "programme": {
+      "eyebrow": "Le programme",
+      "title": "{videos} vidéos, {mistakes} erreurs corrigées",
+      "meta": "{duration} au total · dans l'ordre de la sourate",
+      "seeDetails": "Voir le détail des 10 erreurs"
     }
   },
   "catalog": {
@@ -152,26 +150,23 @@
       "formations": "Formations",
       "category": "Coran"
     },
-    "badgeFeatured": "Le plus suivi",
     "meta": {
-      "lessonsVideo": "{count} leçons vidéo",
-      "hoursContent": "{hours} de contenu",
-      "certificateIncluded": "Attestation incluse",
-      "languages": "FR · EN · AR",
-      "lessonsShort": "{count} leçons",
-      "hoursShort": "{hours}",
-      "certificateShort": "Attestation"
+      "lessonsVideo": "{count} vidéos",
+      "videos": "{count} vidéos",
+      "duration": "{duration} de vidéo",
+      "mistakes": "{count} erreurs corrigées",
+      "beginners": "Accessible aux débutants"
     },
     "purchaseCard": {
-      "previewCaption": "Aperçu gratuit · leçon 1",
+      "previewCaption": "Aperçu gratuit · vidéo 1",
       "paymentNote": "Paiement unique · accès à vie",
       "buyButton": "Acheter avec Wave",
       "ownedButton": "Continuer la formation",
       "questionButton": "Poser une question",
       "questionButtonMobile": "Une question ? Écrivez-nous",
       "included": [
-        "Correction vocale personnalisée",
-        "Supports PDF téléchargeables",
+        "Les 5 vidéos, accès à vie",
+        "Les 10 erreurs détaillées, règle par règle",
         "Remboursé 7 jours si insatisfait"
       ]
     },
@@ -183,59 +178,66 @@
     "outcomes": {
       "eyebrow": "À la fin, vous saurez",
       "items": [
-        "Prononcer les lettres emphatiques correctement",
-        "Respecter la durée des prolongations",
-        "Marquer les arrêts sans couper le sens",
-        "Corriger seul vos erreurs récurrentes"
+        "Prononcer correctement les lettres ح, ع, ذ, غ, ط et ض",
+        "Respecter la shadda sur le يّ et le لّ",
+        "Tenir les allongements, jusqu'aux six temps de الضَّالِّينَ",
+        "Enchaîner les mots sans ajouter de voyelle"
       ]
-    },
-    "curriculum": {
-      "title": "Structure pédagogique",
-      "titleMobile": "Programme",
-      "summary": "{modules} modules · {lessons} leçons · {free} leçons en accès libre",
-      "summaryMobile": "{modules} modules · {lessons} leçons",
-      "freeLabel": "Aperçu gratuit",
-      "watchLabel": "Regarder",
-      "lockedTooltip": "Disponible après l'achat",
-      "previewDialogTitle": "Aperçu gratuit",
-      "moduleMeta": "{lessons} leçons · {duration}",
-      "moduleMetaWithSub": "{subCount} sous-modules · {lessons} leçons · {duration}",
-      "moduleMetaCertificateSuffix": " + attestation",
-      "minutesShort": "{count} min",
-      "summaryCompact": "{lessons} leçons vidéo",
-      "placeholderTitle": "Programme détaillé à venir",
-      "placeholderBody": "{lessons} leçons vidéo · {duration} de contenu déjà prêtes — le détail module par module sera publié prochainement."
     },
     "teacher": {
       "eyebrow": "L'enseignant",
       "name": "Oustaz Souleymane Diallo",
       "credentials": "Ijaza en récitation · Dakar",
-      "bio": "Douze ans d'enseignement du Coran, formé au Caire, corrige personnellement chaque récitation envoyée."
+      "bio": "Douze ans d'enseignement du Coran, formé au Caire."
     },
     "faq": {
       "eyebrow": "Questions fréquentes",
       "items": [
-        "Ai-je un délai pour terminer ?",
-        "Puis-je payer en plusieurs fois ?",
-        "Les vidéos sont-elles sous-titrées ?"
+        {
+          "question": "Ai-je un délai pour terminer ?",
+          "answer": "Aucun. L'accès est à vie : vous avancez à votre rythme et revoyez les vidéos autant de fois que nécessaire."
+        },
+        {
+          "question": "Faut-il savoir lire l'arabe ?",
+          "answer": "Il suffit de savoir lire les lettres arabes. Chaque passage travaillé est affiché en arabe entièrement vocalisé, avec des explications écrites en français, en anglais ou en arabe."
+        },
+        {
+          "question": "Puis-je suivre la formation sur mon téléphone ?",
+          "answer": "Oui. Le site s'adapte au téléphone, et chaque vidéo reprend là où vous vous étiez arrêté."
+        }
       ]
-    },
-    "sidebar": {
-      "paymentDelayTitle": "Besoin d'un délai de paiement ?",
-      "relatedTitle": "Formations liées"
     },
     "stickyCta": {
       "lifetimeLabel": "Accès à vie",
       "buyButton": "Acheter avec Wave",
       "ownedButton": "Continuer la formation"
+    },
+    "badgeRecorded": "Formation enregistrée",
+    "mistakes": {
+      "eyebrow": "L'essentiel du programme",
+      "title": "Les {count} erreurs corrigées",
+      "intro": "Dans l'ordre de la sourate, deux erreurs par vidéo : pour chacune, ce qu'on entend souvent, la bonne prononciation et la règle qui la justifie.",
+      "videoLabel": "Vidéo {number}"
+    },
+    "programme": {
+      "title": "Les {count} vidéos",
+      "summary": "{videos} vidéos · {duration} · {free} en accès libre",
+      "videoNumber": "Vidéo {number}",
+      "free": "Accès libre",
+      "watchFree": "Regarder gratuitement",
+      "watch": "Regarder",
+      "locked": "Après l'achat",
+      "objective": "Objectif :",
+      "learnTitle": "Dans cette vidéo, vous apprendrez à :",
+      "passageLabel": "Passage étudié"
     }
   },
   "auth": {
     "sidePanel": {
       "bullets": [
-        "Accès à vie à vos formations achetées",
-        "Progression enregistrée leçon par leçon",
-        "Correction personnalisée de votre récitation"
+        "Accès à vie à votre formation",
+        "Progression enregistrée vidéo par vidéo",
+        "Reprise là où vous vous êtes arrêté"
       ],
       "statLine": "{count} apprenants au Sénégal et en diaspora"
     },
@@ -250,7 +252,7 @@
     "login": {
       "mobileTitle": "Content de vous revoir",
       "sideTitle": "Reprenez là où vous vous êtes arrêté",
-      "sideBody": "Votre progression, vos corrections et vos attestations vous attendent.",
+      "sideBody": "Votre progression et vos vidéos vous attendent.",
       "formSubPrefix": "Pas encore de compte ?",
       "formSwitchLabel": "Créez-en un",
       "errorTitle": "E-mail ou mot de passe incorrect",
@@ -267,7 +269,7 @@
     "signup": {
       "mobileTitle": "Créer votre compte",
       "sideTitle": "Une académie, pas une bibliothèque de vidéos",
-      "sideBody": "Un compte gratuit vous donne accès aux leçons d'aperçu, à votre progression et à vos corrections personnalisées.",
+      "sideBody": "Un compte gratuit vous donne accès à la vidéo 1 en accès libre et enregistre votre progression.",
       "formSubPrefix": "Vous avez déjà un compte ?",
       "formSwitchLabel": "Connectez-vous",
       "firstNameLabel": "Prénom",
@@ -307,8 +309,8 @@
         "message": "Bonjour, j'ai un problème avec un paiement Wave."
       },
       "correction": {
-        "label": "Suivi d'une correction de récitation",
-        "message": "Bonjour, je voudrais un point sur ma correction de récitation."
+        "label": "Une question de prononciation",
+        "message": "Bonjour, j'ai une question sur la prononciation d'un passage de la Fâtiḥah."
       },
       "other": {
         "label": "Autre demande",
@@ -321,9 +323,9 @@
     "mobileCta": "Écrire sur WhatsApp"
   },
   "testimonials": {
-    "eyebrow": "Ils ont suivi les formations",
+    "eyebrow": "Ils ont suivi la formation",
     "title": "Ce que disent les apprenants",
-    "description": "Des récitations corrigées, des habitudes de mémorisation tenues, des prières récitées avec certitude. Voici ce qu'ils racontent, sans retouche.",
+    "description": "Des lettres enfin bien placées, des allongements tenus, une Fâtiḥah récitée avec plus d'assurance. Voici ce qu'ils en retiennent.",
     "descriptionMobile": "Sans retouche, avec leur formation et leur ville.",
     "filters": {
       "all": "Tous",
@@ -331,26 +333,26 @@
       "text": "Écrits"
     },
     "seeMore": "Voir plus de témoignages",
-    "mobileCta": "Découvrir les formations"
+    "mobileCta": "Découvrir la formation"
   },
   "dashboard": {
     "salam": "السلام عليكم",
     "welcomeTitle": "Bon retour, {name}",
-    "weeklyProgress": "Vous avez terminé {done} leçons cette semaine — il vous reste {remaining} leçons pour achever la {course}.",
-    "weeklyProgressMobile": "{done} leçons terminées cette semaine — il en reste {remaining}.",
+    "weeklyProgress": "{done, plural, =0 {Aucune vidéo terminée cette semaine} one {Vous avez terminé # vidéo cette semaine} other {Vous avez terminé # vidéos cette semaine}} — il vous en reste {remaining} pour achever « {course} ».",
+    "weeklyProgressMobile": "{done, plural, =0 {Aucune vidéo terminée cette semaine} one {# vidéo terminée cette semaine} other {# vidéos terminées cette semaine}} — il en reste {remaining}.",
     "continueLabel": "Continuer votre apprentissage",
-    "contextLine": "{course} · {module} · Leçon {index} sur {total}",
+    "contextLine": "{course} · Vidéo {index} sur {total}",
     "resumeAt": "Reprise à",
-    "resumeButton": "Reprendre la leçon",
-    "progressLabel": "{done} / {total} leçons · {pct} %",
+    "resumeButton": "Reprendre la vidéo",
+    "progressLabel": "{done} / {total} vidéos · {pct} %",
     "myCoursesTitle": "Mes formations",
-    "browseCatalog": "Parcourir le catalogue",
+    "browseCatalog": "Voir la formation",
     "status": {
       "inProgress": "En cours",
       "notStarted": "Non commencée",
       "completed": "Terminée"
     },
-    "lastSeenDaysAgo": "Dernière leçon vue il y a {days} jours",
+    "lastSeenDaysAgo": "{days, plural, =0 {Dernière vidéo vue aujourd'hui} one {Dernière vidéo vue hier} other {Dernière vidéo vue il y a # jours}}",
     "neverStarted": "Jamais commencée",
     "completedOn": "Terminée le {date}",
     "continueBtn": "Continuer",
@@ -362,57 +364,74 @@
     "pendingCorrectionMeta": "Envoyée il y a {days} jour · réponse sous 48 h",
     "pendingCorrectionStatus": "En cours de correction",
     "needHelpTitle": "Besoin d'aide ?",
-    "needHelpBody": "Une question sur une leçon, un paiement, un accès ? L'équipe répond du lundi au samedi.",
+    "needHelpBody": "Une question sur une vidéo, un paiement, un accès ? L'équipe répond du lundi au samedi.",
     "whatsappCta": "Écrire sur WhatsApp",
     "emptyLibrary": {
       "title": "Votre bibliothèque est vide",
-      "description": "Choisissez une première formation — la Fatiha se termine en trois heures et pose les bases de tout le reste.",
-      "action": "Parcourir le catalogue"
-    }
+      "description": "Commencez par « Rectifiez votre Fâtiḥah » : 10 erreurs fréquentes corrigées en 5 vidéos, la première est en accès libre.",
+      "action": "Découvrir la formation"
+    },
+    "reviewBtn": "Revoir"
   },
   "player": {
     "backToDashboard": "Tableau de bord",
-    "progressLabel": "{done} / {total} leçons",
+    "progressLabel": "{done} / {total} vidéos",
     "percentLabel": "{pct} %",
-    "sidebarTitle": "Contenu du cours",
+    "sidebarTitle": "Les 5 vidéos",
     "sendRecitation": "Envoyer ma récitation",
     "lockedTooltip": "Disponible après l'achat",
-    "moduleLessonLabel": "{module} · Leçon {index} sur {total}",
-    "lessonOfTotal": "Leçon {index} sur {total}",
     "tabs": {
       "overview": "Aperçu",
       "resources": "Ressources",
       "questions": "Questions"
     },
     "overview": {
-      "keyPointsTitle": "Points clés de la leçon"
+      "objectiveTitle": "Objectif",
+      "mistakesTitle": "Les {count} erreurs corrigées dans cette vidéo",
+      "mistakeLabel": "Erreur fréquente",
+      "correctionLabel": "Correction",
+      "ruleLabel": "Règle",
+      "learnTitle": "Dans cette vidéo, vous apprendrez à :"
     },
     "resources": {
       "downloadNote": "Les PDF restent accessibles hors connexion après téléchargement.",
       "sizeUnit": "{size} Ko"
     },
     "questions": {
-      "placeholder": "Posez une question sur cette leçon…",
+      "placeholder": "Posez une question sur cette vidéo…",
       "responseTime": "Réponse de l'enseignant sous 48 h",
       "send": "Envoyer",
       "teacherBadge": "Enseignant",
       "pendingAnswer": "En attente de réponse",
-      "emptyTitle": "Aucune question sur cette leçon",
+      "emptyTitle": "Aucune question sur cette vidéo",
       "emptyDescription": "Soyez le premier à demander une précision.",
       "emptyAction": "Poser une question"
     },
     "nav": {
-      "previous": "Leçon précédente",
+      "previous": "Vidéo précédente",
       "markComplete": "Marquer comme terminée",
-      "next": "Leçon suivante"
+      "next": "Vidéo suivante"
     },
     "autoAdvance": {
-      "message": "Leçon suivante dans {seconds} s",
+      "message": "Vidéo suivante dans {seconds} s",
       "cancel": "Annuler"
     },
     "mobile": {
       "programBar": "Programme",
       "drawerHint": "Touchez la barre « Programme » pour ouvrir et fermer le drawer de navigation."
+    },
+    "videoOfTotal": "Vidéo {index} sur {total}",
+    "video": {
+      "play": "Lire la vidéo",
+      "resumeAt": "Reprise à",
+      "unavailableTitle": "Vidéo bientôt disponible",
+      "unavailableBody": "L'enregistrement de cette séance est en cours de finalisation. Les explications et les erreurs corrigées sont déjà disponibles ci-dessous.",
+      "loadError": "Le lecteur vidéo n'a pas pu se charger. Vérifiez votre connexion puis rechargez la page."
+    },
+    "locked": {
+      "title": "Cette vidéo fait partie de la formation",
+      "body": "Accédez aux 5 vidéos et aux 10 erreurs corrigées pour {price}, en paiement unique.",
+      "cta": "Débloquer la formation"
     }
   },
   "profile": {
@@ -481,8 +500,6 @@
       "subtitle": "Un paiement unique, aucun renouvellement automatique.",
       "courseCardTitle": "Votre formation",
       "lifetimeAccess": "Accès à vie",
-      "pdfIncluded": "Supports PDF inclus",
-      "finalCertificate": "Attestation finale",
       "accountCardTitle": "Compte Wave à débiter",
       "phoneLabel": "Numéro de téléphone",
       "useOtherNumber": "Utiliser un autre numéro",
@@ -508,7 +525,9 @@
       "refundNote": "Remboursement intégral sous 7 jours si la formation ne vous convient pas.",
       "questionBeforePaying": "Une question avant de payer ?",
       "loggedInAs": "Connecté en tant que",
-      "changeAccount": "Changer"
+      "changeAccount": "Changer",
+      "mistakesIncluded": "10 erreurs corrigées en détail",
+      "mobileAccess": "Sur téléphone et ordinateur"
     },
     "countdown": {
       "label": "Offre expirée dans"
@@ -525,20 +544,20 @@
       "title": "Questions fréquentes",
       "items": [
         {
-          "question": "Comment accéder aux leçons après paiement ?",
-          "answer": "Une fois votre paiement validé, vous pourrez accéder immédiatement à toutes les leçons depuis votre tableau de bord. Vous recevrez également un e-mail de confirmation."
+          "question": "Comment accéder aux vidéos après paiement ?",
+          "answer": "Dès que Wave confirme le paiement, les 5 vidéos sont débloquées dans votre tableau de bord. Vous recevez également un e-mail de confirmation."
         },
         {
           "question": "Puis-je payer en plusieurs fois ?",
-          "answer": "Actuellement, nous acceptons uniquement les paiements en une fois via Wave. Le paiement est sécurisé et instantané."
+          "answer": "Non : le paiement se fait en une fois via Wave. Il est sécurisé et instantané."
         },
         {
-          "question": "Le certificat est-il reconnu ?",
-          "answer": "Oui, nos attestations sont nominatives et peuvent être partagées sur votre profil LinkedIn ou CV. Elles attestent des compétences acquises pendant la formation."
+          "question": "Faut-il savoir lire l'arabe ?",
+          "answer": "Il suffit de savoir lire les lettres arabes. Chaque passage travaillé est affiché en arabe entièrement vocalisé."
         },
         {
           "question": "Puis-je suivre la formation sur mobile ?",
-          "answer": "Absolument ! Notre plateforme est entièrement adaptée au mobile. Vous pouvez suivre vos formations sur ordinateur, tablette ou téléphone, à tout moment."
+          "answer": "Oui. La plateforme est adaptée au téléphone, à la tablette et à l'ordinateur, et chaque vidéo reprend là où vous vous étiez arrêté."
         }
       ]
     },
@@ -562,15 +581,15 @@
         "blessing": "بَارَكَ اللَّهُ فِيكَ",
         "title": "Votre formation est débloquée",
         "body": "Le paiement de {amount} a été confirmé par Wave. « {course} » vous est accessible à vie, dès maintenant.",
-        "startLesson": "Commencer la leçon 1",
+        "startLesson": "Commencer la vidéo 1",
         "goDashboard": "Aller au tableau de bord",
         "getStartedTitle": "Pour bien commencer",
-        "tip1Title": "Regardez les 3 premières leçons",
-        "tip1Body": "Elles posent le souffle et l'intention avant tout travail sur les lettres.",
-        "tip2Title": "Téléchargez les supports",
-        "tip2Body": "Les PDF restent lisibles hors connexion, utile en déplacement.",
-        "tip3Title": "Envoyez votre récitation",
-        "tip3Body": "À la fin du module 1, pour recevoir votre première correction.",
+        "tip1Title": "Suivez l'ordre des vidéos",
+        "tip1Body": "Elles suivent l'ordre de la sourate, de الْحَمْدُ à الضَّالِّينَ.",
+        "tip2Title": "Répétez à voix haute",
+        "tip2Body": "Après chaque vidéo, relisez les deux erreurs dans l'onglet « Aperçu » et récitez le passage plusieurs fois.",
+        "tip3Title": "Posez vos questions",
+        "tip3Body": "Sous chaque vidéo, l'enseignant répond à vos questions de prononciation.",
         "receiptTitle": "Reçu",
         "paidBadge": "Payé",
         "reference": "Référence",
@@ -694,7 +713,7 @@
         "draft": "Brouillon",
         "published": "Publiée"
       },
-      "meta": "{modules} modules · {lessons} leçons · {duration} de vidéo",
+      "meta": "{modules, plural, one {# module} other {# modules}} · {lessons, plural, one {# leçon} other {# leçons}} · {duration} de vidéo",
       "previewLearner": "Aperçu apprenant",
       "publish": "Publier la formation",
       "delete": "Supprimer la formation",
@@ -765,7 +784,25 @@
         "deleteModuleError": "La suppression du module a échoué. Réessayez.",
         "deleteLessonError": "La suppression de la leçon a échoué. Réessayez.",
         "deleteModuleConfirm": "Supprimer définitivement le module « {title} » et tout son contenu ? Cette action est irréversible.",
-        "deleteLessonConfirm": "Supprimer définitivement la leçon « {title} » ? Cette action est irréversible."
+        "deleteLessonConfirm": "Supprimer définitivement la leçon « {title} » ? Cette action est irréversible.",
+        "editVideo": "Lien YouTube, durée et accès",
+        "freePreview": "Accès libre",
+        "videoUpdated": "Vidéo enregistrée.",
+        "updateVideoError": "L'enregistrement de la vidéo a échoué. Réessayez.",
+        "videoDialog": {
+          "title": "Vidéo de la leçon",
+          "urlLabel": "Lien YouTube",
+          "urlHelp": "Collez le lien de partage de la vidéo (de préférence « non répertoriée »).",
+          "urlInvalid": "Lien non reconnu : utilisez un lien youtu.be/… ou youtube.com/watch?v=…",
+          "previewAlt": "Vignette de la vidéo",
+          "durationLabel": "Durée (min:s)",
+          "durationHelp": "Affichée dans le programme et utilisée pour la durée totale de la formation.",
+          "durationInvalid": "Format attendu : 12:05",
+          "freePreviewLabel": "Accès libre",
+          "freePreviewHelp": "Visible par tous, sans achat, comme aperçu de la formation.",
+          "cancel": "Annuler",
+          "save": "Enregistrer"
+        }
       },
       "cover": {
         "title": "Image de couverture",

@@ -42,13 +42,24 @@ export function formatDuration(durationSeconds: number): string {
   return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
 }
 
-/** Formate une durée totale de formation : formatTotalDuration(22800) → "6 h 20". */
-export function formatTotalDuration(durationSeconds: number): string {
-  const hours = Math.floor(durationSeconds / 3600);
-  const minutes = Math.round((durationSeconds % 3600) / 60);
-  return minutes === 0
-    ? `${hours} h`
-    : `${hours} h ${String(minutes).padStart(2, "0")}`;
+/** Formate une durée totale de formation : formatTotalDuration(22800) → "6 h 20",
+ *  formatTotalDuration(3350) → "56 min" (moins d'une heure : jamais « 0 h 56 »).
+ *  En arabe, unités arabes (« ٥٦ دقيقة » une fois les chiffres localisés) — les chiffres
+ *  restent latins ici, localizeDigits s'en charge à l'affichage. */
+export function formatTotalDuration(
+  durationSeconds: number,
+  locale?: Locale,
+): string {
+  const totalMinutes = Math.round(durationSeconds / 60);
+  const ar = locale === "ar";
+  if (totalMinutes < 60) return `${totalMinutes} ${ar ? "دقيقة" : "min"}`;
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+  const h = ar ? "س" : "h";
+  if (minutes === 0) return `${hours} ${h}`;
+  return ar
+    ? `${hours} ${h} ${minutes} د`
+    : `${hours} ${h} ${String(minutes).padStart(2, "0")}`;
 }
 
 /** Initiales d'un nom complet, pour les avatars des tables admin : getInitials("Aminata Diallo") → "AD". */

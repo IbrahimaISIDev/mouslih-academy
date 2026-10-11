@@ -30,10 +30,15 @@ import { addCourseModule } from "@/features/admin/api/add-course-module";
 import { addCourseLesson } from "@/features/admin/api/add-course-lesson";
 import { updateCourseModule } from "@/features/admin/api/update-course-module";
 import { deleteCourseModule } from "@/features/admin/api/delete-course-module";
-import { updateCourseLesson } from "@/features/admin/api/update-course-lesson";
+import {
+  type LessonVideoInput,
+  updateCourseLesson,
+  updateCourseLessonVideo,
+} from "@/features/admin/api/update-course-lesson";
 import { deleteCourseLesson } from "@/features/admin/api/delete-course-lesson";
 import type { CourseEditorData } from "@/features/admin/api/get-course-editor";
 import { AddCurriculumItemDialog } from "./add-curriculum-item-dialog";
+import { LessonVideoDialog } from "./lesson-video-dialog";
 
 export interface CurriculumEditorProps {
   courseId: string;
@@ -67,6 +72,7 @@ function LessonRow({
   video,
   labels,
   onEdit,
+  onEditVideo,
   onDelete,
 }: {
   lesson: Lesson;
@@ -75,6 +81,8 @@ function LessonRow({
     videoReady: string;
     videoMissing: string;
     uploading: (pct: number) => string;
+    editVideo: string;
+    freePreview: string;
     editLessonDialogTitle: string;
     editLessonFieldLabel: string;
     editLessonPlaceholder: string;
@@ -82,6 +90,7 @@ function LessonRow({
     editLessonSave: string;
   };
   onEdit: (title: string) => Promise<void>;
+  onEditVideo: (input: LessonVideoInput) => Promise<void>;
   onDelete: () => void;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
@@ -105,8 +114,29 @@ function LessonRow({
       >
         <GripVertical className="size-[14px]" strokeWidth={1.8} />
       </button>
-      <PlayCircle className="size-[17px] shrink-0 text-green-ink" strokeWidth={1.6} />
+      <LessonVideoDialog
+        trigger={
+          <button
+            type="button"
+            aria-label={labels.editVideo}
+            title={labels.editVideo}
+            className="shrink-0 rounded-sm text-green-ink hover:text-green-700"
+          >
+            <PlayCircle className="size-[17px]" strokeWidth={1.6} />
+          </button>
+        }
+        lessonTitle={lesson.title.fr}
+        initialYoutubeId={video.youtubeId}
+        initialDurationSeconds={lesson.durationSeconds}
+        initialIsFreePreview={lesson.isFreePreview}
+        onSubmit={onEditVideo}
+      />
       <span className="flex-1 text-sm">{lesson.title.fr}</span>
+      {lesson.isFreePreview && (
+        <span className="rounded-sm bg-gold-50 px-2 py-1 text-[11px] font-semibold text-gold-600">
+          {labels.freePreview}
+        </span>
+      )}
 
       {video.status === "uploading" && (
         <div className="flex w-[200px] items-center gap-2.5">
@@ -164,6 +194,7 @@ function ModuleRow({
   onEditModule,
   onDeleteModule,
   onEditLesson,
+  onEditLessonVideo,
   onDeleteLesson,
 }: {
   courseModule: Module;
@@ -176,6 +207,8 @@ function ModuleRow({
     videoReady: string;
     videoMissing: string;
     uploading: (pct: number) => string;
+    editVideo: string;
+    freePreview: string;
     metaWithSubModules: (subModules: number, lessons: number) => string;
     metaLessonsOnly: (lessons: number) => string;
     addLessonDialogTitle: string;
@@ -198,6 +231,7 @@ function ModuleRow({
   onEditModule: (title: string) => Promise<void>;
   onDeleteModule: () => void;
   onEditLesson: (subModuleId: string, lessonId: string, title: string) => Promise<void>;
+  onEditLessonVideo: (subModuleId: string, lessonId: string, input: LessonVideoInput) => Promise<void>;
   onDeleteLesson: (subModuleId: string, lessonId: string, title: string) => void;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
@@ -279,6 +313,7 @@ function ModuleRow({
                     video={videoStatus[lesson.id] ?? { status: "ready" }}
                     labels={labels}
                     onEdit={(title) => onEditLesson(subModule.id, lesson.id, title)}
+                    onEditVideo={(input) => onEditLessonVideo(subModule.id, lesson.id, input)}
                     onDelete={() => onDeleteLesson(subModule.id, lesson.id, lesson.title.fr)}
                   />
                 ))}
@@ -424,6 +459,22 @@ function CurriculumEditor({
     }
   }
 
+  async function handleEditLessonVideo(
+    moduleId: string,
+    subModuleId: string,
+    lessonId: string,
+    input: LessonVideoInput,
+  ) {
+    try {
+      const data = await updateCourseLessonVideo(courseId, moduleId, subModuleId, lessonId, input);
+      onDataChange(data);
+      toast.success(t("videoUpdated"));
+    } catch (error) {
+      toast.error(error instanceof ClientApiError ? error.message : t("updateVideoError"));
+      throw error;
+    }
+  }
+
   async function handleDeleteLesson(moduleId: string, subModuleId: string, lessonId: string, title: string) {
     if (!window.confirm(t("deleteLessonConfirm", { title }))) return;
     try {
@@ -441,6 +492,8 @@ function CurriculumEditor({
     videoReady: t("videoReady"),
     videoMissing: t("videoMissing"),
     uploading: (pct: number) => t("uploading", { pct }),
+    editVideo: t("editVideo"),
+    freePreview: t("freePreview"),
     metaWithSubModules: (subModules: number, lessons: number) => t("metaWithSubModules", { subModules, lessons }),
     metaLessonsOnly: (lessons: number) => t("metaLessonsOnly", { lessons }),
     addLessonDialogTitle: t("addLessonDialog.title"),
@@ -501,6 +554,9 @@ function CurriculumEditor({
               onDeleteModule={() => handleDeleteModule(courseModule.id, courseModule.title.fr)}
               onEditLesson={(subModuleId, lessonId, title) =>
                 handleEditLesson(courseModule.id, subModuleId, lessonId, title)
+              }
+              onEditLessonVideo={(subModuleId, lessonId, input) =>
+                handleEditLessonVideo(courseModule.id, subModuleId, lessonId, input)
               }
               onDeleteLesson={(subModuleId, lessonId, title) =>
                 handleDeleteLesson(courseModule.id, subModuleId, lessonId, title)

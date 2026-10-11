@@ -5,12 +5,12 @@ import { courses } from "@/mocks/courses";
 describe("findLessonLocation", () => {
   const fatiha = courses.find((c) => c.slug === "rectification-fatiha")!;
 
-  it("localise la leçon 6 comme la sixième du programme, dans le module 2", () => {
-    const location = findLessonLocation(fatiha, "l6");
+  it("localise la vidéo 3 comme la troisième des cinq vidéos du programme", () => {
+    const location = findLessonLocation(fatiha, "fatiha-v03");
     expect(location).not.toBeNull();
-    expect(location?.lessonIndex).toBe(6);
-    expect(location?.totalLessons).toBe(11);
-    expect(location?.moduleIndex).toBe(1);
+    expect(location?.lessonIndex).toBe(3);
+    expect(location?.totalLessons).toBe(5);
+    expect(location?.moduleIndex).toBe(0);
   });
 
   it("renvoie null pour une leçon inexistante", () => {

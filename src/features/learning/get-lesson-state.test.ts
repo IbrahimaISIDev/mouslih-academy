@@ -10,6 +10,7 @@ function makeLesson(overrides: Partial<Lesson> = {}): Lesson {
     durationSeconds: 300,
     isFreePreview: false,
     resources: [],
+    mistakes: [],
     ...overrides,
   };
 }

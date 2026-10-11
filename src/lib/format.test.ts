@@ -58,4 +58,17 @@ describe("formatTotalDuration", () => {
   it("omet les minutes quand la durée tombe juste sur l'heure", () => {
     expect(formatTotalDuration(10800)).toBe("3 h");
   });
+
+  it("affiche les minutes seules sous une heure, jamais « 0 h 56 »", () => {
+    expect(formatTotalDuration(3350)).toBe("56 min");
+  });
+
+  it("arrondit à l'heure pleine sans produire « 0 h 60 »", () => {
+    expect(formatTotalDuration(3590)).toBe("1 h");
+  });
+
+  it("utilise des unités arabes en arabe", () => {
+    expect(formatTotalDuration(3350, "ar")).toBe("56 دقيقة");
+    expect(formatTotalDuration(22800, "ar")).toBe("6 س 20 د");
+  });
 });

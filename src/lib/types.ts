@@ -17,15 +17,47 @@ export interface Resource {
   url: string;
 }
 
+/** Erreur de récitation corrigée dans une leçon (2 par vidéo de « Rectifiez votre Fâtiḥah »). */
+export interface LessonMistake {
+  id: string;
+  /** Mot ou passage concerné, en arabe vocalisé. */
+  passage: string;
+  /** Libellé court, pour la grille « Les 10 erreurs ». */
+  title: I18nText;
+  /** Ce qu'on entend souvent. */
+  mistake: I18nText;
+  /** Ce qu'il faut faire. */
+  correction: I18nText;
+  /** Règle de tajwīd concernée. */
+  rule: I18nText;
+}
+
 export interface Lesson {
   id: string;
   slug: string;
   title: I18nText;
+  description?: I18nText;
+  /** Objectif pédagogique, affiché sous la description. */
+  objective?: I18nText;
+  /** Ce que l'apprenant saura faire, en points courts (liste à puces). */
+  keyPoints?: I18nText[];
+  /** Passage coranique travaillé, en arabe vocalisé (identique dans les trois langues). */
+  passage?: string;
   durationSeconds: number;
   isFreePreview: boolean;
+  /** URL d'intégration YouTube — renseignée par le catalogue public pour les aperçus gratuits
+   *  uniquement. Les vidéos payantes passent par getLessonPlayback (accès vérifié). */
   videoUrl?: string;
   resources: Resource[];
+  mistakes: LessonMistake[];
 }
+
+/** Source de lecture d'une leçon, émise après vérification d'accès (GET /me/lessons/:id/playback).
+ *  `provider: null` : pas encore de vidéo exploitable. */
+export type LessonPlayback =
+  | { provider: "youtube"; videoId: string }
+  | { provider: "stream"; url: string }
+  | { provider: null };
 
 export interface SubModule {
   id: string;
@@ -190,4 +222,6 @@ export interface AdminLessonVideoState {
   status: LessonVideoStatus;
   /** Pourcentage d'envoi en cours, uniquement quand `status === "uploading"`. */
   uploadPct?: number;
+  /** Identifiant de la vidéo YouTube rattachée (éditeur admin uniquement). */
+  youtubeId?: string;
 }

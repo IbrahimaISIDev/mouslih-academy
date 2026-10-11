@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import {
   Check,
   Clock,
-  Globe,
+  GraduationCap,
+  ListChecks,
   MessageCircle,
-  Play,
-  Shield,
+  Plus,
   Video,
 } from "lucide-react";
 import { getTranslations } from "next-intl/server";
@@ -13,15 +13,15 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/lib/types";
-import { formatDuration, formatPrice, formatTotalDuration } from "@/lib/format";
+import { formatPrice, formatTotalDuration, localizeDigits } from "@/lib/format";
+import { parseYouTubeVideoId } from "@/lib/youtube";
 import { getCourse } from "@/features/catalog/api/get-course";
-import { getLessonState } from "@/features/learning/get-lesson-state";
 import { getSession } from "@/lib/session";
 import { backendFetch } from "@/lib/backend-fetch";
 import { USE_MOCKS } from "@/lib/use-mocks";
 import { WHATSAPP_URL } from "@/lib/contact";
-import type { CurriculumModule } from "@/components/patterns/curriculum-accordion";
-import { CourseCurriculum } from "@/features/catalog/components/course-curriculum";
+import { VideoProgramme } from "@/features/catalog/components/video-programme";
+import { MistakesOverview } from "@/features/catalog/components/mistakes-overview";
 
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -29,6 +29,7 @@ import { PublicHeader } from "@/components/layout/public-header";
 import { LevelBadge } from "@/components/patterns/level-badge";
 import { GeometricPattern } from "@/components/patterns/geometric-pattern";
 import { StickyCta } from "@/components/patterns/sticky-cta";
+import { YouTubeFacade } from "@/components/patterns/youtube-facade";
 
 /**
  * Vérification d'appartenance "douce" : cette page reste publique (visiteurs anonymes inclus),
@@ -66,7 +67,6 @@ function firstLessonSlug(course: {
 
 interface CourseDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
-  searchParams: Promise<{ module?: string }>;
 }
 
 export async function generateMetadata({
@@ -99,10 +99,8 @@ export async function generateMetadata({
 
 export default async function CourseDetailPage({
   params,
-  searchParams,
 }: CourseDetailPageProps) {
   const { locale: rawLocale, slug } = await params;
-  const { module: sharedModuleId } = await searchParams;
   const locale = rawLocale as Locale;
 
   const course = await getCourse(slug);
@@ -132,69 +130,19 @@ export default async function CourseDetailPage({
     { label: tNav("contact"), href: "/contact" },
   ];
 
-  const hasDetailedCurriculum = course.modules.length > 0;
-
-  const lessonCount = course.modules.reduce(
-    (n, m) => n + m.subModules.reduce((s, sm) => s + sm.lessons.length, 0),
-    0,
+  const lessons = course.modules.flatMap((m) =>
+    m.subModules.flatMap((sm) => sm.lessons),
   );
-  const freeLessonCount = course.modules.reduce(
-    (n, m) =>
-      n +
-      m.subModules.reduce(
-        (s, sm) => s + sm.lessons.filter((l) => l.isFreePreview).length,
-        0,
-      ),
-    0,
-  );
+  const lessonCount = lessons.length || course.lessonCount;
+  const mistakeCount = lessons.reduce((n, l) => n + l.mistakes.length, 0);
+  const freeLessonCount = lessons.filter((l) => l.isFreePreview).length;
+  const previewLesson = lessons.find((l) => l.isFreePreview && l.videoUrl);
+  const previewVideoId = previewLesson?.videoUrl
+    ? parseYouTubeVideoId(previewLesson.videoUrl)
+    : null;
+  const totalDuration = formatTotalDuration(course.totalDurationSeconds, locale);
 
-  function moduleDurationLabel(totalSeconds: number): string {
-    if (totalSeconds >= 3600) return formatTotalDuration(totalSeconds);
-    return t("curriculum.minutesShort", {
-      count: Math.round(totalSeconds / 60),
-    });
-  }
-
-  const curriculumModules: CurriculumModule[] = course.modules.map(
-    (module, index) => {
-      const lessons = module.subModules.flatMap((s) => s.lessons);
-      const totalSeconds = lessons.reduce((s, l) => s + l.durationSeconds, 0);
-      const duration = moduleDurationLabel(totalSeconds);
-      const hasNamedSubs = module.subModules.length > 1;
-      let meta = hasNamedSubs
-        ? t("curriculum.moduleMetaWithSub", {
-            subCount: module.subModules.length,
-            lessons: lessons.length,
-            duration,
-          })
-        : t("curriculum.moduleMeta", { lessons: lessons.length, duration });
-      if (index === course.modules.length - 1) {
-        meta += t("curriculum.moduleMetaCertificateSuffix");
-      }
-
-      return {
-        id: module.id,
-        number: String(index + 1).padStart(2, "0"),
-        title: module.title[locale],
-        meta,
-        subModules: module.subModules.map((sub) => ({
-          id: sub.id,
-          title: sub.title ? sub.title[locale] : null,
-          lessons: sub.lessons.map((lesson) => ({
-            id: lesson.id,
-            title: lesson.title[locale],
-            duration: formatDuration(lesson.durationSeconds),
-            state: getLessonState(lesson, null, isPurchased),
-            freeLabel: t("curriculum.freeLabel"),
-          })),
-        })),
-      };
-    },
-  );
-
-  const defaultOpen = [curriculumModules[0]?.id, sharedModuleId].filter(
-    (id): id is string => !!id && curriculumModules.some((m) => m.id === id),
-  );
+  const faqItems = t.raw("faq.items") as { question: string; answer: string }[];
 
   return (
     <div className="pb-32 lg:pb-0">
@@ -225,11 +173,9 @@ export default async function CourseDetailPage({
                   level={course.level}
                   label={tCatalog(`levels.${course.level}`)}
                 />
-                {course.isFeatured && (
-                  <span className="rounded-sm bg-gold-200 px-2.5 py-1.5 text-[11px] font-semibold tracking-[0.06em] text-green-ink uppercase">
-                    {t("badgeFeatured")}
-                  </span>
-                )}
+                <span className="rounded-sm bg-gold-200 px-2.5 py-1.5 text-[11px] font-semibold tracking-[0.06em] text-green-ink uppercase">
+                  {t("badgeRecorded")}
+                </span>
               </div>
               <h1 className="mb-3 font-serif text-[30px] leading-[1.14] font-medium lg:mb-4.5 lg:text-[46px] lg:leading-[1.1] lg:tracking-[-0.015em]">
                 {course.title[locale]}
@@ -245,83 +191,60 @@ export default async function CourseDetailPage({
                 </span>
               </p>
 
-              <div className="grid grid-cols-2 gap-2.5 lg:flex lg:flex-wrap lg:gap-8.5">
-                <div className="flex items-center gap-2 text-[13px] text-text-soft lg:gap-2.5 lg:text-[15px] lg:text-on-dark-soft">
-                  <Video
-                    className="size-4 text-green-300 lg:size-[18px]"
-                    strokeWidth={1.5}
-                  />
-                  <span className="lg:hidden">
-                    {t("meta.lessonsShort", { count: lessonCount })}
-                  </span>
-                  <span className="hidden lg:inline">
-                    {t("meta.lessonsVideo", { count: lessonCount })}
-                  </span>
-                </div>
-                <div className="flex items-center gap-2 text-[13px] text-text-soft lg:gap-2.5 lg:text-[15px] lg:text-on-dark-soft">
-                  <Clock
-                    className="size-4 text-green-300 lg:size-[18px]"
-                    strokeWidth={1.5}
-                  />
-                  <span className="lg:hidden">
-                    {t("meta.hoursShort", {
-                      hours: formatTotalDuration(course.totalDurationSeconds),
-                    })}
-                  </span>
-                  <span className="hidden lg:inline">
-                    {t("meta.hoursContent", {
-                      hours: formatTotalDuration(course.totalDurationSeconds),
-                    })}
-                  </span>
-                </div>
-                <div className="flex items-center gap-2 text-[13px] text-text-soft lg:gap-2.5 lg:text-[15px] lg:text-on-dark-soft">
-                  <Shield
-                    className="size-4 text-green-300 lg:size-[18px]"
-                    strokeWidth={1.5}
-                  />
-                  <span className="lg:hidden">
-                    {t("meta.certificateShort")}
-                  </span>
-                  <span className="hidden lg:inline">
-                    {t("meta.certificateIncluded")}
-                  </span>
-                </div>
-                <div className="flex items-center gap-2 text-[13px] text-text-soft lg:gap-2.5 lg:text-[15px] lg:text-on-dark-soft">
-                  <Globe
-                    className="size-4 text-green-300 lg:size-[18px]"
-                    strokeWidth={1.5}
-                  />
-                  {t("meta.languages")}
-                </div>
-              </div>
+              <ul className="grid grid-cols-2 gap-2.5 lg:flex lg:flex-wrap lg:gap-x-8.5 lg:gap-y-3">
+                {[
+                  {
+                    icon: Video,
+                    label: t("meta.videos", { count: lessonCount }),
+                  },
+                  {
+                    icon: Clock,
+                    label: t("meta.duration", { duration: totalDuration }),
+                  },
+                  {
+                    icon: ListChecks,
+                    label: t("meta.mistakes", { count: mistakeCount }),
+                  },
+                  { icon: GraduationCap, label: t("meta.beginners") },
+                ].map(({ icon: Icon, label }) => (
+                  <li
+                    key={label}
+                    className="flex items-center gap-2 text-[13px] text-on-dark-soft lg:gap-2.5 lg:text-[15px]"
+                  >
+                    <Icon
+                      className="size-4 shrink-0 text-green-300 lg:size-[18px]"
+                      strokeWidth={1.5}
+                    />
+                    {localizeDigits(label, locale)}
+                  </li>
+                ))}
+              </ul>
             </div>
 
             {/* Carte d'achat */}
             <div className="border border-gold-600 bg-surface text-text">
-              <div className="relative grid aspect-16/10 place-items-center overflow-hidden bg-green-800">
-                {course.coverUrl ? (
-                  <Image
-                    src={course.coverUrl}
-                    alt=""
-                    fill
-                    sizes="(min-width: 1024px) 380px, 100vw"
-                    className="object-cover object-top"
-                  />
-                ) : (
-                  <GeometricPattern variant="khatam" opacity={0.3} />
-                )}
-                <div className="absolute inset-0 bg-green-900/35" />
-                <div className="relative grid size-14 place-items-center rounded-full border border-gold-200 bg-green-900/50">
-                  <Play
-                    className="size-5 text-gold-200"
-                    strokeWidth={0}
-                    fill="currentColor"
-                  />
+              {previewVideoId && previewLesson ? (
+                <YouTubeFacade
+                  videoId={previewVideoId}
+                  title={previewLesson.title[locale]}
+                  caption={t("purchaseCard.previewCaption")}
+                  className="group relative grid aspect-video w-full place-items-center overflow-hidden bg-green-800"
+                />
+              ) : (
+                <div className="relative grid aspect-video place-items-center overflow-hidden bg-green-800">
+                  {course.coverUrl ? (
+                    <Image
+                      src={course.coverUrl}
+                      alt=""
+                      fill
+                      sizes="(min-width: 1024px) 380px, 100vw"
+                      className="object-cover object-top"
+                    />
+                  ) : (
+                    <GeometricPattern variant="khatam" opacity={0.3} />
+                  )}
                 </div>
-                <span className="absolute bottom-2.5 start-3 text-xs text-on-dark-muted">
-                  {t("purchaseCard.previewCaption")}
-                </span>
-              </div>
+              )}
               <div className="p-5 lg:p-6">
                 <div className="mb-1 flex items-baseline gap-2.5">
                   <span className="font-serif text-[28px] font-semibold lg:text-[34px]">
@@ -418,61 +341,74 @@ export default async function CourseDetailPage({
             </div>
           </div>
 
-          <div className="mb-5 flex items-end justify-between">
-            <h2 className="font-serif text-2xl font-medium lg:text-[30px]">
-              <span className="lg:hidden">{t("curriculum.titleMobile")}</span>
-              <span className="hidden lg:inline">{t("curriculum.title")}</span>
+          <section className="mb-10 lg:mb-14" aria-labelledby="erreurs">
+            <p className="mb-2.5 text-xs font-semibold tracking-[0.16em] text-gold-600 uppercase">
+              {t("mistakes.eyebrow")}
+            </p>
+            <h2
+              id="erreurs"
+              className="mb-2 font-serif text-2xl font-medium lg:text-[30px]"
+            >
+              {localizeDigits(
+                t("mistakes.title", { count: mistakeCount }),
+                locale,
+              )}
             </h2>
-            {hasDetailedCurriculum ? (
-              <span className="hidden text-sm text-text-muted lg:inline">
-                {t("curriculum.summary", {
-                  modules: course.modules.length,
-                  lessons: lessonCount,
-                  free: freeLessonCount,
-                })}
-              </span>
-            ) : (
-              <span className="hidden text-sm text-text-muted lg:inline">
-                {t("curriculum.summaryCompact", {
-                  lessons: course.lessonCount,
-                })}
-              </span>
-            )}
-          </div>
-          {hasDetailedCurriculum ? (
-            <div className="mb-4 text-xs text-text-muted lg:hidden">
-              {t("curriculum.summaryMobile", {
-                modules: course.modules.length,
-                lessons: lessonCount,
-              })}
-            </div>
-          ) : (
-            <div className="mb-4 text-xs text-text-muted lg:hidden">
-              {t("curriculum.summaryCompact", { lessons: course.lessonCount })}
-            </div>
-          )}
+            <p className="mb-5 max-w-[62ch] text-[15px] leading-[1.7] text-text-soft">
+              {t("mistakes.intro")}
+            </p>
+            <MistakesOverview
+              lessons={lessons}
+              locale={locale}
+              videoLabel={t.raw("mistakes.videoLabel") as string}
+            />
+          </section>
 
-          {hasDetailedCurriculum ? (
-            <div className="border border-border-subtle bg-surface">
-              <CourseCurriculum
-                modules={curriculumModules}
-                defaultOpen={defaultOpen}
-              />
+          <section
+            id="programme"
+            className="scroll-mt-24"
+            aria-labelledby="programme-titre"
+          >
+            <div className="mb-5 flex flex-wrap items-end justify-between gap-2">
+              <h2
+                id="programme-titre"
+                className="font-serif text-2xl font-medium lg:text-[30px]"
+              >
+                {localizeDigits(
+                  t("programme.title", { count: lessonCount }),
+                  locale,
+                )}
+              </h2>
+              <span className="text-sm text-text-muted">
+                {localizeDigits(
+                  t("programme.summary", {
+                    videos: lessonCount,
+                    duration: totalDuration,
+                    free: freeLessonCount,
+                  }),
+                  locale,
+                )}
+              </span>
             </div>
-          ) : (
-            <div className="flex flex-col items-center gap-2 border border-dashed border-border-strong bg-bg px-6 py-9 text-center">
-              <Video className="size-6 text-text-faint" strokeWidth={1.4} />
-              <p className="text-sm font-medium text-text-soft">
-                {t("curriculum.placeholderTitle")}
-              </p>
-              <p className="text-[13px] text-text-muted">
-                {t("curriculum.placeholderBody", {
-                  lessons: course.lessonCount,
-                  duration: formatTotalDuration(course.totalDurationSeconds),
-                })}
-              </p>
-            </div>
-          )}
+            <VideoProgramme
+              lessons={lessons}
+              courseSlug={course.slug}
+              locale={locale}
+              isPurchased={isPurchased}
+              variant="detailed"
+              labels={{
+                videoNumber: t.raw("programme.videoNumber") as string,
+                free: t("programme.free"),
+                watchFree: t("programme.watchFree"),
+                watch: t("programme.watch"),
+                locked: t("programme.locked"),
+                objective: t("programme.objective"),
+                previewCaption: t("purchaseCard.previewCaption"),
+                learnTitle: t("programme.learnTitle"),
+                passageLabel: t("programme.passageLabel"),
+              }}
+            />
+          </section>
         </div>
 
         {/* Sidebar collante */}
@@ -503,29 +439,33 @@ export default async function CourseDetailPage({
             <p className="mb-4 text-xs font-semibold tracking-[0.16em] text-text-muted uppercase">
               {t("faq.eyebrow")}
             </p>
-            <div className="flex flex-col gap-3.5">
-              {t
-                .raw("faq.items")
-                .map((question: string, i: number, arr: string[]) => (
-                  <div
-                    key={question}
-                    className={
-                      i < arr.length - 1
-                        ? "flex justify-between gap-3 border-b border-hairline pb-3.5 text-[15px]"
-                        : "flex justify-between gap-3 text-[15px]"
-                    }
-                  >
-                    <span>{question}</span>
-                    <span className="text-text-muted">+</span>
-                  </div>
-                ))}
+            <div className="flex flex-col">
+              {faqItems.map((item) => (
+                <details
+                  key={item.question}
+                  className="group border-b border-hairline py-3.5 first:pt-0 last:border-b-0 last:pb-0"
+                >
+                  <summary className="flex cursor-pointer list-none justify-between gap-3 text-[15px] [&::-webkit-details-marker]:hidden">
+                    <span>{item.question}</span>
+                    <Plus
+                      className="mt-0.5 size-4 shrink-0 text-text-muted transition-transform group-open:rotate-45"
+                      strokeWidth={1.8}
+                    />
+                  </summary>
+                  <p className="mt-2.5 text-sm leading-[1.65] text-text-soft">
+                    {item.answer}
+                  </p>
+                </details>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       <div className="flex justify-between bg-green-900 px-5 py-6 text-[13px] text-green-300 sm:px-6 lg:px-11">
-        <span>{tCommon("footer.copyright")}</span>
+        <span>
+          {tCommon("footer.copyright", { year: new Date().getFullYear() })}
+        </span>
         <span className="hidden sm:inline">
           {tCommon("footer.paymentNote")}
         </span>
