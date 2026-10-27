@@ -57,6 +57,8 @@ export interface Lesson {
 export type LessonPlayback =
   | { provider: "youtube"; videoId: string }
   | { provider: "stream"; url: string }
+  /** Fichier MP4 à URL signée (Cloudinary), lu par le lecteur vidéo du navigateur. */
+  | { provider: "file"; url: string; posterUrl?: string }
   | { provider: null };
 
 export interface SubModule {
@@ -216,12 +218,16 @@ export interface AdminOrderRow {
 export type AdminUsersFilter = "all" | "withPurchase" | "withoutPurchase";
 export type AdminOrdersFilter = "all" | "paid" | "pending" | "failed";
 
-export type LessonVideoStatus = "ready" | "uploading" | "missing";
+/** `processing` : vidéo envoyée, encore en préparation chez l'hébergeur. */
+export type LessonVideoStatus =
+  "ready" | "processing" | "uploading" | "missing";
 
 export interface AdminLessonVideoState {
   status: LessonVideoStatus;
   /** Pourcentage d'envoi en cours, uniquement quand `status === "uploading"`. */
   uploadPct?: number;
+  /** Hébergeur de la vidéo rattachée. */
+  provider?: "youtube" | "cloudinary" | "stream";
   /** Identifiant de la vidéo YouTube rattachée (éditeur admin uniquement). */
   youtubeId?: string;
 }

@@ -62,14 +62,33 @@ Consommé par `completeLesson(lessonId)`.
 
 ### `GET /api/me/lessons/:id/playback`
 Consommé par `getLessonPlayback(lessonId)` (page du lecteur, côté serveur).
-- Réponse : `{ provider: "youtube", videoId }` · `{ provider: "stream", url }` (URL Cloudflare
-  signée) · `{ provider: null }` (pas encore de vidéo).
+- Réponse : `{ provider: "youtube", videoId }` · `{ provider: "file", url, posterUrl }` (MP4
+  Cloudinary à URL signée) · `{ provider: "stream", url }` (URL Cloudflare signée) ·
+  `{ provider: null }` (pas encore de vidéo, ou encore en préparation).
 - Leçon payante d'une formation non achetée → `404` (même réponse qu'une leçon inexistante) ;
   le lecteur affiche alors l'écran « Débloquer la formation ». Aperçu gratuit : servi à tout
   utilisateur connecté.
 - Seule source d'une vidéo payante : le catalogue public n'expose `videoUrl` que pour les
   aperçus gratuits. Limite connue : un identifiant YouTube « non répertorié » reste
   partageable par un inscrit ; seul Cloudflare Stream protège réellement une vidéo payante.
+
+### `GET /api/lessons/:id/playback` (public)
+Consommé par `getPublicLessonPlayback(lessonId)` : même réponse, sans compte, **uniquement pour
+une vidéo en accès libre** d'une formation publiée (sinon `404`). Sert aux vidéos hébergées
+(Cloudinary), dont le catalogue public n'expose pas d'URL.
+
+### `POST /api/admin/courses/:id/modules/:m/submodules/:s/lessons/:l/video-upload`
+Consommé par `uploadLessonVideo` (dialogue « Vidéo de la leçon », mode « Envoyer un fichier »).
+Renvoie les paramètres **signés** d'un envoi direct navigateur → Cloudinary (`uploadUrl`,
+`apiKey`, `timestamp`, `signature`, `fields`, `publicId`) — jamais le secret. Le fichier part
+ensuite par morceaux de 20 Mo (`X-Unique-Upload-Id` + `Content-Range`), chaque morceau retenté
+jusqu'à 3 fois.
+
+### `POST …/lessons/:l/video-upload/complete`
+Corps : `{ publicId }`. L'API vérifie que la vidéo existe chez Cloudinary sous un public_id
+propre à cette leçon (`400` sinon), lit sa durée, la rattache (`status` « processing » tant que
+le rendu MP4 n'est pas prêt) et supprime l'éventuelle ancienne vidéo Cloudinary. Réponse :
+`CourseEditorData` (avec `mediaUpload: { cloudinary }`, qui conditionne le bouton d'envoi).
 
 ### `POST /api/me/lessons/:id/position`
 Consommé par `saveLessonPosition(lessonId, positionSeconds)`.

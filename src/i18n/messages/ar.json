@@ -806,8 +806,23 @@
           "freePreviewLabel": "وصول مجاني",
           "freePreviewHelp": "متاح للجميع دون شراء، كمعاينة للدورة.",
           "cancel": "إلغاء",
-          "save": "حفظ"
-        }
+          "save": "حفظ",
+          "modeUpload": "إرسال ملف",
+          "modeYoutube": "رابط يوتيوب",
+          "fileLabel": "ملف الفيديو",
+          "filePick": "اختر فيديو من حاسوبك",
+          "fileHelp": "يُفضَّل MP4 بدقة 1080p. تُحتسب المدة تلقائيًا.",
+          "currentHosted": "الفيديو الحالي مستضاف على Cloudinary ({duration}). اختر ملفًا لاستبداله.",
+          "uploadingLabel": "جارٍ الإرسال… {pct}٪",
+          "finalizingLabel": "جارٍ التحقق من الفيديو…",
+          "cancelUpload": "إلغاء الإرسال",
+          "processingNote": "بعد الإرسال، يحضّر Cloudinary الفيديو (بضع دقائق) قبل أن يراه المتعلّمون.",
+          "uploadSubmit": "إرسال الفيديو"
+        },
+        "videoProcessing": "قيد التحضير",
+        "videoUploaded": "أُرسل الفيديو. سيكون متاحًا فور انتهاء تحضيره.",
+        "uploadCancelled": "أُلغي الإرسال.",
+        "uploadError": "تعذّر إرسال الفيديو. حاول مرة أخرى."
       },
       "cover": {
         "title": "صورة الغلاف",

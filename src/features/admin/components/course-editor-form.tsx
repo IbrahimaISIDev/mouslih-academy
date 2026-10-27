@@ -1,16 +1,17 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { useRouter } from "@/i18n/navigation";
-import type { Course, Level, Locale } from "@/lib/types";
+import type { AdminLessonVideoState, Course, Level, Locale } from "@/lib/types";
 import { formatTotalDuration } from "@/lib/format";
 import { ClientApiError } from "@/lib/client-fetch";
 import { StatusBadge } from "@/components/patterns/status-badge";
 import { updateCourse } from "../api/update-course";
 import { deleteCourse } from "../api/delete-course";
 import type { CourseEditorData } from "../api/get-course-editor";
+import { getCourseEditorClient } from "../api/get-course-editor-client";
 import { TranslationEditorCard, type TranslationEditorValues } from "./translation-editor-card";
 import { CourseSettingsCard } from "./course-settings-card";
 import { CoverImageCard } from "./cover-image-card";
@@ -21,16 +22,39 @@ export interface CourseEditorFormProps {
   courseId: string;
   locale: Locale;
   initialCourse: Course;
-  initialVideoStatus: Record<string, { status: "ready" | "uploading" | "missing"; uploadPct?: number }>;
+  initialVideoStatus: Record<string, AdminLessonVideoState>;
+  /** Envoi de fichiers vidéo disponible (Cloudinary configuré côté serveur). */
+  videoUploadEnabled: boolean;
   translationDoneCounts?: Partial<Record<Locale, number>>;
 }
 
-function CourseEditorForm({ courseId, locale, initialCourse, initialVideoStatus, translationDoneCounts }: CourseEditorFormProps) {
+function CourseEditorForm({
+  courseId,
+  locale,
+  initialCourse,
+  initialVideoStatus,
+  videoUploadEnabled,
+  translationDoneCounts,
+}: CourseEditorFormProps) {
   const t = useTranslations("admin.course");
   const router = useRouter();
 
   const [course, setCourse] = useState(initialCourse);
   const [videoStatus, setVideoStatus] = useState(initialVideoStatus);
+  const hasProcessingVideo = Object.values(videoStatus).some((v) => v.status === "processing");
+
+  // Vidéo envoyée encore en préparation chez l'hébergeur : on revérifie toutes les 20 s (le
+  // backend met la durée et le statut à jour au passage) jusqu'à ce qu'elle soit prête.
+  useEffect(() => {
+    if (!hasProcessingVideo) return;
+    const interval = setInterval(async () => {
+      const data = await getCourseEditorClient(courseId).catch(() => null);
+      if (!data) return;
+      setVideoStatus(data.videoStatus);
+      setCourse((prev) => ({ ...prev, modules: data.course.modules, totalDurationSeconds: data.course.totalDurationSeconds }));
+    }, 20_000);
+    return () => clearInterval(interval);
+  }, [courseId, hasProcessingVideo]);
   const [translations, setTranslations] = useState<TranslationEditorValues>({
     title: initialCourse.title,
     subtitle: initialCourse.subtitle,
@@ -181,6 +205,7 @@ function CourseEditorForm({ courseId, locale, initialCourse, initialVideoStatus,
             courseId={course.id}
             modules={course.modules}
             videoStatus={videoStatus}
+            videoUploadEnabled={videoUploadEnabled}
             onModulesChange={(modules) => setCourse((prev) => ({ ...prev, modules }))}
             onDataChange={handleCurriculumDataChange}
             addModuleLabel={t("curriculum.addModule")}

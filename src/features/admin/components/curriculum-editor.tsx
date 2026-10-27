@@ -39,6 +39,21 @@ import { deleteCourseLesson } from "@/features/admin/api/delete-course-lesson";
 import type { CourseEditorData } from "@/features/admin/api/get-course-editor";
 import { AddCurriculumItemDialog } from "./add-curriculum-item-dialog";
 import { LessonVideoDialog } from "./lesson-video-dialog";
+import { UploadAbortedError, updateLessonAccess, uploadLessonVideo } from "@/features/admin/api/upload-lesson-video";
+
+/** Actions vidéo transmises jusqu'à chaque leçon (envoi de fichier, accès libre). */
+interface VideoActions {
+  uploadEnabled: boolean;
+  upload: (
+    moduleId: string,
+    subModuleId: string,
+    lessonId: string,
+    file: File,
+    onProgress: (percent: number) => void,
+    signal: AbortSignal,
+  ) => Promise<void>;
+  setAccess: (moduleId: string, subModuleId: string, lessonId: string, isFreePreview: boolean) => Promise<void>;
+}
 
 export interface CurriculumEditorProps {
   courseId: string;
@@ -47,6 +62,8 @@ export interface CurriculumEditorProps {
   onModulesChange: (modules: Module[]) => void;
   onDataChange: (data: CourseEditorData) => void;
   addModuleLabel: string;
+  /** Envoi de fichiers vidéo disponible (Cloudinary configuré côté serveur). */
+  videoUploadEnabled?: boolean;
 }
 
 function moduleDndId(moduleId: string) {
@@ -73,6 +90,9 @@ function LessonRow({
   labels,
   onEdit,
   onEditVideo,
+  uploadEnabled,
+  onUploadVideo,
+  onAccessChange,
   onDelete,
 }: {
   lesson: Lesson;
@@ -80,6 +100,7 @@ function LessonRow({
   labels: {
     videoReady: string;
     videoMissing: string;
+    videoProcessing: string;
     uploading: (pct: number) => string;
     editVideo: string;
     freePreview: string;
@@ -91,6 +112,9 @@ function LessonRow({
   };
   onEdit: (title: string) => Promise<void>;
   onEditVideo: (input: LessonVideoInput) => Promise<void>;
+  uploadEnabled: boolean;
+  onUploadVideo: (file: File, onProgress: (percent: number) => void, signal: AbortSignal) => Promise<void>;
+  onAccessChange: (isFreePreview: boolean) => Promise<void>;
   onDelete: () => void;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
@@ -129,7 +153,11 @@ function LessonRow({
         initialYoutubeId={video.youtubeId}
         initialDurationSeconds={lesson.durationSeconds}
         initialIsFreePreview={lesson.isFreePreview}
+        currentProvider={video.status === "missing" ? undefined : video.provider}
+        uploadEnabled={uploadEnabled}
         onSubmit={onEditVideo}
+        onUpload={onUploadVideo}
+        onAccessChange={onAccessChange}
       />
       <span className="flex-1 text-sm">{lesson.title.fr}</span>
       {lesson.isFreePreview && (
@@ -157,6 +185,11 @@ function LessonRow({
             {labels.videoReady}
           </span>
         </>
+      )}
+      {video.status === "processing" && (
+        <span className="rounded-sm bg-gold-50 px-2 py-1 text-[11px] font-semibold text-gold-600">
+          {labels.videoProcessing}
+        </span>
       )}
       {video.status === "missing" && (
         <span className="rounded-sm bg-warning-bg px-2 py-1 text-[11px] font-semibold text-warning">
@@ -195,6 +228,7 @@ function ModuleRow({
   onDeleteModule,
   onEditLesson,
   onEditLessonVideo,
+  videoActions,
   onDeleteLesson,
 }: {
   courseModule: Module;
@@ -206,6 +240,7 @@ function ModuleRow({
     addLesson: string;
     videoReady: string;
     videoMissing: string;
+    videoProcessing: string;
     uploading: (pct: number) => string;
     editVideo: string;
     freePreview: string;
@@ -232,6 +267,7 @@ function ModuleRow({
   onDeleteModule: () => void;
   onEditLesson: (subModuleId: string, lessonId: string, title: string) => Promise<void>;
   onEditLessonVideo: (subModuleId: string, lessonId: string, input: LessonVideoInput) => Promise<void>;
+  videoActions: VideoActions;
   onDeleteLesson: (subModuleId: string, lessonId: string, title: string) => void;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
@@ -314,6 +350,13 @@ function ModuleRow({
                     labels={labels}
                     onEdit={(title) => onEditLesson(subModule.id, lesson.id, title)}
                     onEditVideo={(input) => onEditLessonVideo(subModule.id, lesson.id, input)}
+                    uploadEnabled={videoActions.uploadEnabled}
+                    onUploadVideo={(file, onProgress, signal) =>
+                      videoActions.upload(courseModule.id, subModule.id, lesson.id, file, onProgress, signal)
+                    }
+                    onAccessChange={(isFree) =>
+                      videoActions.setAccess(courseModule.id, subModule.id, lesson.id, isFree)
+                    }
                     onDelete={() => onDeleteLesson(subModule.id, lesson.id, lesson.title.fr)}
                   />
                 ))}
@@ -349,6 +392,7 @@ function CurriculumEditor({
   onModulesChange,
   onDataChange,
   addModuleLabel,
+  videoUploadEnabled = false,
 }: CurriculumEditorProps) {
   const t = useTranslations("admin.course.curriculum");
   const [openModuleId, setOpenModuleId] = useState<string | null>(modules[1]?.id ?? modules[0]?.id ?? null);
@@ -475,6 +519,38 @@ function CurriculumEditor({
     }
   }
 
+  const videoActions: VideoActions = {
+    uploadEnabled: videoUploadEnabled,
+    async upload(moduleId, subModuleId, lessonId, file, onProgress, signal) {
+      try {
+        const data = await uploadLessonVideo(
+          { courseId, moduleId, subModuleId, lessonId },
+          file,
+          onProgress,
+          signal,
+        );
+        onDataChange(data);
+        toast.success(t("videoUploaded"));
+      } catch (error) {
+        if (error instanceof UploadAbortedError) {
+          toast(t("uploadCancelled"));
+        } else {
+          toast.error(error instanceof Error && error.message ? error.message : t("uploadError"));
+        }
+        throw error;
+      }
+    },
+    async setAccess(moduleId, subModuleId, lessonId, isFreePreview) {
+      try {
+        onDataChange(await updateLessonAccess({ courseId, moduleId, subModuleId, lessonId }, isFreePreview));
+        toast.success(t("videoUpdated"));
+      } catch (error) {
+        toast.error(error instanceof ClientApiError ? error.message : t("updateVideoError"));
+        throw error;
+      }
+    },
+  };
+
   async function handleDeleteLesson(moduleId: string, subModuleId: string, lessonId: string, title: string) {
     if (!window.confirm(t("deleteLessonConfirm", { title }))) return;
     try {
@@ -491,6 +567,7 @@ function CurriculumEditor({
     addLesson: t("addLesson"),
     videoReady: t("videoReady"),
     videoMissing: t("videoMissing"),
+    videoProcessing: t("videoProcessing"),
     uploading: (pct: number) => t("uploading", { pct }),
     editVideo: t("editVideo"),
     freePreview: t("freePreview"),
@@ -558,6 +635,7 @@ function CurriculumEditor({
               onEditLessonVideo={(subModuleId, lessonId, input) =>
                 handleEditLessonVideo(courseModule.id, subModuleId, lessonId, input)
               }
+              videoActions={videoActions}
               onDeleteLesson={(subModuleId, lessonId, title) =>
                 handleDeleteLesson(courseModule.id, subModuleId, lessonId, title)
               }

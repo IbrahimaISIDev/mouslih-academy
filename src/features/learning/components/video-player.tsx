@@ -93,6 +93,15 @@ function VideoPlayer(props: VideoPlayerProps) {
   if (playback.provider === "youtube") {
     return <YouTubeLessonPlayer {...props} videoId={playback.videoId} />;
   }
+  if (playback.provider === "file") {
+    return (
+      <NativeLessonPlayer
+        {...props}
+        src={playback.url}
+        poster={playback.posterUrl}
+      />
+    );
+  }
   if (playback.provider === "stream") {
     return <NativeLessonPlayer {...props} src={playback.url} />;
   }
@@ -274,25 +283,38 @@ function YouTubeLessonPlayer({
   );
 }
 
-/** Lecture d'une URL signée Cloudflare Stream (HLS) — lue nativement par Safari ; le jour où
- *  Stream remplace YouTube, prévoir hls.js pour les autres navigateurs. */
+/** Lecteur du navigateur, pour une vidéo hébergée à URL signée : MP4 Cloudinary (lu partout) ou
+ *  HLS Cloudflare Stream (lu nativement par Safari seulement — prévoir hls.js le cas échéant). */
 function NativeLessonPlayer({
   src,
+  poster,
   title,
   initialPositionSeconds,
   onProgress,
   onComplete,
-}: VideoPlayerProps & { src: string }) {
+}: VideoPlayerProps & { src: string; poster?: string }) {
   const lastReportRef = useRef(0);
   return (
     <video
       src={src}
+      poster={poster}
       controls
+      // Dissuasion simple : pas de bouton de téléchargement ni de menu « Enregistrer la vidéo ».
+      controlsList="nodownload"
+      onContextMenu={(e) => e.preventDefault()}
+      preload="metadata"
       playsInline
       title={title}
       className="aspect-video w-full bg-black"
       onLoadedMetadata={(e) => {
-        e.currentTarget.currentTime = initialPositionSeconds;
+        // Reprise là où l'apprenant s'était arrêté (sauf tout près de la fin).
+        const { duration } = e.currentTarget;
+        if (
+          initialPositionSeconds > 5 &&
+          initialPositionSeconds < duration - 5
+        ) {
+          e.currentTarget.currentTime = initialPositionSeconds;
+        }
       }}
       onTimeUpdate={(e) => {
         const now = Date.now();

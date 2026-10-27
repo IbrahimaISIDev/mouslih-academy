@@ -7,6 +7,8 @@ import { fatihaLessonVideoStatus } from "@/mocks/admin-course-editor";
 export interface CourseEditorData {
   course: Course;
   videoStatus: Record<string, AdminLessonVideoState>;
+  /** Envoi de fichiers vidéo disponible (hébergeur configuré côté serveur). */
+  mediaUpload?: { cloudinary: boolean };
 }
 
 export async function getCourseEditor(courseId: string): Promise<CourseEditorData | null> {
@@ -29,5 +31,5 @@ export async function getCourseEditor(courseId: string): Promise<CourseEditorDat
   const videoStatus =
     course.id === "c-rectification-fatiha" ? fatihaLessonVideoStatus : {};
 
-  return { course, videoStatus };
+  return { course, videoStatus, mediaUpload: { cloudinary: false } };
 }

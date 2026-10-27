@@ -5,6 +5,7 @@ import { getCourse } from "@/features/catalog/api/get-course";
 import { getLessonQuestions } from "@/features/learning/api/get-lesson-questions";
 import { findLessonLocation } from "@/features/learning/find-lesson";
 import { getLessonPlayback } from "@/features/learning/api/get-lesson-playback";
+import { getPublicLessonPlayback } from "@/features/learning/api/get-public-lesson-playback";
 import { getSession } from "@/lib/session";
 import { USE_MOCKS } from "@/lib/use-mocks";
 import { parseYouTubeVideoId } from "@/lib/youtube";
@@ -51,7 +52,11 @@ export default async function LessonPage({ params }: LessonPageProps) {
   const [questions, playback] = await Promise.all([
     getLessonQuestions(currentLesson.id),
     currentLesson.isFreePreview
-      ? Promise.resolve(publicPlayback(currentLesson))
+      ? // Lien YouTube public déjà fourni par le catalogue ; sinon (vidéo hébergée), route
+        // publique de lecture — dans les deux cas, sans dépendre de la session.
+        currentLesson.videoUrl
+        ? Promise.resolve(publicPlayback(currentLesson))
+        : getPublicLessonPlayback(currentLesson.id)
       : isAuthenticated
         ? getLessonPlayback(currentLesson.id)
         : Promise.resolve(null),

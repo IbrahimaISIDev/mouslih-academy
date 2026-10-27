@@ -815,8 +815,23 @@
           "freePreviewLabel": "Accès libre",
           "freePreviewHelp": "Visible par tous, sans achat, comme aperçu de la formation.",
           "cancel": "Annuler",
-          "save": "Enregistrer"
-        }
+          "save": "Enregistrer",
+          "modeUpload": "Envoyer un fichier",
+          "modeYoutube": "Lien YouTube",
+          "fileLabel": "Fichier vidéo",
+          "filePick": "Choisir une vidéo sur votre ordinateur",
+          "fileHelp": "MP4 de préférence, en 1080p. Durée détectée automatiquement.",
+          "currentHosted": "Vidéo actuelle hébergée sur Cloudinary ({duration}). Choisissez un fichier pour la remplacer.",
+          "uploadingLabel": "Envoi en cours… {pct} %",
+          "finalizingLabel": "Vérification de la vidéo…",
+          "cancelUpload": "Annuler l'envoi",
+          "processingNote": "Après l'envoi, la vidéo est préparée par Cloudinary (quelques minutes) avant d'être visible par les apprenants.",
+          "uploadSubmit": "Envoyer la vidéo"
+        },
+        "videoProcessing": "En préparation",
+        "videoUploaded": "Vidéo envoyée. Elle sera disponible dès que sa préparation sera terminée.",
+        "uploadCancelled": "Envoi annulé.",
+        "uploadError": "L'envoi de la vidéo a échoué. Réessayez."
       },
       "cover": {
         "title": "Image de couverture",

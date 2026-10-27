@@ -806,8 +806,23 @@
           "freePreviewLabel": "Free access",
           "freePreviewHelp": "Visible to everyone without purchase, as a preview of the course.",
           "cancel": "Cancel",
-          "save": "Save"
-        }
+          "save": "Save",
+          "modeUpload": "Upload a file",
+          "modeYoutube": "YouTube link",
+          "fileLabel": "Video file",
+          "filePick": "Choose a video from your computer",
+          "fileHelp": "MP4 preferred, in 1080p. Duration detected automatically.",
+          "currentHosted": "Current video hosted on Cloudinary ({duration}). Choose a file to replace it.",
+          "uploadingLabel": "Uploading… {pct}%",
+          "finalizingLabel": "Checking the video…",
+          "cancelUpload": "Cancel upload",
+          "processingNote": "After upload, Cloudinary prepares the video (a few minutes) before learners can see it.",
+          "uploadSubmit": "Upload the video"
+        },
+        "videoProcessing": "Processing",
+        "videoUploaded": "Video uploaded. It will be available as soon as processing is complete.",
+        "uploadCancelled": "Upload cancelled.",
+        "uploadError": "The video upload failed. Please try again."
       },
       "cover": {
         "title": "Cover image",

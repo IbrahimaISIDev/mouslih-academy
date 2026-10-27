@@ -26,7 +26,7 @@ export default async function AdminCourseEditorPage({ params }: AdminCourseEdito
   ]);
 
   if (!editorData) notFound();
-  const { course, videoStatus } = editorData;
+  const { course, videoStatus, mediaUpload } = editorData;
 
   const ordersNeedingAttention = orders.filter(
     (o) => o.status === "pending" || o.status === "failed",
@@ -49,6 +49,7 @@ export default async function AdminCourseEditorPage({ params }: AdminCourseEdito
           locale={locale}
           initialCourse={course}
           initialVideoStatus={videoStatus}
+          videoUploadEnabled={mediaUpload?.cloudinary ?? false}
           translationDoneCounts={{ en: 6 }}
         />
       </div>
