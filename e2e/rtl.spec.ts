@@ -36,8 +36,8 @@ test.describe("Bascule FR → AR", () => {
     await page.goto("/ar/tableau-de-bord");
     await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
 
-    // Démo : vidéos 1 et 2 terminées sur 5.
-    await expect(page.getByText("٢ / ٥ دروس · ٤٠٪").first()).toBeVisible();
+    // Démo : vidéos 1 et 2 terminées sur 6.
+    await expect(page.getByText("٢ / ٦ دروس · ٣٣٪").first()).toBeVisible();
 
     const ltrTime = page.locator('[dir="ltr"]', { hasText: /^\d{2}:\d{2}$/ }).first();
     await expect(ltrTime).toBeVisible();

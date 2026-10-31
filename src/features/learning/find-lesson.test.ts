@@ -5,11 +5,11 @@ import { courses } from "@/mocks/courses";
 describe("findLessonLocation", () => {
   const fatiha = courses.find((c) => c.slug === "rectification-fatiha")!;
 
-  it("localise la vidéo 3 comme la troisième des cinq vidéos du programme", () => {
+  it("localise la vidéo 3 comme la troisième des six vidéos du programme", () => {
     const location = findLessonLocation(fatiha, "fatiha-v03");
     expect(location).not.toBeNull();
     expect(location?.lessonIndex).toBe(3);
-    expect(location?.totalLessons).toBe(5);
+    expect(location?.totalLessons).toBe(6);
     expect(location?.moduleIndex).toBe(0);
   });
 

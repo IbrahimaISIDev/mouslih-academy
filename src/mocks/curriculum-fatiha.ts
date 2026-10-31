@@ -382,9 +382,9 @@ export const fatihaModules: Module[] = [
               ar: "إتقان خاتمة سورة الفاتحة",
             },
             description: {
-              fr: "Dans cette dernière vidéo, nous allons corriger deux erreurs fréquentes dans la prononciation de الضَّالِّينَ. Nous travaillerons l'articulation de la lettre ض, son redoublement, l'allongement nécessaire et la shadda sur la lettre لّ.",
-              en: "In this final video, we correct two common mistakes in the pronunciation of الضَّالِّينَ. We work on the articulation of the letter ض, its doubling, the required prolongation and the shadda on the letter لّ.",
-              ar: "في هذا الدرس الأخير نصحّح خطأين شائعين في نطق «الضَّالِّينَ»: نتدرّب على مخرج الضاد وتشديدها، والمدّ اللازم، والشدّة على اللام.",
+              fr: "Dans cette cinquième vidéo, nous allons corriger deux erreurs fréquentes dans la prononciation de الضَّالِّينَ. Nous travaillerons l'articulation de la lettre ض, son redoublement, l'allongement nécessaire et la shadda sur la lettre لّ.",
+              en: "In this fifth video, we correct two common mistakes in the pronunciation of الضَّالِّينَ. We work on the articulation of the letter ض, its doubling, the required prolongation and the shadda on the letter لّ.",
+              ar: "في هذا الدرس الخامس نصحّح خطأين شائعين في نطق «الضَّالِّينَ»: نتدرّب على مخرج الضاد وتشديدها، والمدّ اللازم، والشدّة على اللام.",
             },
             objective: {
               fr: "Terminer la récitation d'Al-Fâtiḥah en respectant les lettres et les règles de prononciation.",
@@ -464,6 +464,47 @@ export const fatihaModules: Module[] = [
               },
             ],
           },
+          {
+            id: "fatiha-v06",
+            slug: "recitation-complete",
+            title: {
+              fr: "Réciter Al-Fâtiḥah en entier",
+              en: "Reciting Al-Fâtiḥah in full",
+              ar: "تلاوة سورة الفاتحة كاملة",
+            },
+            description: {
+              fr: "Dans cette dernière vidéo, nous récitons Al-Fâtiḥah en entier, du premier au dernier verset, en appliquant l'ensemble des corrections étudiées dans les cinq vidéos précédentes.",
+              en: "In this final video, we recite Al-Fâtiḥah in full, from the first verse to the last, applying all the corrections studied in the five previous videos.",
+              ar: "في هذا الدرس الأخير نتلو سورة الفاتحة كاملة، من الآية الأولى إلى الأخيرة، مع تطبيق كل التصحيحات التي درسناها في الدروس الخمسة السابقة.",
+            },
+            objective: {
+              fr: "Réciter Al-Fâtiḥah du début à la fin en appliquant les 10 corrections.",
+              en: "Recite Al-Fâtiḥah from beginning to end, applying the 10 corrections.",
+              ar: "تلاوة سورة الفاتحة من أولها إلى آخرها مع تطبيق التصحيحات العشرة.",
+            },
+            keyPoints: [
+              {
+                fr: "Réciter les sept versets en marquant l'arrêt à la fin de chacun",
+                en: "Recite the seven verses, pausing at the end of each one",
+                ar: "تلاوة الآيات السبع مع الوقف عند نهاية كل آية",
+              },
+              {
+                fr: "Appliquer ensemble les 10 corrections étudiées",
+                en: "Apply all 10 corrections together",
+                ar: "تطبيق التصحيحات العشرة مجتمعةً",
+              },
+              {
+                fr: "Repérer à l'oreille les erreurs qui persistent",
+                en: "Identify by ear the mistakes that remain",
+                ar: "تمييز الأخطاء المتبقية بالسمع",
+              },
+            ],
+            passage: "سُورَةُ الْفَاتِحَةِ",
+            durationSeconds: 221,
+            isFreePreview: true,
+            resources: [],
+            mistakes: [],
+          },
         ],
       },
     ],
@@ -486,9 +527,9 @@ export const fatihaCourseText: Record<
     ar: "صحِّح قراءتك للفاتحة",
   },
   subtitle: {
-    fr: "10 erreurs fréquentes corrigées en 5 vidéos",
-    en: "10 common mistakes corrected in 5 videos",
-    ar: "عشرة أخطاء شائعة تُصحَّح في خمسة دروس مرئية",
+    fr: "10 erreurs fréquentes corrigées en 5 vidéos, puis une récitation complète",
+    en: "10 common mistakes corrected in 5 videos, then a full recitation",
+    ar: "عشرة أخطاء شائعة تُصحَّح في خمسة دروس مرئية، ثم تلاوة كاملة",
   },
   cardDescription: {
     fr: "Reconnaissez les erreurs de prononciation les plus fréquentes et récitez Al-Fâtiḥah avec davantage de précision.",
@@ -501,18 +542,18 @@ export const fatihaCourseText: Record<
     ar: "تعلَّم كيف تتعرّف على أخطاء النطق، وتُتقن الحروف الصعبة، وتتلو سورة الفاتحة بدقّة أكبر.",
   },
   heroTaglineMobile: {
-    fr: "10 erreurs fréquentes corrigées en 5 vidéos, pour réciter Al-Fâtiḥah avec davantage de précision.",
-    en: "10 common mistakes corrected in 5 videos, to recite Al-Fâtiḥah with greater precision.",
-    ar: "عشرة أخطاء شائعة في خمسة دروس مرئية، لتتلو الفاتحة بدقّة أكبر.",
+    fr: "10 erreurs fréquentes corrigées en 5 vidéos, puis une récitation complète, pour réciter Al-Fâtiḥah avec davantage de précision.",
+    en: "10 common mistakes corrected in 5 videos, then a full recitation, to recite Al-Fâtiḥah with greater precision.",
+    ar: "عشرة أخطاء شائعة في خمسة دروس مرئية، ثم تلاوة كاملة، لتتلو الفاتحة بدقّة أكبر.",
   },
   description: {
-    fr: "Al-Fâtiḥah est récitée à chaque unité de prière. Pourtant, certaines erreurs de prononciation y reviennent très souvent :\n- une lettre remplacée par une autre ;\n- une shadda oubliée ;\n- un allongement écourté ;\n- une voyelle ajoutée entre deux mots.\n\nCette formation les reprend une à une, dans l'ordre de la sourate. Chaque vidéo se concentre sur un passage précis et corrige deux erreurs. Vous apprenez à :\n- les entendre ;\n- placer correctement la langue et la gorge ;\n- répéter le mot juste.",
-    en: "Al-Fâtiḥah is recited in every unit of prayer. Yet some pronunciation mistakes come up again and again:\n- one letter replaced by another;\n- a forgotten shadda;\n- a shortened prolongation;\n- a vowel added between two words.\n\nThis course takes them one by one, in the order of the surah. Each video focuses on a specific passage and corrects two mistakes. You learn to:\n- hear them;\n- position your tongue and throat correctly;\n- repeat the correct word.",
-    ar: "تُتلى سورة الفاتحة في كل ركعة، ومع ذلك تتكرّر فيها أخطاء نطق كثيرة:\n- حرف يُبدَل بغيره؛\n- شدّة تُترك؛\n- مدّ يُقصَر؛\n- حركة تُزاد بين كلمتين.\n\nتتناول هذه الدورة هذه الأخطاء واحدًا تلو الآخر، بترتيب السورة. يركّز كل درس مرئي على موضع محدّد ويصحّح خطأين. ستتعلّم:\n- كيف تسمعهما؛\n- كيف تضبط موضع اللسان والحلق؛\n- كيف تكرّر الكلمة على الوجه الصحيح.",
+    fr: "Al-Fâtiḥah est récitée à chaque unité de prière. Pourtant, certaines erreurs de prononciation y reviennent très souvent :\n- une lettre remplacée par une autre ;\n- une shadda oubliée ;\n- un allongement écourté ;\n- une voyelle ajoutée entre deux mots.\n\nCette formation les reprend une à une, dans l'ordre de la sourate. Cinq vidéos se concentrent chacune sur un passage précis et corrigent deux erreurs ; une sixième réunit le tout dans une récitation complète. Vous apprenez à :\n- les entendre ;\n- placer correctement la langue et la gorge ;\n- répéter le mot juste.",
+    en: "Al-Fâtiḥah is recited in every unit of prayer. Yet some pronunciation mistakes come up again and again:\n- one letter replaced by another;\n- a forgotten shadda;\n- a shortened prolongation;\n- a vowel added between two words.\n\nThis course takes them one by one, in the order of the surah. Five videos each focus on a specific passage and correct two mistakes; a sixth brings everything together in a full recitation. You learn to:\n- hear them;\n- position your tongue and throat correctly;\n- repeat the correct word.",
+    ar: "تُتلى سورة الفاتحة في كل ركعة، ومع ذلك تتكرّر فيها أخطاء نطق كثيرة:\n- حرف يُبدَل بغيره؛\n- شدّة تُترك؛\n- مدّ يُقصَر؛\n- حركة تُزاد بين كلمتين.\n\nتتناول هذه الدورة هذه الأخطاء واحدًا تلو الآخر، بترتيب السورة. تركّز خمسة دروس مرئية كلٌّ منها على موضع محدّد وتصحّح خطأين، ثم يجمع درس سادس ذلك كلّه في تلاوة كاملة. ستتعلّم:\n- كيف تسمعهما؛\n- كيف تضبط موضع اللسان والحلق؛\n- كيف تكرّر الكلمة على الوجه الصحيح.",
   },
 };
 
-export const FATIHA_TOTAL_DURATION_SECONDS = 2275;
+export const FATIHA_TOTAL_DURATION_SECONDS = 2496;
 
 /** Vidéos YouTube d'exemple par leçon (phase de test), remplaçables depuis l'admin. */
 export const FATIHA_LESSON_YOUTUBE_IDS: Record<string, string> = {

@@ -13,13 +13,13 @@ export const courses: Course[] = [
     level: "beginner",
     priceXof: 10150,
     coverUrl: null,
-    lessonCount: 5,
+    lessonCount: 6,
     totalDurationSeconds: FATIHA_TOTAL_DURATION_SECONDS,
     modules: fatihaModules,
     status: "published",
     isFeatured: true,
     // Exercices, correction vocale et attestation masqués tant que l'offre se limite aux
-    // 5 vidéos (décision du 2026-10-10).
+    // vidéos (décision du 2026-10-10).
     hasCertificate: false,
     hasVoiceCorrection: false,
     translationStatus: { fr: "complete", en: "complete", ar: "complete" },

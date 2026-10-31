@@ -115,7 +115,7 @@ arabe vocalisé, les 10 erreurs). ```src/mocks/curriculum-fatiha.ts``` et
 ```prisma/fatiha-content.ts``` (backend) en sont la transcription exacte.
 
 Structure : 1 module (« Les 10 erreurs, vidéo par vidéo »), 1 sous-module sans titre,
-5 leçons (= 5 vidéos), 2 ```LessonMistake``` par leçon. Chaque leçon porte aussi
+6 leçons (= 6 vidéos) : 2 ```LessonMistake``` pour chacune des 5 premières, aucune pour la 6e (récitation complète). Chaque leçon porte aussi
 ```passage``` (arabe vocalisé), ```description``` et ```objective```.
 
 | # | id / slug | Passage | Vidéo d'exemple | Durée |
@@ -125,6 +125,7 @@ Structure : 1 module (« Les 10 erreurs, vidéo par vidéo »), 1 sous-module sa
 | 03 | ```fatiha-v03``` / ```ihdina-s-sirat``` | اهْدِنَا الصِّرَاطَ | ```dDdqkQ3TAYk``` | 07:42 |
 | 04 | ```fatiha-v04``` / ```alladhina-et-maghdubi``` | الَّذِينَ — الْمَغْضُوبِ | ```lquZH_0Fsnk``` | 09:07 |
 | 05 | ```fatiha-v05``` / ```wa-la-d-dallin``` | وَلَا الضَّالِّينَ | ```zTHNmEi30Ys``` | 10:17 |
+| 06 | ```fatiha-v06``` / ```recitation-complete``` | سُورَةُ الْفَاتِحَةِ | — (envoi Cloudinary) | 3:41 |
 
 **Phase de test** (paiement Wave non configuré) : les 5 vidéos sont en accès libre
 (```DEMO_ALL_FREE``` dans la source de contenu). À l'ouverture des paiements, seule la vidéo 01

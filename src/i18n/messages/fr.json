@@ -17,7 +17,7 @@
           "items": [
             "Rectifiez votre Fâtiḥah",
             "Les 10 erreurs corrigées",
-            "Les 5 vidéos"
+            "Les 6 vidéos"
           ]
         },
         {
@@ -90,7 +90,7 @@
       "eyebrow": "Présentation",
       "title": "Présentation de Mouslih Académie",
       "description": "Apprenez à reconnaître les erreurs de prononciation, à maîtriser les lettres difficiles et à réciter Al-Fâtiḥah avec davantage de précision.",
-      "subtitle": "10 erreurs fréquentes corrigées en 5 vidéos",
+      "subtitle": "10 erreurs fréquentes corrigées en 5 vidéos, puis une récitation complète",
       "features": {
         "recorded": "Formation enregistrée",
         "exercises": "Exercices pratiques",
@@ -167,7 +167,7 @@
       "questionButton": "Poser une question",
       "questionButtonMobile": "Une question ? Écrivez-nous",
       "included": [
-        "Les 5 vidéos, accès à vie",
+        "Les 6 vidéos, accès à vie",
         "Les 10 erreurs détaillées, règle par règle",
         "Remboursé 7 jours si insatisfait"
       ]
@@ -375,7 +375,7 @@
     "whatsappCta": "Écrire sur WhatsApp",
     "emptyLibrary": {
       "title": "Votre bibliothèque est vide",
-      "description": "Commencez par « Rectifiez votre Fâtiḥah » : 10 erreurs fréquentes corrigées en 5 vidéos, la première est en accès libre.",
+      "description": "Commencez par « Rectifiez votre Fâtiḥah » : 10 erreurs fréquentes corrigées en 5 vidéos, puis une récitation complète.",
       "action": "Découvrir la formation"
     },
     "reviewBtn": "Revoir"
@@ -384,7 +384,7 @@
     "backToDashboard": "Tableau de bord",
     "progressLabel": "{done} / {total} vidéos",
     "percentLabel": "{pct} %",
-    "sidebarTitle": "Les 5 vidéos",
+    "sidebarTitle": "Les 6 vidéos",
     "sendRecitation": "Envoyer ma récitation",
     "lockedTooltip": "Disponible après l'achat",
     "tabs": {
@@ -437,7 +437,7 @@
     },
     "locked": {
       "title": "Cette vidéo fait partie de la formation",
-      "body": "Accédez aux 5 vidéos et aux 10 erreurs corrigées pour {price}, en paiement unique.",
+      "body": "Accédez aux 6 vidéos et aux 10 erreurs corrigées pour {price}, en paiement unique.",
       "cta": "Débloquer la formation"
     },
     "backToCourse": "La formation",
@@ -559,7 +559,7 @@
       "items": [
         {
           "question": "Comment accéder aux vidéos après paiement ?",
-          "answer": "Dès que Wave confirme le paiement, les 5 vidéos sont débloquées dans votre tableau de bord. Vous recevez également un e-mail de confirmation."
+          "answer": "Dès que Wave confirme le paiement, les 6 vidéos sont débloquées dans votre tableau de bord. Vous recevez également un e-mail de confirmation."
         },
         {
           "question": "Puis-je payer en plusieurs fois ?",

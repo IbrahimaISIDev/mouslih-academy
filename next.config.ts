@@ -16,6 +16,8 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       // Vignettes des vidéos YouTube intégrées (voir YouTubeFacade).
       { protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" },
+      // Image d'aperçu de la vidéo de présentation (Cloudinary, voir lib/intro-video.ts).
+      { protocol: "https", hostname: "res.cloudinary.com", pathname: "/muaxmsav/**" },
       ...(apiUrl
         ? [
             {

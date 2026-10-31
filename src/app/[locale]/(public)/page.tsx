@@ -21,7 +21,8 @@ import { Button } from "@/components/ui/button";
 import { PublicHeader } from "@/components/layout/public-header";
 import { Footer } from "@/components/layout/footer";
 import { GeometricPattern } from "@/components/patterns/geometric-pattern";
-import { YouTubeFacade } from "@/components/patterns/youtube-facade";
+import { IntroVideo } from "@/components/patterns/intro-video";
+import { INTRO_VIDEO } from "@/lib/intro-video";
 import { StickyCta } from "@/components/patterns/sticky-cta";
 import { TestimonialCard } from "@/components/patterns/testimonial-card";
 import { DirectionalIcon } from "@/components/patterns/directional-icon";
@@ -206,8 +207,9 @@ export default async function HomePage({ params }: HomePageProps) {
           <p className="mb-4 text-center text-[11px] font-semibold tracking-[0.18em] text-gold-600 uppercase lg:mb-5 lg:text-xs">
             {t("video.eyebrow")}
           </p>
-          <YouTubeFacade
-            videoId="ku1romHwGCM"
+          <IntroVideo
+            src={INTRO_VIDEO.src}
+            poster={INTRO_VIDEO.poster}
             title={t("video.title")}
             caption={t("video.caption")}
             className="group relative grid aspect-video w-full place-items-center overflow-hidden border border-border-strong bg-green-800"
@@ -272,7 +274,7 @@ export default async function HomePage({ params }: HomePageProps) {
         </div>
       </section>
 
-      {/* Le programme : les 5 vidéos */}
+      {/* Le programme : les vidéos de la formation */}
       {course && lessons.length > 0 && (
         <section className="bg-surface px-5 py-9 sm:px-6 lg:px-11 lg:py-16">
           <div className="mx-auto max-w-[960px]">

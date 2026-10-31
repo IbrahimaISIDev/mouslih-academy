@@ -15,7 +15,7 @@ de contenu commence ici.
 | Périmètre | Seule cette formation est visible ; les 5 autres passent en brouillon (masquées, pas supprimées). |
 | Slug | ```rectification-fatiha``` conservé (liens existants). |
 | Titre | « Rectifiez votre Fâtiḥah » — vouvoiement sur tout le site. |
-| Structure | 5 séances × 1 vidéo, 2 erreurs par vidéo = 10 erreurs. |
+| Structure | 5 séances × 1 vidéo, 2 erreurs par vidéo = 10 erreurs, puis une 6e séance de récitation complète (sans nouvelle erreur). |
 | Prix | 10 150 F CFA. |
 | Accès libre | Vidéo 01. **Phase de test (paiement non configuré) : les 5 vidéos sont en accès libre** (`DEMO_ALL_FREE`). |
 | Vidéos | Vidéos YouTube d'**exemple** (sans rapport avec le contenu), une par leçon, à remplacer par les vraies depuis l'admin. |
@@ -151,6 +151,23 @@ prononciation.
 >
 > Seules modifications par rapport aux notes du propriétaire : vouvoiement, « shadda » en
 > minuscule dans le texte courant, et « Al-maghḍūbi » pour suivre la charte.
+
+### Séance 06 — Réciter Al-Fâtiḥah en entier ⚠ (à valider)
+**Passage** : سُورَةُ الْفَاتِحَةِ · **Vidéo** : EPISODE 06 SURATE COMPLET (3:41)
+
+**Description** — Dans cette dernière vidéo, nous récitons Al-Fâtiḥah en entier, du premier au
+dernier verset, en appliquant l'ensemble des corrections étudiées dans les cinq vidéos précédentes.
+
+**Dans cette vidéo, vous apprendrez à** (liste affichée sur le site)
+- Réciter les sept versets en marquant l'arrêt à la fin de chacun
+- Appliquer ensemble les 10 corrections étudiées
+- Repérer à l'oreille les erreurs qui persistent
+
+**Objectif** — Réciter Al-Fâtiḥah du début à la fin en appliquant les 10 corrections.
+
+> Accroche mise à jour (2026-10-31) : « 10 erreurs fréquentes corrigées en 5 vidéos, puis une
+> récitation complète ». La séance 05 devient la « cinquième » vidéo (et non plus la dernière).
+> Vidéo de présentation de l'accueil : « Introduction formation » (Cloudinary, mode public).
 
 ## 6. Les 10 erreurs ⚠ (à valider intégralement)
 
