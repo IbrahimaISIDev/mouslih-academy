@@ -31,6 +31,8 @@ export async function getAdminUsers({
   const filtered = adminUsers.filter((user) => {
     if (filter === "withPurchase" && user.coursesCount === 0) return false;
     if (filter === "withoutPurchase" && user.coursesCount > 0) return false;
+    if (["notStarted", "inProgress", "completed"].includes(filter) && user.progressStatus !== filter)
+      return false;
     if (!query) return true;
     return (
       user.name.toLowerCase().includes(query) ||

@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import { signupSchema, type SignupFormValues } from "@/features/auth/schemas";
 import { signup } from "@/features/auth/api/signup";
+import { track } from "@/lib/analytics";
 import { getPasswordStrength } from "@/features/auth/password-strength";
 import { cn } from "@/lib/utils";
 import { safeRedirectPath } from "@/lib/safe-redirect";
@@ -88,6 +89,7 @@ function SignupForm({ redirectTo }: SignupFormProps) {
       );
       return;
     }
+    track("signup");
     router.push(safeRedirectPath(redirectTo) ?? "/tableau-de-bord");
   }
 

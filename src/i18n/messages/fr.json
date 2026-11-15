@@ -654,6 +654,7 @@
       "subtitle": "Administration",
       "nav": {
         "dashboard": "Tableau de bord",
+        "audience": "Audience",
         "courses": "Formations",
         "users": "Utilisateurs",
         "orders": "Commandes",
@@ -883,16 +884,29 @@
         "filters": {
           "all": "Tous",
           "withPurchase": "Avec achat",
-          "withoutPurchase": "Sans achat"
+          "withoutPurchase": "Sans achat",
+          "notStarted": "Pas commencé",
+          "inProgress": "En cours",
+          "completed": "Terminé"
         },
         "columns": {
           "learner": "Apprenant",
           "email": "E-mail",
           "phone": "Téléphone",
           "courses": "Formations",
-          "joined": "Inscrit le"
+          "joined": "Inscrit le",
+          "progress": "Progression",
+          "lastActivity": "Dernière activité"
         },
-        "coursesCount": "{count, plural, one {# formation} other {# formations}}"
+        "coursesCount": "{count, plural, one {# formation} other {# formations}}",
+        "progress": "{done}/{total} leçons",
+        "noActivity": "Aucune activité",
+        "progressStatus": {
+          "noPurchase": "Sans achat",
+          "notStarted": "Pas commencé",
+          "inProgress": "En cours",
+          "completed": "Terminé"
+        }
       },
       "orders": {
         "tab": "Liste des commandes",
@@ -936,6 +950,69 @@
         "create": "Créer et continuer",
         "creating": "Création…"
       }
+    },
+    "audience": {
+      "title": "Audience",
+      "subtitle": "Qui visite le site, d'où viennent les visiteurs et jusqu'où ils vont.",
+      "rangeLabel": "Période",
+      "range": "{days} jours",
+      "stats": {
+        "visitors": "Visites",
+        "videoPlays": "Vidéos lancées",
+        "signups": "Inscriptions",
+        "sales": "{count, plural, =0 {Ventes} one {# vente} other {# ventes}}"
+      },
+      "empty": "Aucune visite mesurée sur cette période pour l'instant. Les chiffres apparaîtront dès les premières visites.",
+      "daily": {
+        "title": "Visites par jour",
+        "subtitle": "{pageViews} pages vues · {mobile} % sur téléphone",
+        "value": "{count, plural, =0 {Aucune visite} one {# visite} other {# visites}}",
+        "dateHeader": "Jour",
+        "valueHeader": "Visites"
+      },
+      "funnel": {
+        "title": "Parcours des visiteurs",
+        "subtitle": "Nombre de visites ayant atteint chaque étape (pourcentage des visites).",
+        "steps": {
+          "visit": "Visite du site",
+          "course": "Page formation",
+          "video": "Vidéo lancée",
+          "signup": "Inscription",
+          "checkout": "Paiement lancé",
+          "payment": "Paiement réussi"
+        }
+      },
+      "videos": {
+        "title": "Vidéos regardées",
+        "subtitle": "Visites ayant lancé chaque vidéo, et celles allées jusqu’au bout.",
+        "empty": "Aucune vidéo lancée sur cette période.",
+        "columns": {
+          "video": "Vidéo",
+          "plays": "Lancées",
+          "completions": "Terminées",
+          "rate": "Taux"
+        }
+      },
+      "sources": {
+        "title": "Provenance",
+        "subtitle": "D'où arrivent les visiteurs.",
+        "empty": "Aucune visite sur cette période.",
+        "names": {
+          "tiktok": "TikTok",
+          "whatsapp": "WhatsApp",
+          "google": "Google",
+          "facebook": "Facebook",
+          "instagram": "Instagram",
+          "youtube": "YouTube",
+          "direct": "Accès direct",
+          "autre": "Autres sites"
+        }
+      },
+      "pages": {
+        "title": "Pages les plus vues",
+        "empty": "Aucune page vue sur cette période."
+      },
+      "privacy": "Mesure sans cookie : aucun identifiant n'est conservé d'une visite à l'autre et aucune donnée personnelle n'est enregistrée. Astuce : ajoutez ?utm_source=tiktok à vos liens pour mieux suivre leur provenance."
     }
   },
   "states": {
@@ -1131,7 +1208,8 @@
         {
           "heading": "6. Cookies",
           "body": [
-            "Nous utilisons un cookie de session (pour rester connecté) et un cookie de préférence de langue. Aucun cookie publicitaire ou de suivi tiers n'est utilisé."
+            "Nous utilisons un cookie de session (pour rester connecté) et un cookie de préférence de langue. Aucun cookie publicitaire ou de suivi tiers n'est utilisé.",
+            "Pour mesurer l'audience du site (pages vues, vidéos lancées, provenance des visites), nous utilisons un outil interne sans cookie : aucun identifiant n'est conservé d'une visite à l'autre, aucune adresse IP n'est enregistrée et rien n'est partagé avec des tiers."
           ]
         },
         {

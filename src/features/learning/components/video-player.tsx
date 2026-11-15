@@ -81,6 +81,8 @@ export interface VideoPlayerProps {
   };
   onProgress: (seconds: number) => void;
   onComplete: () => void;
+  /** Appelé une fois, au premier démarrage effectif de la lecture. */
+  onStart?: () => void;
 }
 
 function formatClock(totalSeconds: number): string {
@@ -143,14 +145,16 @@ function YouTubeLessonPlayer({
   labels,
   onProgress,
   onComplete,
+  onStart,
 }: VideoPlayerProps & { videoId: string }) {
   const [started, setStarted] = useState(false);
   const [failed, setFailed] = useState(false);
   const mountRef = useRef<HTMLDivElement>(null);
   // Les callbacks changent d'identité à chaque rendu du parent : on lit toujours la dernière
   // version via une ref plutôt que de recréer le lecteur.
-  const callbacksRef = useRef({ onProgress, onComplete });
-  callbacksRef.current = { onProgress, onComplete };
+  const callbacksRef = useRef({ onProgress, onComplete, onStart });
+  callbacksRef.current = { onProgress, onComplete, onStart };
+  const startedRef = useRef(false);
   const startAtRef = useRef(initialPositionSeconds);
   startAtRef.current = initialPositionSeconds;
 
@@ -185,6 +189,10 @@ function YouTubeLessonPlayer({
           events: {
             onStateChange: (event) => {
               if (event.data === YT.PlayerState.PLAYING) {
+                if (!startedRef.current) {
+                  startedRef.current = true;
+                  callbacksRef.current.onStart?.();
+                }
                 stopTracking();
                 interval = setInterval(() => {
                   callbacksRef.current.onProgress(
@@ -292,8 +300,10 @@ function NativeLessonPlayer({
   initialPositionSeconds,
   onProgress,
   onComplete,
+  onStart,
 }: VideoPlayerProps & { src: string; poster?: string }) {
   const lastReportRef = useRef(0);
+  const startedRef = useRef(false);
   return (
     <video
       src={src}
@@ -321,6 +331,11 @@ function NativeLessonPlayer({
         if (now - lastReportRef.current < PROGRESS_INTERVAL_MS) return;
         lastReportRef.current = now;
         onProgress(e.currentTarget.currentTime);
+      }}
+      onPlay={() => {
+        if (startedRef.current) return;
+        startedRef.current = true;
+        onStart?.();
       }}
       onPause={(e) => onProgress(e.currentTarget.currentTime)}
       onEnded={() => {

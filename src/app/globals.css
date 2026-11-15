@@ -29,6 +29,10 @@
   --color-green-600: #45c557;
   --color-green-300: #6bd179;
   --color-green-100: #d8f3dc;
+  /* Graphiques d'audience (admin) : un vert de la marque validé pour la lisibilité des barres
+     (contraste ≥ 3:1 sur fond clair, luminosité dans la bande recommandée). Jamais pour du texte. */
+  --color-chart: #2e9a3f;
+  --color-chart-hover: #278634;
 
   --color-bg: #f5f3ee;
   --color-surface: #ffffff;

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { createOrder } from "@/features/checkout/api/create-order";
+import { track } from "@/lib/analytics";
 import { GeometricPattern } from "@/components/patterns/geometric-pattern";
 
 const REDIRECT_DELAY_MS = 1800;
@@ -25,6 +26,7 @@ function WaveRedirectView({ locale, courseId, courseSlug, userId, amountXof, amo
   useEffect(() => {
     let cancelled = false;
 
+    track("checkout_start");
     createOrder(courseId, userId, amountXof).then((data) => {
       if (cancelled) return;
       setRef(data.ref);

@@ -1,10 +1,11 @@
-import { BookOpen, LayoutDashboard, Package, Quote, RotateCcw, Users } from "lucide-react";
+import { BarChart3, BookOpen, LayoutDashboard, Package, Quote, RotateCcw, Users } from "lucide-react";
 import type { AdminNavItem } from "@/components/layout/admin-sidebar";
 
-export type AdminNavKey = "dashboard" | "courses" | "users" | "orders";
+export type AdminNavKey = "dashboard" | "audience" | "courses" | "users" | "orders";
 
 export interface AdminNavLabels {
   dashboard: string;
+  audience: string;
   courses: string;
   users: string;
   orders: string;
@@ -24,6 +25,12 @@ export function getAdminNavItems(
       href: "/admin",
       icon: LayoutDashboard,
       active: active === "dashboard",
+    },
+    {
+      label: labels.audience,
+      href: "/admin/audience",
+      icon: BarChart3,
+      active: active === "audience",
     },
     {
       label: labels.courses,

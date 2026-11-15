@@ -9,6 +9,7 @@ import { formatPrice } from "@/lib/format";
 import { WHATSAPP_URL } from "@/lib/contact";
 import { getOrderClient } from "@/features/checkout/api/get-order-client";
 import { useCart } from "@/lib/use-cart";
+import { trackOnce } from "@/lib/analytics";
 import { SuccessState } from "@/features/checkout/components/success-state";
 import { PendingState } from "@/features/checkout/components/pending-state";
 import { FailedState } from "@/features/checkout/components/failed-state";
@@ -58,6 +59,13 @@ function PaymentResult({
   const displayStatus = statusOverride ?? toDisplayStatus(order.status);
   const amountLabel = formatPrice(order.amountXof, locale);
   const title = course.title[locale];
+
+  useEffect(() => {
+    // Une seule mesure par commande, même si la page de confirmation est rechargée.
+    if (!statusOverride && order.status === "paid") {
+      trackOnce(`paid_${order.ref}`, "payment_success");
+    }
+  }, [statusOverride, order.status, order.ref]);
 
   const { cartItem, clearCart } = useCart();
   useEffect(() => {

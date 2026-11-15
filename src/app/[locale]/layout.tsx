@@ -14,6 +14,7 @@ import { routing } from "@/i18n/routing";
 import { isRtl } from "@/lib/rtl";
 import { QueryProvider } from "@/components/providers/query-provider";
 import { PWAProvider } from "@/components/providers/pwa-provider";
+import { AnalyticsTracker } from "@/components/providers/analytics-tracker";
 import { Toaster } from "@/components/ui/sonner";
 import { OfflineBanner } from "@/components/patterns/offline-banner";
 import { PageTransition } from "@/components/patterns/page-transition";
@@ -124,6 +125,7 @@ export default async function LocaleLayout({
             <Direction.Provider dir={dir}>
               <QueryProvider>
                 <PWAProvider />
+                <AnalyticsTracker />
                 <OfflineBanner />
                 <PageTransition>{children}</PageTransition>
                 <Toaster />

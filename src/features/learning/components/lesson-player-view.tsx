@@ -36,6 +36,7 @@ import { LessonSidebar } from "@/features/learning/components/lesson-sidebar";
 import { LessonTabs } from "@/features/learning/components/lesson-tabs";
 import { WHATSAPP_URL } from "@/lib/contact";
 import { ClientApiError } from "@/lib/client-fetch";
+import { track } from "@/lib/analytics";
 
 const VideoPlayer = dynamic(
   () =>
@@ -150,6 +151,7 @@ function LessonPlayerView({
   );
 
   function handleComplete() {
+    track("video_complete", { lessonId: lesson.id });
     if (enrollment) completeLessonMutation.mutate(lesson.id);
     if (nextHref) setAutoAdvanceIn(3);
   }
@@ -248,6 +250,7 @@ function LessonPlayerView({
         <div className="lg:border-e lg:border-border-subtle">
           {playback ? (
             <VideoPlayer
+              key={lesson.id}
               playback={playback}
               title={lesson.title[locale]}
               passage={lesson.passage}
@@ -262,6 +265,7 @@ function LessonPlayerView({
               }}
               onProgress={savePosition}
               onComplete={handleComplete}
+              onStart={() => track("video_play", { lessonId: lesson.id })}
             />
           ) : (
             <div className="relative grid aspect-video place-items-center overflow-hidden bg-green-900 px-6 text-center text-on-dark">

@@ -2,7 +2,8 @@
 
 import { Eye, Pencil } from "lucide-react";
 import { useTranslations } from "next-intl";
-import type { AdminUser, AdminUsersFilter, Locale } from "@/lib/types";
+import type { AdminUser, AdminUserProgressStatus, AdminUsersFilter, Locale } from "@/lib/types";
+import { cn } from "@/lib/utils";
 import { useTableUrlState } from "@/features/admin/hooks/use-table-url-state";
 import { useAdminUsers } from "@/features/admin/hooks/use-admin-users";
 import { DataTable, type DataTableColumn } from "@/components/patterns/data-table";
@@ -12,7 +13,21 @@ import { TablePagination } from "@/components/patterns/table-pagination";
 import { EmptyState } from "@/components/patterns/empty-state";
 import { SectionError } from "@/components/patterns/section-error";
 
-const FILTER_VALUES: AdminUsersFilter[] = ["all", "withPurchase", "withoutPurchase"];
+const FILTER_VALUES: AdminUsersFilter[] = [
+  "all",
+  "withPurchase",
+  "withoutPurchase",
+  "notStarted",
+  "inProgress",
+  "completed",
+];
+
+const STATUS_STYLES: Record<AdminUserProgressStatus, string> = {
+  noPurchase: "border-border-subtle bg-bg text-text-muted",
+  notStarted: "border-warning-border bg-warning-bg text-warning",
+  inProgress: "border-border-subtle bg-green-100 text-green-ink",
+  completed: "border-success-border bg-success-bg text-success",
+};
 const PAGE_SIZE = 7;
 
 export interface UsersTableProps {
@@ -30,6 +45,7 @@ function UsersTable({ locale }: UsersTableProps) {
 
   const { data, isPending, isError, refetch } = useAdminUsers(q, filter, page);
   const dateFormatter = new Intl.DateTimeFormat(locale, { dateStyle: "long" });
+  const shortDateFormatter = new Intl.DateTimeFormat(locale, { day: "numeric", month: "short" });
 
   const columns: DataTableColumn<AdminUser>[] = [
     {
@@ -59,16 +75,42 @@ function UsersTable({ locale }: UsersTableProps) {
       header: t("users.columns.phone"),
       width: "1fr",
       cell: (row) => (
-        <span dir="ltr" className="text-text-soft tabular-nums">
+        <span dir="ltr" className="whitespace-nowrap text-text-soft tabular-nums">
           {row.phone}
         </span>
       ),
     },
     {
-      key: "courses",
-      header: t("users.columns.courses"),
+      key: "progress",
+      header: t("users.columns.progress"),
+      width: "1.1fr",
+      cell: (row) => (
+        <div className="flex flex-col items-start gap-1">
+          <span
+            className={cn(
+              "rounded-full border px-2 py-0.5 text-xs font-semibold",
+              STATUS_STYLES[row.progressStatus],
+            )}
+          >
+            {t(`users.progressStatus.${row.progressStatus}`)}
+          </span>
+          {row.progressStatus !== "noPurchase" && (
+            <span className="text-xs text-text-muted tabular-nums">
+              {t("users.progress", { done: row.completedLessons, total: row.totalLessons })}
+            </span>
+          )}
+        </div>
+      ),
+    },
+    {
+      key: "lastActivity",
+      header: t("users.columns.lastActivity"),
       width: "0.9fr",
-      cell: (row) => <span className="text-text-soft">{t("users.coursesCount", { count: row.coursesCount })}</span>,
+      cell: (row) => (
+        <span className="text-text-muted tabular-nums">
+          {row.lastActivityAt ? shortDateFormatter.format(new Date(row.lastActivityAt)) : t("users.noActivity")}
+        </span>
+      ),
     },
     {
       key: "joined",
@@ -127,6 +169,7 @@ function UsersTable({ locale }: UsersTableProps) {
             { width: "1.5fr", kind: "avatar" },
             { width: "1.6fr" },
             { width: "1fr" },
+            { width: "1.1fr" },
             { width: "0.9fr" },
             { width: "1fr" },
             { width: "90px" },

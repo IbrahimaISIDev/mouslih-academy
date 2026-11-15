@@ -164,7 +164,15 @@ export interface AdminUser {
   phone: string;
   coursesCount: number;
   joinedAt: string;
+  /** Leçons terminées sur la formation Fâtiḥah, et nombre de leçons publiées. */
+  completedLessons: number;
+  totalLessons: number;
+  /** Dernière activité d'apprentissage (ISO), `null` si aucune. */
+  lastActivityAt: string | null;
+  progressStatus: AdminUserProgressStatus;
 }
+
+export type AdminUserProgressStatus = "noPurchase" | "notStarted" | "inProgress" | "completed";
 
 export interface Paginated<T> {
   items: T[];
@@ -215,7 +223,32 @@ export interface AdminOrderRow {
   createdAt: string;
 }
 
-export type AdminUsersFilter = "all" | "withPurchase" | "withoutPurchase";
+export type AdminUsersFilter =
+  | "all"
+  | "withPurchase"
+  | "withoutPurchase"
+  | "notStarted"
+  | "inProgress"
+  | "completed";
+
+/** Mesure d'audience (GET /api/admin/analytics). */
+export interface AnalyticsOverview {
+  days: number;
+  totals: {
+    visitors: number;
+    pageViews: number;
+    videoPlays: number;
+    signups: number;
+    sales: number;
+    revenueXof: number;
+    mobileShare: number;
+  };
+  daily: { date: string; visitors: number; pageViews: number }[];
+  sources: { source: string; visitors: number }[];
+  funnel: { step: "visit" | "course" | "video" | "signup" | "checkout" | "payment"; sessions: number }[];
+  topPages: { path: string; views: number }[];
+  topVideos: { lessonId: string; title: string; plays: number; completions: number }[];
+}
 export type AdminOrdersFilter = "all" | "paid" | "pending" | "failed";
 
 /** `processing` : vidéo envoyée, encore en préparation chez l'hébergeur. */
