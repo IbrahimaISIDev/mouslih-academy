@@ -135,6 +135,8 @@ export interface Testimonial {
   videoUrl?: string;
   /** Identifiant de la vidéo TikTok (témoignages « tiktok »). */
   tiktokId?: string;
+  /** Vignette verticale (image choisie dans l'admin) affichée avant lecture. */
+  thumbnailUrl?: string;
   /** Durée affichée sur la vignette, pour les témoignages vidéo uniquement (ex. "1 min 05"). */
   videoDuration?: string;
   /** Traitement visuel distinct (fond sombre) réservé à un témoignage par mosaïque. */
@@ -174,7 +176,8 @@ export interface AdminUser {
   progressStatus: AdminUserProgressStatus;
 }
 
-export type AdminUserProgressStatus = "noPurchase" | "notStarted" | "inProgress" | "completed";
+export type AdminUserProgressStatus =
+  "noPurchase" | "notStarted" | "inProgress" | "completed";
 
 export interface Paginated<T> {
   items: T[];
@@ -247,9 +250,17 @@ export interface AnalyticsOverview {
   };
   daily: { date: string; visitors: number; pageViews: number }[];
   sources: { source: string; visitors: number }[];
-  funnel: { step: "visit" | "course" | "video" | "signup" | "checkout" | "payment"; sessions: number }[];
+  funnel: {
+    step: "visit" | "course" | "video" | "signup" | "checkout" | "payment";
+    sessions: number;
+  }[];
   topPages: { path: string; views: number }[];
-  topVideos: { lessonId: string; title: string; plays: number; completions: number }[];
+  topVideos: {
+    lessonId: string;
+    title: string;
+    plays: number;
+    completions: number;
+  }[];
 }
 export type AdminOrdersFilter = "all" | "paid" | "pending" | "failed";
 

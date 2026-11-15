@@ -28,6 +28,7 @@ import { TestimonialCard } from "@/components/patterns/testimonial-card";
 import { DirectionalIcon } from "@/components/patterns/directional-icon";
 import { AnimatedCounter } from "@/components/patterns/animated-counter";
 import { VideoProgramme } from "@/features/catalog/components/video-programme";
+import { TikTokShowcase } from "@/features/catalog/components/tiktok-showcase";
 import { WHATSAPP_DISPLAY, WHATSAPP_URL } from "@/lib/contact";
 
 // Page pré-rendue statiquement (generateStaticParams) : sans revalidation, le nombre réel
@@ -74,7 +75,14 @@ export default async function HomePage({ params }: HomePageProps) {
 
   // Les 3 premiers témoignages publiés (l'API les renvoie dans l'ordre éditorial) : aucune
   // dépendance à des identifiants précis, la section suit ce qui est réellement en base.
-  const testimonials = allTestimonials.slice(0, 3);
+  // Témoignages vidéo (TikTok) en carrousel ; témoignages écrits (s'il y en a) en dessous.
+  const videoTestimonials = allTestimonials.filter(
+    (item) => item.kind === "tiktok" && item.tiktokId,
+  );
+  const textTestimonials = allTestimonials
+    .filter((item) => item.kind === "text")
+    .slice(0, 3);
+  const testimonials = [...videoTestimonials, ...textTestimonials];
 
   const navItems = [
     { label: tNav("home"), href: "/", active: true },
@@ -355,25 +363,33 @@ export default async function HomePage({ params }: HomePageProps) {
               </span>
             </h2>
 
-            <div className="hidden grid-cols-3 gap-[26px] lg:grid">
-              {testimonials.map((testimonial) => (
-                <TestimonialCard
-                  key={testimonial.id}
-                  testimonial={testimonial}
-                  locale={locale}
-                />
-              ))}
-            </div>
+            {videoTestimonials.length > 0 && (
+              <TikTokShowcase
+                items={videoTestimonials}
+                locale={locale}
+                variant="carousel"
+              />
+            )}
 
-            <div className="lg:hidden">
-              {testimonials.slice(0, 1).map((testimonial) => (
-                <TestimonialCard
-                  key={testimonial.id}
-                  testimonial={testimonial}
-                  locale={locale}
-                />
-              ))}
-            </div>
+            {textTestimonials.length > 0 && (
+              <div className="mt-6 grid gap-5 lg:grid-cols-3 lg:gap-[26px]">
+                {textTestimonials.map((testimonial) => (
+                  <TestimonialCard
+                    key={testimonial.id}
+                    testimonial={testimonial}
+                    locale={locale}
+                  />
+                ))}
+              </div>
+            )}
+
+            <Link
+              href="/temoignages"
+              className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-green-ink hover:underline"
+            >
+              {t("testimonials.seeAll")}
+              <DirectionalIcon icon={ArrowRight} className="size-4" />
+            </Link>
           </section>
         )}
 

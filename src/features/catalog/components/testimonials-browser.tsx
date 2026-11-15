@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { parseAsString, useQueryState } from "nuqs";
 import { useTranslations } from "next-intl";
 import type { Course, Locale, Testimonial } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { TestimonialCard } from "@/components/patterns/testimonial-card";
+import { TikTokShowcase } from "@/features/catalog/components/tiktok-showcase";
 import { Button } from "@/components/ui/button";
 
 export interface TestimonialsBrowserProps {
@@ -23,22 +23,21 @@ function TestimonialsBrowser({
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
 
-  // La page est mise en cache (identique pour tous) : le filtre de l'URL est appliqué après
-  // l'affichage, côté navigateur, plutôt qu'au rendu serveur.
+  // La page est mise en cache (identique pour tous) et générée à la compilation : le filtre de
+  // l'URL (?filter=…) est lu et écrit directement dans le navigateur, après l'affichage — sans
+  // useSearchParams, qui empêcherait la génération statique de la page.
   const [filter, setFilterLocal] = useState("all");
-  const [filterUrl, setFilterUrl] = useQueryState(
-    "filter",
-    parseAsString.withDefault("all").withOptions({ history: "replace" }),
-  );
   useEffect(() => {
-    setFilterLocal(filterUrl);
-    // Uniquement au chargement : ensuite, c'est setFilter qui tient les deux à jour.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const fromUrl = new URLSearchParams(window.location.search).get("filter");
+    if (fromUrl) setFilterLocal(fromUrl);
   }, []);
 
   function setFilter(value: string) {
     setFilterLocal(value);
-    setFilterUrl(value === "all" ? null : value);
+    const url = new URL(window.location.href);
+    if (value === "all") url.searchParams.delete("filter");
+    else url.searchParams.set("filter", value);
+    window.history.replaceState(window.history.state, "", url);
   }
 
   const filtered = testimonials.filter((testimonial) => {
@@ -56,10 +55,18 @@ function TestimonialsBrowser({
     .map((id) => courses.find((course) => course.id === id))
     .filter((course): course is Course => !!course);
 
+  // Vidéos TikTok : vitrine « stories » ; témoignages écrits : mosaïque / carrousel ci-dessous.
+  const videoItems = filtered.filter(
+    (item) => item.kind === "tiktok" && item.tiktokId,
+  );
+  const otherItems = filtered.filter(
+    (item) => !(item.kind === "tiktok" && item.tiktokId),
+  );
+
   function handleScroll() {
     const el = scrollRef.current;
     if (!el) return;
-    const slideWidth = el.scrollWidth / filtered.length;
+    const slideWidth = el.scrollWidth / Math.max(1, otherItems.length);
     setActiveSlide(Math.round(el.scrollLeft / slideWidth));
   }
 
@@ -105,53 +112,63 @@ function TestimonialsBrowser({
         </div>
       </div>
 
-      {/* Mosaïque desktop */}
-      <div className="hidden bg-bg px-11 py-8.5 lg:block">
-        <div className="columns-3 gap-[22px]">
-          {filtered.map((testimonial) => (
-            <TestimonialCard
-              key={testimonial.id}
-              testimonial={testimonial}
-              locale={locale}
-              className="mb-[22px] break-inside-avoid"
-            />
-          ))}
+      {videoItems.length > 0 && (
+        <div className="bg-bg px-5 pt-6 pb-8 sm:px-6 lg:px-11 lg:pt-8.5 lg:pb-10">
+          <TikTokShowcase items={videoItems} locale={locale} variant="grid" />
         </div>
-        <div className="mt-8.5 flex justify-center">
-          <Button variant="secondary">{t("seeMore")}</Button>
-        </div>
-      </div>
+      )}
 
-      {/* Carrousel mobile */}
-      <div className="bg-bg pt-5 pb-24 lg:hidden">
-        <div
-          ref={scrollRef}
-          onScroll={handleScroll}
-          className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [scrollbar-width:none]"
-        >
-          {filtered.map((testimonial) => (
-            <TestimonialCard
-              key={testimonial.id}
-              testimonial={testimonial}
-              locale={locale}
-              className="w-[85%] shrink-0 snap-center"
-            />
-          ))}
-        </div>
-        {filtered.length > 1 && (
-          <div className="mt-4 flex justify-center gap-1.5">
-            {filtered.map((testimonial, i) => (
-              <span
-                key={testimonial.id}
-                className={cn(
-                  "size-1.5 rounded-full",
-                  i === activeSlide ? "bg-green-700" : "bg-border-strong",
-                )}
-              />
-            ))}
+      {otherItems.length > 0 && (
+        <>
+          {/* Mosaïque desktop */}
+          <div className="hidden bg-bg px-11 py-8.5 lg:block">
+            <div className="columns-3 gap-[22px]">
+              {otherItems.map((testimonial) => (
+                <TestimonialCard
+                  key={testimonial.id}
+                  testimonial={testimonial}
+                  locale={locale}
+                  className="mb-[22px] break-inside-avoid"
+                />
+              ))}
+            </div>
+            <div className="mt-8.5 flex justify-center">
+              <Button variant="secondary">{t("seeMore")}</Button>
+            </div>
           </div>
-        )}
-      </div>
+
+          {/* Carrousel mobile */}
+          <div className="bg-bg pt-5 pb-24 lg:hidden">
+            <div
+              ref={scrollRef}
+              onScroll={handleScroll}
+              className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [scrollbar-width:none]"
+            >
+              {otherItems.map((testimonial) => (
+                <TestimonialCard
+                  key={testimonial.id}
+                  testimonial={testimonial}
+                  locale={locale}
+                  className="w-[85%] shrink-0 snap-center"
+                />
+              ))}
+            </div>
+            {otherItems.length > 1 && (
+              <div className="mt-4 flex justify-center gap-1.5">
+                {otherItems.map((testimonial, i) => (
+                  <span
+                    key={testimonial.id}
+                    className={cn(
+                      "size-1.5 rounded-full",
+                      i === activeSlide ? "bg-green-700" : "bg-border-strong",
+                    )}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }

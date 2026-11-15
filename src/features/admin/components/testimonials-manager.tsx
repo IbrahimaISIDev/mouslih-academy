@@ -1,17 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { ExternalLink, Pencil, Quote, Trash2 } from "lucide-react";
+import { ExternalLink, ImageIcon, Pencil, Quote, Trash2 } from "lucide-react";
 import { ClientApiError } from "@/lib/client-fetch";
 import { cn } from "@/lib/utils";
 import {
   createTikTokTestimonial,
   deleteTestimonial,
   listAdminTestimonials,
+  removeTestimonialThumbnail,
   updateTestimonial,
+  uploadTestimonialThumbnail,
   type AdminTestimonial,
   type TestimonialChanges,
 } from "@/features/admin/api/admin-testimonials-client";
@@ -84,9 +86,23 @@ function AddForm() {
   const [authorCity, setAuthorCity] = useState("");
   const [quote, setQuote] = useState("");
   const [isPublished, setIsPublished] = useState(true);
+  const [image, setImage] = useState<File | null>(null);
 
   const create = useMutation({
-    mutationFn: createTikTokTestimonial,
+    // Le témoignage d'abord, puis sa vignette (facultative) : un échec d'image n'empêche pas
+    // l'ajout, elle pourra être renvoyée depuis la liste.
+    mutationFn: async (
+      input: Parameters<typeof createTikTokTestimonial>[0],
+    ) => {
+      const created = await createTikTokTestimonial(input);
+      if (!image) return created;
+      try {
+        return await uploadTestimonialThumbnail(created.id, image);
+      } catch (error) {
+        toast.error(errorMessage(error, t("toast.imageError")));
+        return created;
+      }
+    },
     onSuccess: (created) => {
       queryClient.setQueryData<AdminTestimonial[]>(QUERY_KEY, (prev) => [
         created,
@@ -96,6 +112,7 @@ function AddForm() {
       setAuthorName("");
       setAuthorCity("");
       setQuote("");
+      setImage(null);
       toast.success(
         created.isPublished ? t("toast.published") : t("toast.saved"),
       );
@@ -180,6 +197,19 @@ function AddForm() {
             {t("form.quoteHelp")}
           </p>
         </div>
+        <div>
+          <Label htmlFor="testimonial-image" className="mb-2 block">
+            {t("form.image")}
+          </Label>
+          <ImagePicker
+            id="testimonial-image"
+            file={image}
+            onChange={setImage}
+          />
+          <p className="mt-1.5 text-xs text-text-faint">
+            {t("form.imageHelp")}
+          </p>
+        </div>
         <label className="flex items-center gap-3 text-sm text-text-soft">
           <Switch checked={isPublished} onCheckedChange={setIsPublished} />
           {t("form.publishNow")}
@@ -217,6 +247,19 @@ function TestimonialRow({ testimonial }: { testimonial: AdminTestimonial }) {
     onError: (error) => toast.error(errorMessage(error, t("toast.error"))),
   });
 
+  const [previewVideo, setPreviewVideo] = useState(false);
+  const thumbnail = useMutation({
+    mutationFn: (file: File | null) =>
+      file
+        ? uploadTestimonialThumbnail(testimonial.id, file)
+        : removeTestimonialThumbnail(testimonial.id),
+    onSuccess: (updated) => {
+      replace(updated);
+      toast.success(t("toast.imageSaved"));
+    },
+    onError: (error) => toast.error(errorMessage(error, t("toast.imageError"))),
+  });
+
   const remove = useMutation({
     mutationFn: () => deleteTestimonial(testimonial.id),
     onSuccess: () => {
@@ -230,12 +273,65 @@ function TestimonialRow({ testimonial }: { testimonial: AdminTestimonial }) {
 
   return (
     <li className="flex gap-5 rounded-sm border border-border-subtle bg-surface p-4.5">
-      <div className="w-[150px] shrink-0">
+      <div className="flex w-[150px] shrink-0 flex-col gap-2">
         {testimonial.kind === "tiktok" && testimonial.tiktokId ? (
-          <TikTokEmbed
-            videoId={testimonial.tiktokId}
-            title={testimonial.authorName}
-          />
+          <>
+            {testimonial.thumbnailUrl && !previewVideo ? (
+              <button
+                type="button"
+                onClick={() => setPreviewVideo(true)}
+                className="group relative aspect-9/16 overflow-hidden rounded-sm bg-green-900"
+                aria-label={t("row.testVideo")}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element -- aperçu admin, image déjà optimisée par Cloudinary */}
+                <img
+                  src={testimonial.thumbnailUrl}
+                  alt=""
+                  className="size-full object-cover"
+                />
+                <span className="absolute inset-x-0 bottom-0 bg-black/55 py-1.5 text-center text-[11px] font-semibold text-white">
+                  {t("row.testVideo")}
+                </span>
+              </button>
+            ) : (
+              <TikTokEmbed
+                videoId={testimonial.tiktokId}
+                title={testimonial.authorName}
+              />
+            )}
+            <label
+              className={cn(
+                "cursor-pointer rounded-sm border border-border-strong px-2 py-1.5 text-center text-xs font-semibold text-text-soft hover:bg-row-hover",
+                thumbnail.isPending && "pointer-events-none opacity-60",
+              )}
+            >
+              {thumbnail.isPending
+                ? t("row.imageUploading")
+                : testimonial.thumbnailUrl
+                  ? t("row.changeImage")
+                  : t("row.addImage")}
+              <input
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                className="sr-only"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  e.target.value = "";
+                  if (file) thumbnail.mutate(file);
+                }}
+              />
+            </label>
+            {testimonial.thumbnailUrl && (
+              <button
+                type="button"
+                disabled={thumbnail.isPending}
+                onClick={() => thumbnail.mutate(null)}
+                className="text-xs text-text-muted hover:text-error"
+              >
+                {t("row.removeImage")}
+              </button>
+            )}
+          </>
         ) : (
           <div className="grid aspect-9/16 place-items-center bg-bg px-3 text-center text-xs text-text-muted">
             {t("row.textOnly")}
@@ -427,3 +523,71 @@ function EditForm({
 }
 
 export { TestimonialsManager };
+
+/** Choix d'une image (aperçu immédiat, 5 Mo max, jpg / png / webp). */
+function ImagePicker({
+  id,
+  file,
+  onChange,
+}: {
+  id: string;
+  file: File | null;
+  onChange: (file: File | null) => void;
+}) {
+  const t = useTranslations("admin.testimonials");
+  const [preview, setPreview] = useState<string | null>(null);
+  useEffect(() => {
+    if (!file) {
+      setPreview(null);
+      return;
+    }
+    const url = URL.createObjectURL(file);
+    setPreview(url);
+    return () => URL.revokeObjectURL(url);
+  }, [file]);
+
+  return (
+    <div className="flex items-center gap-3">
+      <div className="grid aspect-9/16 w-14 shrink-0 place-items-center overflow-hidden rounded-sm border border-border-subtle bg-bg">
+        {preview ? (
+          // eslint-disable-next-line @next/next/no-img-element -- aperçu local (blob:)
+          <img src={preview} alt="" className="size-full object-cover" />
+        ) : (
+          <ImageIcon className="size-4 text-text-faint" strokeWidth={1.6} />
+        )}
+      </div>
+      <div className="flex flex-col items-start gap-1">
+        <label
+          htmlFor={id}
+          className="cursor-pointer rounded-sm border border-border-strong px-3 py-1.5 text-[13px] font-semibold text-text-soft hover:bg-row-hover"
+        >
+          {file ? t("row.changeImage") : t("form.chooseImage")}
+        </label>
+        <input
+          id={id}
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+          className="sr-only"
+          onChange={(e) => {
+            const next = e.target.files?.[0] ?? null;
+            e.target.value = "";
+            if (next && next.size > 5 * 1024 * 1024) {
+              toast.error(t("toast.imageTooBig"));
+              return;
+            }
+            onChange(next);
+          }}
+        />
+        {file && (
+          <button
+            type="button"
+            onClick={() => onChange(null)}
+            className="text-xs text-text-muted hover:text-error"
+          >
+            {t("row.removeImage")}
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}

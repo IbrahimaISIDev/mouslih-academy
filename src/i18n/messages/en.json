@@ -101,7 +101,8 @@
     "testimonials": {
       "eyebrow": "They joined",
       "title": "Learner testimonials",
-      "titleMobile": "Testimonials"
+      "titleMobile": "Testimonials",
+      "seeAll": "See all testimonials"
     },
     "cta": {
       "title": "Start today, keep lifetime access",
@@ -338,6 +339,14 @@
       "title": "The first testimonials are coming soon",
       "description": "The course has just opened: feedback from our first learners will be published here.",
       "action": "Discover the course"
+    },
+    "showcase": {
+      "play": "Watch {name}’s testimonial",
+      "previous": "Previous testimonial",
+      "next": "Next testimonial",
+      "close": "Close",
+      "counter": "{current} / {total}",
+      "dialogTitle": "{name}’s testimonial"
     }
   },
   "dashboard": {
@@ -1028,7 +1037,10 @@
         "quoteHelp": "Shown under the video, in quotes.",
         "publishNow": "Publish on the site right away",
         "submit": "Add testimonial",
-        "adding": "Checking the link…"
+        "adding": "Checking the link…",
+        "image": "Thumbnail image (recommended)",
+        "imageHelp": "A vertical screenshot of the video (face visible if possible). It shows before playback: it is what makes people click. jpg, png or webp, 5 MB max.",
+        "chooseImage": "Choose an image"
       },
       "list": {
         "title": "All testimonials",
@@ -1046,13 +1058,21 @@
         "delete": "Delete",
         "confirmDelete": "Confirm deletion",
         "cancel": "Cancel",
-        "save": "Save"
+        "save": "Save",
+        "testVideo": "Test the video",
+        "changeImage": "Change image",
+        "addImage": "Add an image",
+        "removeImage": "Remove image",
+        "imageUploading": "Uploading…"
       },
       "toast": {
         "published": "Testimonial added and published.",
         "saved": "Testimonial added (hidden).",
         "deleted": "Testimonial deleted.",
-        "error": "Something went wrong. Please try again."
+        "error": "Something went wrong. Please try again.",
+        "imageSaved": "Image saved.",
+        "imageError": "The image could not be uploaded. Please try again.",
+        "imageTooBig": "Image too large (5 MB max)."
       }
     },
     "messages": {

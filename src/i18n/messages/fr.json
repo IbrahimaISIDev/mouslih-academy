@@ -110,7 +110,8 @@
     "testimonials": {
       "eyebrow": "Ils ont suivi",
       "title": "Témoignages d'apprenants",
-      "titleMobile": "Témoignages"
+      "titleMobile": "Témoignages",
+      "seeAll": "Voir tous les témoignages"
     },
     "cta": {
       "title": "Commencez aujourd'hui, gardez l'accès à vie",
@@ -347,6 +348,14 @@
       "title": "Les premiers témoignages arrivent bientôt",
       "description": "La formation vient d'ouvrir : les retours de nos premiers apprenants seront publiés ici.",
       "action": "Découvrir la formation"
+    },
+    "showcase": {
+      "play": "Voir le témoignage de {name}",
+      "previous": "Témoignage précédent",
+      "next": "Témoignage suivant",
+      "close": "Fermer",
+      "counter": "{current} / {total}",
+      "dialogTitle": "Témoignage de {name}"
     }
   },
   "dashboard": {
@@ -1037,7 +1046,10 @@
         "quoteHelp": "Affichée sous la vidéo, entre guillemets.",
         "publishNow": "Publier tout de suite sur le site",
         "submit": "Ajouter le témoignage",
-        "adding": "Vérification du lien…"
+        "adding": "Vérification du lien…",
+        "image": "Image de la vignette (recommandé)",
+        "imageHelp": "Une capture verticale de la vidéo (visage visible si possible). Elle s’affiche avant la lecture : c’est elle qui donne envie de cliquer. jpg, png ou webp, 5 Mo max.",
+        "chooseImage": "Choisir une image"
       },
       "list": {
         "title": "Tous les témoignages",
@@ -1055,13 +1067,21 @@
         "delete": "Supprimer",
         "confirmDelete": "Confirmer la suppression",
         "cancel": "Annuler",
-        "save": "Enregistrer"
+        "save": "Enregistrer",
+        "testVideo": "Tester la vidéo",
+        "changeImage": "Changer l’image",
+        "addImage": "Ajouter une image",
+        "removeImage": "Retirer l’image",
+        "imageUploading": "Envoi…"
       },
       "toast": {
         "published": "Témoignage ajouté et publié.",
         "saved": "Témoignage ajouté (masqué).",
         "deleted": "Témoignage supprimé.",
-        "error": "L’opération a échoué. Réessayez."
+        "error": "L’opération a échoué. Réessayez.",
+        "imageSaved": "Image enregistrée.",
+        "imageError": "L’image n’a pas pu être envoyée. Réessayez.",
+        "imageTooBig": "Image trop lourde (5 Mo maximum)."
       }
     },
     "messages": {
