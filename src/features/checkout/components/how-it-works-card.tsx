@@ -8,7 +8,7 @@ export interface HowItWorksCardProps {
 function HowItWorksCard({ title, steps }: HowItWorksCardProps) {
   return (
     <div className="border border-border-subtle bg-surface p-6.5 lg:p-7">
-      <p className="mb-5.5 text-xs font-semibold tracking-[0.16em] text-gold-600 uppercase">{title}</p>
+      <p className="mb-5.5 text-xs font-semibold tracking-[0.16em] text-gold-700 uppercase">{title}</p>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {steps.map((step, i) => {
           const isLast = i === steps.length - 1;

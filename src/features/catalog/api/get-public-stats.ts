@@ -1,5 +1,6 @@
 import { sleep } from "@/lib/sleep";
-import { apiFetch, USE_MOCKS } from "@/lib/api-client";
+import { USE_MOCKS } from "@/lib/api-client";
+import { publicApiFetch } from "@/lib/public-fetch";
 
 export interface PublicStats {
   learnersCount: number;
@@ -14,5 +15,5 @@ export async function getPublicStats(): Promise<PublicStats> {
     return { learnersCount: 1240, coursesCount: 6 };
   }
 
-  return apiFetch<PublicStats>("/api/courses/stats");
+  return publicApiFetch<PublicStats>("/api/courses/stats");
 }

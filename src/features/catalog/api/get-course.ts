@@ -1,5 +1,6 @@
 import { sleep } from "@/lib/sleep";
-import { ApiError, apiFetch, USE_MOCKS } from "@/lib/api-client";
+import { ApiError, USE_MOCKS } from "@/lib/api-client";
+import { publicApiFetch } from "@/lib/public-fetch";
 import type { Course } from "@/lib/types";
 import { courses } from "@/mocks/courses";
 
@@ -14,7 +15,7 @@ export async function getCourse(slug: string): Promise<Course | null> {
   }
 
   try {
-    return await apiFetch<Course>(`/api/courses/${slug}`);
+    return await publicApiFetch<Course>(`/api/courses/${slug}`);
   } catch (error) {
     // Laisse remonter tout ce qui n'est pas une erreur métier attendue (404 introuvable,
     // notamment) — en particulier la redirection interne déclenchée par apiFetch sur un 401.
@@ -34,7 +35,7 @@ export async function getCourseById(id: string): Promise<Course | null> {
   }
 
   try {
-    return await apiFetch<Course>(`/api/courses/by-id/${id}`);
+    return await publicApiFetch<Course>(`/api/courses/by-id/${id}`);
   } catch (error) {
     if (error instanceof ApiError) return null;
     throw error;

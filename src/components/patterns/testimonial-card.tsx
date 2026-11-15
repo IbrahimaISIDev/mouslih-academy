@@ -140,7 +140,7 @@ function TestimonialCard({
     <div
       className={cn("border border-border-subtle bg-surface p-6.5", className)}
     >
-      <Quote className="mb-4 size-6 text-gold-600" strokeWidth={1.4} />
+      <Quote className="mb-4 size-6 text-gold-700" strokeWidth={1.4} />
       <p className="mb-5.5 font-serif text-lg leading-[1.6]">
         {testimonial.quote[locale]}
       </p>

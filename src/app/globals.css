@@ -45,6 +45,10 @@
   --color-text-faint: #99948b;
 
   --color-gold-600: #a8823c;
+  /* Or « texte » : gold-600 ne tient que 3,2:1 sur fond clair (WCAG AA exige 4,5:1 pour les
+     petits sur-titres). gold-700 garde la teinte en plus foncé (≥ 4,7:1 sur bg, surface et
+     gold-50) ; gold-600 reste pour les filets, accents et icônes décoratives. */
+  --color-gold-700: #86672c;
   --color-gold-300: #c9b073;
   --color-gold-200: #e5d3a8;
   --color-gold-50: #faf2df;
@@ -58,7 +62,8 @@
   --color-error: #a63a2e;
   --color-error-bg: #faecea;
   --color-error-border: #e7c3bc;
-  --color-whatsapp: #1f8a4c;
+  /* Assombri (#1f8a4c → #1c7f46) : texte blanc à 5:1 au lieu de 4,4:1. */
+  --color-whatsapp: #1c7f46;
   --color-whatsapp-hover: #1a7742;
 
   /* Nuances additionnelles (survols, états) relevées dans les maquettes,
@@ -130,7 +135,7 @@ body {
   }
 
   a:hover {
-    color: var(--color-gold-600);
+    color: var(--color-gold-700);
   }
 }
 

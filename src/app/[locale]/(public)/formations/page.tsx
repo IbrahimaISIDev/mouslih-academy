@@ -76,14 +76,14 @@ export default async function CataloguePage({
         signupLabel={tNav("signup")}
         signupHref="/inscription"
       />
-
-      <CatalogBrowser
-        courses={courses}
-        locale={locale}
-        initialQuery={initialQuery}
-        initialLevel={initialLevel}
-      />
-
+      <main>
+        <CatalogBrowser
+          courses={courses}
+          locale={locale}
+          initialQuery={initialQuery}
+          initialLevel={initialLevel}
+        />
+      </main>
       <Footer
         columns={footerColumns}
         whatsappHref={WHATSAPP_URL}

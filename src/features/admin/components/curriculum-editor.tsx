@@ -161,7 +161,7 @@ function LessonRow({
       />
       <span className="flex-1 text-sm">{lesson.title.fr}</span>
       {lesson.isFreePreview && (
-        <span className="rounded-sm bg-gold-50 px-2 py-1 text-[11px] font-semibold text-gold-600">
+        <span className="rounded-sm bg-gold-50 px-2 py-1 text-[11px] font-semibold text-gold-700">
           {labels.freePreview}
         </span>
       )}
@@ -187,7 +187,7 @@ function LessonRow({
         </>
       )}
       {video.status === "processing" && (
-        <span className="rounded-sm bg-gold-50 px-2 py-1 text-[11px] font-semibold text-gold-600">
+        <span className="rounded-sm bg-gold-50 px-2 py-1 text-[11px] font-semibold text-gold-700">
           {labels.videoProcessing}
         </span>
       )}
@@ -292,7 +292,7 @@ function ModuleRow({
         >
           <GripVertical className="size-[15px]" strokeWidth={1.8} />
         </button>
-        <span className="w-5 shrink-0 font-serif text-[13px] text-gold-600">
+        <span className="w-5 shrink-0 font-serif text-[13px] text-gold-700">
           {String(courseModule.order).padStart(2, "0")}
         </span>
         <button type="button" onClick={onToggle} className="flex-1 text-start">

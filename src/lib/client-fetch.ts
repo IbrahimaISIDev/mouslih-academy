@@ -1,11 +1,15 @@
 "use client";
 
+import { revalidateCatalog } from "@/lib/revalidate-catalog";
+
 /**
  * Fetch strictement navigateur, pour les deux composants client qui parlent à l'API en dehors
  * du rendu serveur (création de commande au montage de WaveRedirectView, polling du statut de
  * commande dans PaymentResult). Ne doit RIEN importer qui touche `next/headers`, même par un
  * import dynamique : Next.js refuse de bundler ce module pour le client si c'est le cas, quel
  * que soit le chemin d'import — d'où ce fichier séparé et volontairement minimal.
+ * (Exception sûre : revalidateCatalog est une Server Action — seul un appel réseau est
+ * embarqué côté navigateur, jamais son code ni `next/headers`.)
  *
  * Passe par /api/backend (voir app/api/backend/[...path]/route.ts) : le cookie de session
  * httpOnly voyage tout seul (même origine), la route relaie le Bearer vers l'API réelle.
@@ -51,6 +55,11 @@ export async function clientApiFetch<T>(
       response.status,
       extractErrorMessage(body, fallback),
     );
+  }
+  // Une modification dans l'admin doit apparaître tout de suite sur les pages publiques (mises
+  // en cache) : on périme leur cache, sans attendre ni bloquer en cas d'échec.
+  if ((init?.method ?? "GET") !== "GET" && path.startsWith("/api/admin/")) {
+    void revalidateCatalog().catch(() => undefined);
   }
   if (response.status === 204) return undefined as T;
   return (await response.json()) as T;

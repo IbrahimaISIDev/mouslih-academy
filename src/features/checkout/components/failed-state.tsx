@@ -58,7 +58,7 @@ function FailedState({
           <div className="flex flex-col gap-2.5">
             {checks.map((check) => (
               <div key={check} className="flex gap-2.5 text-[15px] text-text-soft">
-                <span className="text-gold-600">·</span>
+                <span className="text-gold-700">·</span>
                 {check}
               </div>
             ))}

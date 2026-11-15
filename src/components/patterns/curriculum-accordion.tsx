@@ -72,7 +72,7 @@ function CurriculumAccordion({
             <AccordionItem key={module.id} value={module.id}>
               <AccordionTrigger className="group/trigger [&>svg]:hidden">
                 <span className="flex items-baseline gap-3">
-                  <span className="font-serif text-xl text-gold-600">
+                  <span className="font-serif text-xl text-gold-700">
                     {module.number}
                   </span>
                   <span className="flex flex-col gap-0.5">
@@ -109,7 +109,7 @@ function CurriculumAccordion({
                   <div key={subModule.id}>
                     {subModule.title && (
                       <p className="ps-8 flex items-center gap-2 py-2 text-xs font-semibold text-text-muted uppercase">
-                        <span className="text-gold-600">—</span>
+                        <span className="text-gold-700">—</span>
                         {subModule.title}
                       </p>
                     )}

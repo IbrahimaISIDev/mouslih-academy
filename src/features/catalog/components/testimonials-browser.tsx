@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { parseAsString, useQueryState } from "nuqs";
 import { useTranslations } from "next-intl";
 import type { Course, Locale, Testimonial } from "@/lib/types";
@@ -12,24 +12,29 @@ export interface TestimonialsBrowserProps {
   testimonials: Testimonial[];
   courses: Course[];
   locale: Locale;
-  initialFilter: string;
 }
 
 function TestimonialsBrowser({
   testimonials,
   courses,
   locale,
-  initialFilter,
 }: TestimonialsBrowserProps) {
   const t = useTranslations("testimonials");
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
 
-  const [filter, setFilterLocal] = useState(initialFilter);
-  const [, setFilterUrl] = useQueryState(
+  // La page est mise en cache (identique pour tous) : le filtre de l'URL est appliqué après
+  // l'affichage, côté navigateur, plutôt qu'au rendu serveur.
+  const [filter, setFilterLocal] = useState("all");
+  const [filterUrl, setFilterUrl] = useQueryState(
     "filter",
     parseAsString.withDefault("all").withOptions({ history: "replace" }),
   );
+  useEffect(() => {
+    setFilterLocal(filterUrl);
+    // Uniquement au chargement : ensuite, c'est setFilter qui tient les deux à jour.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function setFilter(value: string) {
     setFilterLocal(value);
@@ -61,7 +66,7 @@ function TestimonialsBrowser({
   return (
     <div>
       <div className="border-b border-border-subtle bg-surface px-5 pt-6 pb-7.5 sm:px-6 lg:px-11 lg:pt-11 lg:pb-7.5">
-        <p className="mb-2.5 text-[11px] font-semibold tracking-[0.18em] text-gold-600 uppercase lg:mb-3.5 lg:text-xs">
+        <p className="mb-2.5 text-[11px] font-semibold tracking-[0.18em] text-gold-700 uppercase lg:mb-3.5 lg:text-xs">
           {t("eyebrow")}
         </p>
         <h1 className="mb-3 font-serif text-[28px] leading-[1.15] font-medium tracking-[-0.015em] lg:mb-3 lg:text-[42px]">

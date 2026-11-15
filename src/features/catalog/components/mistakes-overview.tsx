@@ -26,7 +26,7 @@ function MistakesOverview({
           key={mistake.id}
           className="flex items-start gap-4 bg-surface px-5 py-4.5"
         >
-          <span className="w-7 shrink-0 font-serif text-xl leading-tight text-gold-600 tabular-nums">
+          <span className="w-7 shrink-0 font-serif text-xl leading-tight text-gold-700 tabular-nums">
             {localizeDigits(String(index + 1).padStart(2, "0"), locale)}
           </span>
           <div className="min-w-0 flex-1">

@@ -20,7 +20,7 @@ export const metadata: Metadata = { title: "États transverses — référence i
 function SectionTitle({ letter, title }: { letter: string; title: string }) {
   return (
     <div className="mt-16 mb-5 flex items-baseline gap-3 border-b border-border-subtle pb-3 first:mt-0">
-      <span className="font-serif text-lg text-gold-600">{letter}</span>
+      <span className="font-serif text-lg text-gold-700">{letter}</span>
       <h2 className="font-serif text-xl font-semibold">{title}</h2>
     </div>
   );
@@ -46,7 +46,7 @@ export default async function EtatsPage() {
 
   return (
     <div className="mx-auto max-w-[1200px] px-6 py-11">
-      <p className="mb-1 text-xs font-semibold tracking-[0.16em] text-gold-600 uppercase">
+      <p className="mb-1 text-xs font-semibold tracking-[0.16em] text-gold-700 uppercase">
         Référence interne — non liée dans la navigation
       </p>
       <h1 className="mb-8 font-serif text-3xl font-medium">États transverses</h1>

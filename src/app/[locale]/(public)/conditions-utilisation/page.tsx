@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { buildFooterColumns } from "@/lib/footer-columns";
 import {
   LegalPageLayout,
@@ -7,12 +7,22 @@ import {
 } from "@/features/legal/components/legal-page-layout";
 import { WHATSAPP_DISPLAY, WHATSAPP_URL } from "@/lib/contact";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("legal.terms");
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "legal.terms" });
   return { title: t("metaTitle") };
 }
 
-export default async function TermsPage() {
+export default async function TermsPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  setRequestLocale((await params).locale);
   const [t, tNav, tCommon] = await Promise.all([
     getTranslations("legal.terms"),
     getTranslations("nav"),

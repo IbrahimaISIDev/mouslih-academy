@@ -115,7 +115,7 @@ function SuccessState({
 
       <div className="grid grid-cols-1 gap-6 px-5 py-8 sm:px-6 lg:grid-cols-[1fr_380px] lg:gap-8.5 lg:px-11 lg:py-14">
         <div className="border border-border-subtle bg-surface p-6.5 lg:p-7">
-          <p className="mb-6 text-xs font-semibold tracking-[0.16em] text-gold-600 uppercase">{getStartedTitle}</p>
+          <p className="mb-6 text-xs font-semibold tracking-[0.16em] text-gold-700 uppercase">{getStartedTitle}</p>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
             {tips.map((tip) => (
               <div key={tip.title}>

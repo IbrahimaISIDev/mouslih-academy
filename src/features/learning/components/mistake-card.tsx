@@ -23,14 +23,14 @@ function MistakeCard({ mistake, number, locale, labels }: MistakeCardProps) {
       text: mistake.correction[locale],
       tone: "text-success",
     },
-    { label: labels.rule, text: mistake.rule[locale], tone: "text-gold-600" },
+    { label: labels.rule, text: mistake.rule[locale], tone: "text-gold-700" },
   ];
 
   return (
     <article className="border border-border-subtle bg-surface">
       <header className="flex items-start justify-between gap-4 border-b border-hairline px-5 py-4">
         <div className="flex items-baseline gap-3">
-          <span className="font-serif text-[22px] leading-none text-gold-600 tabular-nums">
+          <span className="font-serif text-[22px] leading-none text-gold-700 tabular-nums">
             {localizeDigits(String(number).padStart(2, "0"), locale)}
           </span>
           <h3 className="text-[15px] font-semibold lg:text-base">

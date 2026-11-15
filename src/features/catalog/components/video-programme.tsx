@@ -107,7 +107,7 @@ function VideoProgramme({
             >
               <span
                 aria-hidden="true"
-                className="font-serif text-[28px] leading-none text-gold-600 tabular-nums lg:text-[34px]"
+                className="font-serif text-[28px] leading-none text-gold-700 tabular-nums lg:text-[34px]"
               >
                 {number}
               </span>
@@ -119,7 +119,7 @@ function VideoProgramme({
                     locale,
                   )}
                   {lesson.isFreePreview && !isPurchased && (
-                    <span className="ms-2.5 rounded-sm bg-gold-50 px-1.5 py-0.5 tracking-[0.08em] text-gold-600">
+                    <span className="ms-2.5 rounded-sm bg-gold-50 px-1.5 py-0.5 tracking-[0.08em] text-gold-700">
                       {labels.free}
                     </span>
                   )}
@@ -185,7 +185,7 @@ function DetailedVideoCard({
     <article className="overflow-hidden border border-border-subtle bg-surface transition-shadow hover:shadow-card-hover">
       <header className="flex flex-wrap items-center justify-between gap-3 border-b border-hairline bg-bg px-5 py-3 lg:px-6.5">
         <div className="flex items-center gap-3">
-          <span className="font-serif text-[26px] leading-none text-gold-600 tabular-nums">
+          <span className="font-serif text-[26px] leading-none text-gold-700 tabular-nums">
             {number}
           </span>
           <span className="text-[11px] font-semibold tracking-[0.16em] text-text-muted uppercase">
@@ -216,7 +216,7 @@ function DetailedVideoCard({
 
           {keyPoints.length > 0 ? (
             <>
-              <p className="mt-5 mb-3 text-xs font-semibold tracking-[0.14em] text-gold-600 uppercase">
+              <p className="mt-5 mb-3 text-xs font-semibold tracking-[0.14em] text-gold-700 uppercase">
                 {labels.learnTitle}
               </p>
               <ul className="flex flex-col gap-3">
@@ -277,11 +277,11 @@ function DetailedVideoCard({
       {lesson.objective && (
         <div className="flex gap-3 border-t border-gold-200 bg-gold-50 px-5 py-4 lg:px-6.5">
           <Target
-            className="mt-0.5 size-5 shrink-0 text-gold-600"
+            className="mt-0.5 size-5 shrink-0 text-gold-700"
             strokeWidth={1.7}
           />
           <p className="text-[15px] leading-[1.6] text-text">
-            <span className="font-semibold text-gold-600">
+            <span className="font-semibold text-gold-700">
               {labels.objective}
             </span>{" "}
             <TextWithArabic text={lesson.objective[locale]} locale={locale} />

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/lib/types";
 import { getCourses } from "@/features/catalog/api/get-courses";
 import { getTestimonials } from "@/features/catalog/api/get-testimonials";
@@ -17,16 +17,14 @@ export const metadata: Metadata = { title: "Témoignages — Mouslih Academy" };
 
 interface TemoignagesPageProps {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ filter?: string }>;
 }
 
 export default async function TemoignagesPage({
   params,
-  searchParams,
 }: TemoignagesPageProps) {
   const { locale: rawLocale } = await params;
   const locale = rawLocale as Locale;
-  const { filter } = await searchParams;
+  setRequestLocale(locale);
 
   const [tNav, tCommon, tTestimonials, courses, testimonials] =
     await Promise.all([
@@ -57,31 +55,30 @@ export default async function TemoignagesPage({
         signupLabel={tNav("signup")}
         signupHref="/inscription"
       />
-
-      {testimonials.length > 0 ? (
-        <TestimonialsBrowser
-          testimonials={testimonials}
-          courses={courses}
-          locale={locale}
-          initialFilter={filter ?? "all"}
-        />
-      ) : (
-        <section className="px-5 py-16 sm:px-6 lg:px-11 lg:py-24">
-          <EmptyState
-            icon={Quote}
-            title={tTestimonials("empty.title")}
-            description={tTestimonials("empty.description")}
-            action={
-              <Button asChild>
-                <Link href="/formations/rectification-fatiha">
-                  {tTestimonials("empty.action")}
-                </Link>
-              </Button>
-            }
+      <main>
+        {testimonials.length > 0 ? (
+          <TestimonialsBrowser
+            testimonials={testimonials}
+            courses={courses}
+            locale={locale}
           />
-        </section>
-      )}
-
+        ) : (
+          <section className="px-5 py-16 sm:px-6 lg:px-11 lg:py-24">
+            <EmptyState
+              icon={Quote}
+              title={tTestimonials("empty.title")}
+              description={tTestimonials("empty.description")}
+              action={
+                <Button asChild>
+                  <Link href="/formations/rectification-fatiha">
+                    {tTestimonials("empty.action")}
+                  </Link>
+                </Button>
+              }
+            />
+          </section>
+        )}
+      </main>
       <Footer
         columns={footerColumns}
         whatsappHref={WHATSAPP_URL}

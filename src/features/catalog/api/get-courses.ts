@@ -1,5 +1,6 @@
 import { sleep } from "@/lib/sleep";
-import { apiFetch, USE_MOCKS } from "@/lib/api-client";
+import { USE_MOCKS } from "@/lib/api-client";
+import { publicApiFetch } from "@/lib/public-fetch";
 import type { Course, Level } from "@/lib/types";
 import { courses } from "@/mocks/courses";
 
@@ -19,7 +20,10 @@ export async function getCourses(
       // Comme l'API (CoursesService.list) : une formation en brouillon n'est jamais publique.
       if (course.status !== "published") return false;
       if (params.level && course.level !== params.level) return false;
-      if (params.featured !== undefined && course.isFeatured !== params.featured)
+      if (
+        params.featured !== undefined &&
+        course.isFeatured !== params.featured
+      )
         return false;
       if (params.q) {
         const query = params.q.toLowerCase();
@@ -35,7 +39,8 @@ export async function getCourses(
   const search = new URLSearchParams();
   if (params.level) search.set("level", params.level);
   if (params.q) search.set("q", params.q);
-  if (params.featured !== undefined) search.set("featured", String(params.featured));
+  if (params.featured !== undefined)
+    search.set("featured", String(params.featured));
 
-  return apiFetch<Course[]>(`/api/courses?${search}`);
+  return publicApiFetch<Course[]>(`/api/courses?${search}`);
 }

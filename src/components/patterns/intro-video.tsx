@@ -48,14 +48,17 @@ function IntroVideo({
       type="button"
       onClick={() => setPlaying(true)}
       className={cn(className)}
-      aria-label={title}
     >
+      {/* Nom accessible = titre + légende visible (pas d'aria-label qui masquerait la légende). */}
+      <span className="sr-only">{title} — </span>
       <Image
         src={poster}
         alt=""
         fill
         sizes="(min-width: 1024px) 960px, 100vw"
         className="object-cover"
+        // Plus grande image en haut de l'accueil : chargée en priorité (LCP).
+        priority
       />
       <div className="absolute inset-0 bg-green-900/20 transition-colors group-hover:bg-green-900/10" />
       <div className="relative grid size-14 place-items-center rounded-full border border-gold-200 bg-green-900/60 transition-transform group-hover:scale-105 lg:size-18">

@@ -67,7 +67,7 @@ function LessonTabs({
         <div className="flex max-w-[72ch] flex-col gap-6">
           {lesson.keyPoints && lesson.keyPoints.length > 0 ? (
             <section>
-              <h2 className="mb-3.5 text-xs font-semibold tracking-[0.16em] text-gold-600 uppercase">
+              <h2 className="mb-3.5 text-xs font-semibold tracking-[0.16em] text-gold-700 uppercase">
                 {t("overview.learnTitle")}
               </h2>
               <ul className="flex flex-col gap-3">
@@ -101,11 +101,11 @@ function LessonTabs({
           {lesson.objective && (
             <div className="flex gap-3.5 border-s-2 border-gold-600 bg-gold-50 px-5 py-4">
               <Target
-                className="mt-0.5 size-[18px] shrink-0 text-gold-600"
+                className="mt-0.5 size-[18px] shrink-0 text-gold-700"
                 strokeWidth={1.7}
               />
               <div>
-                <p className="mb-1 text-xs font-semibold tracking-[0.16em] text-gold-600 uppercase">
+                <p className="mb-1 text-xs font-semibold tracking-[0.16em] text-gold-700 uppercase">
                   {t("overview.objectiveTitle")}
                 </p>
                 <p className="text-[15px] leading-[1.6] text-text">

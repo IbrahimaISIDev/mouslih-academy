@@ -294,7 +294,7 @@ function LessonPlayerView({
           {isGuest && playback && (
             <div className="flex flex-col gap-3 border-b border-border-subtle bg-gold-50 px-5 py-4 sm:flex-row sm:items-center lg:px-7.5">
               <UserPlus
-                className="hidden size-5 shrink-0 text-gold-600 sm:block"
+                className="hidden size-5 shrink-0 text-gold-700 sm:block"
                 strokeWidth={1.7}
               />
               <p className="flex-1 text-sm leading-[1.55] text-text">
@@ -344,7 +344,7 @@ function LessonPlayerView({
           </button>
 
           <div className="px-5 pt-5 lg:px-7.5 lg:pt-6.5">
-            <p className="mb-2.5 text-xs font-semibold tracking-[0.16em] text-gold-600 uppercase">
+            <p className="mb-2.5 text-xs font-semibold tracking-[0.16em] text-gold-700 uppercase">
               {localizeDigits(
                 t("videoOfTotal", { index: lessonIndex, total: totalLessons }),
                 locale,
