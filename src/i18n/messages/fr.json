@@ -298,7 +298,8 @@
       "errorTitle": "Impossible de créer le compte",
       "errorFallback": "Une erreur est survenue. Réessayez.",
       "helpText": "Besoin d'aide ?",
-      "helpLink": "Écrivez-nous"
+      "helpLink": "Écrivez-nous",
+      "marketingOptIn": "J'accepte de recevoir par e-mail les nouveautés et offres de Mouslih Académie (désinscription possible à tout moment)."
     }
   },
   "contact": {
@@ -663,6 +664,7 @@
         "audience": "Audience",
         "courses": "Formations",
         "users": "Utilisateurs",
+        "messages": "Messages",
         "orders": "Commandes",
         "corrections": "Corrections",
         "testimonials": "Témoignages"
@@ -1061,6 +1063,81 @@
         "deleted": "Témoignage supprimé.",
         "error": "L’opération a échoué. Réessayez."
       }
+    },
+    "messages": {
+      "title": "Messages",
+      "subtitle": "E-mails automatiques et messages de promotion envoyés à vos inscrits.",
+      "compose": {
+        "title": "Nouveau message",
+        "help": "Les promotions ne partent qu'aux inscrits ayant accepté de les recevoir : {optedIn} sur {learners} inscrits pour l'instant.",
+        "segment": "Destinataires",
+        "subject": "Sujet",
+        "subjectPlaceholder": "Ex. Une offre spéciale pour vous, '{prenom}'",
+        "body": "Message",
+        "bodyHelp": "Laissez une ligne vide entre deux paragraphes. '{prenom}' sera remplacé par le prénom de chaque personne.",
+        "ctaLabel": "Bouton (facultatif)",
+        "ctaLabelPlaceholder": "Ex. Voir la formation",
+        "ctaUrl": "Lien du bouton"
+      },
+      "segments": {
+        "all": "Tous",
+        "noPurchase": "Sans achat",
+        "notStarted": "Pas commencé",
+        "inProgress": "En cours",
+        "completed": "Terminé"
+      },
+      "actions": {
+        "preview": "Aperçu",
+        "test": "M’envoyer un essai",
+        "send": "{count, plural, =0 {Personne à qui envoyer} one {Envoyer à # personne} other {Envoyer à # personnes}}",
+        "confirmQuestion": "{count, plural, one {Envoyer à # personne ?} other {Envoyer à # personnes ?}}",
+        "confirm": "Oui, envoyer",
+        "cancel": "Annuler"
+      },
+      "preview": {
+        "title": "Aperçu de l’e-mail",
+        "subject": "Sujet :"
+      },
+      "toast": {
+        "testSent": "E-mail d’essai envoyé à {email}.",
+        "queued": "{count, plural, one {Envoi lancé pour # personne.} other {Envoi lancé pour # personnes.}}",
+        "error": "L’opération a échoué. Réessayez."
+      },
+      "automations": {
+        "title": "E-mails automatiques",
+        "subtitle": "Envoyés une seule fois par personne. Chiffres des 30 derniers jours.",
+        "notConfigured": "L'envoi d'e-mails n'est pas configuré sur le serveur (SMTP) : rien ne part.",
+        "kinds": {
+          "welcome": {
+            "label": "Bienvenue",
+            "when": "À l’inscription."
+          },
+          "completion": {
+            "label": "Félicitations",
+            "when": "Quand toutes les vidéos sont terminées."
+          },
+          "reminderStart": {
+            "label": "Rappel : commencer",
+            "when": "Formation achetée, aucune vidéo regardée après 2 jours."
+          },
+          "reminderResume": {
+            "label": "Rappel : reprendre",
+            "when": "Formation commencée, sans activité depuis 5 jours."
+          }
+        },
+        "remindersOn": "Rappels actifs.",
+        "remindersOff": "Rappels désactivés sur ce serveur (actifs en production).",
+        "quota": "{sent} e-mails envoyés sur 24 h (limite {limit})."
+      },
+      "history": {
+        "title": "Messages envoyés",
+        "empty": "Aucun message envoyé pour l’instant.",
+        "sending": "En cours",
+        "done": "Terminé",
+        "counts": "{sent} envoyé(s) sur {total}",
+        "failed": "{count} échec(s)",
+        "skipped": "{count} ignoré(s)"
+      }
     }
   },
   "states": {
@@ -1258,7 +1335,8 @@
           "body": [
             "Nous utilisons un cookie de session (pour rester connecté) et un cookie de préférence de langue. Aucun cookie publicitaire ou de suivi tiers n'est utilisé.",
             "Pour mesurer l'audience du site (pages vues, vidéos lancées, provenance des visites), nous utilisons un outil interne sans cookie : aucun identifiant n'est conservé d'une visite à l'autre, aucune adresse IP n'est enregistrée et rien n'est partagé avec des tiers.",
-            "Les témoignages vidéo sont hébergés sur TikTok : le lecteur TikTok (et ses éventuels cookies) ne se charge que si vous cliquez sur une vidéo."
+            "Les témoignages vidéo sont hébergés sur TikTok : le lecteur TikTok (et ses éventuels cookies) ne se charge que si vous cliquez sur une vidéo.",
+            "E-mails : nous vous écrivons pour votre compte (bienvenue, accès, félicitations) et, si vous suivez une formation, pour vous rappeler gentiment de la poursuivre. Les offres et nouveautés ne sont envoyées qu'avec votre accord. Chaque rappel ou offre contient un lien pour vous désinscrire."
           ]
         },
         {
@@ -1275,5 +1353,17 @@
         }
       ]
     }
+  },
+  "unsubscribe": {
+    "metaTitle": "Désinscription — Mouslih Académie",
+    "title": "Ne plus recevoir nos e-mails ?",
+    "body": "Vous ne recevrez plus nos offres ni nos rappels. Les e-mails liés à votre compte (accès à une formation achetée, par exemple) restent envoyés.",
+    "confirm": "Confirmer la désinscription",
+    "loading": "Un instant…",
+    "doneTitle": "C’est fait",
+    "doneBody": "Vous ne recevrez plus nos offres ni nos rappels. Qu’Allah vous facilite.",
+    "errorTitle": "Lien invalide",
+    "errorBody": "Ce lien de désinscription est incomplet ou a expiré. Écrivez-nous sur WhatsApp et nous le ferons pour vous.",
+    "home": "Retour à l’accueil"
   }
 }

@@ -289,7 +289,8 @@
       "errorTitle": "Could not create your account",
       "errorFallback": "Something went wrong. Please try again.",
       "helpText": "Need help?",
-      "helpLink": "Write to us"
+      "helpLink": "Write to us",
+      "marketingOptIn": "I agree to receive Mouslih Académie news and offers by email (unsubscribe at any time)."
     }
   },
   "contact": {
@@ -654,6 +655,7 @@
         "audience": "Audience",
         "courses": "Courses",
         "users": "Users",
+        "messages": "Messages",
         "orders": "Orders",
         "corrections": "Corrections",
         "testimonials": "Testimonials"
@@ -1052,6 +1054,81 @@
         "deleted": "Testimonial deleted.",
         "error": "Something went wrong. Please try again."
       }
+    },
+    "messages": {
+      "title": "Messages",
+      "subtitle": "Automatic emails and promotional messages sent to your learners.",
+      "compose": {
+        "title": "New message",
+        "help": "Promotions only go to learners who agreed to receive them: {optedIn} of {learners} learners so far.",
+        "segment": "Recipients",
+        "subject": "Subject",
+        "subjectPlaceholder": "e.g. A special offer for you, '{prenom}'",
+        "body": "Message",
+        "bodyHelp": "Leave a blank line between paragraphs. '{prenom}' is replaced by each person’s first name.",
+        "ctaLabel": "Button (optional)",
+        "ctaLabelPlaceholder": "e.g. See the course",
+        "ctaUrl": "Button link"
+      },
+      "segments": {
+        "all": "Everyone",
+        "noPurchase": "No purchase",
+        "notStarted": "Not started",
+        "inProgress": "In progress",
+        "completed": "Completed"
+      },
+      "actions": {
+        "preview": "Preview",
+        "test": "Send me a test",
+        "send": "{count, plural, =0 {No one to send to} one {Send to # person} other {Send to # people}}",
+        "confirmQuestion": "{count, plural, one {Send to # person?} other {Send to # people?}}",
+        "confirm": "Yes, send",
+        "cancel": "Cancel"
+      },
+      "preview": {
+        "title": "Email preview",
+        "subject": "Subject:"
+      },
+      "toast": {
+        "testSent": "Test email sent to {email}.",
+        "queued": "{count, plural, one {Sending started for # person.} other {Sending started for # people.}}",
+        "error": "Something went wrong. Please try again."
+      },
+      "automations": {
+        "title": "Automatic emails",
+        "subtitle": "Sent once per person. Figures for the last 30 days.",
+        "notConfigured": "Email sending is not configured on the server (SMTP): nothing is sent.",
+        "kinds": {
+          "welcome": {
+            "label": "Welcome",
+            "when": "At sign-up."
+          },
+          "completion": {
+            "label": "Congratulations",
+            "when": "When all videos are finished."
+          },
+          "reminderStart": {
+            "label": "Reminder: start",
+            "when": "Course bought, no video watched after 2 days."
+          },
+          "reminderResume": {
+            "label": "Reminder: resume",
+            "when": "Course started, no activity for 5 days."
+          }
+        },
+        "remindersOn": "Reminders active.",
+        "remindersOff": "Reminders disabled on this server (active in production).",
+        "quota": "{sent} emails sent in 24 h (limit {limit})."
+      },
+      "history": {
+        "title": "Sent messages",
+        "empty": "No messages sent yet.",
+        "sending": "Sending",
+        "done": "Done",
+        "counts": "{sent} sent of {total}",
+        "failed": "{count} failed",
+        "skipped": "{count} skipped"
+      }
     }
   },
   "states": {
@@ -1249,7 +1326,8 @@
           "body": [
             "We use a session cookie (to keep you signed in) and a language-preference cookie. No advertising or third-party tracking cookies are used.",
             "To measure site audience (pages viewed, videos played, where visits come from), we use an in-house, cookie-free tool: no identifier is kept from one visit to the next, no IP address is stored and nothing is shared with third parties.",
-            "Video testimonials are hosted on TikTok: the TikTok player (and any cookies it sets) only loads if you click a video."
+            "Video testimonials are hosted on TikTok: the TikTok player (and any cookies it sets) only loads if you click a video.",
+            "Emails: we write to you about your account (welcome, access, congratulations) and, if you are taking a course, with gentle reminders to continue it. News and offers are only sent with your consent. Every reminder or offer contains an unsubscribe link."
           ]
         },
         {
@@ -1266,5 +1344,17 @@
         }
       ]
     }
+  },
+  "unsubscribe": {
+    "metaTitle": "Unsubscribe — Mouslih Académie",
+    "title": "Stop receiving our emails?",
+    "body": "You will no longer receive our offers or reminders. Emails about your account (such as access to a course you bought) will still be sent.",
+    "confirm": "Confirm unsubscribe",
+    "loading": "One moment…",
+    "doneTitle": "Done",
+    "doneBody": "You will no longer receive our offers or reminders.",
+    "errorTitle": "Invalid link",
+    "errorBody": "This unsubscribe link is incomplete or has expired. Message us on WhatsApp and we will do it for you.",
+    "home": "Back to home"
   }
 }

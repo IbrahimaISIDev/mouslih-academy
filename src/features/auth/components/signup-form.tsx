@@ -4,7 +4,7 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import { signupSchema, type SignupFormValues } from "@/features/auth/schemas";
 import { signup } from "@/features/auth/api/signup";
@@ -35,6 +35,7 @@ export interface SignupFormProps {
 }
 
 function SignupForm({ redirectTo }: SignupFormProps) {
+  const locale = useLocale();
   const t = useTranslations("auth.signup");
   const tStrength = useTranslations("auth.passwordStrength");
   const router = useRouter();
@@ -57,6 +58,7 @@ function SignupForm({ redirectTo }: SignupFormProps) {
       phone: "",
       password: "",
       acceptTerms: false,
+      marketingOptIn: false,
     },
   });
 
@@ -82,7 +84,7 @@ function SignupForm({ redirectTo }: SignupFormProps) {
 
   async function onSubmit(values: SignupFormValues) {
     setServerError(null);
-    const result = await signup(signupSchema.parse(values));
+    const result = await signup({ ...signupSchema.parse(values), locale });
     if (!result.success) {
       setServerError(
         result.message === "unknown" ? t("errorFallback") : result.message,
@@ -252,6 +254,27 @@ function SignupForm({ redirectTo }: SignupFormProps) {
         )}
       />
       <FieldError message={errors.acceptTerms?.message} />
+
+      <Controller
+        control={control}
+        name="marketingOptIn"
+        render={({ field }) => (
+          <div className="flex items-start gap-2.5">
+            <Checkbox
+              id="signup-marketing"
+              checked={field.value ?? false}
+              onCheckedChange={(checked) => field.onChange(checked === true)}
+              className="mt-0.5"
+            />
+            <label
+              htmlFor="signup-marketing"
+              className="text-sm leading-[1.55] text-text-soft"
+            >
+              {t("marketingOptIn")}
+            </label>
+          </div>
+        )}
+      />
 
       {/* `errors` plutôt que `formState.isValid` : avec des champs Controller (téléphone, case à
           cocher) et mode "onBlur", isValid reste bloqué à false même une fois le formulaire

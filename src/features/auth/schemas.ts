@@ -23,6 +23,8 @@ export const signupSchema = z.object({
   acceptTerms: z.boolean().refine((value) => value === true, {
     error: "Vous devez accepter les conditions pour continuer",
   }),
+  /** Promotions par e-mail : facultatif, jamais pré-coché. */
+  marketingOptIn: z.boolean().optional(),
 });
 
 export type SignupFormValues = z.input<typeof signupSchema>;

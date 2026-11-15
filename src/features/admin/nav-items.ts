@@ -2,6 +2,7 @@ import {
   BarChart3,
   BookOpen,
   LayoutDashboard,
+  Mail,
   Package,
   Quote,
   RotateCcw,
@@ -10,13 +11,20 @@ import {
 import type { AdminNavItem } from "@/components/layout/admin-sidebar";
 
 export type AdminNavKey =
-  "dashboard" | "audience" | "courses" | "users" | "orders" | "testimonials";
+  | "dashboard"
+  | "audience"
+  | "courses"
+  | "users"
+  | "messages"
+  | "orders"
+  | "testimonials";
 
 export interface AdminNavLabels {
   dashboard: string;
   audience: string;
   courses: string;
   users: string;
+  messages: string;
   orders: string;
   corrections: string;
   testimonials: string;
@@ -52,6 +60,12 @@ export function getAdminNavItems(
       href: "/admin/utilisateurs",
       icon: Users,
       active: active === "users",
+    },
+    {
+      label: labels.messages,
+      href: "/admin/messages",
+      icon: Mail,
+      active: active === "messages",
     },
     {
       label: labels.orders,

@@ -20,7 +20,9 @@ export type SignupResult =
  * formulaire d'inscription a besoin du vrai message ("compte déjà existant"...), donc on
  * l'attrape ici et on le renvoie comme donnée normale.
  */
-export async function signup(values: SignupFormValues): Promise<SignupResult> {
+export async function signup(
+  values: SignupFormValues & { locale?: string },
+): Promise<SignupResult> {
   if (!USE_MOCKS) {
     try {
       const data = await apiFetch<AuthTokens>("/api/auth/signup", {
