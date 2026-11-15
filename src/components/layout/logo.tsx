@@ -21,6 +21,8 @@ function Logo({
           fill
           sizes="30px"
           className="object-cover"
+          // Visible dès l'en-tête sur toutes les pages : jamais en chargement différé.
+          loading="eager"
         />
       </span>
       <span

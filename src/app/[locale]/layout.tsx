@@ -20,10 +20,12 @@ import { OfflineBanner } from "@/components/patterns/offline-banner";
 import { PageTransition } from "@/components/patterns/page-transition";
 import "../globals.css";
 
+// Polices : chaque fichier préchargé ralentit l'affichage sur mobile. Spectral se limite aux
+// graisses réellement utilisées (300 et 700 servaient une seule fois chacune).
 const spectral = Spectral({
   variable: "--font-spectral",
   subsets: ["latin", "latin-ext"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
@@ -34,11 +36,15 @@ const workSans = Work_Sans({
   display: "swap",
 });
 
+// Polices arabes : pas de préchargement (≈ 350 Ko évités sur les pages FR/EN). Le navigateur
+// les télécharge de lui-même dès qu'un texte arabe s'affiche (unicode-range), et tout de suite
+// sur les pages /ar.
 const amiri = Amiri({
   variable: "--font-amiri",
   subsets: ["arabic"],
   weight: ["400", "700"],
   display: "swap",
+  preload: false,
 });
 
 const plexArabic = IBM_Plex_Sans_Arabic({
@@ -46,6 +52,7 @@ const plexArabic = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
+  preload: false,
 });
 
 export function generateStaticParams() {
