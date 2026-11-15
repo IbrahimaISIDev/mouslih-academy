@@ -42,6 +42,12 @@
       "paymentNote": "Secure payment by Wave",
       "legalLinks": ["Terms of use", "Refund policy", "Privacy"],
       "legalNavLabel": "Legal information"
+    },
+    "tiktok": {
+      "cta": "Watch the testimonial",
+      "play": "Play {name}’s video testimonial (TikTok)",
+      "notice": "TikTok video — loads only if you click",
+      "frameTitle": "{name}’s testimonial on TikTok"
     }
   },
   "nav": {
@@ -1004,6 +1010,48 @@
         "empty": "No page views in this period."
       },
       "privacy": "Cookie-free measurement: no identifier is kept between visits and no personal data is stored. Tip: add ?utm_source=tiktok to your links to track where they come from."
+    },
+    "testimonials": {
+      "title": "Testimonials",
+      "subtitle": "Add your learners’ TikTok videos: they appear on the home page and the Testimonials page.",
+      "form": {
+        "title": "Add a TikTok video",
+        "help": "On TikTok, open the video, tap “Share” then “Copy link”, and paste it below. The video must be public.",
+        "url": "TikTok video link",
+        "name": "Person’s name",
+        "city": "City",
+        "cityPlaceholder": "e.g. Dakar",
+        "quote": "Key sentence (optional)",
+        "quotePlaceholder": "e.g. “I finally fixed my pronunciation of ḍâd.”",
+        "quoteHelp": "Shown under the video, in quotes.",
+        "publishNow": "Publish on the site right away",
+        "submit": "Add testimonial",
+        "adding": "Checking the link…"
+      },
+      "list": {
+        "title": "All testimonials",
+        "emptyTitle": "No testimonials yet",
+        "emptyBody": "Add a first TikTok video with the form."
+      },
+      "row": {
+        "published": "Published",
+        "hidden": "Hidden",
+        "showOnSite": "Visible on the site",
+        "textOnly": "Written testimonial (no video)",
+        "noQuote": "No sentence shown",
+        "edit": "Edit",
+        "openTiktok": "Open on TikTok",
+        "delete": "Delete",
+        "confirmDelete": "Confirm deletion",
+        "cancel": "Cancel",
+        "save": "Save"
+      },
+      "toast": {
+        "published": "Testimonial added and published.",
+        "saved": "Testimonial added (hidden).",
+        "deleted": "Testimonial deleted.",
+        "error": "Something went wrong. Please try again."
+      }
     }
   },
   "states": {
@@ -1200,7 +1248,8 @@
           "heading": "6. Cookies",
           "body": [
             "We use a session cookie (to keep you signed in) and a language-preference cookie. No advertising or third-party tracking cookies are used.",
-            "To measure site audience (pages viewed, videos played, where visits come from), we use an in-house, cookie-free tool: no identifier is kept from one visit to the next, no IP address is stored and nothing is shared with third parties."
+            "To measure site audience (pages viewed, videos played, where visits come from), we use an in-house, cookie-free tool: no identifier is kept from one visit to the next, no IP address is stored and nothing is shared with third parties.",
+            "Video testimonials are hosted on TikTok: the TikTok player (and any cookies it sets) only loads if you click a video."
           ]
         },
         {

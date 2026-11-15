@@ -1,7 +1,16 @@
-import { BarChart3, BookOpen, LayoutDashboard, Package, Quote, RotateCcw, Users } from "lucide-react";
+import {
+  BarChart3,
+  BookOpen,
+  LayoutDashboard,
+  Package,
+  Quote,
+  RotateCcw,
+  Users,
+} from "lucide-react";
 import type { AdminNavItem } from "@/components/layout/admin-sidebar";
 
-export type AdminNavKey = "dashboard" | "audience" | "courses" | "users" | "orders";
+export type AdminNavKey =
+  "dashboard" | "audience" | "courses" | "users" | "orders" | "testimonials";
 
 export interface AdminNavLabels {
   dashboard: string;
@@ -58,7 +67,9 @@ export function getAdminNavItems(
     },
     {
       label: labels.testimonials,
+      href: "/admin/temoignages",
       icon: Quote,
+      active: active === "testimonials",
     },
   ];
 }

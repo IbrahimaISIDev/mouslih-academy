@@ -51,6 +51,12 @@
         "Confidentialité"
       ],
       "legalNavLabel": "Informations légales"
+    },
+    "tiktok": {
+      "cta": "Voir le témoignage",
+      "play": "Lire le témoignage vidéo de {name} (TikTok)",
+      "notice": "Vidéo TikTok — chargée seulement si vous cliquez",
+      "frameTitle": "Témoignage de {name} sur TikTok"
     }
   },
   "nav": {
@@ -1013,6 +1019,48 @@
         "empty": "Aucune page vue sur cette période."
       },
       "privacy": "Mesure sans cookie : aucun identifiant n'est conservé d'une visite à l'autre et aucune donnée personnelle n'est enregistrée. Astuce : ajoutez ?utm_source=tiktok à vos liens pour mieux suivre leur provenance."
+    },
+    "testimonials": {
+      "title": "Témoignages",
+      "subtitle": "Ajoutez les vidéos TikTok de vos apprenants : elles apparaissent sur l’accueil et la page Témoignages.",
+      "form": {
+        "title": "Ajouter une vidéo TikTok",
+        "help": "Sur TikTok, ouvrez la vidéo, touchez « Partager » puis « Copier le lien », et collez-le ci-dessous. La vidéo doit être publique.",
+        "url": "Lien de la vidéo TikTok",
+        "name": "Nom de la personne",
+        "city": "Ville",
+        "cityPlaceholder": "Ex. Dakar",
+        "quote": "Phrase marquante (facultatif)",
+        "quotePlaceholder": "Ex. « J’ai enfin corrigé ma prononciation du ḍâd. »",
+        "quoteHelp": "Affichée sous la vidéo, entre guillemets.",
+        "publishNow": "Publier tout de suite sur le site",
+        "submit": "Ajouter le témoignage",
+        "adding": "Vérification du lien…"
+      },
+      "list": {
+        "title": "Tous les témoignages",
+        "emptyTitle": "Aucun témoignage pour l’instant",
+        "emptyBody": "Ajoutez une première vidéo TikTok avec le formulaire."
+      },
+      "row": {
+        "published": "Publié",
+        "hidden": "Masqué",
+        "showOnSite": "Visible sur le site",
+        "textOnly": "Témoignage écrit (sans vidéo)",
+        "noQuote": "Pas de phrase affichée",
+        "edit": "Modifier",
+        "openTiktok": "Ouvrir sur TikTok",
+        "delete": "Supprimer",
+        "confirmDelete": "Confirmer la suppression",
+        "cancel": "Annuler",
+        "save": "Enregistrer"
+      },
+      "toast": {
+        "published": "Témoignage ajouté et publié.",
+        "saved": "Témoignage ajouté (masqué).",
+        "deleted": "Témoignage supprimé.",
+        "error": "L’opération a échoué. Réessayez."
+      }
     }
   },
   "states": {
@@ -1209,7 +1257,8 @@
           "heading": "6. Cookies",
           "body": [
             "Nous utilisons un cookie de session (pour rester connecté) et un cookie de préférence de langue. Aucun cookie publicitaire ou de suivi tiers n'est utilisé.",
-            "Pour mesurer l'audience du site (pages vues, vidéos lancées, provenance des visites), nous utilisons un outil interne sans cookie : aucun identifiant n'est conservé d'une visite à l'autre, aucune adresse IP n'est enregistrée et rien n'est partagé avec des tiers."
+            "Pour mesurer l'audience du site (pages vues, vidéos lancées, provenance des visites), nous utilisons un outil interne sans cookie : aucun identifiant n'est conservé d'une visite à l'autre, aucune adresse IP n'est enregistrée et rien n'est partagé avec des tiers.",
+            "Les témoignages vidéo sont hébergés sur TikTok : le lecteur TikTok (et ses éventuels cookies) ne se charge que si vous cliquez sur une vidéo."
           ]
         },
         {

@@ -3,6 +3,7 @@ import type { Locale, Testimonial } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { GeometricPattern } from "@/components/patterns/geometric-pattern";
+import { TikTokEmbed } from "@/components/patterns/tiktok-embed";
 
 export interface TestimonialCardProps {
   testimonial: Testimonial;
@@ -16,6 +17,50 @@ function TestimonialCard({
   className,
 }: TestimonialCardProps) {
   const initials = testimonial.authorName.charAt(0);
+  const quote = testimonial.quote[locale];
+
+  if (testimonial.kind === "tiktok" && testimonial.tiktokId) {
+    return (
+      <div className={cn("border border-border-subtle bg-surface", className)}>
+        {/* Largeur naturelle du lecteur TikTok (≈ 325 px) : au-delà, la vidéo verticale
+            deviendrait démesurée dans une colonne large. */}
+        <div className="bg-green-900">
+          <TikTokEmbed
+            videoId={testimonial.tiktokId}
+            title={testimonial.authorName}
+            className="mx-auto max-w-[325px]"
+          />
+        </div>
+        <div className="p-5 lg:p-6">
+          {quote && (
+            <p className="mb-3.5 font-serif text-base leading-[1.55] lg:mb-4.5 lg:text-lg">
+              « {quote} »
+            </p>
+          )}
+          <div
+            className={cn(
+              "flex items-center gap-2.5 lg:gap-3",
+              quote && "border-t border-hairline pt-3.5 lg:pt-4",
+            )}
+          >
+            <Avatar size="sm" className="lg:size-[38px]">
+              <AvatarFallback>{initials}</AvatarFallback>
+            </Avatar>
+            <div>
+              <div className="text-[13px] font-semibold lg:text-sm">
+                {testimonial.authorName}
+              </div>
+              {testimonial.authorCity && (
+                <div className="text-xs text-text-muted lg:text-[13px]">
+                  {testimonial.authorCity}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (testimonial.kind === "video") {
     return (

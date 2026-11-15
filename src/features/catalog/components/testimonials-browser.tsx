@@ -38,8 +38,9 @@ function TestimonialsBrowser({
 
   const filtered = testimonials.filter((testimonial) => {
     if (filter === "all") return true;
-    if (filter === "video" || filter === "text")
-      return testimonial.kind === filter;
+    if (filter === "video")
+      return testimonial.kind === "video" || testimonial.kind === "tiktok";
+    if (filter === "text") return testimonial.kind === "text";
     return testimonial.courseId === filter;
   });
 

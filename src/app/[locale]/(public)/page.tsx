@@ -362,7 +362,6 @@ export default async function HomePage({ params }: HomePageProps) {
 
           <div className="lg:hidden">
             {testimonials
-              .filter((testimonial) => testimonial.kind === "text")
               .slice(0, 1)
               .map((testimonial) => (
                 <TestimonialCard

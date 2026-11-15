@@ -131,8 +131,10 @@ export interface Testimonial {
   authorCity: string;
   courseId: string;
   quote: I18nText;
-  kind: "text" | "video";
+  kind: "text" | "video" | "tiktok";
   videoUrl?: string;
+  /** Identifiant de la vidéo TikTok (témoignages « tiktok »). */
+  tiktokId?: string;
   /** Durée affichée sur la vignette, pour les témoignages vidéo uniquement (ex. "1 min 05"). */
   videoDuration?: string;
   /** Traitement visuel distinct (fond sombre) réservé à un témoignage par mosaïque. */
