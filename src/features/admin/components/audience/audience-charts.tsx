@@ -146,23 +146,27 @@ function DailyColumns({
           ) : null,
         )}
       </div>
-      <table className="sr-only">
-        <caption>{tableCaption}</caption>
-        <thead>
-          <tr>
-            <th>{dateHeader}</th>
-            <th>{valueHeader}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((d) => (
-            <tr key={d.date}>
-              <td>{longDate.format(new Date(d.date))}</td>
-              <td>{d.value}</td>
+      {/* Table réservée aux lecteurs d'écran. Masquée via un bloc enveloppant : un <table> ignore
+          la hauteur de 1 px de « sr-only » et allongeait la page (barre latérale décalée). */}
+      <div className="sr-only">
+        <table>
+          <caption>{tableCaption}</caption>
+          <thead>
+            <tr>
+              <th>{dateHeader}</th>
+              <th>{valueHeader}</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {data.map((d) => (
+              <tr key={d.date}>
+                <td>{longDate.format(new Date(d.date))}</td>
+                <td>{d.value}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

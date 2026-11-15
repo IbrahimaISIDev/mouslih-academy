@@ -7,7 +7,11 @@ import type { Locale } from "@/lib/types";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
 
-export async function logout(locale: Locale): Promise<void> {
+/** `destination` : page de connexion vers laquelle revenir (« admin/connexion » pour l'admin). */
+export async function logout(
+  locale: Locale,
+  destination: "connexion" | "admin/connexion" = "connexion",
+): Promise<void> {
   if (!USE_MOCKS) {
     const session = await getSession();
     if (session) {
@@ -22,5 +26,8 @@ export async function logout(locale: Locale): Promise<void> {
   }
 
   await clearSession();
-  redirect(`/${locale}/connexion`);
+  // Utilisée comme action de formulaire, la fonction peut recevoir un FormData en 2e argument :
+  // toute valeur inattendue renvoie vers la connexion apprenant.
+  const target = destination === "admin/connexion" ? "admin/connexion" : "connexion";
+  redirect(`/${locale}/${target}`);
 }

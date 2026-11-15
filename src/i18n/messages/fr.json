@@ -1158,6 +1158,12 @@
         "failed": "{count} échec(s)",
         "skipped": "{count} ignoré(s)"
       }
+    },
+    "header": {
+      "breadcrumb": "Fil d'Ariane",
+      "root": "Administration",
+      "viewSite": "Voir le site",
+      "logout": "Se déconnecter"
     }
   },
   "states": {

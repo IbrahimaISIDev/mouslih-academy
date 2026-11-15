@@ -37,20 +37,25 @@ function AdminSidebar({
   return (
     <aside
       className={cn(
-        "flex h-full w-[248px] flex-col bg-green-900 text-on-dark-muted",
+        // Collée en haut et haute comme l'écran : elle reste en place pendant que la page défile
+        // (un « h-full » dans un parent sans hauteur fixe la coupait après le dernier lien).
+        "sticky top-0 flex h-screen w-[248px] flex-col self-start overflow-y-auto bg-green-900 text-on-dark-muted",
         className,
       )}
     >
       <div className="border-b border-white/10 px-5 py-5">
         <Logo wordmark={wordmark} variant="dark" />
-        {subtitle && <p className="mt-1 ps-[38px] text-xs text-green-300">{subtitle}</p>}
+        {subtitle && (
+          <p className="mt-1 ps-[38px] text-xs text-green-300">{subtitle}</p>
+        )}
       </div>
 
-      <nav className="flex flex-1 flex-col gap-1 px-3">
+      <nav className="flex flex-1 flex-col gap-1 px-3 py-4">
         {navItems.map((item) => {
           const itemClassName = cn(
             "flex items-center gap-3 rounded-sm border-s-[3px] border-transparent px-3 py-2.5 text-[15px] text-on-dark-muted outline-none transition-colors",
-            item.href && "focus-visible:shadow-[0_0_0_3px_var(--color-focus-ring-on-dark)]",
+            item.href &&
+              "focus-visible:shadow-[0_0_0_3px_var(--color-focus-ring-on-dark)]",
             item.active
               ? "border-gold-200 bg-gold-200/12 font-semibold text-on-dark"
               : item.href && "hover:text-on-dark",

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import type { Locale } from "@/lib/types";
 import { AdminSidebar } from "@/components/layout/admin-sidebar";
+import { AdminPageHeader } from "@/components/layout/admin-page-header";
 import { getAdminNavItems } from "@/features/admin/nav-items";
 import { getAdminStats } from "@/features/admin/api/get-admin-stats";
 import { TestimonialsManager } from "@/features/admin/components/testimonials-manager";
@@ -10,7 +12,12 @@ export const metadata: Metadata = {
   title: "Témoignages — Administration Mouslih Academy",
 };
 
-export default async function AdminTestimonialsPage() {
+export default async function AdminTestimonialsPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const locale = (await params).locale as Locale;
   const [t, tNav, stats] = await Promise.all([
     getTranslations("admin.testimonials"),
     getTranslations("admin.sidebar"),
@@ -37,14 +44,15 @@ export default async function AdminTestimonialsPage() {
         className="shrink-0"
       />
 
-      <div className="min-w-0 flex-1 px-8.5 py-7.5">
-        <div className="mb-6">
-          <h1 className="mb-1 font-serif text-[30px] font-medium">
-            {t("title")}
-          </h1>
-          <p className="text-[15px] text-text-muted">{t("subtitle")}</p>
+      <div className="min-w-0 flex-1 pb-10">
+        <AdminPageHeader
+          locale={locale}
+          title={t("title")}
+          subtitle={t("subtitle")}
+        />
+        <div className="px-8.5">
+          <TestimonialsManager />
         </div>
-        <TestimonialsManager />
       </div>
     </div>
   );

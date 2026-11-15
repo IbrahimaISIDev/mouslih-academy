@@ -1149,6 +1149,12 @@
         "failed": "{count} failed",
         "skipped": "{count} skipped"
       }
+    },
+    "header": {
+      "breadcrumb": "Breadcrumb",
+      "root": "Administration",
+      "viewSite": "View site",
+      "logout": "Log out"
     }
   },
   "states": {

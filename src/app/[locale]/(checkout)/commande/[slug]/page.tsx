@@ -116,7 +116,7 @@ export default async function OrderSummaryPage({ params }: OrderPageProps) {
                 </p>
               </div>
             </div>
-            <form action={logout.bind(null, locale)}>
+            <form action={logout.bind(null, locale, "connexion")}>
               <Button
                 type="submit"
                 variant="ghost"

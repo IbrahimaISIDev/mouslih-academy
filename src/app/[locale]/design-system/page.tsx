@@ -517,7 +517,7 @@ export default async function DesignSystemPage({
               userName="Aminata Diallo"
               userMenuItems={[{ label: t.profile, href: "/profil" }]}
               logoutLabel={t.logout}
-              onLogout={logout.bind(null, locale)}
+              onLogout={logout.bind(null, locale, "connexion")}
             />
           </div>
         </section>

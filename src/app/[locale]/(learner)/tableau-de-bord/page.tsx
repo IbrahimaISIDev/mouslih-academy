@@ -97,7 +97,7 @@ export default async function DashboardPage({
         userName={profile.firstName}
         userMenuItems={[{ label: tNav("profile"), href: "/profil" }]}
         logoutLabel={tNav("logout")}
-        onLogout={logout.bind(null, locale)}
+        onLogout={logout.bind(null, locale, "connexion")}
       />
 
       <div className="px-5 py-6 sm:px-6 lg:px-11 lg:py-11">

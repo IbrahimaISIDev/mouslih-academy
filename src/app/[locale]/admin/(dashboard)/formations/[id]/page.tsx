@@ -9,13 +9,17 @@ import { getCourseEditor } from "@/features/admin/api/get-course-editor";
 import { CourseEditorForm } from "@/features/admin/components/course-editor-form";
 import { orders } from "@/mocks/orders";
 
-export const metadata: Metadata = { title: "Gestion de formation — Administration Mouslih Academy" };
+export const metadata: Metadata = {
+  title: "Gestion de formation — Administration Mouslih Academy",
+};
 
 interface AdminCourseEditorPageProps {
   params: Promise<{ locale: string; id: string }>;
 }
 
-export default async function AdminCourseEditorPage({ params }: AdminCourseEditorPageProps) {
+export default async function AdminCourseEditorPage({
+  params,
+}: AdminCourseEditorPageProps) {
   const { locale: rawLocale, id } = await params;
   const locale = rawLocale as Locale;
 
@@ -35,7 +39,12 @@ export default async function AdminCourseEditorPage({ params }: AdminCourseEdito
   return (
     <div className="flex min-h-screen">
       <AdminSidebar
-        navItems={getAdminNavItems("courses", tNav.raw("nav"), ordersNeedingAttention, stats.queue.recitationsToReview)}
+        navItems={getAdminNavItems(
+          "courses",
+          tNav.raw("nav"),
+          ordersNeedingAttention,
+          stats.queue.recitationsToReview,
+        )}
         userName={tNav("adminName")}
         userRole={tNav("adminRole")}
         wordmark={tNav("wordmark")}
