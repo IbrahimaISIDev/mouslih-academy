@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { preconnect } from "react-dom";
 import type { Locale } from "@/lib/types";
 import { getCourse } from "@/features/catalog/api/get-course";
 import { getLessonQuestions } from "@/features/learning/api/get-lesson-questions";
@@ -27,6 +28,8 @@ function publicPlayback(lesson: Lesson): LessonPlayback | null {
 export default async function LessonPage({ params }: LessonPageProps) {
   const { locale: rawLocale, slug, lessonSlug } = await params;
   const locale = rawLocale as Locale;
+  // Serveur des vidéos : connexion ouverte dès l'arrivée du HTML, avant même le lecteur.
+  preconnect("https://res.cloudinary.com");
 
   const course = await getCourse(slug);
   if (!course) notFound();
@@ -49,7 +52,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
   // la session — une session expirée ne doit jamais renvoyer vers /connexion pour un contenu
   // gratuit. Seule une vidéo payante passe par l'API connectée (inscription vérifiée).
   const isAuthenticated = USE_MOCKS || (await getSession()) !== null;
-  const [questions, playback] = await Promise.all([
+  const [questions, playback, nextPlayback] = await Promise.all([
     getLessonQuestions(currentLesson.id),
     currentLesson.isFreePreview
       ? // Lien YouTube public déjà fourni par le catalogue ; sinon (vidéo hébergée), route
@@ -60,6 +63,10 @@ export default async function LessonPage({ params }: LessonPageProps) {
       : isAuthenticated
         ? getLessonPlayback(currentLesson.id)
         : Promise.resolve(null),
+    // Vidéo suivante en accès libre : son adresse sert à précharger son début pendant la lecture.
+    nextLesson?.isFreePreview && !nextLesson.videoUrl
+      ? getPublicLessonPlayback(nextLesson.id).catch(() => null)
+      : Promise.resolve(null),
   ]);
 
   // Numérotation continue des erreurs sur toute la formation (01 → 10).
@@ -87,6 +94,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
           ? `/formations/${course.slug}/lecons/${nextLesson.slug}`
           : null
       }
+      nextVideoUrl={nextPlayback?.provider === "file" ? nextPlayback.url : null}
     />
   );
 }

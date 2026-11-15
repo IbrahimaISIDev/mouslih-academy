@@ -19,9 +19,12 @@ export async function completeLesson(
   lessonId: string,
 ): Promise<{ progressPct: number }> {
   if (!USE_MOCKS) {
-    return clientApiFetch<{ progressPct: number }>(`/api/me/lessons/${lessonId}/complete`, {
-      method: "POST",
-    });
+    return clientApiFetch<{ progressPct: number }>(
+      `/api/me/lessons/${lessonId}/complete`,
+      {
+        method: "POST",
+      },
+    );
   }
 
   await sleep(400);

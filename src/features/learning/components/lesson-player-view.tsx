@@ -38,6 +38,15 @@ import { WHATSAPP_URL } from "@/lib/contact";
 import { ClientApiError } from "@/lib/client-fetch";
 import { track } from "@/lib/analytics";
 
+/**
+ * Instant où l'apprenant a quitté une vidéo pour une autre (navigation interne). Si une nouvelle
+ * vidéo s'ouvre juste après, elle démarre seule : pas besoin de rappuyer sur « Lecture » après
+ * « Suivant », « Précédent » ou l'enchaînement automatique. Une arrivée directe (lien partagé,
+ * rechargement) ne lance jamais la lecture d'elle-même.
+ */
+let leftLessonAt = 0;
+const AUTOPLAY_WINDOW_MS = 4000;
+
 const VideoPlayer = dynamic(
   () =>
     import("@/features/learning/components/video-player").then(
@@ -58,6 +67,9 @@ export interface LessonPlayerViewProps {
   questions: LessonQuestion[];
   previousHref: string | null;
   nextHref: string | null;
+  /** Fichier vidéo de la leçon suivante (Cloudinary) : son début est préchargé pendant la
+   *  lecture pour que la vidéo suivante démarre sans attente. */
+  nextVideoUrl?: string | null;
 }
 
 function LessonPlayerView({
@@ -70,6 +82,7 @@ function LessonPlayerView({
   questions,
   previousHref,
   nextHref,
+  nextVideoUrl,
 }: LessonPlayerViewProps) {
   const t = useTranslations("player");
   const router = useRouter();
@@ -100,6 +113,32 @@ function LessonPlayerView({
   );
 
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [autoStart] = useState(
+    () => Date.now() - leftLessonAt < AUTOPLAY_WINDOW_MS,
+  );
+
+  // Les autres vidéos de la formation sont préparées en arrière-plan (suivante et précédente
+  // d'abord) : passer de l'une à l'autre devient quasi instantané.
+  useEffect(() => {
+    const others = [...lessonSlugById.values()]
+      .filter((slug) => slug !== lesson.slug)
+      .map((slug) => `/formations/${course.slug}/lecons/${slug}`);
+    const hrefs = [
+      ...new Set(
+        [nextHref, previousHref, ...others].filter((h): h is string => !!h),
+      ),
+    ];
+    const timer = setTimeout(() => {
+      for (const href of hrefs) {
+        // « full » : données de la page comprises (sans quoi Next.js ne prépare que l'ossature).
+        router.prefetch(href, { kind: "full" } as unknown as Parameters<
+          typeof router.prefetch
+        >[1]);
+      }
+    }, 400);
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lesson.id]);
   const [autoAdvanceIn, setAutoAdvanceIn] = useState<number | null>(null);
   const [initialPosition, setInitialPosition] = useState(
     enrollment?.currentLessonId === lesson.id
@@ -115,6 +154,7 @@ function LessonPlayerView({
   useEffect(() => {
     if (autoAdvanceIn === null || !nextHref) return;
     if (autoAdvanceIn <= 0) {
+      leftLessonAt = Date.now();
       router.push(nextHref);
       return;
     }
@@ -186,7 +226,18 @@ function LessonPlayerView({
   );
 
   return (
-    <div className="pb-28 lg:pb-0">
+    // Un clic vers une autre vidéo (Suivant, Précédent, liste) note l'instant : la vidéo
+    // d'arrivée démarrera seule (voir leftLessonAt). Noté au clic, car la nouvelle page est
+    // rendue avant que l'ancienne ne soit démontée.
+    <div
+      className="pb-28 lg:pb-0"
+      onClickCapture={(e) => {
+        const link = (e.target as HTMLElement).closest("a");
+        if (link?.getAttribute("href")?.includes("/lecons/")) {
+          leftLessonAt = Date.now();
+        }
+      }}
+    >
       {/* Barre supérieure */}
       <div className="flex h-14 items-center gap-5 bg-green-900 px-5 text-on-dark-soft lg:px-5.5">
         <Link
@@ -266,6 +317,8 @@ function LessonPlayerView({
               onProgress={savePosition}
               onComplete={handleComplete}
               onStart={() => track("video_play", { lessonId: lesson.id })}
+              autoStart={autoStart}
+              nextVideoUrl={nextVideoUrl}
             />
           ) : (
             <div className="relative grid aspect-video place-items-center overflow-hidden bg-green-900 px-6 text-center text-on-dark">

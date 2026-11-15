@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { preconnect } from "react-dom";
 import Image from "next/image";
 import { Clock, Play } from "lucide-react";
 import type { LessonPlayback, Locale } from "@/lib/types";
@@ -83,6 +84,10 @@ export interface VideoPlayerProps {
   onComplete: () => void;
   /** Appelé une fois, au premier démarrage effectif de la lecture. */
   onStart?: () => void;
+  /** Démarre la lecture tout seul (arrivée depuis la vidéo précédente/suivante). */
+  autoStart?: boolean;
+  /** Début de la vidéo suivante à précharger pendant la lecture (voir NativeLessonPlayer). */
+  nextVideoUrl?: string | null;
 }
 
 function formatClock(totalSeconds: number): string {
@@ -146,8 +151,9 @@ function YouTubeLessonPlayer({
   onProgress,
   onComplete,
   onStart,
+  autoStart,
 }: VideoPlayerProps & { videoId: string }) {
-  const [started, setStarted] = useState(false);
+  const [started, setStarted] = useState(!!autoStart);
   const [failed, setFailed] = useState(false);
   const mountRef = useRef<HTMLDivElement>(null);
   // Les callbacks changent d'identité à chaque rendu du parent : on lit toujours la dernière
@@ -301,48 +307,71 @@ function NativeLessonPlayer({
   onProgress,
   onComplete,
   onStart,
+  autoStart,
+  nextVideoUrl,
 }: VideoPlayerProps & { src: string; poster?: string }) {
   const lastReportRef = useRef(0);
   const startedRef = useRef(false);
+  const [warmNext, setWarmNext] = useState(false);
+  // Connexion au serveur vidéo ouverte dès l'affichage (≈ 0,3 à 0,5 s gagnées au démarrage).
+  preconnect(new URL(src).origin);
   return (
-    <video
-      src={src}
-      poster={poster}
-      controls
-      // Dissuasion simple : pas de bouton de téléchargement ni de menu « Enregistrer la vidéo ».
-      controlsList="nodownload"
-      onContextMenu={(e) => e.preventDefault()}
-      preload="metadata"
-      playsInline
-      title={title}
-      className="aspect-video w-full bg-black"
-      onLoadedMetadata={(e) => {
-        // Reprise là où l'apprenant s'était arrêté (sauf tout près de la fin).
-        const { duration } = e.currentTarget;
-        if (
-          initialPositionSeconds > 5 &&
-          initialPositionSeconds < duration - 5
-        ) {
-          e.currentTarget.currentTime = initialPositionSeconds;
-        }
-      }}
-      onTimeUpdate={(e) => {
-        const now = Date.now();
-        if (now - lastReportRef.current < PROGRESS_INTERVAL_MS) return;
-        lastReportRef.current = now;
-        onProgress(e.currentTarget.currentTime);
-      }}
-      onPlay={() => {
-        if (startedRef.current) return;
-        startedRef.current = true;
-        onStart?.();
-      }}
-      onPause={(e) => onProgress(e.currentTarget.currentTime)}
-      onEnded={() => {
-        onProgress(0);
-        onComplete();
-      }}
-    />
+    <>
+      <video
+        src={src}
+        poster={poster}
+        controls
+        // Dissuasion simple : pas de bouton de téléchargement ni de menu « Enregistrer la vidéo ».
+        controlsList="nodownload"
+        onContextMenu={(e) => e.preventDefault()}
+        preload="metadata"
+        playsInline
+        title={title}
+        className="aspect-video w-full bg-black"
+        onLoadedMetadata={(e) => {
+          // Reprise là où l'apprenant s'était arrêté (sauf tout près de la fin).
+          const { duration } = e.currentTarget;
+          if (
+            initialPositionSeconds > 5 &&
+            initialPositionSeconds < duration - 5
+          ) {
+            e.currentTarget.currentTime = initialPositionSeconds;
+          }
+        }}
+        autoPlay={autoStart}
+        onTimeUpdate={(e) => {
+          // Après 10 s de visionnage, on prépare le début de la vidéo suivante (quelques
+          // centaines de Ko, pas la vidéo entière : on ménage les forfaits mobiles).
+          if (!warmNext && nextVideoUrl && e.currentTarget.currentTime > 10) {
+            setWarmNext(true);
+          }
+          const now = Date.now();
+          if (now - lastReportRef.current < PROGRESS_INTERVAL_MS) return;
+          lastReportRef.current = now;
+          onProgress(e.currentTarget.currentTime);
+        }}
+        onPlay={() => {
+          if (startedRef.current) return;
+          startedRef.current = true;
+          onStart?.();
+        }}
+        onPause={(e) => onProgress(e.currentTarget.currentTime)}
+        onEnded={() => {
+          onProgress(0);
+          onComplete();
+        }}
+      />
+      {warmNext && nextVideoUrl && (
+        <video
+          src={nextVideoUrl}
+          preload="metadata"
+          muted
+          aria-hidden
+          tabIndex={-1}
+          className="hidden"
+        />
+      )}
+    </>
   );
 }
 

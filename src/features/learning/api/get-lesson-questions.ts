@@ -1,5 +1,6 @@
 import { sleep } from "@/lib/sleep";
-import { apiFetch, USE_MOCKS } from "@/lib/api-client";
+import { USE_MOCKS } from "@/lib/api-client";
+import { publicApiFetch } from "@/lib/public-fetch";
 import type { LessonQuestion } from "@/lib/types";
 import { lessonQuestions } from "@/mocks/lesson-questions";
 
@@ -11,5 +12,6 @@ export async function getLessonQuestions(
     return lessonQuestions.filter((question) => question.lessonId === lessonId);
   }
 
-  return apiFetch<LessonQuestion[]>(`/api/lessons/${lessonId}/questions`);
+  // Questions publiques (lecture seule sur le site) : mises en cache comme le catalogue.
+  return publicApiFetch<LessonQuestion[]>(`/api/lessons/${lessonId}/questions`);
 }
